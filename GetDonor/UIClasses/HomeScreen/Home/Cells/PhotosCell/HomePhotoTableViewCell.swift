@@ -64,5 +64,10 @@ extension HomePhotoTableViewCell: UICollectionViewDelegate, UICollectionViewData
         
         return CGSize(width: (UIScreen.main.bounds.size.width - 26) / 2, height: self.bounds.size.height - 54)
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let delegate = self.delegate else { return }
+        delegate.didCellSelected(at: indexPath, with: .photo)
+    }
 
 }

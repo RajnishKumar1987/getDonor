@@ -28,7 +28,7 @@ class HomeListingViewModel {
         
         let requestParam = ["version": Bundle.main.versionNumber]
         
-        apiLoader.loadAPIRequest(requestData: requestParam) { [weak self](apiResponse, error) in
+        apiLoader.loadAPIRequest(forFuncion: .getHomeData, requestData: requestParam) { [weak self](apiResponse, error) in
             
             
             guard let weakSelf = self else {
@@ -57,6 +57,7 @@ class HomeListingViewModel {
             }
             
         }
+        
         
     }
     

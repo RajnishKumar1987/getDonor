@@ -10,10 +10,14 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var containerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
-        // Do any additional setup after loading the view.
+        
+        
+        containerView.addShadow(offset: CGSize.init(width: 0, height: 1), color: UIColor.black, radius: 4.0, opacity: 0.35)
+
     }
 
     override func didReceiveMemoryWarning() {

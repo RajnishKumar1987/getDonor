@@ -19,9 +19,18 @@ class HomeViewController: BaseViewController {
     }
     
     func doInitialConfig() {
-        
+                
         self.title = "Home"
-        loadHomeScreen()
+        if AppConfig().getUserLoginStatus() {
+            presentLoginSignUpScreen()
+        }else{
+            loadHomeScreen()
+
+        }
+    }
+    func presentLoginSignUpScreen() {
+        
+        performSegue(withIdentifier: "openLoginSignUp", sender: nil)
     }
     
     func loadHomeScreen() {
@@ -30,14 +39,35 @@ class HomeViewController: BaseViewController {
             
             switch result {
             case .Success:
-                
                 self?.tableView.reloadData()
-
             case .failure(let message):
-                
                 print(message)
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch segue.identifier {
+        case "openVideoDetails":
+            let videoDetailsVC = segue.destination as? VideoDetailsViewController
+            videoDetailsVC?.model = sender as! Video
+        case "openArticalsDetails":
+            let articalDetailVC = segue.destination as? ArticalDetailsViewController
+            articalDetailVC?.articals = [sender as? Article] as? [Article]
+        case "openPhotoDetails":
+            let articalDetailVC = segue.destination as? PhotoDetailsViewController
+            articalDetailVC?.selectedIndexPath = sender as! IndexPath
+            articalDetailVC?.photos = viewModel.homeApiResponse?.contents?.photo            
+        default:
+            print("Unknown")
+            
+        }
+        
+    }
+
+    @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {
+        loadHomeScreen()
     }
 
 
@@ -45,6 +75,24 @@ class HomeViewController: BaseViewController {
 }
 
 extension HomeViewController: HomeScreenCellDelegate{
+   
+    func didCellSelected(at indexPath: IndexPath, with cellType: HomeScreenCellType) {
+        
+        switch cellType {
+        case .video:
+            let model = viewModel.homeApiResponse?.contents?.video[indexPath.item]
+            self.performSegue(withIdentifier: "openVideoDetails", sender: model)
+        case .artical:
+            let model = viewModel.homeApiResponse?.contents?.article[indexPath.item]
+            self.performSegue(withIdentifier: "openArticalsDetails", sender: model)
+        case .photo:
+            self.performSegue(withIdentifier: "openPhotoDetails", sender: indexPath)
+
+        default:
+            print("Unknown")
+        }
+    }
+    
    
     func didMoreButtonPressed(at cellType: HomeScreenCellType) {
         

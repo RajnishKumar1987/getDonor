@@ -20,7 +20,7 @@ class DesireViewController: BaseViewController {
     }
     
     func doInitialConfig() {
-        
+    
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerCell(CorousalTableViewCell.self)
@@ -64,9 +64,9 @@ extension DesireViewController: UITableViewDelegate, UITableViewDataSource{
             let cell: CorousalTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
             cell.configureCell(with: viewModel.getModelFor(cell: cellType))
             return cell
-        default:
+        case .headingAndDescription(let index):
             let cell: DesireTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.configureCell(with: viewModel.getModelFor(cell: cellType))
+            cell.configureCell(with: viewModel.getModelFor(cell: .headingAndDescription(indexPath: index)))
             return cell
             
         }

@@ -10,20 +10,26 @@ import Foundation
 
 
 enum DesireCellType{
-    case corousal, vision, objective, mission
+    case corousal
+    case headingAndDescription(indexPath: IndexPath)
 }
 
 protocol DesireCellViewModel {
 }
 
+
 struct HeadeAndDescriptionCellViewModel: DesireCellViewModel {
     var headerText: String?
     var descriptionText: String?
     
-    init(with headertext:String?, and descTextArray:[String]?) {
+    init(with bodyIteam: BodyText?) {
         
-        self.headerText = headertext
-        self.descriptionText = " ● " + (descTextArray?.joined(separator: "\n\n ● "))!
+        if let model = bodyIteam {
+            
+            self.headerText = model.headerText ?? ""
+            self.descriptionText = " ● " + (model.descriptiontext?.joined(separator: "\n\n ● "))!
+
+        }
     }
     
     
@@ -56,9 +62,9 @@ class DesireViewModel {
     
     func loadDesire(with result: @escaping(Result<String>)->Void) {
         
-        let requestParam = ["version":"1.0.0"]
+        let requestParam = ["version":Bundle.main.versionNumber]
         
-        apiLoader?.loadAPIRequest(requestData: requestParam, completionHandler: { [weak self](response, error) in
+        apiLoader?.loadAPIRequest(forFuncion: .getDesire, requestData: requestParam, completionHandler: { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))
@@ -83,14 +89,9 @@ class DesireViewModel {
         
         switch cellType {
         case .corousal:
-            return CorousalCellViewModel(with: model?.node.corousal)
-        case .vision:
-            return HeadeAndDescriptionCellViewModel(with: "Our Vision", and: model?.node.vision)
-        case .objective:
-            return HeadeAndDescriptionCellViewModel(with: "Our Objectives", and: model?.node.objective)
-        case .mission:
-            return HeadeAndDescriptionCellViewModel(with: "Our Mission", and: model?.node.mission)
-
+            return CorousalCellViewModel(with: model?.response.corousal)
+        case .headingAndDescription(let indexPath):
+            return HeadeAndDescriptionCellViewModel(with: model?.response.textBody![indexPath.row])
         }
         
     }
@@ -100,24 +101,21 @@ class DesireViewModel {
         var cellTypeArray = Array<DesireCellType>()
         
         
-            let container = model.node
+            let container = model.response
             
             if let corousal = container.corousal, corousal.count > 0  {
                 
                 cellTypeArray.append(.corousal)
             }
-            
-            if container.vision != nil{
-                cellTypeArray.append(.vision)
-            }
-            if container.objective != nil{
-                cellTypeArray.append(.objective)
-            }
-            if container.mission != nil{
-                cellTypeArray.append(.mission)
-            }
-
         
+        if let body = container.textBody, body.count > 0 {
+            
+            for i in 0...body.count - 1
+            {
+                cellTypeArray.append(.headingAndDescription(indexPath: IndexPath(row: i, section: 0)))
+
+            }
+        }
         
         
         return cellTypeArray

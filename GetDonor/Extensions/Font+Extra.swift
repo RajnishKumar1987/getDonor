@@ -18,6 +18,7 @@ enum TextStyle {
     case title3
     case caption1
     case caption2
+    case extraBold
 }
 
 extension UIFont{
@@ -41,6 +42,31 @@ extension UIFont{
             return UIFont(name: "Muli", size: 12.0)!
         case .caption2:
             return UIFont(name: "Muli", size: 10.0)!
+        case .extraBold:
+            return UIFont(name: "Muli-Bold", size: 30.0)!
+
         }
     }
 }
+
+enum UIComponent {
+    case tabBar
+    case navigationBar
+    case button
+}
+
+extension UIColor{
+    
+   static func colorFor(component: UIComponent) -> UIColor {
+        
+        switch component {
+        case .button:
+            return UIColor.red
+        case .navigationBar:
+            return UIColor.red
+        case .tabBar:
+            return UIColor.red
+        }
+    }
+}
+
