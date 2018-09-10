@@ -23,12 +23,12 @@ class CorousalCollectionViewCell: UICollectionViewCell,CellReusable {
         guard let urlString = imageUrl else { return }
         
         imageLoader = APIRequestLoader(apiRequest: ImageRequest())
-        imageLoader?.loadAPIRequest(requestData: urlString, completionHandler: { [weak self](image, error) in
+        imageLoader?.loadAPIRequest(forFuncion: .getImage(urlString: urlString), requestData: nil, completionHandler: { [weak self](image, error) in
             
             if let image = image{
-                
                 self?.imageView.image = image
             }
+            
         })
     }
 

@@ -10,6 +10,11 @@
 protocol HomeScreenCellDelegate: class {
     
     func didMoreButtonPressed(at cellType: HomeScreenCellType)
+    func didCellSelected(at indexPath: IndexPath, with cellType: HomeScreenCellType)
+
+}
+
+protocol HomeVideoTableViewCellDelegate:class {
 }
 
 import UIKit
@@ -24,7 +29,7 @@ class HomeVideoTableViewCell: UITableViewCell, CellReusable {
     
     weak var delegate : HomeScreenCellDelegate?
     
-    var videosModelArray: [Video]? = []
+    var videosModelArray: [Video] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,9 +42,13 @@ class HomeVideoTableViewCell: UITableViewCell, CellReusable {
     
     func configurecell(model: [Video]?) {
         
-        self.pageControl.numberOfPages = (model?.count)!
-        self.videosModelArray = model
-        collectionView.reloadData()
+        if let model = model {
+            
+            self.pageControl.numberOfPages = model.count
+            self.videosModelArray = model
+            collectionView.reloadData()
+
+        }
     }
 
     @IBAction func actionMoreVideosButtonPressed(_ sender: UIButton) {
@@ -57,18 +66,20 @@ class HomeVideoTableViewCell: UITableViewCell, CellReusable {
         // Configure the view for the selected state
     }
     
+
+    
 }
 
 extension HomeVideoTableViewCell: UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (self.videosModelArray?.count)!
+        return self.videosModelArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: VideosCollectionViewCell = collectionView.dequeueCell(atIndexPath: indexPath)
-        cell.configureCell(model: videosModelArray![indexPath.item])
+        cell.configureCell(model: videosModelArray[indexPath.item])
         return cell
     }
     
@@ -79,5 +90,12 @@ extension HomeVideoTableViewCell: UICollectionViewDataSource,UICollectionViewDel
         
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if (self.delegate != nil) {
+            self.delegate?.didCellSelected(at: indexPath, with: .video)
+        }
     }
 }

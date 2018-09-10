@@ -62,5 +62,10 @@ extension HomeArticalTableViewCell: UICollectionViewDataSource, UICollectionView
         
         return CGSize(width: UIScreen.main.bounds.size.width - 16, height: self.bounds.size.height - 54)
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let delegate = self.delegate else { return }
+        delegate.didCellSelected(at: indexPath, with: .artical)
+    }
     
 }

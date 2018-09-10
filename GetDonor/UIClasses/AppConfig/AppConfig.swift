@@ -16,4 +16,18 @@ enum DevelopmentEnvironment {
 struct AppConfig {
     
     static let environment: DevelopmentEnvironment = .production
+    
+    func setUserLoggedIn(status: Bool) {
+        
+        UserDefaults.standard.set(status, forKey: "userLoginStatus")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getUserLoginStatus() -> Bool {
+        
+        return UserDefaults.standard.bool(forKey: "userLoginStatus")
+        
+    }
+    
 }
+

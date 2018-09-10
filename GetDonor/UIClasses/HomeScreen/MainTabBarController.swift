@@ -16,7 +16,7 @@ class MainTabBarController: UITabBarController {
         
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.red], for: .selected)
-        self.tabBar.barTintColor = UIColor.red
+        self.tabBar.barTintColor = UIColor.colorFor(component: .tabBar)
 
         // Do any additional setup after loading the view.
     }

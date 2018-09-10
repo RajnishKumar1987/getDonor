@@ -10,13 +10,16 @@ import Foundation
 
 class DesireApiRequest: APIRequest {
     
-    func makeRequest(from requestParam: [String:String]) throws -> URLRequest {
+    
+    func makeRequest(forFuncion function: Api_EndPoint, parameters: [String:String]?) throws -> URLRequest {
         
-        let url = try? URLEncoder().urlWith(urlString: AppBaseURLs.baseUrl + "desire.php", parameters: requestParam)
+        let url = try? URLEncoder().urlWith(urlString: function.urlString, parameters: parameters)
         
         var urlRequest = URLRequest(url: url!)
         
-        urlRequest.addValue(requestParam.md5WithSecretKey, forHTTPHeaderField: "Authorization")
+        if let requestParam = parameters {
+            urlRequest.addValue(requestParam.md5WithSecretKey, forHTTPHeaderField: "Authorization")
+        }
         return urlRequest
 
     }
@@ -24,25 +27,21 @@ class DesireApiRequest: APIRequest {
     func parseResponse(data: Data) throws -> DesireModel {
         
         
-        var jsonData = Data()
-        
-        
-        if let path = Bundle.main.path(forResource: "Desire", ofType: "json") {
-            do {
-                jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
-                print(jsonResult)
-                
-            } catch {
-                // handle error
-            }
-        }
+//        var jsonData = Data()
+//
+//
+//        if let path = Bundle.main.path(forResource: "Desire", ofType: "json") {
+//            do {
+//                jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
+//                print(jsonResult)
+//
+//            } catch {
+//                // handle error
+//            }
+//        }
 
-
-
-        
-        
-        return try JSONDecoder().decode(DesireModel.self, from: jsonData)
+        return try JSONDecoder().decode(DesireModel.self, from: data)
 
     }
 }

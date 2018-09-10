@@ -283,7 +283,7 @@
                                                                     </imageView>
                                                                     <view alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ANQ-3F-U8n">
                                                                         <rect key="frame" x="0.0" y="102" width="138" height="26"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0i-Gj-dcU">
@@ -358,7 +358,7 @@
                                                                     </imageView>
                                                                     <view alpha="0.69999998807907104" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w9x-Oo-CWu">
                                                                         <rect key="frame" x="0.0" y="106" width="157" height="26"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BC-Fn-H5z">
@@ -400,11 +400,47 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="pLF-77-3hU" id="vRB-1T-riK"/>
+                        <segue destination="HFN-Nb-eox" kind="show" identifier="openVideoDetails" id="cAP-XS-R5K"/>
+                        <segue destination="yam-8G-2cg" kind="show" identifier="openArticalsDetails" id="PcM-0j-eca"/>
+                        <segue destination="rLx-1G-zcE" kind="presentation" identifier="openPhotoDetails" animates="NO" id="ReO-Fp-JS3"/>
+                        <segue destination="i01-9L-l2d" kind="presentation" identifier="openLoginSignUp" animates="NO" id="zVh-9h-wbg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOW-h2-uGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2474" y="1208"/>
+        </scene>
+        <!--VideoDetailsViewController-->
+        <scene sceneID="0zm-FL-2aE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Videos" referencedIdentifier="VideoDetailsViewController" id="HFN-Nb-eox" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dzY-pT-hyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1878" y="1075"/>
+        </scene>
+        <!--ArticalDetailsViewController-->
+        <scene sceneID="y3j-vO-8mA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Articals" referencedIdentifier="ArticalDetailsViewController" id="yam-8G-2cg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nV0-lY-SWv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1814" y="1206"/>
+        </scene>
+        <!--PhotoDetailsViewController-->
+        <scene sceneID="65P-5D-Pq3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Photos" referencedIdentifier="PhotoDetailsViewController" id="rLx-1G-zcE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xFi-FA-8Ba" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1811" y="1294"/>
+        </scene>
+        <!--LoginSignUpViewController-->
+        <scene sceneID="KNH-5W-MB3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="LoginSignUpViewController" id="i01-9L-l2d" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s72-k0-ZZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2474" y="1658"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="xJj-zm-xIi">

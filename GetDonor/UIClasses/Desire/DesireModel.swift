@@ -11,22 +11,37 @@ import Foundation
 struct DesireModel: Codable {
     
     
-    var node: Container
+    var response: Response
+    
+    enum CodingKeys: String, CodingKey {
+        case response = "node"
+    }
+    
     
 }
 
-struct Container: Codable {
-    var corousal:  [String]? = []
-    var vision: [String]?
-    var objective: [String]?
-    var mission: [String]?
+struct Response: Codable {
+    var corousal: [String]? = []
+    var textBody: [BodyText]? = []
     
     enum CodingKeys: String, CodingKey {
-        case corousal 
-        case vision = "our_vision"
-        case objective = "our_objective"
-        case mission = "our_mission"
+        case corousal = "carousal"
+        case textBody = "text_body"
     }
+    
+}
+
+struct BodyText: Codable {
+    
+    var headerText: String?
+    var descriptiontext: [String]?
+    
+    enum CodingKeys: String, CodingKey {
+        case headerText = "headerText"
+        case descriptiontext = "descriptionText"
+    }
+    
+    
     
 }
 

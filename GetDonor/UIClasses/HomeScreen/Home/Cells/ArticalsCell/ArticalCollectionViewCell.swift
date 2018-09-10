@@ -30,14 +30,15 @@ class ArticalCollectionViewCell: UICollectionViewCell, CellReusable {
         
         imageLoader = APIRequestLoader(apiRequest: ImageRequest())
         
-        imageLoader?.loadAPIRequest(requestData: imageUrl, completionHandler: { [weak self](image, error) in
+
+        imageLoader?.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil, completionHandler: { [weak self](image, error) in
             
             if let image = image{
                 self?.imageView.image = image
             }
-
             
         })
+        
         
         
     }
