@@ -14,7 +14,7 @@ class NavigationViewController: UINavigationController {
         super.viewDidLoad()
         
         self.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.fontWithTextStyle(textStyle: .headline)]
-        self.navigationBar.barTintColor = UIColor.red
+        self.navigationBar.barTintColor = UIColor.colorFor(component: .navigationBar)
 
         // Do any additional setup after loading the view.
     }

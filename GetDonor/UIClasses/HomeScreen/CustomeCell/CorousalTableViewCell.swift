@@ -11,6 +11,7 @@ import UIKit
 class CorousalTableViewCell: UITableViewCell,CellReusable {
     
     var model: CorousalCellViewModel?
+    var timer: Timer!
     
 
     @IBOutlet weak var pageControl: UIPageControl!
@@ -21,6 +22,12 @@ class CorousalTableViewCell: UITableViewCell,CellReusable {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        //timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(animateCollectionView), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc func animateCollectionView() {
+        collectionView.scrollToNextItem()
     }
     
     func configureCell(with model:DesireCellViewModel?) {
@@ -34,6 +41,27 @@ class CorousalTableViewCell: UITableViewCell,CellReusable {
         }
     }
 
+}
+
+extension UICollectionView {
+    func scrollToNextItem() {
+        let contentOffset = CGFloat(floor(self.contentOffset.x + self.bounds.size.width))
+        
+        UIView.animate(withDuration: 2) {
+            self.moveToFrame(contentOffset: contentOffset)
+
+        }
+    }
+    
+    func scrollToPreviousItem() {
+        let contentOffset = CGFloat(floor(self.contentOffset.x - self.bounds.size.width))
+        self.moveToFrame(contentOffset: contentOffset)
+    }
+    
+    func moveToFrame(contentOffset : CGFloat) {
+        let frame: CGRect = CGRect(x: contentOffset, y: self.contentOffset.y , width: self.frame.width, height: self.frame.height)
+        self.scrollRectToVisible(frame, animated: true)
+    }
 }
 
 extension CorousalTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

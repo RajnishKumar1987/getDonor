@@ -1,5 +1,7 @@
 
 
+
+
 {
     "error": 0,
     "message": "successful",
@@ -17,24 +19,36 @@
                      ]
         ,
         
-        "our_vision":[
-                        "To contribute access to free blood to the needy through Get Donor Blood Bank which will be located in all districts, in every states, All Over India.",
-                      "Farmers commit suicide due to poor cultivation, and constant worry over his family needs like educating children, getting their daughters married. We will offer them help in the best ways possible without forcing them to take a heavy loan.",
-                      "For the farmers who have committed suicide, we will reach out to help their struggling families ,by taking care of their children&#039;s education and daughter’s marriage."
-                      ],
-        
-        "our_objective":[
-                         "To buy equipments required for blood bank as soon as possible. To establish a blood bank over the next six months.",
-                         "Agriculture has become a costly enterprise. Farmers have to borrow loans to meet the requirements of cultivation like seeds,fertilisers,etc. Our objective is to minimize farmer’s burden by providing them with latest equipments for agriculture, seeds, pesticides; thereby reducing the level of strain for them."
-                         ]
-        ,
-        
-        "our_mission": [
-                        "It is the foremost requirement and expectation of a donor that, blood should be given free to the blood receiver. We promise to fulfill this mission. We will plan events and campaign for blood donation, one donor per home as an example to start with.",
-                        "We will educate farmers on latest evolving technologies in the agricultural industry. The mission might look impossible, but together it can be achieved. We need your help to successfully carry out this mission. Your contributions/donations will be used appropriately for our farmers. We assure zero corruption and full transparency in this endeavour.",
-                        "Donation (Contribution charity appropriation)  required to us for fulfilling it."
-        
-                       ]
+        "text_body":[
+                     
+                     {
+                     "headerText": "Our Vision",
+                     "descriptionText":[
+                                        "To contribute access to free blood to the needy through Get Donor Blood Bank which will be located in all districts, in every states, All Over India.",
+                                        "Farmers commit suicide due to poor cultivation, and constant worry over his family needs like educating children, getting their daughters married. We will offer them help in the best ways possible without forcing them to take a heavy loan.",
+                                        "For the farmers who have committed suicide, we will reach out to help their struggling families ,by taking care of their children&#039;s education and daughter’s marriage."
+                                        ]
+                     },
+                     {
+                     "headerText": "Our Objective",
+                     "descriptionText":[
+                                        "To buy equipments required for blood bank as soon as possible. To establish a blood bank over the next six months.",
+                                        "Agriculture has become a costly enterprise. Farmers have to borrow loans to meet the requirements of cultivation like seeds,fertilisers,etc. Our objective is to minimize farmer’s burden by providing them with latest equipments for agriculture, seeds, pesticides; thereby reducing the level of strain for them."
+                                        ]
+                     },
+                     {
+                     "headerText": "Our Mission",
+                     "descriptionText":[
+                                        "It is the foremost requirement and expectation of a donor that, blood should be given free to the blood receiver. We promise to fulfill this mission. We will plan events and campaign for blood donation, one donor per home as an example to start with.",
+                                        "We will educate farmers on latest evolving technologies in the agricultural industry. The mission might look impossible, but together it can be achieved. We need your help to successfully carry out this mission. Your contributions/donations will be used appropriately for our farmers. We assure zero corruption and full transparency in this endeavour.",
+                                        "Donation (Contribution charity appropriation)  required to us for fulfilling it."
+                                        
+                                        ]
+                     }
+                     
+                     
+                     ]
         
     }
 }
+

@@ -12,13 +12,15 @@ import UIKit
 class HomeListingRequest: APIRequest {
     
     
-    func makeRequest(from requestParam: [String: String]) throws -> URLRequest {
+    func makeRequest(forFuncion function: Api_EndPoint, parameters: [String:String]?) throws -> URLRequest {
         
-        let url = try? URLEncoder().urlWith(urlString: AppBaseURLs.baseUrl + "home.php", parameters: requestParam)
+        let url = try? URLEncoder().urlWith(urlString: function.urlString , parameters: parameters)
         
         var urlRequest = URLRequest(url: url!)
         
-        urlRequest.addValue(requestParam.md5WithSecretKey, forHTTPHeaderField: "Authorization")
+        if let requestParam = parameters {
+            urlRequest.addValue(requestParam.md5WithSecretKey, forHTTPHeaderField: "Authorization")
+        }
         return urlRequest
         
         
@@ -34,10 +36,9 @@ class HomeListingRequest: APIRequest {
 
 class ImageRequest: APIRequest {
     
-    func makeRequest(from imagePath: String) throws -> URLRequest {
+    func makeRequest(forFuncion function: Api_EndPoint, parameters: Dictionary<String,String>? = [:]) throws -> URLRequest {
         
-        let urlString = imagePath.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        let urlRequest = URLRequest(url: URL(string: urlString!)!)
+        let urlRequest = URLRequest(url: URL(string: function.urlString)!)
         return urlRequest
         
     }

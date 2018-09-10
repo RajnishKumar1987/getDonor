@@ -15,18 +15,25 @@ enum Result<String> {
     case failure(String)
 }
 
+enum ContentType: Int{
+    case artical = 0
+    case video
+    case event
+    case photo
+}
+
 protocol APIRequest {
     
     associatedtype RequestDataType
     associatedtype ResponseDataType
 
-    func makeRequest(from data: RequestDataType) throws -> URLRequest
+    func makeRequest(forFuncion function:Api_EndPoint, parameters: RequestDataType) throws -> URLRequest
     func parseResponse(data: Data) throws -> ResponseDataType
     func shouldCacheResponse() -> Bool
 }
 
 extension APIRequest {
-    
+        
     func shouldCacheResponse() -> Bool {
         return false
     }
@@ -47,10 +54,11 @@ class APIRequestLoader<T: APIRequest> {
         print("deinit : \(apiRequest) ")
     }
     
-    func loadAPIRequest(requestData: T.RequestDataType, completionHandler: @escaping(T.ResponseDataType?, Error?)-> Void) {
+    func loadAPIRequest(forFuncion funcion:Api_EndPoint, requestData: T.RequestDataType, completionHandler: @escaping(T.ResponseDataType?, Error?)-> Void) {
         
         do {
-            let urlRequest = try self.apiRequest.makeRequest(from: requestData)
+            
+            let urlRequest = try self.apiRequest.makeRequest(forFuncion: funcion, parameters: requestData)
             
             NetworkLogger.log(request: urlRequest)
             

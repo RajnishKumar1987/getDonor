@@ -10,26 +10,67 @@ import UIKit
 
 class MoreArticalsViewController: BaseViewController {
 
+    var viewModel = ArticalsViewModel()
+    
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Articals"
         // Do any additional setup after loading the view.
+        doInitialConfig()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func doInitialConfig()  {
+        loadArticals()
+    }
+    
+    func loadArticals() {
+        
+        viewModel.loadArticals { [weak self](result) in
+            
+            switch (result){
+            case .Success:
+                self?.tableView.reloadData()
+                print("Success")
+            case .failure(let msg):
+                print(msg)
+            }
+        }
+    }
+
+    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let cell = sender as? ArticalsTableViewCell, let indexPath = tableView.indexPath(for: cell) {
+            
+            if let  articalDeatilsVC = segue.destination as? ArticalDetailsViewController{
+                
+                articalDeatilsVC.loadArticlsWith(model: self.viewModel.model.articalList!, withSelected: indexPath)
+            }
+            
+        }
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension MoreArticalsViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (viewModel.model.articalList?.count)!
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let  cell: ArticalsTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+        cell.configureCell(with: viewModel.getModelForCell(at: indexPath))
+        return cell
+        
+    }
+    
+}
+
+
+
+
+
