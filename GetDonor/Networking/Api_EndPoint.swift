@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum UserProfileActionType: String{
+    case get = "GET"
+    case set = "SET"
+}
+
 enum Api_EndPoint {
     case getHomeData
     case getDesire
@@ -16,6 +21,7 @@ enum Api_EndPoint {
     case getSimilar
     case login
     case registration
+    case updateProfile
     
     
     var urlString: String{
@@ -34,7 +40,9 @@ enum Api_EndPoint {
             return AppBaseURLs.baseUrl.appending("login.php")
         case .registration:
             return AppBaseURLs.baseUrl.appending("registration.php")
-            
+        case .updateProfile:
+            return AppBaseURLs.baseUrl.appending("update_profile.php")
+
         }
     }
 

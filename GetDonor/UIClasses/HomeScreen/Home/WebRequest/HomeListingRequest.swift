@@ -38,7 +38,14 @@ class ImageRequest: APIRequest {
     
     func makeRequest(forFuncion function: Api_EndPoint, parameters: Dictionary<String,String>? = [:]) throws -> URLRequest {
         
-        let urlRequest = URLRequest(url: URL(string: function.urlString)!)
+        //let urlString = function.urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        var urlRequest = URLRequest(url: URL(string: "https://www.getdonor.org")!)
+        
+        let url = try? URLEncoder().urlWith(urlString: function.urlString , parameters: parameters)
+        if let url = url {
+            urlRequest = URLRequest(url: url)
+
+        }
         return urlRequest
         
     }

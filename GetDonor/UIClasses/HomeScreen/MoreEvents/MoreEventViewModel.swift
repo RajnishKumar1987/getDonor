@@ -40,7 +40,7 @@ class MoreEventViewModel {
         let page = isUserRefreshingList ? 1 : (model.currentPage ?? 0) + 1
         
         let requestParam = ["version":Bundle.main.versionNumber,
-                            "type":"\(ContentType.photo.rawValue)",
+                            "type":"\(ContentType.event.rawValue)",
             "page":"\(page)"
         ]
         

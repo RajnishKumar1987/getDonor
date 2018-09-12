@@ -404,6 +404,7 @@
                         <segue destination="yam-8G-2cg" kind="show" identifier="openArticalsDetails" id="PcM-0j-eca"/>
                         <segue destination="rLx-1G-zcE" kind="presentation" identifier="openPhotoDetails" animates="NO" id="ReO-Fp-JS3"/>
                         <segue destination="i01-9L-l2d" kind="presentation" identifier="openLoginSignUp" animates="NO" id="zVh-9h-wbg"/>
+                        <segue destination="OOS-5Z-lUH" kind="show" identifier="openEditProfile" animates="NO" id="IvO-bZ-acn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOW-h2-uGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -433,6 +434,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFi-FA-8Ba" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1811" y="1294"/>
+        </scene>
+        <!--EditProfileViewController-->
+        <scene sceneID="n64-to-oro">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EditProfile" referencedIdentifier="EditProfileViewController" id="OOS-5Z-lUH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BdM-Ua-BQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2121" y="1658"/>
         </scene>
         <!--LoginSignUpViewController-->
         <scene sceneID="KNH-5W-MB3">

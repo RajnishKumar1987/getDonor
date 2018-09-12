@@ -62,34 +62,52 @@ class LoginSignUpViewController: UITableViewController {
     }
     func doLogin() {
         
-        
-        let loader = APIRequestLoader(apiRequest: CommonApiRequest())
-        
-        
-        loader.loadAPIRequest(forFuncion: .login, requestData: nil) { [weak self](response, error) in
+        if doValidation() {
             
-            print(response)
-            self?.performSegue(withIdentifier: "unwindSegueToHome", sender: nil)
+            btnLogin.loadingIndicator(show: true)
             
+            self.apiLoader = APIRequestLoader(apiRequest: LoginApiRequest())
+            
+            self.loginViewModel.login(with: txtEmail.text!, and: txtPassword.text!) {[weak self] (result) in
+                
+                self?.btnLogin.loadingIndicator(show: false)
+
+                switch (result){
+                case .Success:
+                    print("Success")
+                    self?.performSegue(withIdentifier: "unwindSegueToHome", sender: nil)
+                case .failure(let msg):
+                    self?.showMessage(with: msg)
+                }
+            }
+
         }
         
         
-//        self.apiLoader = APIRequestLoader(apiRequest: LoginApiRequest())
-//        
-//        apiLoader.loadAPIRequest(forFuncion: .login, requestData: <#T##[String : String]?#>, completionHandler: <#T##(LoginDataModel?, Error?) -> Void#>)
-        
-//        self.loginViewModel.login(with: txtEmail.text!, and: txtPassword.text!) { (result) in
-//            
-//            switch (result){
-//            case .Success:
-//                print("Success")
-//            case .failure(let msg):
-//                print(msg)
-//            }
-//        }
-        
     }
     
-
+    func doValidation() -> Bool {
+        
+        if txtEmail.text?.isEmpty ?? true {
+            showMessage(with: "Email can't be empty.")
+            return false
+        }
+        if !(txtEmail.text?.isValidEmail())! {
+            showMessage(with: "Please enter a valid email.")
+            return false
+        }
+        if txtPassword.text?.isEmpty ?? true {
+            showMessage(with: "Password can't be empty.")
+            return false
+        }
+        return true
+    }
+    
+    func showMessage(with title:String) {
+        
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
 }

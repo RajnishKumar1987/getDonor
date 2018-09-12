@@ -37,7 +37,7 @@ struct Article: Codable {
     var status: String?
     var updatedate: String?
     var description: String?
-    var data: String?
+    //var data: String?
     var type: String?
     
 }
@@ -52,7 +52,7 @@ struct Event: Codable{
     var status: String?
     var updatedate: String?
     var description: String?
-    var data: [extraData]? = []
+    var data: [ExtraData]? = []
     var type: String?
     
 }
@@ -67,7 +67,7 @@ struct Video: Codable{
     var status: String?
     var updatedate: String?
     var description: String?
-    var data: [extraData]? = []
+    var data: [ExtraData]? = []
     var type: String?
     
 }
@@ -81,21 +81,24 @@ struct Photo: Codable {
     var status: String?
     var updatedate: String?
     var description: String?
-    var data: [extraData]? = []
+    //var data: [extraData]? = []
     var type: String?
     
 }
 
-struct extraData:Codable {
+struct ExtraData:Codable {
     
     var caption: String?
     var title: String?
     var playbackUrl: String?
+    var imageUrl:String?
+    
     
     enum CodingKeys: String, CodingKey {
         case caption = "cap"
         case title = "video_title"
         case playbackUrl = "vu"
+        case imageUrl = "image"
     }
     
     

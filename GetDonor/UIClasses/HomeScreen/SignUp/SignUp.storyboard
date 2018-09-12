@@ -28,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovD-Dy-soU">
-                                                    <rect key="frame" x="2" y="-8" width="47" height="52"/>
+                                                    <rect key="frame" x="2" y="-4" width="47" height="52"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="back"/>
                                                     <connections>
@@ -136,8 +136,29 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="0ln-Ef-Brg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="zWj-tR-ffx">
                                         <rect key="frame" x="0.0" y="386" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zWj-tR-ffx" id="VDJ-nc-rMB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Blood Group" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="71G-OM-P7X">
+                                                    <rect key="frame" x="37" y="10" width="300" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="jdh-2D-d3J" id="K31-Jn-Qki"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="0ln-Ef-Brg">
+                                        <rect key="frame" x="0.0" y="446" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0ln-Ef-Brg" id="a1G-S9-2fb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -155,7 +176,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Ws0-am-iJg">
-                                        <rect key="frame" x="0.0" y="446" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="506" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ws0-am-iJg" id="cHn-cj-ZmY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -173,7 +194,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="DNN-0u-7aK">
-                                        <rect key="frame" x="0.0" y="506" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="566" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DNN-0u-7aK" id="3Cx-qb-D4C">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -202,13 +223,14 @@
                     <connections>
                         <outlet property="btnSignUp" destination="rAn-px-A4N" id="kpt-1A-cla"/>
                         <outlet property="lblSignUp" destination="mdv-w2-vZN" id="GjK-Hl-JwG"/>
+                        <outlet property="txtBloodGroup" destination="71G-OM-P7X" id="4Zc-aE-Zmo"/>
                         <outlet property="txtConfirmPassword" destination="pXp-90-IBK" id="Oz1-ME-Tw6"/>
                         <outlet property="txtEmail" destination="SQy-uX-EY9" id="i0d-3f-epY"/>
                         <outlet property="txtFirstName" destination="vn0-9r-RHB" id="pKi-8G-UB1"/>
                         <outlet property="txtLastName" destination="l7b-XA-vnv" id="ScT-Sy-G8W"/>
                         <outlet property="txtMobile" destination="AMI-rJ-nbu" id="nEn-pK-Yrx"/>
                         <outlet property="txtPassword" destination="oLy-ue-dM3" id="caO-nc-uat"/>
-                        <segue destination="rBz-Eb-5Sx" kind="unwind" identifier="unwindSegueToHome" unwindAction="unwindToHomeScreenWithSegue:" id="aXZ-i8-w3x"/>
+                        <segue destination="rBz-Eb-5Sx" kind="unwind" identifier="unwindSegueToHome" customClass="UIStoryboardSegueWithCompletionHandler" customModule="GetDonor" customModuleProvider="target" unwindAction="unwindToHomeScreenWithSegue:" id="aXZ-i8-w3x"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HKN-fM-cZg" userLabel="First Responder" sceneMemberID="firstResponder"/>

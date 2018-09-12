@@ -16,6 +16,13 @@ class BaseViewController: UIViewController {
         addProfileButton()
     }
     
+    func hideProfileButton()  {
+        if let button = self.navigationItem.rightBarButtonItem {
+            button.isEnabled = false
+            button.tintColor = UIColor.clear
+        }
+        
+    }
     func addProfileButton() {
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile"), style: .plain, target: self, action: #selector(openProfileScreen))

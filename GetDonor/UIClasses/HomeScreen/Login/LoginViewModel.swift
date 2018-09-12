@@ -11,7 +11,6 @@ import Foundation
 class LoginViewModel {
     
     let apiLoader: APIRequestLoader<LoginApiRequest>!
-    var model = LoginDataModel()
     
     init(loader: APIRequestLoader<LoginApiRequest> = APIRequestLoader(apiRequest: LoginApiRequest())) {
         self.apiLoader = loader
@@ -20,19 +19,21 @@ class LoginViewModel {
     
     func login(with userName:String, and password:String, with result:@escaping(Result<String>)->Void) {
         
-        let requestParam = ["version":"1.0.0","username":"sendtorajnishkumar@gmail.com".toBase64(),"password":"12345678".toBase64() , "token":"TOKEN"]
+        let requestParam = ["version":Bundle.main.versionNumber,"username":userName.toBase64(),"password":password.toBase64() , "token":"TOKEN"]
         
-        apiLoader.loadAPIRequest(forFuncion: .login, requestData: requestParam) { [weak self](response, error) in
-            
-            guard let weakSelf = self else {
-                result(.failure(error.debugDescription))
-                return
-            }
+        apiLoader.loadAPIRequest(forFuncion: .login, requestData: requestParam) { (response, error) in
             
             if let response = response {
                 
-                weakSelf.model = response
-                result(.Success)
+                if response.message == "successful"{
+                    AppConfig().setUserId(id: response.userDetails?.userId ?? "")
+                    result(.Success)
+
+                }else
+                {
+                    result(.failure(response.message!))
+
+                }
                 
             }
             else{

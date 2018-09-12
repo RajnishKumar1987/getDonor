@@ -10,13 +10,27 @@ import Foundation
 
 struct LoginDataModel:Codable {
     
+    var message: String?
+    var userDetails: UserDetails?
+    
+    enum CodingKeys: String, CodingKey {
+        case message
+        case userDetails = "node"
+    }
+    
+}
+
+struct UserDetails: Codable {
     var userName: String?
     var userId: String?
-    
+
     enum CodingKeys: String,CodingKey {
         case userName = "username"
         case userId = "user_id"
     }
-    
-    
+
 }
+
+
+
+

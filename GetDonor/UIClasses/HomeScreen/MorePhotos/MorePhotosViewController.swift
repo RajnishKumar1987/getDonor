@@ -186,36 +186,5 @@ extension MorePhotosViewController {
 
 }
 
-extension UIViewController{
-    
-    func getTabBarHeight() -> CGFloat {
-        
-        var tabbarHeight: CGFloat = CGFloat(0.0)
-        if #available(iOS 11.0, *) {
-            tabbarHeight = (UIApplication.shared.keyWindow?.safeAreaInsets.bottom)! + 49
-        } else {
-            tabbarHeight = 49
-        }
-        
-        return tabbarHeight
-    }
-    
-    func addLoaderViewForNextResults() {
-        
-        
-        let view = UIView(frame: CGRect(x: 0, y: self.view.frame.size.height - (kLoaderViewHeight + getTabBarHeight()) , width: self.view.frame.size.width, height: kLoaderViewHeight))
-        view.backgroundColor = UIColor.lightGray
-        view.tag = kLoaderViewTag
-        
-        let indicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        indicatorView.center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
-        indicatorView.startAnimating()
-        indicatorView.color = UIColor.white
-        indicatorView.isHidden = false
-        view.addSubview(indicatorView)
-        
-        self.view.addSubview(view)
-    }
 
-}
 

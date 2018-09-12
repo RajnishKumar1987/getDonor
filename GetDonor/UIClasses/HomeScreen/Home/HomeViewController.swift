@@ -15,7 +15,9 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doInitialConfig()
+        //self.performSegue(withIdentifier: "openEditProfile", sender: nil)
+
+         doInitialConfig()
     }
     
     func doInitialConfig() {
@@ -58,7 +60,11 @@ class HomeViewController: BaseViewController {
         case "openPhotoDetails":
             let articalDetailVC = segue.destination as? PhotoDetailsViewController
             articalDetailVC?.selectedIndexPath = sender as! IndexPath
-            articalDetailVC?.photos = viewModel.homeApiResponse?.contents?.photo            
+            articalDetailVC?.photos = viewModel.homeApiResponse?.contents?.photo
+        case "openEditProfile":
+            let videoDetailsVC = segue.destination as? EditProfileViewController
+            videoDetailsVC?.userId = AppConfig().getUserId()
+            print("openEditProfile")
         default:
             print("Unknown")
             
@@ -67,7 +73,21 @@ class HomeViewController: BaseViewController {
     }
 
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {
+        if let segue = segue as? UIStoryboardSegueWithCompletionHandler {
+            segue.completion = {
+                self.performSegue(withIdentifier: "openEditProfile", sender: nil)
+
+            }
+        }
         loadHomeScreen()
+    }
+    
+    func loadEditProfile() {
+        let storyboard = UIStoryboard(name: "EditProfile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController")
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
     }
 
 
@@ -87,9 +107,15 @@ extension HomeViewController: HomeScreenCellDelegate{
             self.performSegue(withIdentifier: "openArticalsDetails", sender: model)
         case .photo:
             self.performSegue(withIdentifier: "openPhotoDetails", sender: indexPath)
+        case .event:
+            let storyboard = UIStoryboard(name: "PhotoViewer", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "PhotoViewerViewController") as! PhotoViewerViewController
+            let model = viewModel.homeApiResponse?.contents?.event[indexPath.item]
+            if let extraData = model?.data {
+                vc.viewModel = PhotoViewerViewModel(with: extraData)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
 
-        default:
-            print("Unknown")
         }
     }
     

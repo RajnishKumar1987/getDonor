@@ -18,15 +18,20 @@ struct AppConfig {
     static let environment: DevelopmentEnvironment = .production
     
     func setUserLoggedIn(status: Bool) {
-        
         UserDefaults.standard.set(status, forKey: "userLoginStatus")
         UserDefaults.standard.synchronize()
     }
     
     func getUserLoginStatus() -> Bool {
-        
         return UserDefaults.standard.bool(forKey: "userLoginStatus")
-        
+    }
+    
+    func setUserId(id: String) {
+        UserDefaults.standard.set(id, forKey: "userId")
+        UserDefaults.standard.synchronize()
+    }
+    func getUserId() -> String {
+        return UserDefaults.standard.string(forKey: "userId") ?? ""
     }
     
 }

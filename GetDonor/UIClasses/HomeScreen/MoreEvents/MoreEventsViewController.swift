@@ -9,7 +9,7 @@
 import UIKit
 
 class MoreEventsViewController: BaseViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     
@@ -29,11 +29,9 @@ class MoreEventsViewController: BaseViewController {
     
     func loadMoreEvents() {
         
-        
         viewModel.loadMoreEvents { [weak self](result) in
             
             self?.refreshControl?.endRefreshing()
-
             switch (result){
             case .Success:
                 print("Success")
@@ -42,27 +40,27 @@ class MoreEventsViewController: BaseViewController {
                 print(msg)
             }
             
-            self?.isLoadingNextPageResults(false)
-            self?.viewModel.isUserRefreshingList = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1/3) , execute: {
+                self?.isLoadingNextPageResults(false)
+                self?.viewModel.isUserRefreshingList = false
 
+            })
             
         }
         
         
     }
-
     
-
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
@@ -75,20 +73,18 @@ extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
         cell.configureCell(with: viewModel.getModelForCell(at: indexPath))
         return cell
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        guard viewModel.canLoadNextPage() else {
-            return
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       
+        if indexPath.row == viewModel.model.eventList.count - 1 {
         }
-        
-        let margin: CGFloat = 30
-        let heightToLoadNextPage: CGFloat = scrollView.contentSize.height + margin
-        let currentPosition: CGFloat = scrollView.contentOffset.y + scrollView.frame.size.height
-        
-        if (currentPosition >= heightToLoadNextPage) {
-            isLoadingNextPageResults(true)
-            loadNextPageResults()
-            print("loadNextPageResults")
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = viewModel.getModelForCell(at: indexPath)
+        let storyboard = UIStoryboard(name: "PhotoViewer", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PhotoViewerViewController") as! PhotoViewerViewController
+        if let extraData = model.data {
+            vc.viewModel = PhotoViewerViewModel(with: extraData)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }
@@ -129,7 +125,6 @@ extension MoreEventsViewController {
         if isLoading {
             tableViewButtomConstaraints.constant = kLoaderViewHeight
             addLoaderViewForNextResults()
-            
         }
         else {
             
