@@ -52,7 +52,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="rCW-mz-Rf4" id="Uz1-99-9bR"/>
                                             <outlet property="lblName" destination="17h-cX-S0v" id="CQV-4Y-0Of"/>
-                                            <segue destination="NJo-5D-Zst" kind="modal" animates="NO" id="gUB-Rh-3jc"/>
+                                            <segue destination="b3P-Vq-QdQ" kind="show" identifier="openPhotoViewer" id="gTI-Z4-aQq"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorePhotosHeaderCollectionViewCell" id="3ch-U8-0wh" customClass="MorePhotosHeaderCollectionViewCell" customModule="GetDonor" customModuleProvider="target">
@@ -87,6 +87,10 @@
                                     <outlet property="delegate" destination="kr6-yq-jtF" id="hQ1-PK-Sh1"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7t0-QK-MP0">
+                                <rect key="frame" x="177" y="324" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -98,6 +102,7 @@
                         <viewLayoutGuide key="safeArea" id="uJP-wh-3cC"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="7t0-QK-MP0" id="iW6-4X-9iN"/>
                         <outlet property="collectionView" destination="tFn-92-2nv" id="HAR-cq-tHW"/>
                         <outlet property="constraintCollectionViewBottomMargin" destination="IWf-kO-hfh" id="WLB-PP-PMP"/>
                     </connections>
@@ -105,6 +110,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rpb-PG-aq7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="76" y="171.36431784107947"/>
+        </scene>
+        <!--PhotoViewerViewController-->
+        <scene sceneID="EEM-U6-omS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PhotoViewer" referencedIdentifier="PhotoViewerViewController" id="b3P-Vq-QdQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bdq-ei-bvA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="616"/>
         </scene>
         <!--Photo Details View Controller-->
         <scene sceneID="3YC-ae-tjU">
@@ -168,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vEZ-qw-J0e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="778.39999999999998" y="167.76611694152925"/>
+            <point key="canvasLocation" x="857" y="164"/>
         </scene>
     </scenes>
     <resources>

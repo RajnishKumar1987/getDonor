@@ -19,6 +19,11 @@ class ArticalsTableViewCell: UITableViewCell,CellReusable {
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
     }
     
+    override func prepareForReuse() {
+        imgView.image = nil
+        imageLoader = nil
+    }
+
     func configureCell(with model: Article) {
         
         lblTitle.text = model.title

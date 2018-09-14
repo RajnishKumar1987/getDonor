@@ -17,4 +17,11 @@ struct PhotoViewerDataModel {
         })
     }
     
+    init(with photoIteam: [Photo]) {
+        
+        self.images = photoIteam.map({ (item) -> String in
+            return item.image ?? ""
+        })
+    }
+    
 }

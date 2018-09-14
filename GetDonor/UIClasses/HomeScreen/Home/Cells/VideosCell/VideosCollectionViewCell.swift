@@ -19,7 +19,11 @@ class VideosCollectionViewCell: UICollectionViewCell,CellReusable {
         super.awakeFromNib()
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
     }
-    
+    override func prepareForReuse() {
+        imageView.image = nil
+        imageLoader = nil
+    }
+
     func configureCell(model: Video) {
         
         lblTitle.text = model.title ?? ""        

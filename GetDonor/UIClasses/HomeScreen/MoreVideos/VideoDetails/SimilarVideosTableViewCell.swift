@@ -19,6 +19,11 @@ class SimilarVideosTableViewCell: UITableViewCell,CellReusable {
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
     }
     
+    override func prepareForReuse() {
+        imgView.image = nil
+        imageLoader = nil
+    }
+
     func configCell(with model:Video)  {
         
         lblTitle.text = model.title ?? ""

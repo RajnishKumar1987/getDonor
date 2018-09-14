@@ -12,6 +12,11 @@ class PhotoDetailsCollectionViewCell: UICollectionViewCell, CellReusable {
     @IBOutlet weak var imageView: UIImageView!
     var imageLoader : APIRequestLoader<ImageRequest>?
     
+    override func prepareForReuse() {
+        imageView.image = nil
+        imageLoader = nil
+    }
+
     func configureCell(with imageUrl: String?) {
      
         if let imageUrl = imageUrl {

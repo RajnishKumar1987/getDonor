@@ -10,6 +10,7 @@ import UIKit
 
 class EditProfileViewController: BaseViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imgProfile: UIImageView!
     var imagePicker = UIImagePickerController()
@@ -25,7 +26,6 @@ class EditProfileViewController: BaseViewController {
 
     func doIniticalConfug() {
         imagePicker.delegate = self
-        
         containerView.addShadow(offset: CGSize.init(width: 0, height: 1), color: UIColor.black, radius: 4.0, opacity: 0.35)
         imgProfile.makeCornerRadiusWithValue(imgProfile.frame.width/2)
         imgProfile.layer.borderWidth = 3

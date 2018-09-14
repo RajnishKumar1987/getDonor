@@ -12,7 +12,7 @@ class ArticalDetailsViewController: UIViewController {
 
     var articals: [Article]?
     var selectedIndex: IndexPath?
-    
+
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {

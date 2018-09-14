@@ -10,7 +10,8 @@ import UIKit
 
 class MoreVideosViewController: BaseViewController {
 
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     @IBOutlet weak var tableView: UITableView!
     var viewModel = MoreVideosViewModel()
     
@@ -29,7 +30,7 @@ class MoreVideosViewController: BaseViewController {
     func loadVideos() {
         
         viewModel.loadMoreVideos { [weak self] (result) in
-            
+            self?.activityIndicator.stopAnimating()
             switch (result){
             case .Success:
                 self?.tableView.reloadData()

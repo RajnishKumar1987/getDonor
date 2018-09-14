@@ -18,6 +18,11 @@ class CorousalCollectionViewCell: UICollectionViewCell,CellReusable {
         // Initialization code
     }
     
+    override func prepareForReuse() {
+        imageView.image = nil
+        imageLoader = nil
+    }
+
     func configureCell(with imageUrl: String?) {
         
         guard let urlString = imageUrl else { return }

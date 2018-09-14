@@ -10,6 +10,7 @@ import UIKit
 
 class MoreEventsViewController: BaseViewController {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     
@@ -30,7 +31,7 @@ class MoreEventsViewController: BaseViewController {
     func loadMoreEvents() {
         
         viewModel.loadMoreEvents { [weak self](result) in
-            
+            self?.activityIndicator.stopAnimating()
             self?.refreshControl?.endRefreshing()
             switch (result){
             case .Success:
@@ -82,6 +83,7 @@ extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
         let model = viewModel.getModelForCell(at: indexPath)
         let storyboard = UIStoryboard(name: "PhotoViewer", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "PhotoViewerViewController") as! PhotoViewerViewController
+        vc.selectedIndex = IndexPath(item: 0, section: 0)
         if let extraData = model.data {
             vc.viewModel = PhotoViewerViewModel(with: extraData)
             self.navigationController?.pushViewController(vc, animated: true)

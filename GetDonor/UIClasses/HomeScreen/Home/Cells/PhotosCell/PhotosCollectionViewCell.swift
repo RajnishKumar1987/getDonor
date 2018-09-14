@@ -18,7 +18,11 @@ class PhotosCollectionViewCell: UICollectionViewCell,CellReusable {
         super.awakeFromNib()
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
     }
-    
+    override func prepareForReuse() {
+        imageView.image = nil
+        imageLoader = nil
+    }
+
     func configureCell(with model: Photo?) {
         
         

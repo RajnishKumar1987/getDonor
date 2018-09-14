@@ -37,6 +37,7 @@ class EditProfileTableViewController: UITableViewController {
         super.viewDidLoad()
         setUpUI()
         tableView.layer.cornerRadius = 10
+        tableView.alpha = 0
         loadUserDetails()
     }
     
@@ -98,7 +99,7 @@ class EditProfileTableViewController: UITableViewController {
         
         if doValidation() {
             
-            let param = [""]
+            //let param = [""]
             
         }
         

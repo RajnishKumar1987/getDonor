@@ -20,7 +20,11 @@ class EventsCollectionViewCell: UICollectionViewCell,CellReusable {
         
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
     }
-    
+    override func prepareForReuse() {
+        imageView.image = nil
+        imageLoader = nil
+    }
+
     func configureCell(with model: Event?) {
         
         guard let model = model else { return }

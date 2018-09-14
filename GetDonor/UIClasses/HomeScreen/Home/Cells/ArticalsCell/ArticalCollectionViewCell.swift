@@ -20,7 +20,11 @@ class ArticalCollectionViewCell: UICollectionViewCell, CellReusable {
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
         lblDescription.font = UIFont.fontWithTextStyle(textStyle: .body)
     }
-    
+    override func prepareForReuse() {
+        imageView.image = nil
+        imageLoader = nil
+    }
+
     func configurecell(model: Article) {
         
         lblTitle.text = model.title ?? ""

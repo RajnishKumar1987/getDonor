@@ -13,7 +13,8 @@ class MorePhotosViewController: BaseViewController {
 
     var viewModel = MorePhotosViewModel()
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     @IBOutlet weak var constraintCollectionViewBottomMargin: NSLayoutConstraint!
     var refreshControl: UIRefreshControl?
     
@@ -21,6 +22,7 @@ class MorePhotosViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Phots"
+        collectionView.alpha = 0
         doInitialConfig()
     }
     
@@ -32,13 +34,14 @@ class MorePhotosViewController: BaseViewController {
     func loadMorePhotos() {
         
         viewModel.loadMorePhotos { [weak self](result) in
-            
+            self?.activityIndicator.stopAnimating()
             self?.isLoadingNextPageResults(false)
             self?.viewModel.isUserRefreshingList = false
             self?.refreshControl?.endRefreshing()
             switch (result){
             case .Success:
                 print("success")
+                self?.collectionView.alpha = 1
                 self?.collectionView.reloadData()
             case .failure(let msg):
                 print(msg)
@@ -59,10 +62,14 @@ class MorePhotosViewController: BaseViewController {
 
         if let cell = sender as? MorePhotosCollectionViewCell, var indexPath = collectionView.indexPath(for: cell) {
             
-            let photoDetailsVC = segue.destination as? PhotoDetailsViewController
+            let photoViewerVc = segue.destination as? PhotoViewerViewController
+            photoViewerVc?.viewModel = PhotoViewerViewModel(with: viewModel.model.photoList)
             indexPath.section = 0
-            photoDetailsVC?.selectedIndexPath = indexPath
-            photoDetailsVC?.photos = viewModel.model.photoList
+            photoViewerVc?.selectedIndex = indexPath
+//            let photoDetailsVC = segue.destination as? PhotoDetailsViewController
+//            indexPath.section = 0
+//            photoDetailsVC?.selectedIndexPath = indexPath
+//            photoDetailsVC?.photos = viewModel.model.photoList
         }
     }
  

@@ -14,4 +14,9 @@ class PhotoViewerViewModel {
     init(with extraDataItem: [ExtraData]) {
         self.model = PhotoViewerDataModel(with: extraDataItem)
     }
+    
+    init(with photoItem: [Photo]) {
+        
+        self.model = PhotoViewerDataModel(with: photoItem)
+    }
 }

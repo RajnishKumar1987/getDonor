@@ -18,7 +18,11 @@ class ArticalImageTableViewCell: UITableViewCell, CellReusable {
         super.awakeFromNib()
         // Initialization code
     }
-    
+    override func prepareForReuse() {
+        imgView.image = nil
+        imageLoader = nil
+    }
+
     func configureCellWith(image imageUrl: String?) {
         
         if let imageUrl = imageUrl {

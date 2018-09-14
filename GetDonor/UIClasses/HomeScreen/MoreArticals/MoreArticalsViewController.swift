@@ -11,11 +11,13 @@ import UIKit
 class MoreArticalsViewController: BaseViewController {
 
     var viewModel = ArticalsViewModel()
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Articals"
+        tableView.alpha = 0
         // Do any additional setup after loading the view.
         doInitialConfig()
     }
@@ -27,9 +29,10 @@ class MoreArticalsViewController: BaseViewController {
     func loadArticals() {
         
         viewModel.loadArticals { [weak self](result) in
-            
+            self?.activityIndicator.stopAnimating()
             switch (result){
             case .Success:
+                self?.tableView.alpha = 1
                 self?.tableView.reloadData()
                 print("Success")
             case .failure(let msg):

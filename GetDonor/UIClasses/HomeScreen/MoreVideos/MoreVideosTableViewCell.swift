@@ -19,7 +19,11 @@ class MoreVideosTableViewCell: UITableViewCell, CellReusable{
         
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title1)
     }
-    
+    override func prepareForReuse() {
+        imgView.image = nil
+        imageLoader = nil
+    }
+
     func configureCell(with model: Video?) {
         
         lblTitle.text = model?.title

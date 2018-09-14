@@ -10,6 +10,7 @@ import UIKit
 
 class HomeViewController: BaseViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var viewModel = HomeListingViewModel()
     
@@ -39,6 +40,7 @@ class HomeViewController: BaseViewController {
         
         viewModel.loadHomeScreen { [weak self](result) in
             
+            self?.activityIndicator.stopAnimating()
             switch result {
             case .Success:
                 self?.tableView.reloadData()
@@ -57,14 +59,21 @@ class HomeViewController: BaseViewController {
         case "openArticalsDetails":
             let articalDetailVC = segue.destination as? ArticalDetailsViewController
             articalDetailVC?.articals = [sender as? Article] as? [Article]
-        case "openPhotoDetails":
-            let articalDetailVC = segue.destination as? PhotoDetailsViewController
-            articalDetailVC?.selectedIndexPath = sender as! IndexPath
-            articalDetailVC?.photos = viewModel.homeApiResponse?.contents?.photo
+        case "openPhotoViewer":
+            let articalDetailVC = segue.destination as? PhotoViewerViewController
+            articalDetailVC?.selectedIndex = sender as? IndexPath
+            articalDetailVC?.viewModel = PhotoViewerViewModel(with: (viewModel.homeApiResponse?.contents?.photo)!)
         case "openEditProfile":
             let videoDetailsVC = segue.destination as? EditProfileViewController
             videoDetailsVC?.userId = AppConfig().getUserId()
             print("openEditProfile")
+        case "showEventsPhoto":
+            let articalDetailVC = segue.destination as? PhotoViewerViewController
+            var indexPath = sender as? IndexPath
+            indexPath?.section = 0
+            articalDetailVC?.selectedIndex = IndexPath(item: 0, section: 0)
+            let model = viewModel.homeApiResponse?.contents?.event[(indexPath?.item)!]
+            articalDetailVC?.viewModel = PhotoViewerViewModel(with: (model?.data)!)
         default:
             print("Unknown")
             
@@ -106,16 +115,9 @@ extension HomeViewController: HomeScreenCellDelegate{
             let model = viewModel.homeApiResponse?.contents?.article[indexPath.item]
             self.performSegue(withIdentifier: "openArticalsDetails", sender: model)
         case .photo:
-            self.performSegue(withIdentifier: "openPhotoDetails", sender: indexPath)
+            self.performSegue(withIdentifier: "openPhotoViewer", sender: indexPath)
         case .event:
-            let storyboard = UIStoryboard(name: "PhotoViewer", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "PhotoViewerViewController") as! PhotoViewerViewController
-            let model = viewModel.homeApiResponse?.contents?.event[indexPath.item]
-            if let extraData = model?.data {
-                vc.viewModel = PhotoViewerViewModel(with: extraData)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-
+            self.performSegue(withIdentifier: "showEventsPhoto", sender: indexPath)
         }
     }
     
