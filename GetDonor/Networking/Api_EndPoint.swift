@@ -12,6 +12,11 @@ enum UserProfileActionType: String{
     case get = "GET"
     case set = "SET"
 }
+enum CSCListingType: String{
+    case country = "co"
+    case state = "st"
+    case city = "ci"
+}
 
 enum Api_EndPoint {
     case getHomeData
@@ -21,9 +26,13 @@ enum Api_EndPoint {
     case getSimilar
     case login
     case registration
-    case updateProfile
-    
-    
+    case getProfile
+    case getDonationDetails
+    case updateProfile(id: String, action: UserProfileActionType)
+    case menu
+    case updateLocation
+    case getCSCList(listingType: CSCListingType, id: String)
+
     var urlString: String{
         switch self {
         case .getHomeData:
@@ -40,8 +49,18 @@ enum Api_EndPoint {
             return AppBaseURLs.baseUrl.appending("login.php")
         case .registration:
             return AppBaseURLs.baseUrl.appending("registration.php")
-        case .updateProfile:
+        case .getProfile:
             return AppBaseURLs.baseUrl.appending("update_profile.php")
+        case .getDonationDetails:
+            return AppBaseURLs.baseUrl.appending("pay_info.php")
+        case .updateProfile(let id, let action):
+            return AppBaseURLs.baseUrl.appending("update_profile.php?id=\(id)&action=\(action.rawValue)")
+        case .menu:
+            return AppBaseURLs.baseUrl.appending("menu.php")
+        case .updateLocation:
+            return AppBaseURLs.baseUrl.appending("update_location.php")
+        case .getCSCList(let action, let id):
+            return AppBaseURLs.baseUrl.appending("csc.php?id=\(id)&t=\(action.rawValue)")
 
         }
     }

@@ -15,6 +15,7 @@ class EditProfileViewController: BaseViewController {
     @IBOutlet weak var imgProfile: UIImageView!
     var imagePicker = UIImagePickerController()
     var userId: String!
+    weak var delegate: EditProfileTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +98,8 @@ class EditProfileViewController: BaseViewController {
         if segue.identifier == "editProfileVC" {
             let childVC = segue.destination as? EditProfileTableViewController
             childVC?.userId = userId
-            
+            childVC?.profileImage = self.imgProfile.image
+            self.delegate = childVC
         }
     }
 
@@ -108,8 +110,13 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imgProfile.image = pickedImage
         }
+        if #available(iOS 11.0, *) {
+            print(info[UIImagePickerControllerImageURL])
+        } else {
+            // Fallback on earlier versions
+        }
         picker.dismiss(animated: true, completion: nil)
-
+        self.delegate?.didProfileImageSelected(image: self.imgProfile.image!)
     }
 }
 

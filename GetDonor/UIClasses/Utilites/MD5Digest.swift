@@ -96,9 +96,12 @@ public extension String.UTF8View {
 /// Pure Swift implementation of the MD5 algorithm.
 fileprivate struct MD5State {
     
+    var b:UInt32 = 0xefcdab89
+    var c:UInt32 = 0x98badcfe
+
     var a = UInt32(0x67452301)
-    var b = UInt32(0xefcdab89)
-    var c = UInt32(0x98badcfe)
+    //var b = UInt32(0xefcdab89)
+    //var c = UInt32(0x98badcfe)
     var d = UInt32(0x10325476)
     
     static let chunkSize = 64

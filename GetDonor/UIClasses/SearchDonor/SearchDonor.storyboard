@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,18 +15,133 @@
             <objects>
                 <viewController storyboardIdentifier="SearchDonorViewController" id="eZi-DW-VnX" customClass="SearchDonorViewController" customModule="GetDonor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nG2-jn-TqT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agA-Kg-ygs">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kon-JY-0Yx">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
+                                        <subviews>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNg-Iw-Dql">
+                                                <rect key="frame" x="49" y="44" width="277" height="35"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Blood Group" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N6H-u2-qHL">
+                                                        <rect key="frame" x="8" y="3" width="261" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.70854423420000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="eZi-DW-VnX" id="hOU-qp-a6O"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="9kB-14-ZnY"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="0.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBP-Qe-bha">
+                                                <rect key="frame" x="130" y="97" width="115" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="GjT-pP-Jpm"/>
+                                                    <constraint firstAttribute="width" constant="115" id="owE-4Q-tFd"/>
+                                                </constraints>
+                                                <state key="normal" title="SEARCH"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-Zc-iTl">
+                                                <rect key="frame" x="20" y="161" width="80" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="MP8-vt-Jd7"/>
+                                                    <constraint firstAttribute="width" constant="80" id="XhP-gs-Jtp"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="14" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxJ-b4-Zuu">
+                                                <rect key="frame" x="19" y="194" width="337" height="94"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="94" id="bbK-5i-KZ3"/>
+                                                </constraints>
+                                                <string key="text">GetDonor will help you to search donors nearby you. In a blood transfusion, a patient must receive a blood type compatible with his or own blood type so we provide the donors compatible with patient Blood Group.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgimg" translatesAutoresizingMaskIntoConstraints="NO" id="XlW-RC-AmV">
+                                                <rect key="frame" x="87" y="311" width="200" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="D9b-4Y-WCo"/>
+                                                    <constraint firstAttribute="width" constant="200" id="gl5-bJ-Oo2"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="XlW-RC-AmV" firstAttribute="top" secondItem="lxJ-b4-Zuu" secondAttribute="bottom" constant="23" id="3SH-tO-9jy"/>
+                                            <constraint firstItem="XBP-Qe-bha" firstAttribute="centerX" secondItem="kon-JY-0Yx" secondAttribute="centerX" id="6Jn-uj-NxM"/>
+                                            <constraint firstItem="FNg-Iw-Dql" firstAttribute="top" secondItem="kon-JY-0Yx" secondAttribute="top" constant="44" id="9nN-aD-SEd"/>
+                                            <constraint firstItem="FNg-Iw-Dql" firstAttribute="leading" secondItem="kon-JY-0Yx" secondAttribute="leading" constant="49" id="Fah-Nb-UHf"/>
+                                            <constraint firstItem="XBP-Qe-bha" firstAttribute="top" secondItem="FNg-Iw-Dql" secondAttribute="bottom" constant="18" id="PWx-sH-QQz"/>
+                                            <constraint firstItem="JLw-Zc-iTl" firstAttribute="top" secondItem="FNg-Iw-Dql" secondAttribute="bottom" constant="82" id="SQs-ym-n9N"/>
+                                            <constraint firstAttribute="trailing" secondItem="FNg-Iw-Dql" secondAttribute="trailing" constant="49" id="bDn-X1-Eiq"/>
+                                            <constraint firstItem="JLw-Zc-iTl" firstAttribute="leading" secondItem="kon-JY-0Yx" secondAttribute="leading" constant="20" id="eq8-0C-GNg"/>
+                                            <constraint firstItem="lxJ-b4-Zuu" firstAttribute="top" secondItem="JLw-Zc-iTl" secondAttribute="bottom" constant="12" id="gUk-E8-BMi"/>
+                                            <constraint firstItem="XlW-RC-AmV" firstAttribute="centerX" secondItem="kon-JY-0Yx" secondAttribute="centerX" id="hbc-Mx-shq"/>
+                                            <constraint firstAttribute="bottom" secondItem="XlW-RC-AmV" secondAttribute="bottom" constant="179" id="jlB-y6-Iix"/>
+                                            <constraint firstAttribute="trailing" secondItem="lxJ-b4-Zuu" secondAttribute="trailing" constant="19" id="sQU-zf-JIM"/>
+                                            <constraint firstItem="lxJ-b4-Zuu" firstAttribute="leading" secondItem="kon-JY-0Yx" secondAttribute="leading" constant="19" id="u7t-eY-KVD"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kon-JY-0Yx" secondAttribute="trailing" id="9NS-KR-OXK"/>
+                                    <constraint firstAttribute="bottom" secondItem="kon-JY-0Yx" secondAttribute="bottom" id="Of5-eI-IZD"/>
+                                    <constraint firstItem="kon-JY-0Yx" firstAttribute="height" secondItem="agA-Kg-ygs" secondAttribute="height" priority="250" id="WhW-Z4-ejx"/>
+                                    <constraint firstItem="kon-JY-0Yx" firstAttribute="leading" secondItem="agA-Kg-ygs" secondAttribute="leading" id="eeA-x2-ILI"/>
+                                    <constraint firstItem="kon-JY-0Yx" firstAttribute="width" secondItem="agA-Kg-ygs" secondAttribute="width" id="gH8-6N-DR8"/>
+                                    <constraint firstItem="kon-JY-0Yx" firstAttribute="top" secondItem="agA-Kg-ygs" secondAttribute="top" id="gPL-Zc-xcK"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="agA-Kg-ygs" firstAttribute="trailing" secondItem="plm-kS-HsM" secondAttribute="trailing" id="8sI-RI-1TH"/>
+                            <constraint firstItem="agA-Kg-ygs" firstAttribute="leading" secondItem="plm-kS-HsM" secondAttribute="leading" id="G2O-XM-6g4"/>
+                            <constraint firstItem="agA-Kg-ygs" firstAttribute="top" secondItem="plm-kS-HsM" secondAttribute="top" id="dB9-eP-IvO"/>
+                            <constraint firstItem="agA-Kg-ygs" firstAttribute="bottom" secondItem="plm-kS-HsM" secondAttribute="bottom" id="nYf-GZ-KfQ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="plm-kS-HsM"/>
                     </view>
                     <navigationItem key="navigationItem" id="CSL-98-pIz">
                         <barButtonItem key="backBarButtonItem" title=" " id="oPg-uH-hfb"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnSearch" destination="XBP-Qe-bha" id="zhi-Hv-PyD"/>
+                        <outlet property="lblDesc" destination="lxJ-b4-Zuu" id="hyH-4O-qiB"/>
+                        <outlet property="lblNote" destination="JLw-Zc-iTl" id="fmf-as-z3i"/>
+                        <outlet property="scrollView" destination="agA-Kg-ygs" id="x6w-8C-Z7M"/>
+                        <outlet property="txtBloodGroup" destination="N6H-u2-qHL" id="d6p-74-xxj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0d-sL-Rmq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1580" y="151.57421289355324"/>
+            <point key="canvasLocation" x="1580" y="151.47783251231527"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3qy-3X-Vz1">
@@ -34,7 +149,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t8S-EQ-Mwu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5rQ-2n-Uiw">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -47,4 +162,7 @@
             <point key="canvasLocation" x="640.79999999999995" y="151.57421289355324"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bgimg" width="291" height="291"/>
+    </resources>
 </document>

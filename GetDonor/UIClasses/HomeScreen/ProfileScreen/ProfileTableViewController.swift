@@ -7,18 +7,29 @@
 //
 
 import UIKit
+import StoreKit
 
 class ProfileTableViewController: UITableViewController {
 
+    var viewModel = MenuViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.layer.cornerRadius = 10
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        loadMenu()
+    }
+    
+    func loadMenu() {
+        viewModel.loadMenu {[weak self] (result) in
+            switch result{
+            case .Success:
+                print("success")
+                self?.tableView.reloadData()
+            case .failure(let msg):
+                print(msg)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,71 +37,84 @@ class ProfileTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return viewModel.model.menu.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let model = viewModel.model.menu[indexPath.row]
+        let cell: MenuTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+        cell.lblTitle.text = model.name
         return cell
+        
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = viewModel.model.menu[indexPath.row]
+        
+        switch model.type {
+        case "webview":
+            openWebView(with: model.url!)
+        case "inapp":
+            if model.name == "Rate the App"{
+                loadRateTheAppView()
+            }
+            else{
+                performSegue(withIdentifier: model.name!, sender: nil)
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+            }
+        default:
+            print("Unknown")
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    
+    func openWebView(with stringUrl: String)  {
+        let storyBoard = UIStoryboard(name: "WebView", bundle: nil)
+        let webViewController = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+        webViewController.urlString = stringUrl
+        self.navigationController?.pushViewController(webViewController, animated: true)
 
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    func loadRateTheAppView()  {
+        if #available( iOS 10.3,*){
+            SKStoreReviewController.requestReview()
+        }
+        else{
+            rateApp(appId: "id414009038")
+        }
     }
-    */
-
-    /*
+    
+    fileprivate func rateApp(appId: String) {
+        openUrl("itms-apps://itunes.apple.com/app/" + appId)
+    }
+    fileprivate func openUrl(_ urlString:String) {
+        let url = URL(string: urlString)!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        switch segue.identifier {
+        case "Edit":
+            let vc = segue.destination as! EditProfileViewController
+            vc.userId = AppConfig.getUserId()
+        case "Logout":
+            print("")
+            AppConfig.setUserLoggedIn(status: false)
+            //self.navigationController?.popViewController(animated: false)
+        default:
+            print("Unknown")
+        }
     }
-    */
+    
 
 }

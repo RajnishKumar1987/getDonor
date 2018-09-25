@@ -18,16 +18,15 @@ class LoginSignUpViewController: UITableViewController {
     @IBOutlet weak var btnForgotPassword: UIButton!
     @IBOutlet weak var btnSignUp: UIButton!
     var apiLoader: APIRequestLoader<LoginApiRequest>!
-
+    
     var loginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let imageView = UIImageView(frame: self.view.bounds)
         imageView.image = UIImage(named: "bglogin")
         tableView.backgroundView = imageView
-        
+        addTapGesture()
         lblWecome.font = UIFont.fontWithTextStyle(textStyle: .title1)
         lblGetDonor.font = UIFont.fontWithTextStyle(textStyle: .extraBold)
         txtEmail.font = UIFont.fontWithTextStyle(textStyle: .title2)
@@ -36,7 +35,8 @@ class LoginSignUpViewController: UITableViewController {
         txtPassword.font = UIFont.fontWithTextStyle(textStyle: .title2)
         txtPassword.makeCornerRadiusWithValue(15.0, borderColor: UIColor.black)
         txtPassword.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
+        txtEmail.delegate = self
+        txtPassword.delegate = self
         btnLogin.titleLabel?.font = UIFont.fontWithTextStyle(textStyle: .title1)
         btnLogin.makeCornerRadiusWithValue(15.0, borderColor: nil)
         btnLogin.backgroundColor = UIColor.colorFor(component: .button)
@@ -52,7 +52,7 @@ class LoginSignUpViewController: UITableViewController {
         
 
     }
-
+    
     @IBAction func actionLogingButtonPressed(_ sender: Any) {
         doLogin()
     }
@@ -110,4 +110,19 @@ class LoginSignUpViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+}
+
+extension LoginSignUpViewController: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == txtEmail {
+            txtPassword.becomeFirstResponder()
+        }
+        if textField == txtPassword {
+            doLogin()
+        }
+
+        return true
+    }
 }

@@ -80,6 +80,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="BHD-eP-8l0"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="v14-BF-uGD" id="E6t-4A-sRh"/>
                         <outlet property="tableView" destination="vPG-ZC-5OQ" id="BvO-zn-Tro"/>
                     </connections>
                 </viewController>

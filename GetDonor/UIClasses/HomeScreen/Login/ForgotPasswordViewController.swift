@@ -22,6 +22,7 @@ class ForgotPasswordViewController: UIViewController {
         btnSignUp.tintColor = UIColor.white
         
         txtEmail.font = UIFont.fontWithTextStyle(textStyle: .title1)
+        addTapGesture()
 
 
     }

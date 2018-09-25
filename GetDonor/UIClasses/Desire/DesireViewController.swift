@@ -12,6 +12,7 @@ class DesireViewController: BaseViewController {
 
     var viewModel = DesireViewModel()
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class DesireViewController: BaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerCell(CorousalTableViewCell.self)
         viewModel.loadDesire { [weak self](result) in
+            self?.activityIndicator.stopAnimating()
             switch result{
             case .Success:
                 self?.tableView.reloadData()

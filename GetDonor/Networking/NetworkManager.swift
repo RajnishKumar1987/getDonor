@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 
 enum Result<String> {
@@ -30,6 +30,7 @@ protocol APIRequest {
     func makeRequest(forFuncion function:Api_EndPoint, parameters: RequestDataType) throws -> URLRequest
     func parseResponse(data: Data) throws -> ResponseDataType
     func shouldCacheResponse() -> Bool
+    
 }
 
 extension APIRequest {
@@ -37,6 +38,12 @@ extension APIRequest {
     func shouldCacheResponse() -> Bool {
         return false
     }
+    
+    func makeMultiPartRequest(forFuncion function:Api_EndPoint, parameters: RequestDataType, image: UIImage) throws -> URLRequest{
+        return URLRequest(url: URL(string: AppBaseURLs.baseUrl)!)
+    }
+
+    
 }
 
 class APIRequestLoader<T: APIRequest> {

@@ -19,6 +19,7 @@ enum TextStyle {
     case caption1
     case caption2
     case extraBold
+    case regular
 }
 
 extension UIFont{
@@ -37,13 +38,15 @@ extension UIFont{
         case .headline:
             return UIFont(name: "Muli-Bold", size: 20.0)!
         case .subHead:
-            return UIFont(name: "Muli-Bold", size: 18.0)!
+            return UIFont(name: "Muli-Bold", size: 16.0)!
         case .caption1:
             return UIFont(name: "Muli", size: 12.0)!
         case .caption2:
             return UIFont(name: "Muli", size: 10.0)!
         case .extraBold:
             return UIFont(name: "Muli-Bold", size: 30.0)!
+        case .regular:
+            return UIFont(name: "Muli", size: 16.0)!
 
         }
     }

@@ -29,6 +29,13 @@ extension String {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: self)
     }
+    
+    func getBloodGroupId() -> String {
+        return bloodGroups[self]!
+    }
+    func getBloodGroup() -> String {
+        return bloodGroups.someKey(forValue: self)!
+    }
 }
 
 extension UIButton {
@@ -114,4 +121,64 @@ extension UIViewController{
         self.view.addSubview(view)
     }
     
+    
 }
+
+extension NSMutableAttributedString {
+    @discardableResult func bold(_ text: String, with font: UIFont) -> NSMutableAttributedString {
+        let attrs: [NSAttributedStringKey: Any] = [.font: font]
+        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(boldString)
+        
+        return self
+    }
+    
+    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
+        let normal = NSAttributedString(string: text)
+        append(normal)
+        
+        return self
+    }
+}
+
+extension Data {
+    
+    /// Append string to Data
+    ///
+    /// Rather than littering my code with calls to `data(using: .utf8)` to convert `String` values to `Data`, this wraps it in a nice convenient little extension to Data. This defaults to converting using UTF-8.
+    ///
+    /// - parameter string:       The string to be added to the `Data`.
+    
+    mutating func append(_ string: String, using encoding: String.Encoding = .utf8) {
+        if let data = string.data(using: encoding) {
+            append(data)
+        }
+    }
+}
+
+extension Date {
+    
+    func getDateString(format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let strMonth = dateFormatter.string(from: self)
+        return strMonth
+    }
+    
+    
+}
+
+extension UIViewController{
+    
+    func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.addTarget(self, action: #selector(hideKeyBoard))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyBoard() {
+        self.view.endEditing(true)
+    }
+}
+
+

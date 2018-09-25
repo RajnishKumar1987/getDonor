@@ -1,0 +1,56 @@
+{
+    "error": 0,
+    "message": "successful",
+    "node": [
+             {
+             "type": "inapp",
+             "name": "Edit",
+             "url": ""
+             },
+             {
+             "type": "webview",
+             "name": "Donation Details",
+             "url": "https://www.getdonor.org/api/payment.php?action=donatedetails"
+             },
+             {
+             "type": "webview",
+             "name": "About Us",
+             "url": "https://www.getdonor.org/api/index.php?action=aboutus"
+             },
+             {
+             "type": "webview",
+             "name": "Contact Us",
+             "url": "https://www.getdonor.org/api/index.php?action=contactus"
+             },
+             {
+             "type": "inapp",
+             "name": "Rate the App",
+             "url": "https://play.google.com/store/apps/details?id=com.trustp.getdonor"
+             },
+             {
+             "type": "webview",
+             "name": "Feedback",
+             "url": ""
+             },
+             {
+             "type": "webview",
+             "name": "Help & Support",
+             "url": "https://www.getdonor.org/api/index.php?action=help_support"
+             },
+             {
+             "type": "webview",
+             "name": "Privacy Policy",
+             "url": "https://www.getdonor.org/api/index.php?action=policy"
+             },
+             {
+             "type": "webview",
+             "name": "Terms & Conditions",
+             "url": "https://www.getdonor.org/api/index.php?action=terms"
+             },
+             {
+             "type": "inapp",
+             "name": "Logout",
+             "url": ""
+             }
+             ]
+}

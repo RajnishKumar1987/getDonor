@@ -1,0 +1,33 @@
+
+
+{
+    "error": 0,
+    "message": "successful",
+    "node": {
+        "description":{
+            "info":"We don't live in a perfect world and there's never going to be a perfect time to give but there are always people out there in need of help.\n Donating to charity is a major mood-booster. The knowledge that you're helping others is hugely empowering and, in turn, can make you feel happier and more fulfilled."
+        },
+        "q&a":[
+        {
+               "question":"Why to Donate ?",
+               "answer":"Well, that answer can only come from your heart. Happy giving!"
+        }
+        ],
+        "secure_payment":{
+            "info":"100% Secure Payment"
+        },
+        "upi_detail": {
+            "info": "You Can Also Donate By Tez / BHIM UPI On 9422360600"
+        },
+        "bank_detail": {
+            "info": "Now pay directly to the bank account using various mobile apps such as BHIM app, Mobile Banking app etc.",
+            "account_name": "Rohan Ramdas Satone",
+            "bank_name": "CANARA BANK",
+            "account_number": "4311101000127",
+            "ifsc_code": "CNRB0004311"
+        },
+        "cash_detail": {
+            "info": "You can pay in Cash. To Donate Contact On 7058858800"
+        }
+    }
+}

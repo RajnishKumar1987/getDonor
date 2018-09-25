@@ -15,6 +15,19 @@ class CommonApiRequest: APIRequest {
         
         let url = try? URLEncoder().urlWith(urlString: function.urlString, parameters: parameters)
         
+        let urlComp = URLComponents(string: (url?.absoluteString)!)
+        
+        if let queryItem = urlComp?.queryItems {
+           let result = queryItem.map { (item) -> String in
+            return item.value!
+            }.joined(separator: "")
+            print(result)
+        }
+        for item in (urlComp?.queryItems)!{
+            print(item.value)
+        }
+        
+        
         var urlRequest = URLRequest(url: url!)
         
         if let requestParam = parameters {

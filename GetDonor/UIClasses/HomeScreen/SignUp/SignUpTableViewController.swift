@@ -25,10 +25,7 @@ class SignUpTableViewController: UITableViewController {
     var _accountKit: AKFAccountKit!
     let viewModel = SignUpViewModel()
     
-    let bloodGroups = ["O+":"1","O-":"2","A+":"3","A-":"4","B+":"5","B-":"6","AB+":"7","AB-":"8"]
-    
-    //1=>"O+",2=>"O-",3=>"A+",4=>"A-",5=>"B+",6=>"B-",7=>"AB+",8=>"AB-"
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         txtMobile.text = "8369150994"
@@ -46,6 +43,7 @@ class SignUpTableViewController: UITableViewController {
     
     func doInitialConfig() {
         
+        addTapGesture()
         if _accountKit == nil {
             _accountKit = AKFAccountKit(responseType: .accessToken)
         }
@@ -104,7 +102,7 @@ class SignUpTableViewController: UITableViewController {
         
         if doValidation() {
             
-            let b_group = bloodGroups[txtBloodGroup.text!]
+            let b_group = txtBloodGroup.text!.getBloodGroupId()
             
             let param : [String:String] = ["email":txtEmail.text!,
                          "password":txtPassword.text!,
@@ -112,7 +110,7 @@ class SignUpTableViewController: UITableViewController {
                          "firstname":txtFirstName.text!,
                          "lastname": txtLastName.text!,
                          "version":"1.0.0",
-                         "b_group": b_group!
+                         "b_group": b_group
                          ]
             
 
@@ -121,9 +119,7 @@ class SignUpTableViewController: UITableViewController {
                 case .Success:
                     print("Success")
                 case .failure(let msg):
-                    self?.performSegue(withIdentifier: "unwindSegueToHome", sender: "openEditProfile")
-
-                    //self?.showError(with: msg)
+                    self?.showError(with: msg)
                 }
             }
         }
@@ -142,10 +138,8 @@ class SignUpTableViewController: UITableViewController {
         pickerView  = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
-        
         txtBloodGroup.inputView = pickerView
-        let bloodGroup = Array(bloodGroups.keys)
-        txtBloodGroup.text = bloodGroup[0]
+        txtBloodGroup.text = bloodGroupsArray[0]
         
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
@@ -160,10 +154,15 @@ class SignUpTableViewController: UITableViewController {
         toolBar.isUserInteractionEnabled = true
         txtBloodGroup.inputAccessoryView = toolBar
 
+//        [self pickerView: myPickerView
+//            didSelectRow:[myPickerView selectedRowInComponent:component]
+//            inComponent:component];
+        self.pickerView.delegate?.pickerView!(self.pickerView, didSelectRow: 0, inComponent: 0)
     }
     
     @objc func pickerViewDonePressed() {
-        self.view.endEditing(true)
+        self.pickerView.removeFromSuperview()
+        self.txtBloodGroup.resignFirstResponder()
     }
     
     func prepareLoginViewController(loginViewController: AKFViewController) {
@@ -276,17 +275,16 @@ extension SignUpTableViewController: UIPickerViewDataSource, UIPickerViewDelegat
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return bloodGroups.count
+        return bloodGroupsArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let bloodGroup = Array(bloodGroups.keys)
-        return bloodGroup[row]
+        return bloodGroupsArray[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-        let bloodGroup = Array(bloodGroups.keys)
-        txtBloodGroup.text = bloodGroup[row]
+        
+        txtBloodGroup.text = bloodGroupsArray[row]
     }
 
 }

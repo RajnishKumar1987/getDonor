@@ -8,6 +8,10 @@
 
 import Foundation
 
+let bloodGroupsArray = ["O+","O-","A+","A-","B+","B-","AB+","AB-"]
+
+let bloodGroups = ["O+":"1","O-":"2","A+":"3","A-":"4","B+":"5","B-":"6","AB+":"7","AB-":"8"]
+
 enum DevelopmentEnvironment {
     case stagging
     case production
@@ -17,22 +21,33 @@ struct AppConfig {
     
     static let environment: DevelopmentEnvironment = .production
     
-    func setUserLoggedIn(status: Bool) {
+    static func setUserLoggedIn(status: Bool) {
         UserDefaults.standard.set(status, forKey: "userLoginStatus")
         UserDefaults.standard.synchronize()
     }
     
-    func getUserLoginStatus() -> Bool {
+    static func getUserLoginStatus() -> Bool {
         return UserDefaults.standard.bool(forKey: "userLoginStatus")
     }
     
-    func setUserId(id: String) {
+    static func setUserId(id: String) {
         UserDefaults.standard.set(id, forKey: "userId")
         UserDefaults.standard.synchronize()
     }
-    func getUserId() -> String {
+    static func getUserId() -> String {
         return UserDefaults.standard.string(forKey: "userId") ?? ""
     }
+    
+    static func setUserBloodGroup(bgroupId: String){
+        UserDefaults.standard.set(bgroupId, forKey: "userBloodGroup")
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func getUserBloodGroup()-> String{
+        return UserDefaults.standard.string(forKey: "userBloodGroup") ?? ""
+
+    }
+
     
 }
 

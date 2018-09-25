@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EditProfileViewControllerDelegate: class{
+    func didProfileImageSelected(image: UIImage)
+}
+
 class EditProfileTableViewController: UITableViewController {
 
     @IBOutlet weak var lblFirstName: UILabel!
@@ -22,16 +26,23 @@ class EditProfileTableViewController: UITableViewController {
     @IBOutlet weak var txtBloodGroup: UITextField!
     @IBOutlet weak var lblCity: UILabel!
     @IBOutlet weak var txtCity: UITextField!
-    @IBOutlet weak var lblAddress: UILabel!
-    @IBOutlet weak var txtAddress: UITextView!
     @IBOutlet weak var lblCountry: UILabel!
     @IBOutlet weak var txtCountry: UITextField!
+    @IBOutlet weak var lblDOB: UILabel!
+    @IBOutlet weak var txtDOB: UITextField!
+    @IBOutlet weak var lblState: UILabel!
+    @IBOutlet weak var txtState: UITextField!
 
     @IBOutlet weak var btnUpdate: UIButton!
     
-    let viewModel = ProfileViewModel()
-    var userId: String!
+    var profileImage: UIImage!
     
+    let viewModel = ProfileViewModel()
+    let cscViewModel = CSCViewModel()
+    
+    var userId: String!
+    var datePickerView: UIDatePicker!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +50,13 @@ class EditProfileTableViewController: UITableViewController {
         tableView.layer.cornerRadius = 10
         tableView.alpha = 0
         loadUserDetails()
+        loadDatePicker()
+        addTapGesture()
+        getCountryList()
+    }
+    
+    func getCountryList() {
+        cscViewModel.loadCountryList()
     }
     
     func setUpUI()  {
@@ -57,14 +75,17 @@ class EditProfileTableViewController: UITableViewController {
         lblBloodGroup.font = UIFont.fontWithTextStyle(textStyle: .title2)
         txtBloodGroup.font = UIFont.fontWithTextStyle(textStyle: .title1)
 
-        lblAddress.font = UIFont.fontWithTextStyle(textStyle: .title2)
-        txtAddress.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
         lblCountry.font = UIFont.fontWithTextStyle(textStyle: .title2)
         txtCountry.font = UIFont.fontWithTextStyle(textStyle: .title1)
 
         lblCity.font = UIFont.fontWithTextStyle(textStyle: .title2)
         txtCity.font = UIFont.fontWithTextStyle(textStyle: .title1)
+
+        lblDOB.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        txtDOB.font = UIFont.fontWithTextStyle(textStyle: .title1)
+        
+        txtState.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        txtState.font = UIFont.fontWithTextStyle(textStyle: .title1)
 
         btnUpdate.titleLabel?.font = UIFont.fontWithTextStyle(textStyle: .headline)
         btnUpdate.makeCornerRadiusWithValue(15.0, borderColor: nil)
@@ -74,15 +95,48 @@ class EditProfileTableViewController: UITableViewController {
     }
     
     func loadUserDetails() {
-        viewModel.userProfile(for: userId, action: .get, userDetails: nil) { [weak self](result) in
+        viewModel.getProfile(for: userId, action: .get, userDetails: nil) { [weak self](result) in
+            
+            
             switch (result){
             case .Success:
                 print("Success")
+                self?.tableView.alpha = 1
                 self?.populateData()
             case .failure(let msg):
                 print(msg)
             }
         }
+    }
+    
+    func loadDatePicker() {
+        datePickerView  = UIDatePicker()
+        datePickerView.datePickerMode = .date
+        datePickerView.maximumDate = Date(timeIntervalSinceNow: 0)
+
+        datePickerView.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        txtDOB.inputView = datePickerView
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.colorFor(component: .button)
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(pickerViewDonePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([ spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        txtDOB.inputAccessoryView = toolBar
+        
+    }
+    @objc func pickerViewDonePressed()  {
+        self.view.endEditing(true)
+    }
+    
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        txtDOB.text = sender.date.getDateString(format: "yyyy-MM-dd")
     }
 
     func populateData() {
@@ -92,17 +146,36 @@ class EditProfileTableViewController: UITableViewController {
         txtMobile.text = viewModel.model.user?.phone
         txtCity.text = viewModel.model.user?.city
         txtCountry.text = viewModel.model.user?.country
-        txtAddress.text = viewModel.model.user?.address
+        txtDOB.text = viewModel.model.user?.dob
+        if let bloodGroup = viewModel.model.user?.b_group {
+            txtBloodGroup.text = bloodGroup.getBloodGroup()
+        }
     }
     
     @IBAction func actionUpdate(_ sender: UIButton) {
         
-        if doValidation() {
+    if doValidation() {
             
-            //let param = [""]
+        let userDetails : [String:Any] = ["phone": txtMobile.text!,
+                               "firstname":txtFirstName.text!,
+                               "lastname":txtLastName.text!,
+                               "city":txtCity.text!,
+                               "country":txtCountry.text!,
+                               "b_group":"6",
+                               "dob":txtDOB.text!,
+                              "image": profileImage
+                               ]
             
-        }
-        
+            viewModel.updateUserProfile(for: AppConfig.getUserId(), action: .set, userDetails: userDetails) { [weak self](result) in
+                switch result{
+                case .Success:
+                    print("Success")
+                    self?.navigationController?.popViewController(animated: true)
+                case .failure(let msg):
+                    print(msg)
+                }
+            }
+       }
     }
     
     func doValidation() -> Bool {
@@ -123,19 +196,23 @@ class EditProfileTableViewController: UITableViewController {
             showMessage(with: "Last name can't be empty.")
             return false
         }
-        if txtBloodGroup.text?.isEmpty ?? true {
-            showMessage(with: "Please select blood group.")
+        if txtDOB.text?.isEmpty ?? true {
+            showMessage(with: "DOB can't be empty.")
             return false
         }
+
         return true
     }
     
     func showMessage(with title:String) {
-        
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+}
 
-
+extension EditProfileTableViewController: EditProfileViewControllerDelegate{
+    func didProfileImageSelected(image: UIImage) {
+        self.profileImage = image
+    }
 }

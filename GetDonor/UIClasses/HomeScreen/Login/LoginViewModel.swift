@@ -26,7 +26,8 @@ class LoginViewModel {
             if let response = response {
                 
                 if response.message == "successful"{
-                    AppConfig().setUserId(id: response.userDetails?.userId ?? "")
+                    AppConfig.setUserId(id: response.userDetails?.userId ?? "")
+                    AppConfig.setUserLoggedIn(status: true)
                     result(.Success)
 
                 }else

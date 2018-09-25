@@ -9,6 +9,7 @@ target 'GetDonor' do
 	
   pod 'youtube-ios-player-helper', '~> 0.1.4'
   pod 'AccountKit'
+  pod 'ReachabilitySwift'
 
   target 'GetDonorTests' do
     inherit! :search_paths

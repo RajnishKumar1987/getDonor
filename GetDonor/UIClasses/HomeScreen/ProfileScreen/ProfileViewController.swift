@@ -26,7 +26,9 @@ class ProfileViewController: BaseViewController {
         imgProfile.layer.borderColor = UIColor.white.cgColor
 
     }
-
+    
+    
+    
     /*
     // MARK: - Navigation
 

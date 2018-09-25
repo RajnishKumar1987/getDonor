@@ -24,11 +24,10 @@ class HomeViewController: BaseViewController {
     func doInitialConfig() {
                 
         self.title = "Home"
-        if AppConfig().getUserLoginStatus() {
+        if !AppConfig.getUserLoginStatus() {
             presentLoginSignUpScreen()
         }else{
             loadHomeScreen()
-
         }
     }
     func presentLoginSignUpScreen() {
@@ -65,7 +64,7 @@ class HomeViewController: BaseViewController {
             articalDetailVC?.viewModel = PhotoViewerViewModel(with: (viewModel.homeApiResponse?.contents?.photo)!)
         case "openEditProfile":
             let videoDetailsVC = segue.destination as? EditProfileViewController
-            videoDetailsVC?.userId = AppConfig().getUserId()
+            videoDetailsVC?.userId = AppConfig.getUserId()
             print("openEditProfile")
         case "showEventsPhoto":
             let articalDetailVC = segue.destination as? PhotoViewerViewController
@@ -84,11 +83,19 @@ class HomeViewController: BaseViewController {
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {
         if let segue = segue as? UIStoryboardSegueWithCompletionHandler {
             segue.completion = {
-                self.performSegue(withIdentifier: "openEditProfile", sender: nil)
+                
+                if segue.identifier == "Logout" {
+                    self.presentLoginSignUpScreen()
+                }
+                else{
+                    self.performSegue(withIdentifier: "openEditProfile", sender: nil)
+                    self.loadHomeScreen()
+
+                }
 
             }
         }
-        loadHomeScreen()
+        
     }
     
     func loadEditProfile() {
