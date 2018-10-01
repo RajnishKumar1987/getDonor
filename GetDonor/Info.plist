@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AccountKitClientToken</key>
+	<string>ebaf2699d04d95fea746753b3f896a70</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -16,8 +18,19 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ak1471589852942749</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>1471589852942749</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -25,6 +38,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app will use camera</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>GetDonor need your current </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You can select photo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Muli-ExtraLightItalic.ttf</string>
@@ -57,24 +76,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>FacebookAppID</key>
-	<string>1471589852942749</string>
-	<key>AccountKitClientToken</key>
-	<string>ebaf2699d04d95fea746753b3f896a70</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>ak1471589852942749</string>
-			</array>
-		</dict>
-	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>This app will use camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You can select photo</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>GetDonor need your current </string>
 </dict>
 </plist>

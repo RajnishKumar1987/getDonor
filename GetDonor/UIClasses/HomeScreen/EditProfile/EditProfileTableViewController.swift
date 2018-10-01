@@ -36,12 +36,15 @@ class EditProfileTableViewController: UITableViewController {
     @IBOutlet weak var btnUpdate: UIButton!
     
     var profileImage: UIImage!
+    var pickerView: UIPickerView!
     
     let viewModel = ProfileViewModel()
     let cscViewModel = CSCViewModel()
     
     var userId: String!
     var datePickerView: UIDatePicker!
+    var selectedTxtField = UITextField()
+    let toolBar = UIToolbar()
 
     
     override func viewDidLoad() {
@@ -49,14 +52,23 @@ class EditProfileTableViewController: UITableViewController {
         setUpUI()
         tableView.layer.cornerRadius = 10
         tableView.alpha = 0
+        initilizeToolBar()
         loadUserDetails()
         loadDatePicker()
         addTapGesture()
-        getCountryList()
+        
     }
     
-    func getCountryList() {
-        cscViewModel.loadCountryList()
+    func getCountryList(cscType: CSCListingType, id: String) {
+        cscViewModel.loadCSCList(with: cscType, and: id) { [weak self](result) in
+            switch result{
+            case .Success:
+                self?.pickerView.reloadAllComponents()
+                self?.loadPickerView()
+            case .failure(let msg):
+                print(msg)
+            }
+        }
     }
     
     func setUpUI()  {
@@ -94,10 +106,32 @@ class EditProfileTableViewController: UITableViewController {
 
     }
     
+    func loadPickerView() {
+
+        let values = Array(cscViewModel.dataToPopulate.values).sorted(by: <)
+        if values.count > 0 {
+            selectedTxtField.text = values[0]
+            self.pickerView.delegate?.pickerView!(self.pickerView, didSelectRow: 0, inComponent: 0)
+//            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+        }
+    }
+    
+    func initilizeToolBar() {
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.colorFor(component: .button)
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(pickerViewDonePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([ spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+
+    }
+    
     func loadUserDetails() {
         viewModel.getProfile(for: userId, action: .get, userDetails: nil) { [weak self](result) in
-            
-            
             switch (result){
             case .Success:
                 print("Success")
@@ -133,6 +167,13 @@ class EditProfileTableViewController: UITableViewController {
     }
     @objc func pickerViewDonePressed()  {
         self.view.endEditing(true)
+        if selectedTxtField == txtCountry {
+            cscViewModel.selectedCountry = txtCountry.text!
+        }
+        if selectedTxtField == txtState {
+            cscViewModel.selectedState = txtState.text!
+        }
+
     }
     
     @objc func dateChanged(_ sender: UIDatePicker) {
@@ -216,3 +257,73 @@ extension EditProfileTableViewController: EditProfileViewControllerDelegate{
         self.profileImage = image
     }
 }
+extension EditProfileTableViewController: UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        selectedTxtField = textField
+        self.pickerView  = UIPickerView()
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
+
+        textField.inputView = pickerView
+        textField.inputAccessoryView = toolBar
+        
+        if textField == txtCountry {
+            if cscViewModel.shouldMakeCallToFetchCSCListing(for: .country, and: "") {
+                getCountryList(cscType: .country, id: "")
+            }else{
+                pickerView.reloadAllComponents()
+            }
+        }
+        
+        if textField == txtState {
+            if cscViewModel.shouldMakeCallToFetchCSCListing(for: .state, and: txtCountry.text!) {
+                getCountryList(cscType: .state, id: cscViewModel.countryName.someKey(forValue: txtCountry.text!)!)
+            }else{
+                pickerView.reloadAllComponents()
+            }
+
+        }
+        
+        if textField == txtCity {
+            if cscViewModel.shouldMakeCallToFetchCSCListing(for: .city, and: txtState.text!) {
+                getCountryList(cscType: .city, id: cscViewModel.stateName.someKey(forValue: txtState.text!)!)
+            }else{
+                pickerView.reloadAllComponents()
+            }
+            
+        }
+        
+
+    }
+}
+
+extension EditProfileTableViewController: UIPickerViewDataSource, UIPickerViewDelegate{
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return self.cscViewModel.dataToPopulate.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let values = Array(self.cscViewModel.dataToPopulate.values).sorted(by: <)
+        return values[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+        let values = Array(self.cscViewModel.dataToPopulate.values).sorted(by: <)
+        selectedTxtField.text = values[row]
+    }
+    
+}
+
+
+
+
+
+
+
+

@@ -32,7 +32,8 @@ enum Api_EndPoint {
     case menu
     case updateLocation
     case getCSCList(listingType: CSCListingType, id: String)
-
+    case searchDonor(id: String, bloodGroup: String, lat: String, lon: String, page: String)
+    
     var urlString: String{
         switch self {
         case .getHomeData:
@@ -61,6 +62,8 @@ enum Api_EndPoint {
             return AppBaseURLs.baseUrl.appending("update_location.php")
         case .getCSCList(let action, let id):
             return AppBaseURLs.baseUrl.appending("csc.php?id=\(id)&t=\(action.rawValue)")
+        case .searchDonor(let id, let bloodGroup, let lat, let lon, let page):
+            return AppBaseURLs.baseUrl.appending("user_search.php?id=\(id)&b_group=\(bloodGroup)&lat=\(lat)&lon=\(lon)&page=\(page)")
 
         }
     }

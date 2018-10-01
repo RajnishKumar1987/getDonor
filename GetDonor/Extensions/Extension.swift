@@ -181,4 +181,26 @@ extension UIViewController{
     }
 }
 
+extension URL{
+    
+    func getMD5WithSceretKey() -> String {
+        
+        let urlComp = URLComponents(string: self.absoluteString)
+        
+        var md5String = AppBaseURLs.apiSecretKey.utf8.md5.description
+        
+        if let queryItem = urlComp?.queryItems {
+            let result = queryItem.map { (item) -> String in
+                return item.value!
+                }.joined(separator: "")
+            
+            md5String = (AppBaseURLs.apiSecretKey + result).utf8.md5.description
+            
+        }
+
+        return md5String
+        
+    }
+}
+
 

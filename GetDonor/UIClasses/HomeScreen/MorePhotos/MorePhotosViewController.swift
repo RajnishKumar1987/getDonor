@@ -132,7 +132,6 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
         if (currentPosition >= heightToLoadNextPage) {
             isLoadingNextPageResults(true)
             loadNextPageResults()
-            print("1234567890")
         }
         
     }

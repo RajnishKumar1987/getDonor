@@ -16,6 +16,11 @@
 		84393AAC2133EC6C006B8688 /* CorousalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84393AAB2133EC6C006B8688 /* CorousalTableViewCell.xib */; };
 		84393AAE2133ED6D006B8688 /* CorousalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84393AAD2133ED6D006B8688 /* CorousalTableViewCell.swift */; };
 		84393AB02133EEC9006B8688 /* DesireTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84393AAF2133EEC9006B8688 /* DesireTableViewCell.swift */; };
+		84483FDF215C9D4F002078DC /* SearchApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84483FDE215C9D4E002078DC /* SearchApiRequest.swift */; };
+		84483FE1215C9D5C002078DC /* SearchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84483FE0215C9D5C002078DC /* SearchDataModel.swift */; };
+		84483FE3215C9DA1002078DC /* SerachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84483FE2215C9DA1002078DC /* SerachViewModel.swift */; };
+		84483FE5215CAC51002078DC /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84483FE4215CAC51002078DC /* SearchResultViewController.swift */; };
+		84483FE7215CB0CF002078DC /* SearchDonorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84483FE6215CB0CF002078DC /* SearchDonorTableViewCell.swift */; };
 		845205242154D0810055297C /* MenuDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845205232154D0810055297C /* MenuDataModel.swift */; };
 		845205262154D0900055297C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845205252154D0900055297C /* MenuViewModel.swift */; };
 		845205282154D09C0055297C /* MenuApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845205272154D09C0055297C /* MenuApiRequest.swift */; };
@@ -181,9 +186,15 @@
 		840CF8042158BAAF003E2C76 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		840CF8072159FB98003E2C76 /* CSCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCViewModel.swift; sourceTree = "<group>"; };
 		840CF8092159FE5F003E2C76 /* CSCDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCDataModel.swift; sourceTree = "<group>"; };
+		84358182216227B500EC28CE /* GetDonor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetDonor.entitlements; sourceTree = "<group>"; };
 		84393AAB2133EC6C006B8688 /* CorousalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CorousalTableViewCell.xib; sourceTree = "<group>"; };
 		84393AAD2133ED6D006B8688 /* CorousalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorousalTableViewCell.swift; sourceTree = "<group>"; };
 		84393AAF2133EEC9006B8688 /* DesireTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesireTableViewCell.swift; sourceTree = "<group>"; };
+		84483FDE215C9D4E002078DC /* SearchApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApiRequest.swift; sourceTree = "<group>"; };
+		84483FE0215C9D5C002078DC /* SearchDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataModel.swift; sourceTree = "<group>"; };
+		84483FE2215C9DA1002078DC /* SerachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerachViewModel.swift; sourceTree = "<group>"; };
+		84483FE4215CAC51002078DC /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		84483FE6215CB0CF002078DC /* SearchDonorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDonorTableViewCell.swift; sourceTree = "<group>"; };
 		845205232154D0810055297C /* MenuDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDataModel.swift; sourceTree = "<group>"; };
 		845205252154D0900055297C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		845205272154D09C0055297C /* MenuApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuApiRequest.swift; sourceTree = "<group>"; };
@@ -448,6 +459,7 @@
 		845B8215212D294C00DF259F /* GetDonor */ = {
 			isa = PBXGroup;
 			children = (
+				84358182216227B500EC28CE /* GetDonor.entitlements */,
 				845B8246212D29AA00DF259F /* UIClasses */,
 				845B8245212D29A100DF259F /* Networking */,
 				845B8244212D299800DF259F /* Extensions */,
@@ -560,6 +572,11 @@
 			children = (
 				84D908DC214A6AB50037980F /* SearchDonor.storyboard */,
 				84D908DE214A6AD60037980F /* SearchDonorViewController.swift */,
+				84483FDE215C9D4E002078DC /* SearchApiRequest.swift */,
+				84483FE2215C9DA1002078DC /* SerachViewModel.swift */,
+				84483FE0215C9D5C002078DC /* SearchDataModel.swift */,
+				84483FE4215CAC51002078DC /* SearchResultViewController.swift */,
+				84483FE6215CB0CF002078DC /* SearchDonorTableViewCell.swift */,
 			);
 			path = SearchDonor;
 			sourceTree = "<group>";
@@ -951,6 +968,11 @@
 				TargetAttributes = {
 					845B8212212D294C00DF259F = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					845B8226212D295100DF259F = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -1140,6 +1162,7 @@
 			files = (
 				84CABD5A213D4D580058E1B0 /* ArticalsViewModel.swift in Sources */,
 				845B8255212D429100DF259F /* ReusableCellHandler.swift in Sources */,
+				84483FE3215C9DA1002078DC /* SerachViewModel.swift in Sources */,
 				84E8802221492EDD006950A2 /* ProfileApiRequest.swift in Sources */,
 				849E76D12142AF87005F6859 /* ProfileTableViewController.swift in Sources */,
 				845D3A41215156E100C48FC5 /* DonateUPIDetailsTableViewCell.swift in Sources */,
@@ -1164,11 +1187,13 @@
 				84AB781F213E5D5D0021E311 /* MorePhotosViewModel.swift in Sources */,
 				8469B6832148FF1700D3CDEF /* EditProfileViewController.swift in Sources */,
 				848B5F602130384C009D6314 /* DesireApiRequest.swift in Sources */,
+				84483FE1215C9D5C002078DC /* SearchDataModel.swift in Sources */,
 				845D3A49215214A800C48FC5 /* UpdateApiRequest.swift in Sources */,
 				84FAEC8F212EBBF80099B0AE /* ArticalCollectionViewCell.swift in Sources */,
 				848B5F34212FDA2D009D6314 /* PhotosCollectionViewCell.swift in Sources */,
 				845D3A452151572000C48FC5 /* DonateCashDtailsTableViewCell.swift in Sources */,
 				84A5EB7F214640DA00C370CF /* MoreEventDataModel.swift in Sources */,
+				84483FE5215CAC51002078DC /* SearchResultViewController.swift in Sources */,
 				84D908A2214990150037980F /* PhotoViewerCollectionViewCell.swift in Sources */,
 				845D3A382150DFFB00C48FC5 /* DonateApiRequest.swift in Sources */,
 				8470E4AD213E9F0100B906A0 /* Extension.swift in Sources */,
@@ -1189,6 +1214,7 @@
 				84D908DF214A6AD60037980F /* SearchDonorViewController.swift in Sources */,
 				84575E8E2142732800DBA043 /* CommonApiRequest.swift in Sources */,
 				84FAEC72212E978F0099B0AE /* HomePhotoTableViewCell.swift in Sources */,
+				84483FE7215CB0CF002078DC /* SearchDonorTableViewCell.swift in Sources */,
 				848B5F5C2130380C009D6314 /* DesireModel.swift in Sources */,
 				84FAEC8C212EAB000099B0AE /* Font+Extra.swift in Sources */,
 				848B5F42213006AD009D6314 /* NavigationViewController.swift in Sources */,
@@ -1242,6 +1268,7 @@
 				84575E802140F50200DBA043 /* SimilarVideosViewModel.swift in Sources */,
 				84575E8C2142408600DBA043 /* Api_EndPoint.swift in Sources */,
 				848B5F5E21303817009D6314 /* DesireViewModel.swift in Sources */,
+				84483FDF215C9D4F002078DC /* SearchApiRequest.swift in Sources */,
 				84575E862141776C00DBA043 /* LoginApiRequest.swift in Sources */,
 				845205262154D0900055297C /* MenuViewModel.swift in Sources */,
 				84575E842140FCD600DBA043 /* SimilarVideosTableViewCell.swift in Sources */,
@@ -1420,15 +1447,16 @@
 			baseConfigurationReference = AC2A7B4D20C629AD3A984E09 /* Pods-GetDonor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GetDonor/GetDonor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YXXHP3TW8Y;
+				DEVELOPMENT_TEAM = 7DLJ956GQN;
 				INFOPLIST_FILE = GetDonor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GetDonor.GetDonor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trustp.getdonor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1440,15 +1468,16 @@
 			baseConfigurationReference = BAAC154788486A1DE6FC593C /* Pods-GetDonor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GetDonor/GetDonor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YXXHP3TW8Y;
+				DEVELOPMENT_TEAM = 7DLJ956GQN;
 				INFOPLIST_FILE = GetDonor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GetDonor.GetDonor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trustp.getdonor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -13,26 +13,12 @@ class CommonApiRequest: APIRequest {
     
     func makeRequest(forFuncion function: Api_EndPoint, parameters:Dictionary<String,String>? = [:]) throws -> URLRequest {
         
-        let url = try? URLEncoder().urlWith(urlString: function.urlString, parameters: parameters)
+        let url = try URLEncoder().urlWith(urlString: function.urlString, parameters: parameters)
+
+        var urlRequest = URLRequest(url: url)
         
-        let urlComp = URLComponents(string: (url?.absoluteString)!)
-        
-        if let queryItem = urlComp?.queryItems {
-           let result = queryItem.map { (item) -> String in
-            return item.value!
-            }.joined(separator: "")
-            print(result)
-        }
-        for item in (urlComp?.queryItems)!{
-            print(item.value)
-        }
-        
-        
-        var urlRequest = URLRequest(url: url!)
-        
-        if let requestParam = parameters {
-            urlRequest.addValue(requestParam.md5WithSecretKey, forHTTPHeaderField: "Authorization")
-        }
+        urlRequest.addValue(url.getMD5WithSceretKey(), forHTTPHeaderField: "Authorization")
+    
         return urlRequest
         
     }

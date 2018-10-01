@@ -90,6 +90,9 @@ class HomeViewController: BaseViewController {
                 else{
                     self.performSegue(withIdentifier: "openEditProfile", sender: nil)
                     self.loadHomeScreen()
+                    LocationManager.sharedInstance.startLocaitonService()
+                    let appDelegte = UIApplication.shared.delegate as! AppDelegate
+                    appDelegte.registerForPushNotifications()
 
                 }
 
