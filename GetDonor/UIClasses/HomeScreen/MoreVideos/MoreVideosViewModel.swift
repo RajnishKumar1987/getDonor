@@ -12,7 +12,9 @@ class MoreVideosViewModel {
     
     let apiLoader: APIRequestLoader<MoreVideosApiRequest>!
     var model = MoreVideosDataModel()
-    
+    var isLoadingNextPageResults: Bool = false
+    var isUserRefreshingList: Bool = false
+
     init(loader: APIRequestLoader<MoreVideosApiRequest> = APIRequestLoader(apiRequest: MoreVideosApiRequest())) {
         self.apiLoader = loader
     }
@@ -24,8 +26,11 @@ class MoreVideosViewModel {
     
     func loadMoreVideos(with result:@escaping(Result<String>)->Void) {
         
+        let page = isUserRefreshingList ? 1 : (model.currentPage ?? 0) + 1
+
         let requestParam = ["version":Bundle.main.versionNumber,
-                            "type":"\(ContentType.video.rawValue)"]
+                            "type":"\(ContentType.video.rawValue)",
+                            "page":"\(page)"]
 
         apiLoader.loadAPIRequest(forFuncion: .getListing, requestData: requestParam) { [weak self](response, error) in
             

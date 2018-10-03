@@ -9,9 +9,25 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    @IBOutlet weak var tableview:UITableView!
+    @IBOutlet weak var collectionview:UICollectionView!
+    var isEnableRefreshControler:Bool = true
+    var isEnablePagination: Bool = true
+    
+    lazy var refreshControl: UIRefreshControl? = {
+        let rControl = UIRefreshControl()
+        rControl.tintColor = UIColor.colorFor(component: .navigationBar)
+        rControl.addTarget(self, action:
+            #selector(refreshPage),
+                           for: UIControlEvents.valueChanged)
+        return rControl
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isEnableRefreshControler {
+            self.setUpRefreshActivityController()
+        }
 
         addProfileButton()
     }
@@ -33,24 +49,62 @@ class BaseViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
         self.navigationController?.pushViewController(profileVC, animated: true)
+        }
+    @objc private func refreshPage(){
         
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.refresingPage()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func refresingPage() {
+        
     }
-    */
+
+    
+    func setUpRefreshActivityController(){
+        if let tblView = self.tableview{
+            tblView.alwaysBounceVertical = true
+            tblView.bounces = true
+            tblView.addSubview(self.refreshControl!)
+            tblView.tag = 100
+        }
+        if let collection = self.collectionview{
+            collection.alwaysBounceVertical = true
+            collection.bounces = true
+            collection.addSubview(self.refreshControl!)
+            collection.tag = 100
+        }
+    }
+    
+    func enableRefresh() {
+        if let tblView = self.tableview{
+            tblView.alwaysBounceVertical = true
+            tblView.bounces = true
+        }
+        if let collection = self.collectionview{
+            collection.alwaysBounceVertical = true
+            collection.bounces = true
+        }
+    }
+    
+    func disableRefresh() {
+        if let tblView = self.tableview{
+            tblView.alwaysBounceVertical = false
+            tblView.bounces = false
+        }
+        if let collection = self.collectionview{
+            collection.alwaysBounceVertical = false
+            collection.bounces = false
+        }
+    }
+    
+    func uninstallRefreshController(){
+        guard let _ = self.refreshControl else {
+            return
+        }
+        self.refreshControl?.removeFromSuperview()
+    }
+
+
+    
 
 }

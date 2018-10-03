@@ -12,23 +12,27 @@ import UIKit
 class MorePhotosViewController: BaseViewController {
 
     var viewModel = MorePhotosViewModel()
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var constraintCollectionViewBottomMargin: NSLayoutConstraint!
-    var refreshControl: UIRefreshControl?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Phots"
-        collectionView.alpha = 0
+        collectionview.alpha = 0
         doInitialConfig()
+        enableRefresh()
     }
     
     func doInitialConfig() {
         loadMorePhotos()
-        configureRefershControl(on: collectionView)
+    }
+    
+    override func refresingPage() {
+        viewModel.isUserRefreshingList = true
+        refreshControl?.beginRefreshing()
+        loadMorePhotos()
+
     }
     
     func loadMorePhotos() {
@@ -41,8 +45,8 @@ class MorePhotosViewController: BaseViewController {
             switch (result){
             case .Success:
                 print("success")
-                self?.collectionView.alpha = 1
-                self?.collectionView.reloadData()
+                self?.collectionview.alpha = 1
+                self?.collectionview.reloadData()
             case .failure(let msg):
                 print(msg)
             }
@@ -60,7 +64,7 @@ class MorePhotosViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if let cell = sender as? MorePhotosCollectionViewCell, var indexPath = collectionView.indexPath(for: cell) {
+        if let cell = sender as? MorePhotosCollectionViewCell, var indexPath = collectionview.indexPath(for: cell) {
             
             let photoViewerVc = segue.destination as? PhotoViewerViewController
             photoViewerVc?.viewModel = PhotoViewerViewModel(with: viewModel.model.photoList)
@@ -137,26 +141,6 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
     }
 }
 
-
-
-extension MorePhotosViewController{
-    
-    func configureRefershControl(on collectionView: UICollectionView) {
-        
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refershPhotosList), for: .valueChanged)
-        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.collectionView.refreshControl = refreshControl
-
-    }
-    
-    @objc func refershPhotosList()  {
-        
-        viewModel.isUserRefreshingList = true
-        refreshControl?.beginRefreshing()
-        loadMorePhotos()
-    }
-}
 
 //MARK: - Lazy loading functionality
 

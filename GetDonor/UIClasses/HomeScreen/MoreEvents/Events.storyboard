@@ -78,8 +78,8 @@
                     <navigationItem key="navigationItem" id="r4V-UN-oaG"/>
                     <connections>
                         <outlet property="activityIndicator" destination="SeR-8s-vVQ" id="Agv-xU-iaW"/>
-                        <outlet property="tableView" destination="sRC-77-oc8" id="0UZ-0N-vPq"/>
                         <outlet property="tableViewButtomConstaraints" destination="qAy-vn-W38" id="MjZ-gg-LBA"/>
+                        <outlet property="tableview" destination="sRC-77-oc8" id="AsZ-fd-Azc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v34-Wj-a0M" userLabel="First Responder" sceneMemberID="firstResponder"/>

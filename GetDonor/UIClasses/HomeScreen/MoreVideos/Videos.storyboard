@@ -86,7 +86,7 @@
                     <navigationItem key="navigationItem" id="G1X-TF-7Cl"/>
                     <connections>
                         <outlet property="activityIndicator" destination="k1D-fu-29q" id="b86-Xt-QQF"/>
-                        <outlet property="tableView" destination="BDC-WK-ot9" id="Tce-ay-lqf"/>
+                        <outlet property="tableview" destination="BDC-WK-ot9" id="WD2-fe-Bhc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vzf-5Z-cKP" userLabel="First Responder" sceneMemberID="firstResponder"/>

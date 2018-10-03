@@ -11,9 +11,6 @@ import UIKit
 class MoreEventsViewController: BaseViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tableView: UITableView!
-    var refreshControl: UIRefreshControl!
-    
     @IBOutlet weak var tableViewButtomConstaraints: NSLayoutConstraint!
     let viewModel = MoreEventViewModel()
     
@@ -21,11 +18,16 @@ class MoreEventsViewController: BaseViewController {
         super.viewDidLoad()
         self.title = "Events"
         doInitialConfig()
+        enableRefresh()
     }
     
     func doInitialConfig() {
         loadMoreEvents()
-        configureRefershControl(on: tableView)
+    }
+    override func refresingPage() {
+        viewModel.isUserRefreshingList = true
+        refreshControl?.beginRefreshing()
+        loadMoreEvents()
     }
     
     func loadMoreEvents() {
@@ -36,7 +38,7 @@ class MoreEventsViewController: BaseViewController {
             switch (result){
             case .Success:
                 print("Success")
-                self?.tableView.reloadData()
+                self?.tableview.reloadData()
             case .failure(let msg):
                 print(msg)
             }
@@ -49,18 +51,7 @@ class MoreEventsViewController: BaseViewController {
             
         }
         
-        
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
@@ -92,25 +83,6 @@ extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-
-extension MoreEventsViewController{
-    
-    func configureRefershControl(on collectionView: UITableView) {
-        
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refershPhotosList), for: .valueChanged)
-        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.tableView.refreshControl = refreshControl
-        
-    }
-    
-    @objc func refershPhotosList()  {
-        
-        viewModel.isUserRefreshingList = true
-        refreshControl?.beginRefreshing()
-        loadMoreEvents()
-    }
-}
 
 //MARK: - Lazy loading functionality
 

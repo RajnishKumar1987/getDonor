@@ -12,7 +12,9 @@ class ArticalsViewModel {
     
     let apiLoader: APIRequestLoader<ArticalsApiRequest>!
     var model = ArticalsDataModel()
-    
+    var isLoadingNextPageResults: Bool = false
+    var isUserRefreshingList: Bool = false
+
     init(loader: APIRequestLoader<ArticalsApiRequest> = APIRequestLoader(apiRequest: ArticalsApiRequest())) {
         self.apiLoader = loader
     }
@@ -24,8 +26,11 @@ class ArticalsViewModel {
     
     func loadArticals(with result:@escaping(Result<String>)->Void) {
         
+        let page = isUserRefreshingList ? 1 : (model.currentPage ?? 0) + 1
+
         let requestParam = ["version":Bundle.main.versionNumber,
-                            "type":"\(ContentType.artical.rawValue)"]
+                            "type":"\(ContentType.artical.rawValue)",
+                            "page": "\(page)"]
         
         apiLoader.loadAPIRequest(forFuncion: .getListing, requestData: requestParam) { [weak self](response, error) in
             

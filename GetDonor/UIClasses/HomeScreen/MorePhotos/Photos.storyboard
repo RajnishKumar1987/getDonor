@@ -103,7 +103,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="7t0-QK-MP0" id="iW6-4X-9iN"/>
-                        <outlet property="collectionView" destination="tFn-92-2nv" id="HAR-cq-tHW"/>
+                        <outlet property="collectionview" destination="tFn-92-2nv" id="v89-im-XpA"/>
                         <outlet property="constraintCollectionViewBottomMargin" destination="IWf-kO-hfh" id="WLB-PP-PMP"/>
                     </connections>
                 </viewController>

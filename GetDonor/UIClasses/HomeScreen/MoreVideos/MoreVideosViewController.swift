@@ -12,7 +12,6 @@ class MoreVideosViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    @IBOutlet weak var tableView: UITableView!
     var viewModel = MoreVideosViewModel()
     
     override func viewDidLoad() {
@@ -21,6 +20,12 @@ class MoreVideosViewController: BaseViewController {
         self.title = "Videos"
         
         doInitialConfig()
+        enableRefresh()
+    }
+    override func refresingPage() {
+        viewModel.isUserRefreshingList = true
+        refreshControl?.beginRefreshing()
+        loadVideos()
     }
     
     func doInitialConfig() {
@@ -31,9 +36,10 @@ class MoreVideosViewController: BaseViewController {
         
         viewModel.loadMoreVideos { [weak self] (result) in
             self?.activityIndicator.stopAnimating()
+            self?.refreshControl?.endRefreshing()
             switch (result){
             case .Success:
-                self?.tableView.reloadData()
+                self?.tableview.reloadData()
                 print("Success")
             case .failure(let messgae):
                 print(messgae)
@@ -52,7 +58,7 @@ class MoreVideosViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let cell = sender as? MoreVideosTableViewCell, let indexPath = tableView.indexPath(for: cell) {
+        if let cell = sender as? MoreVideosTableViewCell, let indexPath = tableview.indexPath(for: cell) {
             
             let videoModel = viewModel.getModelForCell(at: indexPath)
             

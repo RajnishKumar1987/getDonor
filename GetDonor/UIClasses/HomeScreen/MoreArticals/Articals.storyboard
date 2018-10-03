@@ -75,7 +75,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="iXR-dy-7bB" id="kO9-mr-dTf"/>
-                        <outlet property="tableView" destination="EA8-1m-wZU" id="wnZ-7k-RFk"/>
+                        <outlet property="tableview" destination="EA8-1m-wZU" id="Joh-or-Li4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8D-bv-WOf" userLabel="First Responder" sceneMemberID="firstResponder"/>

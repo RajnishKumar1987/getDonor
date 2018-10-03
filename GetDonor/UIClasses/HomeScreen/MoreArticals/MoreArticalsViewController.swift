@@ -13,15 +13,19 @@ class MoreArticalsViewController: BaseViewController {
     var viewModel = ArticalsViewModel()
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Articals"
-        tableView.alpha = 0
-        // Do any additional setup after loading the view.
+        tableview.alpha = 0
         doInitialConfig()
+        enableRefresh()
     }
 
+    override func refresingPage() {
+        viewModel.isUserRefreshingList = true
+        refreshControl?.beginRefreshing()
+        loadArticals()
+    }
     func doInitialConfig()  {
         loadArticals()
     }
@@ -30,10 +34,11 @@ class MoreArticalsViewController: BaseViewController {
         
         viewModel.loadArticals { [weak self](result) in
             self?.activityIndicator.stopAnimating()
+            self?.refreshControl?.endRefreshing()
             switch (result){
             case .Success:
-                self?.tableView.alpha = 1
-                self?.tableView.reloadData()
+                self?.tableview.alpha = 1
+                self?.tableview.reloadData()
                 print("Success")
             case .failure(let msg):
                 print(msg)
@@ -45,7 +50,7 @@ class MoreArticalsViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let cell = sender as? ArticalsTableViewCell, let indexPath = tableView.indexPath(for: cell) {
+        if let cell = sender as? ArticalsTableViewCell, let indexPath = tableview.indexPath(for: cell) {
             
             if let  articalDeatilsVC = segue.destination as? ArticalDetailsViewController{
                 
