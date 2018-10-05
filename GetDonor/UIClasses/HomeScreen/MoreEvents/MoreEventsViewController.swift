@@ -10,8 +10,6 @@ import UIKit
 
 class MoreEventsViewController: BaseViewController {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tableViewButtomConstaraints: NSLayoutConstraint!
     let viewModel = MoreEventViewModel()
     
     override func viewDidLoad() {
@@ -22,6 +20,9 @@ class MoreEventsViewController: BaseViewController {
     }
     
     func doInitialConfig() {
+        tableview.estimatedRowHeight = 195
+        tableview.rowHeight = UITableViewAutomaticDimension
+        showLoader(onViewController: self)
         loadMoreEvents()
     }
     override func refresingPage() {
@@ -33,8 +34,11 @@ class MoreEventsViewController: BaseViewController {
     func loadMoreEvents() {
         
         viewModel.loadMoreEvents { [weak self](result) in
-            self?.activityIndicator.stopAnimating()
+            self?.removeLoader(fromViewController: self!)
             self?.refreshControl?.endRefreshing()
+            self?.isLoadingNextPageResult(false)
+            self?.viewModel.isUserRefreshingList = false
+
             switch (result){
             case .Success:
                 print("Success")
@@ -43,16 +47,13 @@ class MoreEventsViewController: BaseViewController {
                 print(msg)
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1/3) , execute: {
-                self?.isLoadingNextPageResults(false)
-                self?.viewModel.isUserRefreshingList = false
-
-            })
-            
         }
         
     }
-    
+    deinit {
+        viewModel.apiLoader.cancelTask()
+    }
+
 }
 
 extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
@@ -67,7 +68,14 @@ extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
        
+        print("cell: \(indexPath.row)")
         if indexPath.row == viewModel.model.eventList.count - 1 {
+            if viewModel.canLoadNextPage(){
+                isLoadingNextPageResult(true)
+                viewModel.isLoadingNextPageResults = true
+                loadMoreEvents()
+
+            }
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -81,37 +89,6 @@ extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
         }
         
     }
-}
-
-
-//MARK: - Lazy loading functionality
-
-extension MoreEventsViewController {
-    
-    func loadNextPageResults() {
-        loadMoreEvents()
-    }
-    
-    func isLoadingNextPageResults(_ isLoading: Bool) {
-        
-        viewModel.isLoadingNextPageResults = isLoading
-        
-        if isLoading {
-            tableViewButtomConstaraints.constant = kLoaderViewHeight
-            addLoaderViewForNextResults()
-        }
-        else {
-            
-            self.tableViewButtomConstaraints.constant = 0
-            
-            let view = self.view.viewWithTag(kLoaderViewTag)
-            view?.removeFromSuperview()
-        }
-        
-        self.view.layoutIfNeeded()
-    }
-    
-    
 }
 
 

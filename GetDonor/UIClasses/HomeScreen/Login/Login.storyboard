@@ -59,7 +59,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -136,7 +136,7 @@
                                                     <state key="normal" title="SIGN UP"/>
                                                     <connections>
                                                         <action selector="actionSignUpButtonPressed:" destination="f0x-m4-vzD" eventType="touchUpInside" id="5wI-uX-SvB"/>
-                                                        <segue destination="mGt-2B-qUc" kind="show" id="bRx-PW-ms4"/>
+                                                        <segue destination="mGt-2B-qUc" kind="show" identifier="" id="bRx-PW-ms4"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -173,7 +173,7 @@
                 <viewControllerPlaceholder storyboardName="SignUp" referencedIdentifier="SignUpTableViewController" id="mGt-2B-qUc" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1v-J8-EcL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="746" y="130"/>
+            <point key="canvasLocation" x="703" y="287"/>
         </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="7WO-l5-Njx">
@@ -219,7 +219,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPv-Fc-kG7">
                                         <rect key="frame" x="21" y="59" width="300" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Sign Up"/>
+                                        <state key="normal" title="SUBMIT"/>
+                                        <connections>
+                                            <action selector="actionSubmit:" destination="my7-L5-ZRu" eventType="touchUpInside" id="n60-b1-kFG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -10,8 +10,6 @@ import UIKit
 
 class MoreVideosViewController: BaseViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
     var viewModel = MoreVideosViewModel()
     
     override func viewDidLoad() {
@@ -29,14 +27,18 @@ class MoreVideosViewController: BaseViewController {
     }
     
     func doInitialConfig() {
+        tableview.estimatedRowHeight = 240
+        tableview.rowHeight = UITableViewAutomaticDimension
+        showLoader(onViewController: self)
         loadVideos()
     }
     
     func loadVideos() {
-        
         viewModel.loadMoreVideos { [weak self] (result) in
-            self?.activityIndicator.stopAnimating()
+            self?.removeLoader(fromViewController: self!)
             self?.refreshControl?.endRefreshing()
+            self?.viewModel.isLoadingNextPageResults = false
+            self?.isLoadingNextPageResult(false)
             switch (result){
             case .Success:
                 self?.tableview.reloadData()
@@ -59,31 +61,38 @@ class MoreVideosViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let cell = sender as? MoreVideosTableViewCell, let indexPath = tableview.indexPath(for: cell) {
-            
             let videoModel = viewModel.getModelForCell(at: indexPath)
-            
             let videoDetailsVC = segue.destination as? VideoDetailsViewController
-            
             videoDetailsVC?.model = videoModel
-            
-            
         }
     }
     
-
+    deinit {
+        viewModel.apiLoader.cancelTask()
+    }
 }
 
 extension MoreVideosViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (viewModel.model.vidoeList?.count)!
+        return viewModel.model.vidoeList.count
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       
+        if indexPath.row == viewModel.model.vidoeList.count - 3 {
+            if viewModel.canLoadNextPage(){
+                isLoadingNextPageResult(true)
+                viewModel.isLoadingNextPageResults = true
+                loadVideos()
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MoreVideosTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
         cell.configureCell(with: viewModel.getModelForCell(at: indexPath))
         return cell
-        
     }
 }
 

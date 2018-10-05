@@ -291,7 +291,7 @@
                                         <rect key="frame" x="0.0" y="608" width="375" height="192"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jws-VA-0xA" id="bKe-on-Bc8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="191.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzH-yL-oOu">
@@ -323,7 +323,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventsCollectionViewCell" id="aWj-NH-rk1" customClass="EventsCollectionViewCell" customModule="GetDonor" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="3" width="157" height="132"/>
+                                                            <rect key="frame" x="0.0" y="2.5" width="157" height="132"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="157" height="132"/>
@@ -368,10 +368,6 @@
                                     <outlet property="delegate" destination="XJa-p4-SnG" id="jFC-uR-EOD"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kn4-Op-SEc">
-                                <rect key="frame" x="177" y="323" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="B9Q-kz-f0W"/>
@@ -380,14 +376,13 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="HmQ-tT-G0O"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="kn4-Op-SEc" id="Tod-wy-p72"/>
                         <outlet property="tableView" destination="1MJ-qh-4uk" id="oVF-Wx-bpN"/>
                         <segue destination="oF7-Xn-Upa" kind="show" identifier="openVideoDetails" id="i5H-oA-kpY"/>
                         <segue destination="Ebc-sX-7XJ" kind="show" identifier="openArticalsDetails" id="yhm-Gm-c2J"/>
                         <segue destination="bkL-Ga-mZz" kind="presentation" identifier="openLoginSignUp" animates="NO" id="Pn5-hq-JRJ"/>
-                        <segue destination="LGq-go-oPw" kind="show" identifier="openEditProfile" animates="NO" id="iE3-UE-Kiw"/>
                         <segue destination="EvQ-Xp-qwg" kind="show" identifier="openPhotoViewer" id="YwJ-Ro-cKH"/>
                         <segue destination="U8n-pJ-7Ri" kind="show" identifier="showEventsPhoto" id="15H-0F-8Pe"/>
+                        <segue destination="Nzi-6O-GvF" kind="show" identifier="openEditProfile" id="UfM-0N-mJX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A63-eC-eab" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -411,12 +406,12 @@
             <point key="canvasLocation" x="-875.20000000000005" y="1205.3973013493255"/>
         </scene>
         <!--EditProfileViewController-->
-        <scene sceneID="kLW-qH-Hsi">
+        <scene sceneID="YJo-ze-p2e">
             <objects>
-                <viewControllerPlaceholder storyboardName="EditProfile" referencedIdentifier="EditProfileViewController" id="LGq-go-oPw" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="p8J-Eb-L3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="EditProfile" referencedIdentifier="EditProfileViewController" id="Nzi-6O-GvF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="04P-Ur-4Au" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2121" y="1658"/>
+            <point key="canvasLocation" x="-951" y="1437"/>
         </scene>
         <!--PhotoViewerViewController-->
         <scene sceneID="RhH-Yz-4Bd">
@@ -424,7 +419,7 @@
                 <viewControllerPlaceholder storyboardName="PhotoViewer" referencedIdentifier="PhotoViewerViewController" id="U8n-pJ-7Ri" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DzD-s9-o0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1922" y="1774"/>
+            <point key="canvasLocation" x="-1378" y="1727"/>
         </scene>
         <!--PhotoViewerViewController-->
         <scene sceneID="J4q-yr-EKh">

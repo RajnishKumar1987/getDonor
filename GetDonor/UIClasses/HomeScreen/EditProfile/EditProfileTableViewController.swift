@@ -49,9 +49,11 @@ class EditProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoader(onViewController: self)
+        tableView.isScrollEnabled = false
         setUpUI()
         tableView.layer.cornerRadius = 10
-        tableView.alpha = 0
+        //tableView.alpha = 0
         initilizeToolBar()
         loadUserDetails()
         loadDatePicker()
@@ -131,11 +133,17 @@ class EditProfileTableViewController: UITableViewController {
     }
     
     func loadUserDetails() {
+        
+        guard let userId = self.userId else {
+            return
+        }
         viewModel.getProfile(for: userId, action: .get, userDetails: nil) { [weak self](result) in
+            self?.tableView.isScrollEnabled = true
+            self?.removeLoader(fromViewController: self!)
             switch (result){
             case .Success:
                 print("Success")
-                self?.tableView.alpha = 1
+                //self?.tableView.alpha = 1
                 self?.populateData()
             case .failure(let msg):
                 print(msg)

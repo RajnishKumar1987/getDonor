@@ -8,31 +8,36 @@
 
 import UIKit
 
-class SearchResultViewController: UIViewController {
+class SearchResultViewController: BaseViewController {
 
-    @IBOutlet weak var constraintTableViewBottomMargin: NSLayoutConstraint!
     var bloodGroup: String!
     var viewModel = SearchViewModel()
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = 120
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableview.estimatedRowHeight = 120
+        tableview.rowHeight = UITableViewAutomaticDimension
+        self.title = "Near by Doners"
+        showLoader(onViewController: self)
         searchDonor()
     }
     
     func searchDonor() {
         viewModel.serachUser(bloodGroup: bloodGroup) {[weak self] (result) in
+            self?.removeLoader(fromViewController: self!)
+            self?.isLoadingNextPageResult(false)
+            self?.viewModel.isLoadingNextPageResults = false
             switch result{
             case .Success:
                 print("Success")
-                self?.tableView.reloadData()
+                self?.tableview.reloadData()
             case .failure(let msg):
                 print(msg)
             }
-            self?.isLoadingNextPageResults(false)
         }
+    }
+    deinit {
+        viewModel.apiLoader.cancelTask()
     }
 
 }
@@ -43,11 +48,12 @@ extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate
         return viewModel.model.donors.count
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+        print("cell: \(indexPath.row)")
         if indexPath.row == viewModel.model.donors.count - 1{
             if viewModel.canLoadNextPage() {
-                isLoadingNextPageResults(true)
-                loadNextPageResults()
+                isLoadingNextPageResult(true)
+                viewModel.isLoadingNextPageResults = true
+                searchDonor()
             }
         }
     }
@@ -59,36 +65,7 @@ extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate
     
 }
 
-//MARK: - Lazy loading functionality
 
-extension SearchResultViewController {
-    
-    func loadNextPageResults() {
-        searchDonor()
-    }
-    
-    func isLoadingNextPageResults(_ isLoading: Bool) {
-        
-        viewModel.isLoadingNextPageResults = isLoading
-        
-        if isLoading {
-            constraintTableViewBottomMargin.constant = kLoaderViewHeight
-            addLoaderViewForNextResults()
-            
-        }
-        else {
-            
-            self.constraintTableViewBottomMargin.constant = 0
-            
-            let view = self.view.viewWithTag(kLoaderViewTag)
-            view?.removeFromSuperview()
-        }
-        
-        self.view.layoutIfNeeded()
-    }
-    
-    
-}
 
 
 

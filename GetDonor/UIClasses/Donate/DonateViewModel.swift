@@ -96,7 +96,7 @@ class DonateViewModel {
         
         let requestParam = ["version":Bundle.main.versionNumber]
         
-        apiLoader?.loadAPIRequest(forFuncion: .getDonationDetails, requestData: requestParam) { [weak self](response, error) in
+        apiLoader?.loadAPIRequest(forFuncion: .getPaymentInfo, requestData: requestParam) { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))

@@ -13,6 +13,10 @@ class PhotoViewerCollectionViewCell: UICollectionViewCell,CellReusable {
     
     var imageLoader: APIRequestLoader<ImageRequest>!
     
+    override func awakeFromNib() {
+        imageView.image = #imageLiteral(resourceName: "default")
+
+    }
     override var isSelected: Bool{
         didSet{
             if self.isSelected
@@ -30,7 +34,7 @@ class PhotoViewerCollectionViewCell: UICollectionViewCell,CellReusable {
         }
     }
     override func prepareForReuse() {
-        imageView.image = nil
+        imageView.image = #imageLiteral(resourceName: "default")
         imageLoader = nil
     }
     

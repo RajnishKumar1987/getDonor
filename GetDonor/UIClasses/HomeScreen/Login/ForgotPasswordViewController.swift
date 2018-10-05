@@ -34,6 +34,36 @@ class ForgotPasswordViewController: UIViewController {
     @IBAction func actionBackButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    @IBAction func actionSubmit(_ sender: Any) {
+        
+        if doValidation() {
+            btnSignUp.loadingIndicator(show: true)
+            let apiLoader = APIRequestLoader(apiRequest: CommonApiRequest())
+            apiLoader.loadAPIRequest(forFuncion: .forgotPassword(userEmail: txtEmail.text!), requestData: nil) { [weak self] (response, error) in
+                self?.btnSignUp.loadingIndicator(show: false)
+                let alert = UIAlertController(title: "Please check your mail box.", message: "Password sent to your registred email.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .destructive, handler: { (action) in
+                    self?.dismiss(animated: true, completion: nil)
+                }))
+                self?.present(alert, animated: true, completion: nil)
+
+            }
+        }
+    }
+    
+    func doValidation() -> Bool {
+        
+        if txtEmail.text?.isEmpty ?? true {
+            showAlert(with: "Email can't be empty.")
+            return false
+        }
+        if !(txtEmail.text?.isValidEmail())! {
+            showAlert(with: "Please enter a valid email.")
+            return false
+        }
+        return true
+    }
+    
     
 
     /*

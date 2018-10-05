@@ -15,6 +15,8 @@ class WebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.delegate = self
+        showLoader(onViewController: self)
         loadWebView(with: urlString)
     }
     
@@ -42,4 +44,13 @@ class WebViewController: UIViewController {
     }
     */
 
+}
+
+extension WebViewController: UIWebViewDelegate{
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        removeLoader(fromViewController: self)
+    }
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        removeLoader(fromViewController: self)
+    }
 }

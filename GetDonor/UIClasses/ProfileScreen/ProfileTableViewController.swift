@@ -15,13 +15,14 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        showLoader(onViewController: self)
         tableView.layer.cornerRadius = 10
         loadMenu()
     }
     
     func loadMenu() {
         viewModel.loadMenu {[weak self] (result) in
+            self?.removeLoader(fromViewController: self!)
             switch result{
             case .Success:
                 print("success")
@@ -110,7 +111,10 @@ class ProfileTableViewController: UITableViewController {
         case "Logout":
             print("")
             AppConfig.setUserLoggedIn(status: false)
-            //self.navigationController?.popViewController(animated: false)
+            self.navigationController?.popViewController(animated: false)
+        case "Donation Details":
+            print("")
+            
         default:
             print("Unknown")
         }

@@ -12,8 +12,11 @@ class PhotoDetailsCollectionViewCell: UICollectionViewCell, CellReusable {
     @IBOutlet weak var imageView: UIImageView!
     var imageLoader : APIRequestLoader<ImageRequest>?
     
+    override func awakeFromNib() {
+        imageView.image = #imageLiteral(resourceName: "default")
+    }
     override func prepareForReuse() {
-        imageView.image = nil
+        imageView.image = #imageLiteral(resourceName: "default")
         imageLoader = nil
     }
 

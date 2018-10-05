@@ -10,7 +10,6 @@ import UIKit
 
 class ProfileViewController: BaseViewController {
 
-    @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var containerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +20,6 @@ class ProfileViewController: BaseViewController {
     
     func doIniticalConfug() {
         containerView.addShadow(offset: CGSize.init(width: 0, height: 1), color: UIColor.black, radius: 4.0, opacity: 0.35)
-        imgProfile.makeCornerRadiusWithValue(imgProfile.frame.width/2)
-        imgProfile.layer.borderWidth = 3
-        imgProfile.layer.borderColor = UIColor.white.cgColor
-
     }
     
     

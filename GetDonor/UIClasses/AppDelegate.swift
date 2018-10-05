@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        LocationManager.sharedInstance.startLocaitonService()
+        registerForPushNotifications()
+
         return true
     }
     
@@ -66,13 +69,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let token = tokenParts.joined()
         // 2. Print device token to use for PNs payloads
         print("Device Token: \(token)")
+        updateDeviceToken(token: token)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         // 1. Print out error if PNs registration not successful
         print("Failed to register for remote notifications with error: \(error)")
     }
-
+    
+    func updateDeviceToken(token: String?)  {
+        
+        guard let token = token else { return }
+        
+        let apiLoader = APIRequestLoader(apiRequest: CommonApiRequest())
+        apiLoader.loadAPIRequest(forFuncion: .updateDeviceToken(id: AppConfig.getUserId(), token: token), requestData: nil) { (response, error) in
+            
+        }
+        
+    }
 
 }
 

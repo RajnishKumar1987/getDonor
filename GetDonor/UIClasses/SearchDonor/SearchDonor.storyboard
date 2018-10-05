@@ -162,7 +162,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="599"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchDonorTableViewCell" rowHeight="103" id="CJQ-F9-nEJ" customClass="SearchDonorTableViewCell" customModule="GetDonor" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchDonorTableViewCell" rowHeight="103" id="CJQ-F9-nEJ" customClass="SearchDonorTableViewCell" customModule="GetDonor" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CJQ-F9-nEJ" id="OiO-rv-rTz">
@@ -238,8 +238,8 @@
                         <viewLayoutGuide key="safeArea" id="ZlY-kH-IUl"/>
                     </view>
                     <connections>
-                        <outlet property="constraintTableViewBottomMargin" destination="f7K-LQ-B7G" id="3dr-Ls-eBE"/>
-                        <outlet property="tableView" destination="N4r-tU-ZNJ" id="Il5-Eu-idi"/>
+                        <outlet property="listingContainerButtomConstaraints" destination="f7K-LQ-B7G" id="VxN-vI-wOS"/>
+                        <outlet property="tableview" destination="N4r-tU-ZNJ" id="DWx-pH-5eN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYm-s3-rvA" userLabel="First Responder" sceneMemberID="firstResponder"/>

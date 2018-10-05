@@ -11,7 +11,6 @@ import UIKit
 class MoreArticalsViewController: BaseViewController {
 
     var viewModel = ArticalsViewModel()
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +26,20 @@ class MoreArticalsViewController: BaseViewController {
         loadArticals()
     }
     func doInitialConfig()  {
+        
+        tableview.estimatedRowHeight = 140
+        tableview.rowHeight = UITableViewAutomaticDimension
+        showLoader(onViewController: self)
         loadArticals()
     }
     
     func loadArticals() {
         
         viewModel.loadArticals { [weak self](result) in
-            self?.activityIndicator.stopAnimating()
+            self?.removeLoader(fromViewController: self!)
             self?.refreshControl?.endRefreshing()
+            self?.viewModel.isLoadingNextPageResults = false
+            self?.isLoadingNextPageResult(false)
             switch (result){
             case .Success:
                 self?.tableview.alpha = 1
@@ -54,19 +59,33 @@ class MoreArticalsViewController: BaseViewController {
             
             if let  articalDeatilsVC = segue.destination as? ArticalDetailsViewController{
                 
-                articalDeatilsVC.loadArticlsWith(model: self.viewModel.model.articalList!, withSelected: indexPath)
+                articalDeatilsVC.loadArticlsWith(model: self.viewModel.model.articalList, withSelected: indexPath)
             }
             
         }
     }
     
+    deinit {
+        viewModel.apiLoader.cancelTask()
+    }
 
 }
 
 extension MoreArticalsViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (viewModel.model.articalList?.count)!
+        return viewModel.model.articalList.count
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == viewModel.model.articalList.count - 1 {
+            if viewModel.canLoadNextPage(){
+                isLoadingNextPageResult(true)
+                viewModel.isLoadingNextPageResults = true
+                loadArticals()
+                
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

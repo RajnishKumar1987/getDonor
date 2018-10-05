@@ -59,6 +59,7 @@ class LoginSignUpViewController: UITableViewController {
     @IBAction func actionForgotPasswordButtonPressed(_ sender: UIButton) {
     }
     @IBAction func actionSignUpButtonPressed(_ sender: UIButton) {
+        
     }
     func doLogin() {
         

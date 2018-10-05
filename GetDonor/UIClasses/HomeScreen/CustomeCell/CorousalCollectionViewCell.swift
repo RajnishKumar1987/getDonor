@@ -15,11 +15,11 @@ class CorousalCollectionViewCell: UICollectionViewCell,CellReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        imageView.image = #imageLiteral(resourceName: "default")
     }
     
     override func prepareForReuse() {
-        imageView.image = nil
+        imageView.image = #imageLiteral(resourceName: "default")
         imageLoader = nil
     }
 

@@ -18,6 +18,7 @@ class SearchDonorTableViewCell: UITableViewCell,CellReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        imgProfile.image = #imageLiteral(resourceName: "default")
         imgProfile.makeCornerRadiusWithValue(imgProfile.frame.width/2)
         imgProfile.layer.borderWidth = 1
         imgProfile.layer.borderColor = UIColor.red.cgColor
@@ -28,7 +29,10 @@ class SearchDonorTableViewCell: UITableViewCell,CellReusable {
         lblName.adjustsFontSizeToFitWidth = true
         lblAddress.adjustsFontSizeToFitWidth = true
     }
-    
+    override func prepareForReuse() {
+        imgProfile.image = #imageLiteral(resourceName: "default")
+        imageLoader = nil
+    }
     func configureCell(with model: Doner) {
         
         self.phone = model.phone
@@ -57,11 +61,13 @@ class SearchDonorTableViewCell: UITableViewCell,CellReusable {
     }
 
     @IBAction func actionCallButtonPressed(_ sender: UIButton) {
-        if let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
-
+        
+        guard let phoneNumber = self.phone else { return }
+        
+        UIApplication.shared.open(URL(string: "telprompt://\(phoneNumber)")!, options: [:]) { (value) in
+            }
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

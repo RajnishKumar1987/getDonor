@@ -10,7 +10,6 @@ import UIKit
 
 class EditProfileViewController: BaseViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imgProfile: UIImageView!
     var imagePicker = UIImagePickerController()

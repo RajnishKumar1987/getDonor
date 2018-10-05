@@ -16,11 +16,11 @@ class MoreVideosTableViewCell: UITableViewCell, CellReusable{
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        imgView.image = #imageLiteral(resourceName: "default")
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title1)
     }
     override func prepareForReuse() {
-        imgView.image = nil
+        imgView.image = #imageLiteral(resourceName: "default")
         imageLoader = nil
     }
 

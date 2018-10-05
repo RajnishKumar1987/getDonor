@@ -12,19 +12,16 @@ import UIKit
 class MorePhotosViewController: BaseViewController {
 
     var viewModel = MorePhotosViewModel()
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
-    @IBOutlet weak var constraintCollectionViewBottomMargin: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Phots"
-        collectionview.alpha = 0
         doInitialConfig()
         enableRefresh()
     }
     
     func doInitialConfig() {
+        showLoader(onViewController: self)
         loadMorePhotos()
     }
     
@@ -38,14 +35,14 @@ class MorePhotosViewController: BaseViewController {
     func loadMorePhotos() {
         
         viewModel.loadMorePhotos { [weak self](result) in
-            self?.activityIndicator.stopAnimating()
-            self?.isLoadingNextPageResults(false)
+            self?.removeLoader(fromViewController: self!)
+            self?.isLoadingNextPageResult(false)
             self?.viewModel.isUserRefreshingList = false
             self?.refreshControl?.endRefreshing()
+            self?.viewModel.isLoadingNextPageResults = false
             switch (result){
             case .Success:
                 print("success")
-                self?.collectionview.alpha = 1
                 self?.collectionview.reloadData()
             case .failure(let msg):
                 print(msg)
@@ -76,7 +73,10 @@ class MorePhotosViewController: BaseViewController {
 //            photoDetailsVC?.photos = viewModel.model.photoList
         }
     }
- 
+    deinit {
+        viewModel.apiLoader.cancelTask()
+    }
+
 
 }
 
@@ -95,6 +95,18 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
 
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.item == viewModel.model.photoList.count - 1 {
+            if viewModel.canLoadNextPage(){
+                isLoadingNextPageResult(true)
+                viewModel.isLoadingNextPageResults = true
+                loadMorePhotos()
+                
+            }
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch indexPath.section {
@@ -107,8 +119,6 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
             return cell
 
         }
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -123,58 +133,9 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        guard viewModel.canLoadNextPage() else {
-            return
-        }
-        
-        let margin: CGFloat = 30
-        let heightToLoadNextPage: CGFloat = scrollView.contentSize.height + margin
-        let currentPosition: CGFloat = scrollView.contentOffset.y + scrollView.frame.size.height
-        
-        if (currentPosition >= heightToLoadNextPage) {
-            isLoadingNextPageResults(true)
-            loadNextPageResults()
-        }
-        
-    }
 }
 
 
-//MARK: - Lazy loading functionality
-
-let kLoaderViewTag = 1011
-let kLoaderViewHeight: CGFloat = 50
-
-extension MorePhotosViewController {
-    
-    func loadNextPageResults() {
-        loadMorePhotos()
-    }
-    
-    func isLoadingNextPageResults(_ isLoading: Bool) {
-        
-        viewModel.isLoadingNextPageResults = isLoading
-        
-        if isLoading {
-            constraintCollectionViewBottomMargin.constant = kLoaderViewHeight
-            addLoaderViewForNextResults()
-            
-        }
-        else {
-            
-            self.constraintCollectionViewBottomMargin.constant = 0
-            
-            let view = self.view.viewWithTag(kLoaderViewTag)
-            view?.removeFromSuperview()
-        }
-        
-        self.view.layoutIfNeeded()
-    }
-    
-
-}
 
 
 

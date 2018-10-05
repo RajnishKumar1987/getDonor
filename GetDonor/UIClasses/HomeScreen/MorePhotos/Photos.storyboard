@@ -87,10 +87,6 @@
                                     <outlet property="delegate" destination="kr6-yq-jtF" id="hQ1-PK-Sh1"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7t0-QK-MP0">
-                                <rect key="frame" x="177" y="324" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -102,9 +98,8 @@
                         <viewLayoutGuide key="safeArea" id="uJP-wh-3cC"/>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="7t0-QK-MP0" id="iW6-4X-9iN"/>
                         <outlet property="collectionview" destination="tFn-92-2nv" id="v89-im-XpA"/>
-                        <outlet property="constraintCollectionViewBottomMargin" destination="IWf-kO-hfh" id="WLB-PP-PMP"/>
+                        <outlet property="listingContainerButtomConstaraints" destination="IWf-kO-hfh" id="PcN-kl-qr5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rpb-PG-aq7" userLabel="First Responder" sceneMemberID="firstResponder"/>

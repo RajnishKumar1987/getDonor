@@ -16,10 +16,10 @@ class ArticalImageTableViewCell: UITableViewCell, CellReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        imgView.image = #imageLiteral(resourceName: "default")
     }
     override func prepareForReuse() {
-        imgView.image = nil
+        imgView.image = #imageLiteral(resourceName: "default")
         imageLoader = nil
     }
 

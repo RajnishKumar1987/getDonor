@@ -13,10 +13,8 @@ class VideoDetailsViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicatorPlayer: UIActivityIndicatorView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var constraintsContainerViewBottom: NSLayoutConstraint!
     var model: Video!
     var viewModel = SimilarVideosViewModel()
     
@@ -24,10 +22,13 @@ class VideoDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         playerView.delegate = self
+        showLoader(onViewController: self)
         doInitialConfig()
     }
     
     func doInitialConfig() {
+        tableview.estimatedRowHeight = 100
+        tableview.rowHeight = UITableViewAutomaticDimension
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
         playVideoAndLoadSimilar(with: model)
         
@@ -41,53 +42,45 @@ class VideoDetailsViewController: BaseViewController {
         
         if let playBackId = videoId {
             playerView.load(withVideoId: playBackId, playerVars: ["playsinline":"1"])
-            
         }
-        
         loadSimilarVideos(with: model.id!)
 
     }
     
     func loadSimilarVideos(with id: String) {
-        
-        self.activityIndicator.startAnimating()
-        
+                
         viewModel.loadSimilarVideos(by: id) { [weak self](result) in
-
+            self?.removeLoader(fromViewController: self!)
+            self?.isLoadingNextPageResult(false)
+            self?.viewModel.isUserRefreshingList = false
             self?.activityIndicator.stopAnimating()
             switch (result){
             case .Success:
-                self?.tableView.reloadData()
+                self?.tableview.reloadData()
                 print("success")
             case .failure(let msg):
                 print(msg)
             }
-            
-            self?.isLoadingNextPageResults(false)
-            self?.viewModel.isUserRefreshingList = false
 
         }
     }
     
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension VideoDetailsViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.model.vidoeList.count
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.model.vidoeList.count - 1 {
+            if viewModel.canLoadNextPage(){
+                isLoadingNextPageResult(true)
+                viewModel.isLoadingNextPageResults = true
+                loadSimilarVideos(with: model.id!)
+                
+            }
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -101,22 +94,6 @@ extension VideoDetailsViewController: UITableViewDataSource, UITableViewDelegate
         playVideoAndLoadSimilar(with: viewModel.getModelForCell(at: indexPath))
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        guard viewModel.canLoadNextPage() else {
-            return
-        }
-        
-        let margin: CGFloat = 30
-        let heightToLoadNextPage: CGFloat = scrollView.contentSize.height + margin
-        let currentPosition: CGFloat = scrollView.contentOffset.y + scrollView.frame.size.height
-        
-        if (currentPosition >= heightToLoadNextPage) {
-            isLoadingNextPageResults(true)
-            loadNextPageResults()
-        }
-        
-    }
 }
 
 extension VideoDetailsViewController: YTPlayerViewDelegate{
@@ -133,9 +110,7 @@ extension VideoDetailsViewController: YTPlayerViewDelegate{
         default:
             activityIndicatorPlayer.stopAnimating()
         }
-        
-        print("state : \(state)")
-    }
+}
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         activityIndicatorPlayer.stopAnimating()
@@ -144,34 +119,7 @@ extension VideoDetailsViewController: YTPlayerViewDelegate{
     }
 }
 
-extension VideoDetailsViewController{
-    
-    func loadNextPageResults() {
-        loadSimilarVideos(with: model.id!)
-    }
-    
-    func isLoadingNextPageResults(_ isLoading: Bool) {
-        
-        viewModel.isLoadingNextPageResults = isLoading
-        
-        if isLoading {
-            constraintsContainerViewBottom.constant = kLoaderViewHeight
-            addLoaderViewForNextResults()
-            
-        }
-        else {
-            
-            self.constraintsContainerViewBottom.constant = 0
-            
-            let view = self.view.viewWithTag(kLoaderViewTag)
-            view?.removeFromSuperview()
-        }
-        
-        self.view.layoutIfNeeded()
-    }
-    
-    
-}
+
 
 
 

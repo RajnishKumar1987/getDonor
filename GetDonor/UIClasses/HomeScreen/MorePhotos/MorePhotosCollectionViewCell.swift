@@ -15,11 +15,12 @@ class MorePhotosCollectionViewCell: UICollectionViewCell, CellReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        imageView.image = #imageLiteral(resourceName: "default")
         lblName.font = UIFont.fontWithTextStyle(textStyle: .title2)
     }
     
     override func prepareForReuse() {
-        imageView.image = nil
+        imageView.image = #imageLiteral(resourceName: "default")
         imageLoader = nil
     }
     

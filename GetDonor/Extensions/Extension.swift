@@ -49,10 +49,12 @@ extension UIButton {
             indicator.tag = tag
             self.addSubview(indicator)
             indicator.startAnimating()
+            self.isUserInteractionEnabled = false
         } else {
             if let indicator = self.viewWithTag(tag) as? UIActivityIndicatorView {
                 indicator.stopAnimating()
                 indicator.removeFromSuperview()
+                self.isUserInteractionEnabled = true
             }
         }
     }}
@@ -106,7 +108,6 @@ extension UIViewController{
     
     func addLoaderViewForNextResults() {
         
-        
         let view = UIView(frame: CGRect(x: 0, y: self.view.frame.size.height - (kLoaderViewHeight + getTabBarHeight()) , width: self.view.frame.size.width, height: kLoaderViewHeight))
         view.backgroundColor = UIColor.lightGray
         view.tag = kLoaderViewTag
@@ -117,9 +118,64 @@ extension UIViewController{
         indicatorView.color = UIColor.white
         indicatorView.isHidden = false
         view.addSubview(indicatorView)
-        
         self.view.addSubview(view)
     }
+    
+    func showLoader(onViewController:UIViewController, transparent:Bool = false){
+        if let keyWindow = onViewController.view{
+            if keyWindow.subviews.count > 1{
+                
+                let loader = keyWindow.subviews[1]
+                
+                if (loader.isKind(of: LoaderView.self)){
+                    return
+                }
+            }
+            let overlay = Bundle.main.loadNibNamed("LoaderView", owner: nil, options: nil)![0] as! LoaderView
+            overlay.frame = onViewController.view.bounds
+            keyWindow.addSubview(overlay)
+            
+        }
+    }
+    
+    func removeLoader(fromViewController:UIViewController){
+        let keyWindow = fromViewController.view
+        if let _ = keyWindow,(keyWindow?.subviews.count)! > 1{
+            keyWindow?.subviews.forEach({ (loader) in
+                if (loader.isKind(of: LoaderView.self)){
+                    let overlay = loader as! LoaderView
+                    overlay.removeFromSuperview()
+                }
+            })
+        }else{
+            print("")
+        }
+    }
+    
+    func showLoaderOnView(someView: UIView) {
+        if let keyWindow = view{
+            if keyWindow.subviews.count > 1{
+                
+                let loader = keyWindow.subviews[1]
+                
+                if (loader.isKind(of: LoaderView.self)){
+                    return
+                }
+            }
+            let overlay = Bundle.main.loadNibNamed("LoaderView", owner: nil, options: nil)![0] as! LoaderView
+            overlay.frame = someView.bounds
+            keyWindow.addSubview(overlay)
+            
+        }
+    }
+    
+    func showAlert(with title:String) {
+        
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
     
 }
@@ -197,7 +253,7 @@ extension URL{
             md5String = (AppBaseURLs.apiSecretKey + result).utf8.md5.description
             
         }
-
+        
         return md5String
         
     }

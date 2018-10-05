@@ -102,6 +102,9 @@ class SignUpTableViewController: UITableViewController {
         
         if doValidation() {
             
+            btnSignUp.loadingIndicator(show: true)
+            
+            
             let b_group = txtBloodGroup.text!.getBloodGroupId()
             
             let param : [String:String] = ["email":txtEmail.text!,
@@ -115,6 +118,9 @@ class SignUpTableViewController: UITableViewController {
             
 
             viewModel.login(with: param) {[weak self] (result) in
+                
+                self?.btnSignUp.loadingIndicator(show: false)
+
                 switch (result){
                 case .Success:
                     print("Success")
@@ -210,7 +216,10 @@ class SignUpTableViewController: UITableViewController {
                 
                 if let phoneNumber = account?.phoneNumber{
                     print("PhoneNumber:\(phoneNumber.phoneNumber)")
-                    self?.txtMobile.text = phoneNumber.phoneNumber
+                    DispatchQueue.main.async {
+                        self?.txtMobile.text = phoneNumber.phoneNumber
+                        
+                    }
 
                 }
             }

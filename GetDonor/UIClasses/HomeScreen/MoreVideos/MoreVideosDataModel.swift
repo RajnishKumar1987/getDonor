@@ -10,7 +10,7 @@ import Foundation
 
 struct MoreVideosDataModel: Codable {
     
-    var vidoeList: [Video]? = []
+    var vidoeList: [Video] = []
     var currentPage: Int?
     var totalPages: Int?
     
@@ -18,6 +18,16 @@ struct MoreVideosDataModel: Codable {
         case vidoeList = "node"
         case currentPage = "current_page"
         case totalPages = "total_pages"
+    }
+    
+    mutating func addResults(from newObject: MoreVideosDataModel) {
+        
+        if let newPage = newObject.currentPage {
+            
+            self.currentPage = newPage
+            self.totalPages = newObject.totalPages
+            self.vidoeList.append(contentsOf: newObject.vidoeList)
+        }
     }
     
 }

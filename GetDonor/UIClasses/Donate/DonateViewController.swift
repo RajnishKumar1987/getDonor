@@ -18,11 +18,13 @@ class DonateViewController: BaseViewController {
         self.title = "Donate"
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
+        showLoader(onViewController: self)
         loadDonationDetails()
     }
     
     func loadDonationDetails()  {
         viewModel.loadDonationDetails { [weak self](result) in
+            self?.removeLoader(fromViewController: self!)
             switch result{
             case .Success:
                 print("success")

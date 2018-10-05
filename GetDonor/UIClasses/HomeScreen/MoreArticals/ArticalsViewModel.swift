@@ -21,7 +21,17 @@ class ArticalsViewModel {
     
     func getModelForCell(at indexPath: IndexPath) -> Article {
         
-        return model.articalList![indexPath.row]
+        return model.articalList[indexPath.row]
+    }
+    func canLoadNextPage() -> Bool {
+        
+        if isLoadingNextPageResults || isUserRefreshingList { return false }
+        
+        if let currentPage = model.currentPage, let totalPages = model.totalPages, currentPage + 1 > totalPages {
+            return false
+        }
+        
+        return true
     }
     
     func loadArticals(with result:@escaping(Result<String>)->Void) {
@@ -41,7 +51,8 @@ class ArticalsViewModel {
             
             if let response = response {
                 
-                weakSelf.model = response
+                weakSelf.isUserRefreshingList ? weakSelf.model = response :
+                    weakSelf.model.addResults(from: response)
                 result(.Success)
                 
             }

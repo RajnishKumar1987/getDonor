@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>FacebookAppID</key>
 	<string>1471589852942749</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -41,7 +41,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This app will use camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>GetDonor need your current </string>
+	<string>This will use your current location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>You can select photo</string>
 	<key>UIAppFonts</key>

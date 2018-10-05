@@ -10,17 +10,14 @@ import UIKit
 
 class HomeViewController: BaseViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var viewModel = HomeListingViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.performSegue(withIdentifier: "openEditProfile", sender: nil)
-
          doInitialConfig()
     }
-    
+        
     func doInitialConfig() {
                 
         self.title = "Home"
@@ -37,9 +34,9 @@ class HomeViewController: BaseViewController {
     
     func loadHomeScreen() {
         
+        showLoader(onViewController: self)
         viewModel.loadHomeScreen { [weak self](result) in
-            
-            self?.activityIndicator.stopAnimating()
+            self?.removeLoader(fromViewController: self!)
             switch result {
             case .Success:
                 self?.tableView.reloadData()
@@ -90,10 +87,6 @@ class HomeViewController: BaseViewController {
                 else{
                     self.performSegue(withIdentifier: "openEditProfile", sender: nil)
                     self.loadHomeScreen()
-                    LocationManager.sharedInstance.startLocaitonService()
-                    let appDelegte = UIApplication.shared.delegate as! AppDelegate
-                    appDelegte.registerForPushNotifications()
-
                 }
 
             }

@@ -21,7 +21,18 @@ class MoreVideosViewModel {
     
     func getModelForCell(at indexPath: IndexPath) -> Video {
         
-        return model.vidoeList![indexPath.row]
+        return model.vidoeList[indexPath.row]
+    }
+    
+    func canLoadNextPage() -> Bool {
+        
+        if isLoadingNextPageResults || isUserRefreshingList { return false }
+        
+        if let currentPage = model.currentPage, let totalPages = model.totalPages, currentPage + 1 > totalPages {
+            return false
+        }
+        
+        return true
     }
     
     func loadMoreVideos(with result:@escaping(Result<String>)->Void) {
@@ -41,9 +52,10 @@ class MoreVideosViewModel {
             
             if let response = response {
                 
-                weakSelf.model = response
+                weakSelf.isUserRefreshingList ? weakSelf.model = response :
+                weakSelf.model.addResults(from: response)
                 result(.Success)
-                
+
             }
             else{
                 result(.failure(error.debugDescription))

@@ -8,12 +8,15 @@
 
 import UIKit
 
+let kLoaderViewTag = 1011
+let kLoaderViewHeight: CGFloat = 50
+
 class BaseViewController: UIViewController {
     @IBOutlet weak var tableview:UITableView!
     @IBOutlet weak var collectionview:UICollectionView!
     var isEnableRefreshControler:Bool = true
-    var isEnablePagination: Bool = true
-    
+    @IBOutlet weak var listingContainerButtomConstaraints: NSLayoutConstraint!
+
     lazy var refreshControl: UIRefreshControl? = {
         let rControl = UIRefreshControl()
         rControl.tintColor = UIColor.colorFor(component: .navigationBar)
@@ -22,13 +25,27 @@ class BaseViewController: UIViewController {
                            for: UIControlEvents.valueChanged)
         return rControl
     }()
+    
+    lazy var paginationLoaderView: UIView? = {
+        
+        let view = UIView(frame: CGRect(x: 0, y: self.view.frame.size.height - (kLoaderViewHeight + getTabBarHeight()) , width: self.view.frame.size.width, height: kLoaderViewHeight))
+        view.backgroundColor = UIColor.white
+        view.tag = kLoaderViewTag
+        
+        let indicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        indicatorView.center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
+        indicatorView.startAnimating()
+        indicatorView.color = UIColor.colorFor(component: .navigationBar)
+        indicatorView.isHidden = false
+        view.addSubview(indicatorView)
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if isEnableRefreshControler {
             self.setUpRefreshActivityController()
         }
-
         addProfileButton()
     }
     
@@ -59,6 +76,19 @@ class BaseViewController: UIViewController {
         
     }
 
+    func isLoadingNextPageResult(_ isLoading: Bool) {
+
+        if isLoading {
+            listingContainerButtomConstaraints.constant = kLoaderViewHeight
+            self.view.addSubview(paginationLoaderView!)
+        }
+        else {
+            self.listingContainerButtomConstaraints.constant = 0
+            let view = self.view.viewWithTag(kLoaderViewTag)
+            view?.removeFromSuperview()
+        }
+        self.view.layoutIfNeeded()
+    }
     
     func setUpRefreshActivityController(){
         if let tblView = self.tableview{
