@@ -65,9 +65,7 @@ class HomeListingViewModel {
         
         var cellTypes = Array<HomeScreenCellType>()
         
-        if let videos = model.contents?.video, videos.count > 0 {
-            cellTypes.append(.video)
-        }
+        
         if let artical = model.contents?.article, artical.count > 0 {
             cellTypes.append(.artical)
         }
@@ -76,6 +74,9 @@ class HomeListingViewModel {
         }
         if let event = model.contents?.event, event.count > 0 {
             cellTypes.append(.event)
+        }
+        if let videos = model.contents?.video, videos.count > 0 {
+            cellTypes.append(.video)
         }
 
         

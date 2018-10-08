@@ -18,10 +18,12 @@ class DonationDetailsViewController: BaseViewController {
     @IBOutlet weak var segmentButton: UISegmentedControl!
     
     var viewModel = DonationDetailsViewModel()
+    var selectedDonationDetailsType: DonationDetailsType = .allDonations
     
     override func viewDidLoad() {
         super.viewDidLoad()
         hideProfileButton()
+        disableRefresh()
         self.title = "Donation Details"
         doInitialConfig()
     }
@@ -34,14 +36,15 @@ class DonationDetailsViewController: BaseViewController {
         lblUsedEndowment.font = UIFont.fontWithTextStyle(textStyle: .subHead)
         lblTotalValue.font = UIFont.fontWithTextStyle(textStyle: .regular)
         lblUsedValue.font = UIFont.fontWithTextStyle(textStyle: .regular)
-
+        lblTotalValue.textColor = UIColor.colorFor(component: .button)
+        lblUsedValue.textColor = UIColor.colorFor(component: .button)
         segmentButton.borderColor = UIColor.colorFor(component: .button)
         segmentButton.tintColor = UIColor.colorFor(component: .button)
         segmentButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.fontWithTextStyle(textStyle: .title1)],
                                                 for: .normal)
         segmentButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.fontWithTextStyle(textStyle: .title1)],
                                              for: .selected)
-
+        
         
         loadDonationDetails(for: .allDonations)
 
@@ -49,25 +52,62 @@ class DonationDetailsViewController: BaseViewController {
     
     func loadDonationDetails(for type: DonationDetailsType) {
         showLoader(onViewController: self)
-        viewModel.loadDonationDetails(for: type) { (result) in
-            self.removeLoader(fromViewController: self)
+        viewModel.loadDonationDetails(for: type) { [weak self](result) in
+            self?.removeLoader(fromViewController: self!)
             switch result{
             case .Success:
                 print("success")
+                self?.tableview.reloadData()
+                self?.updateEndowmentDetails()
             case .failure(let msg):
                 print(msg)
             }
             
         }
     }
+    
+    func updateEndowmentDetails() {
+        switch selectedDonationDetailsType {
+        case .allDonations:
+            if let usedEnd = viewModel.allDonations.usedEndowment{
+                self.lblUsedValue.text = "₹ " + usedEnd
+            }
+            if let totalEnd = viewModel.allDonations.totalEndowmant{
+                self.lblTotalValue.text = "₹ " + totalEnd
+            }
+        case .myDonation:
+            if let usedEnd = viewModel.myDonation.usedEndowment{
+                self.lblUsedValue.text = "₹ " + usedEnd
+            }
+            if let totalEnd = viewModel.myDonation.totalEndowmant{
+                self.lblTotalValue.text = "₹ " + totalEnd
+            }
+        }
+    }
     @IBAction func actionSegmentButtonPressed(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
         case 0:
-            print("0")
-            
+            selectedDonationDetailsType = .allDonations
+            if viewModel.allDonations.transactions.count > 0{
+                tableview.reloadData()
+                updateEndowmentDetails()
+            }
+            else
+            {
+                loadDonationDetails(for: selectedDonationDetailsType)
+            }
         case 1:
-            print("1")
+            selectedDonationDetailsType = .myDonation
+            if viewModel.myDonation.transactions.count > 0{
+                tableview.reloadData()
+                updateEndowmentDetails()
+            }
+            else
+            {
+                loadDonationDetails(for: selectedDonationDetailsType)
+            }
+
         default:
             print("known")
         }
@@ -79,14 +119,47 @@ class DonationDetailsViewController: BaseViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let vc = segue.destination as! WebViewController
+        vc.urlString = sender as! String
+        vc.title = "Receipt"
+        
     }
-    */
+    
 
 }
+
+extension DonationDetailsViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.getCellCountFor(cellType: selectedDonationDetailsType)
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: DonationDetailsTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+        cell.configureCell(with: viewModel.getModelFor(cellType: selectedDonationDetailsType, indexPath: indexPath), forType: selectedDonationDetailsType)
+        cell.delegate = self
+        return cell
+    }
+}
+
+extension DonationDetailsViewController: DonationDetailsTableViewCellDelegate{
+    func didDownloadFinished() {
+        self.tableview.reloadData()
+    }
+    func didViewReceiptPressed(receiptUrl: String) {
+        self.performSegue(withIdentifier: "openWebView", sender: receiptUrl)
+    }
+}
+
+
+
+
+
+
+
+
+

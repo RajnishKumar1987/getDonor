@@ -76,6 +76,8 @@
 		845D3A452151572000C48FC5 /* DonateCashDtailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D3A442151572000C48FC5 /* DonateCashDtailsTableViewCell.swift */; };
 		845D3A47215159C100C48FC5 /* DonateSecureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D3A46215159C100C48FC5 /* DonateSecureTableViewCell.swift */; };
 		845D3A49215214A800C48FC5 /* UpdateApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D3A48215214A700C48FC5 /* UpdateApiRequest.swift */; };
+		8464400C21677CE400798BEE /* DonationDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464400B21677CE400798BEE /* DonationDetailsTableViewCell.swift */; };
+		8464400E2168C09700798BEE /* DownloadingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464400D2168C09700798BEE /* DownloadingQueue.swift */; };
 		8469B6812148FB4A00D3CDEF /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8469B6802148FB4A00D3CDEF /* EditProfile.storyboard */; };
 		8469B6832148FF1700D3CDEF /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8469B6822148FF1700D3CDEF /* EditProfileViewController.swift */; };
 		8470E4AD213E9F0100B906A0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8470E4AC213E9F0100B906A0 /* Extension.swift */; };
@@ -264,6 +266,8 @@
 		845D3A442151572000C48FC5 /* DonateCashDtailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCashDtailsTableViewCell.swift; sourceTree = "<group>"; };
 		845D3A46215159C100C48FC5 /* DonateSecureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateSecureTableViewCell.swift; sourceTree = "<group>"; };
 		845D3A48215214A700C48FC5 /* UpdateApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateApiRequest.swift; sourceTree = "<group>"; };
+		8464400B21677CE400798BEE /* DonationDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		8464400D2168C09700798BEE /* DownloadingQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingQueue.swift; sourceTree = "<group>"; };
 		8469B6802148FB4A00D3CDEF /* EditProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditProfile.storyboard; sourceTree = "<group>"; };
 		8469B6822148FF1700D3CDEF /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		8470E4AC213E9F0100B906A0 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -437,6 +441,8 @@
 				84140C1721675652003A6C31 /* DonationDetailsViewModel.swift */,
 				84140C192167565F003A6C31 /* DonationDetailsApiRequest.swift */,
 				84140C1D2167573F003A6C31 /* DonationDetails.json */,
+				8464400B21677CE400798BEE /* DonationDetailsTableViewCell.swift */,
+				8464400D2168C09700798BEE /* DownloadingQueue.swift */,
 			);
 			path = DonationDetails;
 			sourceTree = "<group>";
@@ -1206,6 +1212,7 @@
 			files = (
 				84CABD5A213D4D580058E1B0 /* ArticalsViewModel.swift in Sources */,
 				845B8255212D429100DF259F /* ReusableCellHandler.swift in Sources */,
+				8464400C21677CE400798BEE /* DonationDetailsTableViewCell.swift in Sources */,
 				848B51302166159200C915DB /* LoaderView.swift in Sources */,
 				84483FE3215C9DA1002078DC /* SerachViewModel.swift in Sources */,
 				84E8802221492EDD006950A2 /* ProfileApiRequest.swift in Sources */,
@@ -1316,6 +1323,7 @@
 				84575E8C2142408600DBA043 /* Api_EndPoint.swift in Sources */,
 				848B5F5E21303817009D6314 /* DesireViewModel.swift in Sources */,
 				84483FDF215C9D4F002078DC /* SearchApiRequest.swift in Sources */,
+				8464400E2168C09700798BEE /* DownloadingQueue.swift in Sources */,
 				84140C1821675652003A6C31 /* DonationDetailsViewModel.swift in Sources */,
 				84575E862141776C00DBA043 /* LoginApiRequest.swift in Sources */,
 				845205262154D0900055297C /* MenuViewModel.swift in Sources */,

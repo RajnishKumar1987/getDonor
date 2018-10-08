@@ -28,7 +28,7 @@ struct User: Codable {
     var firstname: String?
     var lastname: String?
     var dob: String?
-    var address: String?
+    var state: String?
     var city: String?
     var country: String?
     var b_group: String?

@@ -194,6 +194,7 @@ class EditProfileTableViewController: UITableViewController {
         txtEmail.text = viewModel.model.user?.email
         txtMobile.text = viewModel.model.user?.phone
         txtCity.text = viewModel.model.user?.city
+        txtState.text = viewModel.model.user?.state
         txtCountry.text = viewModel.model.user?.country
         txtDOB.text = viewModel.model.user?.dob
         if let bloodGroup = viewModel.model.user?.b_group {
@@ -210,6 +211,7 @@ class EditProfileTableViewController: UITableViewController {
                                "lastname":txtLastName.text!,
                                "city":txtCity.text!,
                                "country":txtCountry.text!,
+                               "state":txtState.text!,
                                "b_group":"6",
                                "dob":txtDOB.text!,
                               "image": profileImage
@@ -302,8 +304,6 @@ extension EditProfileTableViewController: UITextFieldDelegate{
             }
             
         }
-        
-
     }
 }
 

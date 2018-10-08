@@ -27,7 +27,21 @@ class WebViewController: UIViewController {
         webView.loadRequest(request)
         
     }
-
+    @IBAction func actionShare(_ sender: Any) {
+        let fileManager = FileManager.default
+        let documentoPath = urlString!
+        
+        if fileManager.fileExists(atPath: documentoPath){
+            let documento = NSData(contentsOfFile: documentoPath)
+            let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [documento!], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView=self.view
+            present(activityViewController, animated: true, completion: nil)
+        }
+        else {
+            print("document was not found")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

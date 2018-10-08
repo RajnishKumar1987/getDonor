@@ -13,9 +13,27 @@ class DonationDetailsViewModel {
     var apiLoader: APIRequestLoader<DonationDetailsApiRequest>!
     var myDonation = DonationDetailsDataModel()
     var allDonations = DonationDetailsDataModel()
-
+    
     init(loader:APIRequestLoader<DonationDetailsApiRequest> = APIRequestLoader(apiRequest: DonationDetailsApiRequest()) ) {
         self.apiLoader = loader
+    }
+    
+    func getModelFor(cellType:DonationDetailsType, indexPath: IndexPath) -> Transaction {
+        switch cellType {
+        case .allDonations:
+            return allDonations.transactions[indexPath.row]
+        case .myDonation:
+            return myDonation.transactions[indexPath.row]
+        }
+    }
+    
+    func getCellCountFor(cellType: DonationDetailsType) -> Int {
+        switch cellType {
+        case .allDonations:
+            return allDonations.transactions.count
+        case .myDonation:
+            return myDonation.transactions.count
+        }
     }
     
     func loadDonationDetails(for type: DonationDetailsType, result: @escaping(Result<String>)->Void) {
