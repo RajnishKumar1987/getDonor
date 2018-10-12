@@ -64,7 +64,8 @@ extension DesireViewController: UITableViewDelegate, UITableViewDataSource{
         switch cellType {
         case .corousal:
             let cell: CarouselTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            //cell.configureCell(with: viewModel.getModelFor(cell: cellType))
+            cell.configureCell(with: viewModel.getCarsouelCellModel(), and: .topBanner)
+            cell.delegate = self
             return cell
         case .headingAndDescription(let index):
             let cell: DesireTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
@@ -81,10 +82,32 @@ extension DesireViewController: UITableViewDelegate, UITableViewDataSource{
         
         switch cellType {
         case .corousal:
-            return 250
+            return kCarouselHeight
         default:
             return UITableViewAutomaticDimension
         }
 
+    }
+}
+
+extension DesireViewController : HomeScreenCellDelegate{
+
+    func didCellSelected(at index: IndexPath, with model: ContentDataModel) {
+        
+        if let contentType = ContentType(rawValue: model.type!){
+            switch contentType{
+            case .photo:
+                let storyboard = UIStoryboard.init(name: "PhotoViewer", bundle: nil)
+                let photoViewerVc = storyboard.instantiateViewController(withIdentifier: "PhotoViewerViewController") as! PhotoViewerViewController
+                photoViewerVc.viewModel = PhotoViewerViewModel(with: viewModel.getCarsouelCellModel())
+                photoViewerVc.selectedIndex = index
+                self.navigationController?.pushViewController(photoViewerVc, animated: true)
+            default:
+                print("unknown type")
+            }
+        }
+        
+        
+        
     }
 }

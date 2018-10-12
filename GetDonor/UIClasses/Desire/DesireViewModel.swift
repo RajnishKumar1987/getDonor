@@ -96,6 +96,18 @@ class DesireViewModel {
         
     }
     
+    func getCarsouelCellModel() -> [ContentDataModel] {
+        
+        var contentModels = [ContentDataModel]()
+        
+        if let carousel = model?.response.corousal {
+            contentModels = carousel.compactMap({ (imageUrl) -> ContentDataModel in
+                ContentDataModel(id: "", image: imageUrl, title: "", insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue)
+            })
+        }
+        return contentModels
+    }
+    
     func getCellType(from model: DesireModel) -> Array<DesireCellType> {
         
         var cellTypeArray = Array<DesireCellType>()

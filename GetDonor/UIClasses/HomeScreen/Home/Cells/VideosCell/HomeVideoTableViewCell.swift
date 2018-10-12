@@ -15,7 +15,13 @@ protocol HomeScreenCellDelegate: class {
 }
 
 extension HomeScreenCellDelegate{
-    
+    func didMoreButtonPressed(at cellType: HomeScreenCellType){
+        
+    }
+    func didCellSelected(at indexPath: IndexPath, with cellType: HomeScreenCellType){
+        
+    }
+
     func didCellSelected(at index:IndexPath, with model:ContentDataModel){
 
     }

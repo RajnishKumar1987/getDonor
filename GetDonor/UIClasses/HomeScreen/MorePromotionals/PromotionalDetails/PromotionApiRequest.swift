@@ -19,17 +19,17 @@ class PromotionApiRequest: APIRequest {
     
     func parseResponse(data: Data) throws -> PromotionDatatModel {
         
-        var jsonData = Data()
-        if let path = Bundle.main.path(forResource: "PromotionDetails", ofType: "json") {
-            do {
-                jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
-                print(jsonResult)
-
-            } catch {
-                // handle error
-            }
-        }
-        return try JSONDecoder().decode(PromotionDatatModel.self, from: jsonData)
+//        var jsonData = Data()
+//        if let path = Bundle.main.path(forResource: "PromotionDetails", ofType: "json") {
+//            do {
+//                jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
+//                print(jsonResult)
+//
+//            } catch {
+//                // handle error
+//            }
+//        }
+        return try JSONDecoder().decode(PromotionDatatModel.self, from: data)
     }
 }

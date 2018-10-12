@@ -28,12 +28,12 @@ class SignUpTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        txtMobile.text = "8369150994"
-        txtEmail.text = "rajkumar@gmail.com"
-        txtFirstName.text = "raj"
-        txtLastName.text = "kumar"
-        txtPassword.text = "12345"
-        txtConfirmPassword.text = "12345"
+//        txtMobile.text = "8369150994"
+//        txtEmail.text = "rajkumar@gmail.com"
+//        txtFirstName.text = "raj"
+//        txtLastName.text = "kumar"
+//        txtPassword.text = "12345"
+//        txtConfirmPassword.text = "12345"
         let imageView = UIImageView(frame: self.view.bounds)
         imageView.image = UIImage(named: "bglogin")
         tableView.backgroundView = imageView
