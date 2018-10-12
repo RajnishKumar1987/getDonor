@@ -10,7 +10,7 @@ import Foundation
 
 struct MoreEventDataModel: Codable {
     
-    var eventList: [Event] = []
+    var eventList: [ContentDataModel] = []
     var totalPages: Int? = 0
     var currentPage: Int? = 0
     

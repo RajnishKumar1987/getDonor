@@ -13,7 +13,7 @@ class HomeEventTableViewCell: UITableViewCell,CellReusable {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var btnMore: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    var eventsModelArray: [Event]? = []
+    var eventsModelArray: [ContentDataModel]? = []
     weak var delegate: HomeScreenCellDelegate?
     
     override func awakeFromNib() {
@@ -25,7 +25,7 @@ class HomeEventTableViewCell: UITableViewCell,CellReusable {
 
     }
     
-    func configureCell(with model: [Event]?) {
+    func configureCell(with model: [ContentDataModel]?) {
         
         if let model = model, model.count > 0 {
             eventsModelArray = model

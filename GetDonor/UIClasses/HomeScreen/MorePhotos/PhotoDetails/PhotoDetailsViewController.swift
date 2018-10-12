@@ -11,7 +11,7 @@ import UIKit
 class PhotoDetailsViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var photos : [Photo]?
+    var photos : [ContentDataModel]?
     var selectedIndexPath: IndexPath!
     
     

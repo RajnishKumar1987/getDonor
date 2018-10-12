@@ -24,7 +24,7 @@ class ArticalsTableViewCell: UITableViewCell,CellReusable {
         imageLoader = nil
     }
 
-    func configureCell(with model: Article) {
+    func configureCell(with model: ContentDataModel) {
         
         lblTitle.text = model.title
         

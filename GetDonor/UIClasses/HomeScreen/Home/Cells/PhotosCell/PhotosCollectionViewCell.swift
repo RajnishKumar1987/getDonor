@@ -24,7 +24,7 @@ class PhotosCollectionViewCell: UICollectionViewCell,CellReusable {
         imageLoader = nil
     }
 
-    func configureCell(with model: Photo?) {
+    func configureCell(with model: ContentDataModel?) {
         
         
         guard let model = model else { return }

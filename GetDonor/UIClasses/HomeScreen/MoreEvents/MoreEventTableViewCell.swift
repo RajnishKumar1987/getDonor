@@ -27,7 +27,7 @@ class MoreEventTableViewCell: UITableViewCell,CellReusable {
     }
 
     
-    func configureCell(with model: Event?) {
+    func configureCell(with model: ContentDataModel?) {
         
         if let model = model {
             lblTitle.text = model.title

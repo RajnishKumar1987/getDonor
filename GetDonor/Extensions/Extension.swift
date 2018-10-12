@@ -264,4 +264,19 @@ extension URL{
     }
 }
 
+extension UIImageView{
+    func loadImage(from urlString: String?, shouldCache: Bool) {
+        guard let url = urlString else { return }
+        
+        let imageLoader = APIRequestLoader(apiRequest: ImageRequest(shouldCache: shouldCache))
+        imageLoader.loadAPIRequest(forFuncion: .getImage(urlString: url), requestData: nil) { (image, error) in
+            
+            if let image = image{
+                self.image = image
+            }
+        }
+        
+    }
+}
+
 

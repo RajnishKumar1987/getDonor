@@ -25,7 +25,7 @@ class SimilarVideosTableViewCell: UITableViewCell,CellReusable {
         imageLoader = nil
     }
 
-    func configCell(with model:Video)  {
+    func configCell(with model:ContentDataModel)  {
         
         lblTitle.text = model.title ?? ""
         

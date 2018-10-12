@@ -19,7 +19,7 @@ class ArticalsViewModel {
         self.apiLoader = loader
     }
     
-    func getModelForCell(at indexPath: IndexPath) -> Article {
+    func getModelForCell(at indexPath: IndexPath) -> ContentDataModel {
         
         return model.articalList[indexPath.row]
     }

@@ -25,7 +25,7 @@ class EventsCollectionViewCell: UICollectionViewCell,CellReusable {
         imageLoader = nil
     }
 
-    func configureCell(with model: Event?) {
+    func configureCell(with model: ContentDataModel?) {
         
         guard let model = model else { return }
         

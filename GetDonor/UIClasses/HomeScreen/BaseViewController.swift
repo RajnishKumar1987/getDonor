@@ -46,6 +46,9 @@ class BaseViewController: UIViewController {
         if isEnableRefreshControler {
             self.setUpRefreshActivityController()
         }
+        if let _ = tableview {
+            tableview.registerCell(CarouselTableViewCell.self)
+        }
         addProfileButton()
     }
     

@@ -24,7 +24,7 @@ class MorePhotosCollectionViewCell: UICollectionViewCell, CellReusable {
         imageLoader = nil
     }
     
-    func configureCell(with model: Photo?) {
+    func configureCell(with model: ContentDataModel?) {
         
         if let model = model {
             

@@ -23,6 +23,7 @@ class HomeViewController: BaseViewController {
     func doInitialConfig() {
                 
         self.title = "Home"
+        tableView.registerCell(CarouselTableViewCell.self)
         if !AppConfig.getUserLoginStatus() {
             presentLoginSignUpScreen()
         }else{
@@ -53,10 +54,10 @@ class HomeViewController: BaseViewController {
         switch segue.identifier {
         case "openVideoDetails":
             let videoDetailsVC = segue.destination as? VideoDetailsViewController
-            videoDetailsVC?.model = sender as! Video
+            videoDetailsVC?.model = sender as! ContentDataModel
         case "openArticalsDetails":
             let articalDetailVC = segue.destination as? ArticalDetailsViewController
-            articalDetailVC?.articals = [sender as? Article] as? [Article]
+            articalDetailVC?.articals = [sender as? ContentDataModel] as? [ContentDataModel]
         case "openPhotoViewer":
             let articalDetailVC = segue.destination as? PhotoViewerViewController
             articalDetailVC?.selectedIndex = sender as? IndexPath
@@ -72,6 +73,13 @@ class HomeViewController: BaseViewController {
             articalDetailVC?.selectedIndex = IndexPath(item: 0, section: 0)
             let model = viewModel.homeApiResponse?.contents?.event[(indexPath?.item)!]
             articalDetailVC?.viewModel = PhotoViewerViewModel(with: (model?.data)!)
+        case "openPromotionDetails":
+            let promotionDetailsVC = segue.destination as? PromotionDetailsViewController
+            var indexPath = sender as? IndexPath
+            let promotionBannerModel = viewModel.homeApiResponse?.contents?.topBanner[(indexPath?.row)!]
+            promotionDetailsVC?.contentId = promotionBannerModel?.id
+            
+            print("")
         default:
             print("Unknown")
             
@@ -123,6 +131,9 @@ extension HomeViewController: HomeScreenCellDelegate{
             self.performSegue(withIdentifier: "openPhotoViewer", sender: indexPath)
         case .event:
             self.performSegue(withIdentifier: "showEventsPhoto", sender: indexPath)
+        case .promotional:
+            self.performSegue(withIdentifier: "openPromotionDetails", sender: indexPath)
+            print("")
         }
     }
     
@@ -138,6 +149,9 @@ extension HomeViewController: HomeScreenCellDelegate{
             loadViewControllerWith(viewControllerIdentifier: "MorePhotosViewController", andStoryboardName: "Photos")
         case .event:
             loadViewControllerWith(viewControllerIdentifier: "MoreEventsViewController", andStoryboardName: "Events")
+        case .promotional:
+            loadViewControllerWith(viewControllerIdentifier: "MorePromotionalViewController", andStoryboardName: "Promotional")
+
 
         }
     }
@@ -168,8 +182,13 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
         
         switch cellType {
         case .video:
-            let cell: HomeVideoTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.configurecell(model: viewModel.homeApiResponse?.contents?.video)
+//            let cell: HomeVideoTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+//            cell.configurecell(model: viewModel.homeApiResponse?.contents?.video)
+           // let c_model = CarouselDataModel(with: viewModel.homeApiResponse?.contents?.video)
+           // print(c_model)
+            let cell: CarouselTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+            cell.configureCell(with: viewModel.homeApiResponse?.contents?.video, and: .carousel(title: "Video", cellType: .video))
+
             cell.delegate = self
             return cell
         case .artical:
@@ -187,8 +206,11 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
             cell.configureCell(with: viewModel.homeApiResponse?.contents?.event)
             cell.delegate = self
             return cell
-
-        
+        case .promotional:
+            let cell: CarouselTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+            cell.configureCell(with: viewModel.homeApiResponse?.contents?.topBanner, and: .carousel(title: "", cellType: .promotional))
+            cell.delegate = self
+            return cell
         }
         
     }
@@ -198,8 +220,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
         let cellType = viewModel.cellTypes[indexPath.row]
         
         switch cellType {
-        case .video:
-            return 270
+        case .video, .promotional:
+            return kCarouselHeight
         default:
             return 180
         }

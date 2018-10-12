@@ -24,7 +24,7 @@ class MoreVideosTableViewCell: UITableViewCell, CellReusable{
         imageLoader = nil
     }
 
-    func configureCell(with model: Video?) {
+    func configureCell(with model: ContentDataModel?) {
         
         lblTitle.text = model?.title
         

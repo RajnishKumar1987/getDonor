@@ -25,7 +25,7 @@ class ArticalCollectionViewCell: UICollectionViewCell, CellReusable {
         imageLoader = nil
     }
 
-    func configurecell(model: Article) {
+    func configurecell(model: ContentDataModel) {
         
         lblTitle.text = model.title ?? ""
         lblDescription.text = model.description ?? ""

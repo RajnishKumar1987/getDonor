@@ -24,18 +24,18 @@ class DonationDetailsApiRequest: APIRequest {
     
     func parseResponse(data: Data) throws -> DonationDetailsDataModel {
         
-                               var jsonData = Data()
-                                if let path = Bundle.main.path(forResource: "DonationDetails", ofType: "json") {
-                                    do {
-                                        jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                                        let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
-                                        print(jsonResult)
+//                               var jsonData = Data()
+//                                if let path = Bundle.main.path(forResource: "DonationDetails", ofType: "json") {
+//                                    do {
+//                                        jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                                        let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
+//                                        print(jsonResult)
+//
+//                                    } catch {
+//                                        // handle error
+//                                    }
+//                                }
 
-                                    } catch {
-                                        // handle error
-                                    }
-                                }
-
-        return try JSONDecoder().decode(DonationDetailsDataModel.self, from: jsonData)
+        return try JSONDecoder().decode(DonationDetailsDataModel.self, from: data)
     }
 }

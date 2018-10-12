@@ -1,0 +1,38 @@
+
+
+
+{
+    "error": 0,
+    "message": "successful",
+    "node":{
+             "id": "2",
+             "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+             "images": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+             "data": {
+             "image": [
+                       "https://www.getdonor.org/media/content/2018/08/2202072716.jpg",
+                       "https://www.getdonor.org/media/content/2018/08/2202072714.jpg"
+                       ],
+             "text": "<p>The winter session of Maharashtra State Assembly started on 11th Dec in Nagpur. In a reply to Leader of Opposition Radhakrishna Vikhe Patil, Revenue Minister Chandrakant Patil said in assembly, the number of farmers, who committed suicide from 2001 to October 2017 is 26,339. Of them, 12,805 farmers killed themselves due to unproductive land, indebtedness and insistence on repayment of loan.He added, â€œbetween January 1 and August 15 this year, 580 farmers from Marathwada region committed suicide. Beed district alone reported 115 suicides (this year).</p> <p>Even if we take the number given by Chandrakant Patil at face value, it means that for 17 years now, more than 4 farmers in Maharashtra have committed suicide daily, which is an awful stat in itself and if this is the condition in one of the most prosperous states in India then the Governmentâ€™s recent claim of doubling all farmersâ€™ income by 2022 sounds rather unrealistic.</p> <p>Who will cry for India's farmers ?</p> <p>Actors Nana Patekar and Makrand Anaspure are on a noble and humbling mission. They are distributing cheques of financial aid to as many as 113 families of farmers from Latur and Osmanabad districts of Marathwada, who have committed suicides, owing to drought and indebtedness we need more Nana Patekars to wake us into doing something about the agrarian crisis.Elaborate Appeal for help.</p>",
+             "video": [
+                       {
+                       "image": "https://www.getdonor.org/media/content/2018/07/01122559language1_cms.jpg",
+                       "videoid": "aXtGp5OiOkU",
+                       "id":"1",
+                       "title": "Video Title"
+                       },
+                       {
+                       "image": "https://www.getdonor.org/media/content/2018/07/01122653temple1_cms.jpg",
+                       "videoid": "sbfcMdNIEUI",
+                       "id":"1",
+                       "title": "Video Title"
+                       }
+                       ]
+             },
+             "insertdate": "0000-00-00 00:00:00",
+             "updatedate": "0000-00-00 00:00:00",
+             "priority": "2",
+             "status": "1"
+             }
+             
+}

@@ -28,18 +28,22 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+            locationManager.distanceFilter = 1
             locationManager.startUpdatingLocation()
         }
 
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
-        self.latitude = String(locValue.latitude)
-        self.longitude = String(locValue.longitude)
-        updateUserLocation()
+        if(String(locValue.longitude) != self.longitude){
+            self.latitude = String(locValue.latitude)
+            self.longitude = String(locValue.longitude)
+            updateUserLocation()
+        }
     }
     
     func updateUserLocation() {

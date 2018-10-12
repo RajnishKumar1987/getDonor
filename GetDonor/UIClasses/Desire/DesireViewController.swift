@@ -24,7 +24,7 @@ class DesireViewController: BaseViewController {
         showLoader(onViewController: self)
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerCell(CorousalTableViewCell.self)
+        tableView.registerCell(CarouselTableViewCell.self)
         viewModel.loadDesire { [weak self](result) in
             self?.removeLoader(fromViewController: self!)
             switch result{
@@ -63,8 +63,8 @@ extension DesireViewController: UITableViewDelegate, UITableViewDataSource{
     
         switch cellType {
         case .corousal:
-            let cell: CorousalTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.configureCell(with: viewModel.getModelFor(cell: cellType))
+            let cell: CarouselTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+            //cell.configureCell(with: viewModel.getModelFor(cell: cellType))
             return cell
         case .headingAndDescription(let index):
             let cell: DesireTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)

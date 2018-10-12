@@ -48,7 +48,7 @@ class UpdateProfileApiRequest: APIRequest {
             }
         }
         
-        if let data = UIImageJPEGRepresentation(image, 1) {
+        if let data = UIImageJPEGRepresentation(image, 0) {
             let filename = "user-profile.jpg"
             let mimetype = "image/jpg"
             body.append("--\(boundary)\r\n")

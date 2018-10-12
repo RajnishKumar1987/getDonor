@@ -19,7 +19,7 @@ class MorePhotosViewModel {
         self.apiLoader = loader
     }
     
-    func getModelForCell(at indexPath: IndexPath) -> Photo {
+    func getModelForCell(at indexPath: IndexPath) -> ContentDataModel {
         
         return model.photoList[indexPath.row]
     }

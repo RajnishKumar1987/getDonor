@@ -8,6 +8,7 @@
 
 import UIKit
 import youtube_ios_player_helper
+import AVFoundation
 
 class VideoDetailsViewController: BaseViewController {
 
@@ -15,7 +16,7 @@ class VideoDetailsViewController: BaseViewController {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    var model: Video!
+    var model: ContentDataModel!
     var viewModel = SimilarVideosViewModel()
     
     
@@ -27,6 +28,7 @@ class VideoDetailsViewController: BaseViewController {
     }
     
     func doInitialConfig() {
+    
         tableview.estimatedRowHeight = 100
         tableview.rowHeight = UITableViewAutomaticDimension
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
@@ -34,8 +36,15 @@ class VideoDetailsViewController: BaseViewController {
         
     }
     
-    func playVideoAndLoadSimilar(with model:Video) {
+    func playVideoAndLoadSimilar(with model:ContentDataModel) {
      
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback, with: .duckOthers)
+        } catch {
+            print("AVAudioSession cannot be set: \(error)")
+        }
+
         self.model = model
         lblTitle.text = model.title ?? ""
         let videoId = model.data?.first?.playbackUrl?.components(separatedBy: "/").last

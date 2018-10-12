@@ -14,7 +14,7 @@ class HomeArticalTableViewCell: UITableViewCell, CellReusable {
     @IBOutlet weak var collectionView: UICollectionView!
     
     weak var delegate: HomeScreenCellDelegate?
-    var articalsModelArray: [Article]? = []
+    var articalsModelArray: [ContentDataModel]? = []
     
     
     override func awakeFromNib() {
@@ -25,7 +25,7 @@ class HomeArticalTableViewCell: UITableViewCell, CellReusable {
         btnMore.titleLabel?.font = UIFont.fontWithTextStyle(textStyle: .title2)
     }
     
-    func configureCell(with model: [Article]?) {
+    func configureCell(with model: [ContentDataModel]?) {
         
         self.articalsModelArray = model
         self.collectionView.reloadData()

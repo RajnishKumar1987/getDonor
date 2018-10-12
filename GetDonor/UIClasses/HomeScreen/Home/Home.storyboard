@@ -291,7 +291,7 @@
                                         <rect key="frame" x="0.0" y="608" width="375" height="192"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jws-VA-0xA" id="bKe-on-Bc8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="191.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzH-yL-oOu">
@@ -312,7 +312,7 @@
                                                     </connections>
                                                 </button>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sI1-v4-GVj">
-                                                    <rect key="frame" x="8" y="44" width="359" height="137"/>
+                                                    <rect key="frame" x="8" y="44" width="359" height="136"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KRZ-Pm-Snl">
@@ -383,6 +383,7 @@
                         <segue destination="EvQ-Xp-qwg" kind="show" identifier="openPhotoViewer" id="YwJ-Ro-cKH"/>
                         <segue destination="U8n-pJ-7Ri" kind="show" identifier="showEventsPhoto" id="15H-0F-8Pe"/>
                         <segue destination="Nzi-6O-GvF" kind="show" identifier="openEditProfile" id="UfM-0N-mJX"/>
+                        <segue destination="p7a-6f-jlM" kind="show" identifier="openPromotionDetails" id="cUn-3t-Jy3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A63-eC-eab" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -412,6 +413,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="04P-Ur-4Au" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-951" y="1437"/>
+        </scene>
+        <!--PromotionDetailsViewController-->
+        <scene sceneID="yO3-b4-bIP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Promotional" referencedIdentifier="PromotionDetailsViewController" id="p7a-6f-jlM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dSu-0L-rCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-994" y="1602"/>
         </scene>
         <!--PhotoViewerViewController-->
         <scene sceneID="RhH-Yz-4Bd">

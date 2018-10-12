@@ -30,7 +30,7 @@ class SimilarVideosViewModel {
         return true
     }
     
-    func getModelForCell(at indexPath: IndexPath) -> Video {
+    func getModelForCell(at indexPath: IndexPath) -> ContentDataModel {
         
         return model.vidoeList[indexPath.row]
     }

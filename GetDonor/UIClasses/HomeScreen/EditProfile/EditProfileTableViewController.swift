@@ -110,12 +110,22 @@ class EditProfileTableViewController: UITableViewController {
     
     func loadPickerView() {
 
+        
         let values = Array(cscViewModel.dataToPopulate.values).sorted(by: <)
-        if values.count > 0 {
-            selectedTxtField.text = values[0]
-            self.pickerView.delegate?.pickerView!(self.pickerView, didSelectRow: 0, inComponent: 0)
-//            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+        
+        if (selectedTxtField.text?.count)! > 0 {
+            if let index = values.index(of: selectedTxtField.text!){
+                selectedTxtField.text = values[index]
+                self.pickerView.delegate?.pickerView!(self.pickerView, didSelectRow: index, inComponent: 0)
+                self.pickerView.selectRow(index, inComponent: 0, animated: false)
+            }
+            else{
+                 selectedTxtField.text = values[0]
+                 self.pickerView.selectRow(0, inComponent: 0, animated: true)
+
+            }
         }
+        
     }
     
     func initilizeToolBar() {
@@ -200,12 +210,17 @@ class EditProfileTableViewController: UITableViewController {
         if let bloodGroup = viewModel.model.user?.b_group {
             txtBloodGroup.text = bloodGroup.getBloodGroup()
         }
+        
+        if let vc = self.parent as? EditProfileViewController{
+            vc.imgProfile.loadImage(from: viewModel.model.user?.image, shouldCache: false)
+        }
     }
     
     @IBAction func actionUpdate(_ sender: UIButton) {
         
     if doValidation() {
-            
+        
+        self.btnUpdate.loadingIndicator(show: true)
         let userDetails : [String:Any] = ["phone": txtMobile.text!,
                                "firstname":txtFirstName.text!,
                                "lastname":txtLastName.text!,
@@ -218,6 +233,7 @@ class EditProfileTableViewController: UITableViewController {
                                ]
             
             viewModel.updateUserProfile(for: AppConfig.getUserId(), action: .set, userDetails: userDetails) { [weak self](result) in
+                self?.btnUpdate.loadingIndicator(show: false)
                 switch result{
                 case .Success:
                     print("Success")
@@ -288,8 +304,14 @@ extension EditProfileTableViewController: UITextFieldDelegate{
         }
         
         if textField == txtState {
+            if (txtCountry.text?.isEmpty)!{
+                return
+            }
             if cscViewModel.shouldMakeCallToFetchCSCListing(for: .state, and: txtCountry.text!) {
-                getCountryList(cscType: .state, id: cscViewModel.countryName.someKey(forValue: txtCountry.text!)!)
+                
+                if let countryId = cscViewModel.countryName.someKey(forValue: txtCountry.text!){
+                    getCountryList(cscType: .state, id: countryId)
+                }
             }else{
                 pickerView.reloadAllComponents()
             }
@@ -297,8 +319,14 @@ extension EditProfileTableViewController: UITextFieldDelegate{
         }
         
         if textField == txtCity {
+            if (txtCountry.text?.isEmpty)! || (txtState.text?.isEmpty)!{
+                return
+            }
             if cscViewModel.shouldMakeCallToFetchCSCListing(for: .city, and: txtState.text!) {
-                getCountryList(cscType: .city, id: cscViewModel.stateName.someKey(forValue: txtState.text!)!)
+                if let stateId = cscViewModel.stateName.someKey(forValue: txtState.text!){
+                    getCountryList(cscType: .city, id: stateId)
+                }
+
             }else{
                 pickerView.reloadAllComponents()
             }

@@ -17,7 +17,7 @@ struct PhotoViewerDataModel {
         })
     }
     
-    init(with photoIteam: [Photo]) {
+    init(with photoIteam: [ContentDataModel]) {
         
         self.images = photoIteam.map({ (item) -> String in
             return item.image ?? ""

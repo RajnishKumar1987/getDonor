@@ -19,7 +19,7 @@ class MoreEventViewModel {
         self.apiLoader = loader
     }
     
-    func getModelForCell(at indexPath: IndexPath) -> Event {
+    func getModelForCell(at indexPath: IndexPath) -> ContentDataModel {
         
         return model.eventList[indexPath.row]
     }

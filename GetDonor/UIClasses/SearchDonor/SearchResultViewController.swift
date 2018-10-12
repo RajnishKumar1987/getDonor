@@ -20,7 +20,9 @@ class SearchResultViewController: BaseViewController {
         self.title = "Near by Doners"
         showLoader(onViewController: self)
         searchDonor()
+        disableRefresh()
     }
+    
     
     func searchDonor() {
         viewModel.serachUser(bloodGroup: bloodGroup) {[weak self] (result) in

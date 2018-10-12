@@ -110,7 +110,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             imgProfile.image = pickedImage
         }
         if #available(iOS 11.0, *) {
-            print(info[UIImagePickerControllerImageURL])
+           // print(info[UIImagePickerControllerImageURL])
         } else {
             // Fallback on earlier versions
         }

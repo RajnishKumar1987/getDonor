@@ -15,12 +15,6 @@ enum Result<String> {
     case failure(String)
 }
 
-enum ContentType: Int{
-    case artical = 0
-    case video
-    case event
-    case photo
-}
 
 protocol APIRequest {
     
@@ -71,9 +65,8 @@ class APIRequestLoader<T: APIRequest> {
             
             if let response = getCachedData(from: urlRequest) {
                 completionHandler(response, nil)
-                return
+               // return
             }
-
             
             task = urlSession.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
                 
@@ -133,10 +126,9 @@ extension APIRequestLoader{
     func getCachedData(from request: URLRequest) -> T.ResponseDataType? {
         
         if let key = request.url?.absoluteString, let cachedData = dataCache.object(forKey: key as NSString) {
-            
+
             return try? self.apiRequest.parseResponse(data: cachedData as Data)
         }
-        
         return nil
     }
     

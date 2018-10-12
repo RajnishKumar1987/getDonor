@@ -10,7 +10,7 @@ import Foundation
 
 struct ArticalsDataModel: Codable {
     
-    var articalList: [Article] = []
+    var articalList: [ContentDataModel] = []
     var currentPage: Int?
     var totalPages: Int?
     

@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum HomeScreenCellType {
-    case video, artical, photo, event
+enum HomeScreenCellType: String {
+    case video = "1", artical = "0", photo = "3", event = "2", promotional = "5"
 }
 
 class HomeListingViewModel {
@@ -46,14 +46,7 @@ class HomeListingViewModel {
             }
             else
             {
-                
-                if let message = error?.localizedDescription{
-                    
-                    result(.failure(message))
-                    
-                }
-                
-                
+                result(.failure(error.debugDescription))
             }
             
         }
@@ -65,7 +58,9 @@ class HomeListingViewModel {
         
         var cellTypes = Array<HomeScreenCellType>()
         
-        
+        if let topBanner = model.contents?.topBanner, topBanner.count > 0 {
+            cellTypes.append(.promotional)
+        }
         if let artical = model.contents?.article, artical.count > 0 {
             cellTypes.append(.artical)
         }

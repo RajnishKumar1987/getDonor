@@ -13,7 +13,7 @@ class HomePhotoTableViewCell: UITableViewCell,CellReusable {
     @IBOutlet weak var btnMore: UIButton!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    var photosModelArray: [Photo]? = []
+    var photosModelArray: [ContentDataModel]? = []
     weak var delegate: HomeScreenCellDelegate?
     
     override func awakeFromNib() {
@@ -25,7 +25,7 @@ class HomePhotoTableViewCell: UITableViewCell,CellReusable {
         collectionView.dataSource = self
     }
     
-    func configureCell(with model: [Photo]?) {
+    func configureCell(with model: [ContentDataModel]?) {
         
         if let contentArray = model {
             photosModelArray = contentArray

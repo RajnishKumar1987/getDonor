@@ -25,7 +25,7 @@ class VideosCollectionViewCell: UICollectionViewCell,CellReusable {
         imageLoader = nil
     }
 
-    func configureCell(model: Video) {
+    func configureCell(model: ContentDataModel) {
         
         lblTitle.text = model.title ?? ""        
         guard let imageUrl = model.image else { return }

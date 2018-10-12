@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 let bloodGroupsArray = ["O+","O-","A+","A-","B+","B-","AB+","AB-"]
 
 let bloodGroups = ["O+":"1","O-":"2","A+":"3","A-":"4","B+":"5","B-":"6","AB+":"7","AB-":"8"]
+
+let kCarouselHeight: CGFloat = 250.0
 
 enum DevelopmentEnvironment {
     case stagging

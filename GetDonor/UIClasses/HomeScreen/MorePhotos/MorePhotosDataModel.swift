@@ -10,7 +10,7 @@ import Foundation
 
 struct MorePhotosDataModel: Codable {
     
-    var photoList: [Photo] = []
+    var photoList: [ContentDataModel] = []
     var totalPages: Int? = 0
     var currentPage: Int? = 0
     

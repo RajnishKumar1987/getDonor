@@ -11,7 +11,14 @@ protocol HomeScreenCellDelegate: class {
     
     func didMoreButtonPressed(at cellType: HomeScreenCellType)
     func didCellSelected(at indexPath: IndexPath, with cellType: HomeScreenCellType)
+    func didCellSelected(at index:IndexPath, with model:ContentDataModel)
+}
 
+extension HomeScreenCellDelegate{
+    
+    func didCellSelected(at index:IndexPath, with model:ContentDataModel){
+
+    }
 }
 
 protocol HomeVideoTableViewCellDelegate:class {
@@ -29,7 +36,7 @@ class HomeVideoTableViewCell: UITableViewCell, CellReusable {
     
     weak var delegate : HomeScreenCellDelegate?
     
-    var videosModelArray: [Video] = []
+    var videosModelArray: [ContentDataModel] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,7 +47,7 @@ class HomeVideoTableViewCell: UITableViewCell, CellReusable {
         collectionView.dataSource = self
     }
     
-    func configurecell(model: [Video]?) {
+    func configurecell(model: [ContentDataModel]?) {
         
         if let model = model {
             

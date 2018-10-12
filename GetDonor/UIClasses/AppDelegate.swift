@@ -6,6 +6,7 @@
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
+
 import UIKit
 import UserNotifications
 
@@ -13,7 +14,6 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

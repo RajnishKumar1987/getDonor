@@ -10,7 +10,7 @@ import Foundation
 
 struct SimilarVideosDataModel:Codable {
     
-    var vidoeList: [Video] = []
+    var vidoeList: [ContentDataModel] = []
     var totalPages: Int? = 0
     var currentPage: Int? = 0
     

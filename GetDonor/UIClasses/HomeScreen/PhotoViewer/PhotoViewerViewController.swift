@@ -36,6 +36,12 @@ class PhotoViewerViewController: UIViewController {
             loadImageView(from: viewModel.model.images[indexPath.item])
 
         }
+        else{
+            if viewModel.model.images.count > 0{
+                loadImageView(from: viewModel.model.images[0])
+            }
+
+        }
         
     }
     func loadImageView(from imageUrl: String)  {

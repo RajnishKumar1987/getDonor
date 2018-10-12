@@ -10,7 +10,7 @@ import UIKit
 
 class ArticalDetailsViewController: UIViewController {
 
-    var articals: [Article]?
+    var articals: [ContentDataModel]?
     var selectedIndex: IndexPath?
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -33,7 +33,7 @@ class ArticalDetailsViewController: UIViewController {
         }
     }
     
-    func loadArticlsWith(model:[Article],withSelected indexPath: IndexPath) {
+    func loadArticlsWith(model:[ContentDataModel],withSelected indexPath: IndexPath) {
         self.articals = model
         self.selectedIndex = indexPath
         //self.collectionView.reloadData()

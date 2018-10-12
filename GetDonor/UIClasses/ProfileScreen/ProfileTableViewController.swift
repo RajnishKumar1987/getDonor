@@ -111,7 +111,7 @@ class ProfileTableViewController: UITableViewController {
         case "Logout":
             print("")
             AppConfig.setUserLoggedIn(status: false)
-            self.navigationController?.popViewController(animated: false)
+            self.navigationController?.popViewController(animated: true)
         case "Donation Details":
             print("")
             

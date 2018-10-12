@@ -14,7 +14,7 @@ enum ArticalCellType {
 
 class ArticalDetailsCollectionViewCell: UICollectionViewCell, CellReusable {
     @IBOutlet weak var tableView: UITableView!
-    var model: Article?
+    var model: ContentDataModel?
     let cellTypes : [ArticalCellType] = [.title, .image, .description]
     
     
@@ -27,7 +27,7 @@ class ArticalDetailsCollectionViewCell: UICollectionViewCell, CellReusable {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    func configureCell(with model: Article?) {
+    func configureCell(with model: ContentDataModel?) {
         
         self.model = model
         tableView.reloadData()

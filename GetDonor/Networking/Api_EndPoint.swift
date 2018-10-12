@@ -22,6 +22,15 @@ enum DonationDetailsType: String {
     case allDonations = "peoples"
 }
 
+enum ContentType: String{
+    case artical = "0"
+    case video = "1"
+    case event = "2"
+    case photo = "3"
+    case  promotinal = "5"
+}
+
+
 enum Api_EndPoint {
     case getHomeData
     case getDesire
@@ -40,6 +49,8 @@ enum Api_EndPoint {
     case updateDeviceToken(id: String, token: String)
     case forgotPassword(userEmail: String)
     case getDonationDetails(action: DonationDetailsType, userId: String)
+    case getSpecialPageDetails(id: String)
+    case getPromotionalList
     
     var urlString: String{
         switch self {
@@ -77,6 +88,10 @@ enum Api_EndPoint {
             return AppBaseURLs.baseUrl.appending("forgot_pass.php?u=\(userEmail)")
         case .getDonationDetails(let action, let userId):
             return AppBaseURLs.baseUrl.appending("pay.php?action=\(action.rawValue)&uid=\(userId)")
+        case .getSpecialPageDetails(let id):
+            return AppBaseURLs.baseUrl.appending("special_detail.php?id=\(id)")
+        case .getPromotionalList:
+            return AppBaseURLs.baseUrl.appending("special_list.php?")
 
         }
     }
