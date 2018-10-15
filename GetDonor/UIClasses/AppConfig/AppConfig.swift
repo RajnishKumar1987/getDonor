@@ -15,6 +15,9 @@ let bloodGroups = ["O+":"1","O-":"2","A+":"3","A-":"4","B+":"5","B-":"6","AB+":"
 
 let kCarouselHeight: CGFloat = 250.0
 
+let kAppId = "id1421647128"//id1421647128
+
+
 enum DevelopmentEnvironment {
     case stagging
     case production

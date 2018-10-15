@@ -23,4 +23,6 @@ struct Menu: Codable{
     var type: String?
     var name: String?
     var url: String?
+    var text: String?
+    
 }

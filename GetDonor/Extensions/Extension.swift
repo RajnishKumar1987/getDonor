@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Reachability
 
 extension String {
     
@@ -180,6 +181,125 @@ extension UIViewController{
         alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func checkInternetStatus(viewController : UIViewController, navigationBarPresent : Bool) -> Bool {
+        
+        let reachability = Reachability.init()!
+        switch reachability.connection {
+        case .cellular:
+            print("Reachable")
+            removeNoInternetView(viewController: viewController)
+            return true
+        case .wifi:
+            print("Reachable")
+            removeNoInternetView(viewController: viewController)
+            return true
+        case .none:
+            print("Not reachable")
+            showNoInternetView(viewController: viewController, navigationBarPresent: navigationBarPresent)
+            return false
+        }
+    }
+    
+    func showNoInternetView(viewController : UIViewController, navigationBarPresent : Bool) {
+        
+        var tabbarHeight        :CGFloat  = 0.0
+        var navigationbarHeight :CGFloat  = viewController.navigationController?.navigationBar.frame.size.height ?? 0
+        
+        if viewController.tabBarController != nil {
+            tabbarHeight = viewController.tabBarController?.tabBar.frame.size.height ?? 0.0
+        }
+        
+        if !navigationBarPresent {
+            navigationbarHeight = 0
+        }else {
+            navigationbarHeight = navigationbarHeight - 20
+        }
+        
+        /* Used for excluding tab bar height and navigation item height. */
+        let upAndDownSpace:CGFloat = tabbarHeight + navigationbarHeight
+        
+        var screenRect = UIScreen.main.bounds
+        if let baseView = viewController as? BaseViewController {
+            if let tableview = baseView.tableview{
+                screenRect = tableview.bounds
+                
+            }
+            
+        }
+        
+        let noInternetoverlay = Bundle.main.loadNibNamed("NoInternetView", owner: nil, options: nil)![0] as? NoInternetView
+        
+        
+        noInternetoverlay?.frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height - upAndDownSpace)
+        noInternetoverlay?.targetVc = viewController
+        noInternetoverlay?.alpha = 0
+        
+        if let baseViewController = viewController as? BaseViewController{
+            noInternetoverlay?.backgroundColor = baseViewController.view.backgroundColor
+            
+//            if let tableview = baseViewController.tableview{
+//                tableview.addSubview(noInternetoverlay!)
+//                baseViewController.isNoInternetPresented = true
+//            }else if let collectionView = baseViewController.collectionview{
+//                collectionView.addSubview(noInternetoverlay!)
+//                baseViewController.isNoInternetPresented = true
+//            }else{
+//                viewController.view.addSubview(noInternetoverlay!)
+//            }
+            viewController.view.addSubview(noInternetoverlay!)
+
+        }else{
+            viewController.view.addSubview(noInternetoverlay!)
+        }
+        
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            noInternetoverlay?.alpha = 1
+        })
+        
+        
+    }
+    
+    func removeNoInternetView(viewController : UIViewController) {
+        
+        
+        var keyWindow:UIView?
+        
+        if let baseViewController = viewController as? BaseViewController{
+            if let tableview = baseViewController.tableview{
+                keyWindow = tableview
+            }else if let collectionView = baseViewController.collectionview{
+                keyWindow = collectionView
+            }else{
+                keyWindow = viewController.view
+            }
+            baseViewController.isNoInternetPresented = false
+        }else{
+            keyWindow = viewController.view
+        }
+        
+        if let _ = keyWindow,(keyWindow?.subviews.count)! > 1{
+            
+            keyWindow?.subviews.forEach({ (loader) in
+                if (loader.isKind(of: NoInternetView.self)){
+                    
+                    let overlay = loader as! NoInternetView
+                    UIView.animate(withDuration: 0.3, animations: {
+                        overlay.alpha = 0
+                    }, completion: { (done) in
+                        //SharedManager.shared.isNoNetworkViewPresented = false
+                        overlay.removeFromSuperview()
+                    })
+                }
+            })
+            
+            
+        }else{
+            print("")
+        }
+        
+    }
 
     
     
@@ -276,6 +396,12 @@ extension UIImageView{
             }
         }
         
+    }
+}
+extension UIView{
+    
+    func appDelegate() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
     }
 }
 

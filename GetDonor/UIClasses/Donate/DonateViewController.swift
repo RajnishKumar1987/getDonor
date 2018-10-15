@@ -22,15 +22,22 @@ class DonateViewController: BaseViewController {
         loadDonationDetails()
     }
     
+    override func refresingPage() {
+        loadDonationDetails()
+    }
+    
     func loadDonationDetails()  {
-        viewModel.loadDonationDetails { [weak self](result) in
-            self?.removeLoader(fromViewController: self!)
-            switch result{
-            case .Success:
-                print("success")
-                self?.tableView.reloadData()
-            case .failure(let msg):
-                print(msg)
+        
+        if checkInternetStatus(viewController: self, navigationBarPresent: true) {
+            viewModel.loadDonationDetails { [weak self](result) in
+                self?.removeLoader(fromViewController: self!)
+                switch result{
+                case .Success:
+                    print("success")
+                    self?.tableView.reloadData()
+                case .failure(let msg):
+                    print(msg)
+                }
             }
         }
     }

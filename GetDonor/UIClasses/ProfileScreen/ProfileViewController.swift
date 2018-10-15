@@ -16,6 +16,21 @@ class ProfileViewController: BaseViewController {
         hideProfileButton()
         self.title = "Profile"
         doIniticalConfug()
+        
+        if checkInternetStatus(viewController: self, navigationBarPresent: true) {
+        }
+    }
+    
+    override func refresingPage() {
+        //self.performSegue(withIdentifier: "openMenu", sender: nil)
+        if  let vc = self.childViewControllers.first as? ProfileTableViewController{
+            if checkInternetStatus(viewController: self, navigationBarPresent: true) {
+                vc.loadMenu()
+
+            }
+
+        }
+        
     }
     
     func doIniticalConfug() {
@@ -24,7 +39,7 @@ class ProfileViewController: BaseViewController {
     
     
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -32,6 +47,6 @@ class ProfileViewController: BaseViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }

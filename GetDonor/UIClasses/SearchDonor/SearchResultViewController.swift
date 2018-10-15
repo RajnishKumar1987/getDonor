@@ -23,18 +23,24 @@ class SearchResultViewController: BaseViewController {
         disableRefresh()
     }
     
+    override func refresingPage() {
+        searchDonor()
+    }
+    
     
     func searchDonor() {
-        viewModel.serachUser(bloodGroup: bloodGroup) {[weak self] (result) in
-            self?.removeLoader(fromViewController: self!)
-            self?.isLoadingNextPageResult(false)
-            self?.viewModel.isLoadingNextPageResults = false
-            switch result{
-            case .Success:
-                print("Success")
-                self?.tableview.reloadData()
-            case .failure(let msg):
-                print(msg)
+        if checkInternetStatus(viewController: self, navigationBarPresent: true) {
+            viewModel.serachUser(bloodGroup: bloodGroup) {[weak self] (result) in
+                self?.removeLoader(fromViewController: self!)
+                self?.isLoadingNextPageResult(false)
+                self?.viewModel.isLoadingNextPageResults = false
+                switch result{
+                case .Success:
+                    print("Success")
+                    self?.tableview.reloadData()
+                case .failure(let msg):
+                    print(msg)
+                }
             }
         }
     }

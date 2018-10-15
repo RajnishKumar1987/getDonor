@@ -128,7 +128,15 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
             return CGSize(width: collectionView.frame.size.width, height: 35)
 
         default:
-            return CGSize(width: (collectionView.frame.size.width - 24) / 2, height: ((collectionView.frame.size.width - 26) / 2) - 20)
+            
+            if indexPath.item % 3 == 0{
+                return CGSize(width: (collectionView.frame.size.width - 16), height: ((collectionView.frame.size.width) / 1.5))
+
+            }
+            else{
+                return CGSize(width: (collectionView.frame.size.width - 24) / 2, height: ((collectionView.frame.size.width - 26) / 2) - 20)
+
+            }
 
         }
     }

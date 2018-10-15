@@ -9,8 +9,7 @@
 import Foundation
 
 struct AppBaseURLs {
-    
-
+        
     static let baseUrl: String = {
         switch AppConfig.environment {
         case .production:

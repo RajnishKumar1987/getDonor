@@ -20,6 +20,8 @@ class ProfileTableViewController: UITableViewController {
         loadMenu()
     }
     
+    
+    
     func loadMenu() {
         viewModel.loadMenu {[weak self] (result) in
             self?.removeLoader(fromViewController: self!)
@@ -59,12 +61,14 @@ class ProfileTableViewController: UITableViewController {
         case "webview":
             openWebView(with: model.url!)
         case "inapp":
-            if model.name == "Rate the App"{
-                loadRateTheAppView()
-            }
-            else{
+           
+            switch model.name{
+            case "Rate":
+                    loadRateTheAppView()
+            case "Share":
+                shareApp(model: model)
+            default:
                 performSegue(withIdentifier: model.name!, sender: nil)
-
             }
         default:
             print("Unknown")
@@ -84,15 +88,28 @@ class ProfileTableViewController: UITableViewController {
             SKStoreReviewController.requestReview()
         }
         else{
-            rateApp(appId: "id414009038")
+            rateApp()
         }
     }
     
-    fileprivate func rateApp(appId: String) {
-        openUrl("itms-apps://itunes.apple.com/app/" + appId)
+    func shareApp(model: Menu)  {
+        
+        if let shareUrl = URL(string: model.url ?? ""), let text = model.text {
+            let shareAll = [text, shareUrl] as [Any]
+            let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+
+        }
+    }
+
+    
+    fileprivate func rateApp() {
+        openUrl("itms-apps://itunes.apple.com/app/" + kAppId)
     }
     fileprivate func openUrl(_ urlString:String) {
         let url = URL(string: urlString)!
+
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {

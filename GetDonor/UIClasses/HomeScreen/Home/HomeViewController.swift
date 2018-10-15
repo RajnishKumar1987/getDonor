@@ -19,9 +19,15 @@ class HomeViewController: BaseViewController {
         print(documentsPath)
          doInitialConfig()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func refresingPage() {
+        self.loadHomeScreen()
+    }
         
     func doInitialConfig() {
-                
         self.title = "Home"
         tableView.registerCell(CarouselTableViewCell.self)
         if !AppConfig.getUserLoginStatus() {
@@ -37,6 +43,7 @@ class HomeViewController: BaseViewController {
     
     func loadHomeScreen() {
         
+        if self.checkInternetStatus(viewController: self, navigationBarPresent: true){
         showLoader(onViewController: self)
         viewModel.loadHomeScreen { [weak self](result) in
             self?.removeLoader(fromViewController: self!)
@@ -46,6 +53,7 @@ class HomeViewController: BaseViewController {
             case .failure(let message):
                 print(message)
             }
+        }
         }
     }
     

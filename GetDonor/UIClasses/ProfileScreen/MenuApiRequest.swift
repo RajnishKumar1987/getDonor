@@ -18,19 +18,19 @@ class MenuApiRequest: APIRequest {
     }
     
     func parseResponse(data: Data) throws -> MenuDataModel {
- //                       var jsonData = Data()
-//                        if let path = Bundle.main.path(forResource: "Menu", ofType: "json") {
-//                            do {
-//                                jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-//                                let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
-//                                print(jsonResult)
-//
-//                            } catch {
-//                                // handle error
-//                            }
-//                        }
+                        var jsonData = Data()
+                        if let path = Bundle.main.path(forResource: "Menu", ofType: "json") {
+                            do {
+                                jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                                let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableLeaves)
+                                print(jsonResult)
+
+                            } catch {
+                                // handle error
+                            }
+                        }
         
-        return try JSONDecoder().decode(MenuDataModel.self, from: data)
+        return try JSONDecoder().decode(MenuDataModel.self, from: jsonData)
     }
 }
 

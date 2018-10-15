@@ -30,7 +30,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="dropShadow" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="NrK-oJ-4hj" kind="embed" id="gnP-PZ-S4B"/>
+                                    <segue destination="NrK-oJ-4hj" kind="embed" identifier="openMenu" id="gnP-PZ-S4B"/>
                                 </connections>
                             </containerView>
                         </subviews>

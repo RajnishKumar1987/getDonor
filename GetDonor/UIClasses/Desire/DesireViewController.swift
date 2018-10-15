@@ -19,8 +19,13 @@ class DesireViewController: BaseViewController {
         self.doInitialConfig()
     }
     
+    override func refresingPage() {
+        doInitialConfig()
+    }
+    
     func doInitialConfig() {
     
+        if checkInternetStatus(viewController: self, navigationBarPresent: true) {
         showLoader(onViewController: self)
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -36,6 +41,7 @@ class DesireViewController: BaseViewController {
 
             }
         }
+    }
     }
 
     

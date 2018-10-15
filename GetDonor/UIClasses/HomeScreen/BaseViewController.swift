@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
     @IBOutlet weak var tableview:UITableView!
     @IBOutlet weak var collectionview:UICollectionView!
     var isEnableRefreshControler:Bool = true
+    var isNoInternetPresented: Bool = false
     @IBOutlet weak var listingContainerButtomConstaraints: NSLayoutConstraint!
 
     lazy var refreshControl: UIRefreshControl? = {
@@ -50,6 +51,16 @@ class BaseViewController: UIViewController {
             tableview.registerCell(CarouselTableViewCell.self)
         }
         addProfileButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.appDelegate().retry.bind { [weak self](vc) in
+            if vc == self{
+                self?.refresingPage()
+            }
+        }
+
     }
     
     func hideProfileButton()  {
