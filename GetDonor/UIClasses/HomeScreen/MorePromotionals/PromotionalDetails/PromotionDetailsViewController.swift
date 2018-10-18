@@ -2,14 +2,14 @@
 //  PromotionDetailsViewController.swift
 //  GetDonor
 //
-//  Created by admin on 09/10/18.
+//  Created by Rajnish kumar on 09/10/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
 import UIKit
 
 class PromotionDetailsViewController: BaseViewController {
-
+    
     var contentId: String!
     var viewModel = PromotionViewModel()
     
@@ -20,17 +20,20 @@ class PromotionDetailsViewController: BaseViewController {
         tableview.rowHeight = UITableViewAutomaticDimension
         loadPromotion()
         showLoader(onViewController: self)
+        disableRefresh()
     }
     
     func loadPromotion() {
-        viewModel.loadPromotionPage(for: contentId) { [weak self](result) in
-            self?.removeLoader(fromViewController: self!)
-            switch result{
-            case .Success:
-                self?.tableview.reloadData()
-                print("Success")
-            case .failure(let msg):
-                print(msg)
+        if checkInternetStatus(viewController: self, navigationBarPresent: true) {
+            viewModel.loadPromotionPage(for: contentId) { [weak self](result) in
+                self?.removeLoader(fromViewController: self!)
+                switch result{
+                case .Success:
+                    self?.tableview.reloadData()
+                    print("Success")
+                case .failure(let msg):
+                    self?.tableview.addBgViewWith(message: msg)
+                }
             }
         }
     }
@@ -79,7 +82,7 @@ extension PromotionDetailsViewController: UITableViewDataSource, UITableViewDele
         case .image, .vidoes:
             return kCarouselHeight
         }
-
+        
     }
 }
 
@@ -104,9 +107,6 @@ extension PromotionDetailsViewController : HomeScreenCellDelegate{
                 print("unknown type")
             }
         }
-        
-        
-
     }
 }
 

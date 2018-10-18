@@ -2,7 +2,7 @@
 //  VideoDetailsViewController.swift
 //  GetDonor
 //
-//  Created by admin on 05/09/18.
+//  Created by Rajnish kumar on 05/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

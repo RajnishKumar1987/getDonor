@@ -2,7 +2,7 @@
 //  MenuTableViewCell.swift
 //  GetDonor
 //
-//  Created by admin on 21/09/18.
+//  Created by Rajnish kumar on 21/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

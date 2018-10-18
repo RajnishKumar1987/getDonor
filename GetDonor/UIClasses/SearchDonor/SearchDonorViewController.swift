@@ -2,14 +2,14 @@
 //  SearchDonorViewController.swift
 //  GetDonor
 //
-//  Created by admin on 13/09/18.
+//  Created by Rajnish kumar on 13/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
 import UIKit
 
 class SearchDonorViewController: BaseViewController {
-
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var lblNote: UILabel!
     @IBOutlet weak var lblDesc: UILabel!
@@ -33,8 +33,8 @@ class SearchDonorViewController: BaseViewController {
     func searchDonor() {
         if doValidation() {
             self.performSegue(withIdentifier: "openSearchView", sender: nil)
-            }
         }
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "openSearchView" {
             let searchResultVC = segue.destination as! SearchResultViewController
@@ -50,15 +50,15 @@ class SearchDonorViewController: BaseViewController {
         }
         return true
     }
-
+    
     
     func showMessage(with title:String) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
-
+    
+    
     @IBAction func actionSearchButtonPressed(_ sender: UIButton) {
         searchDonor()
     }
@@ -84,12 +84,12 @@ class SearchDonorViewController: BaseViewController {
         txtBloodGroup.inputAccessoryView = toolBar
         self.pickerView.delegate?.pickerView!(self.pickerView, didSelectRow: 0, inComponent: 0)
     }
-
+    
     @objc func pickerViewDonePressed() {
         self.pickerView.removeFromSuperview()
         self.txtBloodGroup.resignFirstResponder()
     }
-
+    
 }
 
 extension SearchDonorViewController: UIPickerViewDataSource, UIPickerViewDelegate{

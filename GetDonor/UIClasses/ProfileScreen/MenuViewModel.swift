@@ -2,7 +2,7 @@
 //  MenuViewModel.swift
 //  GetDonor
 //
-//  Created by admin on 21/09/18.
+//  Created by Rajnish kumar on 21/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -19,8 +19,7 @@ class MenuViewModel {
     
     func loadMenu(with result: @escaping(Result<String>)-> Void) {
         
-         let requestParam = ["version":Bundle.main.versionNumber]
-        apiLoader.loadAPIRequest(forFuncion: .menu, requestData: requestParam) { [weak self](response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .menu, requestData: nil) { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))

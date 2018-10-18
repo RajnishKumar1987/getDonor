@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,27 +32,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mge-l2-L7w">
-                                                    <rect key="frame" x="8" y="8" width="125" height="99"/>
+                                                    <rect key="frame" x="8" y="17" width="144" height="81"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="125" id="Kzw-WY-L2P"/>
-                                                        <constraint firstAttribute="height" constant="99" id="mA2-qR-cfV"/>
+                                                        <constraint firstAttribute="width" secondItem="Mge-l2-L7w" secondAttribute="height" multiplier="16:9" id="xEC-Dq-btH"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcm-Se-5A6">
-                                                    <rect key="frame" x="141" y="10" width="226" height="94"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcm-Se-5A6">
+                                                    <rect key="frame" x="161" y="14" width="206" height="88"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Mge-l2-L7w" secondAttribute="bottom" constant="8.5" id="5JM-kf-VN2"/>
-                                                <constraint firstItem="Mcm-Se-5A6" firstAttribute="top" secondItem="ghb-D5-VeD" secondAttribute="top" constant="10" id="Ggu-xX-eul"/>
-                                                <constraint firstAttribute="bottom" secondItem="Mcm-Se-5A6" secondAttribute="bottom" constant="11.5" id="Hy4-Oz-iSo"/>
-                                                <constraint firstItem="Mcm-Se-5A6" firstAttribute="leading" secondItem="Mge-l2-L7w" secondAttribute="trailing" constant="8" id="LND-Je-d4W"/>
-                                                <constraint firstItem="Mge-l2-L7w" firstAttribute="top" secondItem="ghb-D5-VeD" secondAttribute="top" constant="8" id="RyW-A1-829"/>
-                                                <constraint firstAttribute="trailing" secondItem="Mcm-Se-5A6" secondAttribute="trailing" constant="8" id="cSq-mE-KsB"/>
-                                                <constraint firstItem="Mge-l2-L7w" firstAttribute="leading" secondItem="ghb-D5-VeD" secondAttribute="leading" constant="8" id="g73-Fy-xGR"/>
+                                                <constraint firstItem="Mcm-Se-5A6" firstAttribute="top" secondItem="ghb-D5-VeD" secondAttribute="top" constant="14" id="IR3-HH-azi"/>
+                                                <constraint firstItem="Mge-l2-L7w" firstAttribute="centerY" secondItem="ghb-D5-VeD" secondAttribute="centerY" id="Ifg-C7-av7"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mcm-Se-5A6" secondAttribute="trailing" constant="8" id="RIi-X8-0ma"/>
+                                                <constraint firstItem="Mcm-Se-5A6" firstAttribute="leading" secondItem="Mge-l2-L7w" secondAttribute="trailing" constant="9" id="bHM-aU-dDT"/>
+                                                <constraint firstItem="Mge-l2-L7w" firstAttribute="leading" secondItem="ghb-D5-VeD" secondAttribute="leading" constant="8" id="fUN-u4-01r"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mcm-Se-5A6" secondAttribute="bottom" constant="13.5" id="gNI-qT-aOw"/>
+                                                <constraint firstItem="Mge-l2-L7w" firstAttribute="top" secondItem="ghb-D5-VeD" secondAttribute="topMargin" constant="6" id="zAs-Iq-krF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

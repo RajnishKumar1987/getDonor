@@ -2,8 +2,8 @@
 //  NetworkManager.swift
 //  SampleApp
 //
-//  Created by admin on 13/08/18.
-//  Copyright © 2018 admin. All rights reserved.
+//  Created by Rajnish kumar on 13/08/18.
+//  Copyright © 2018 Rajnish kumar. All rights reserved.
 //
 
 import Foundation
@@ -98,8 +98,6 @@ class APIRequestLoader<T: APIRequest> {
                         completionHandler(nil, error)
                     }
                 }
-                
-                
                 
             })
             

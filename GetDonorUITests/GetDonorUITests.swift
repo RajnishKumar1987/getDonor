@@ -2,7 +2,7 @@
 //  GetDonorUITests.swift
 //  GetDonorUITests
 //
-//  Created by admin on 22/08/18.
+//  Created by Rajnish kumar on 22/08/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  MoreVideosApiRequest.swift
 //  GetDonor
 //
-//  Created by admin on 03/09/18.
+//  Created by Rajnish kumar on 03/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -13,15 +13,14 @@ class MoreVideosApiRequest: APIRequest {
 
     func makeRequest(forFuncion function: Api_EndPoint, parameters: [String:String]?) throws -> URLRequest {
         
-        let url = try? URLEncoder().urlWith(urlString: function.urlString, parameters: parameters)
+        let url = try URLEncoder().urlWith(urlString: function.urlString, parameters: parameters)
         
-        var urlRequest = URLRequest(url: url!)
+        var urlRequest = URLRequest(url: url)
         
-        if let requestParam = parameters {
-            urlRequest.addValue(requestParam.md5WithSecretKey, forHTTPHeaderField: "Authorization")
-        }
+        urlRequest.addValue(url.getMD5WithSceretKey(), forHTTPHeaderField: "Authorization")
+        
         return urlRequest
-        
+
     }
     
     func parseResponse(data: Data) throws -> MoreVideosDataModel {

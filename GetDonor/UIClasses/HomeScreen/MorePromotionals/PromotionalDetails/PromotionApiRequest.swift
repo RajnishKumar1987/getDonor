@@ -2,7 +2,7 @@
 //  PromotionApiRequest.swift
 //  GetDonor
 //
-//  Created by admin on 10/10/18.
+//  Created by Rajnish kumar on 10/10/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

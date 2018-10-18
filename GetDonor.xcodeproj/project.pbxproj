@@ -10,6 +10,8 @@
 		09761522907E0247BDBB9EFF /* Pods_GetDonorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F683F91654B749E2FD267E /* Pods_GetDonorUITests.framework */; };
 		2A21B702C9D6B4596D357F2C /* Pods_GetDonor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CFCA0A5293CAD1BB098AB7 /* Pods_GetDonor.framework */; };
 		316362938DC3CB16D4A035E6 /* Pods_GetDonorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1A04FF3DFC012137CB152 /* Pods_GetDonorTests.framework */; };
+		84050BC52176425E00EA752D /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84050BC42176425E00EA752D /* Search.storyboard */; };
+		84050BC7217642C000EA752D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84050BC6217642C000EA752D /* SearchViewController.swift */; };
 		840CF8052158BAAF003E2C76 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CF8042158BAAF003E2C76 /* LocationManager.swift */; };
 		840CF8082159FB98003E2C76 /* CSCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CF8072159FB98003E2C76 /* CSCViewModel.swift */; };
 		840CF80A2159FE5F003E2C76 /* CSCDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CF8092159FE5F003E2C76 /* CSCDataModel.swift */; };
@@ -209,6 +211,8 @@
 		56AA2A13D2709333E37600C0 /* Pods-GetDonorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetDonorUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GetDonorUITests/Pods-GetDonorUITests.release.xcconfig"; sourceTree = "<group>"; };
 		59F683F91654B749E2FD267E /* Pods_GetDonorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetDonorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60CFCA0A5293CAD1BB098AB7 /* Pods_GetDonor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetDonor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84050BC42176425E00EA752D /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		84050BC6217642C000EA752D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		840CF8042158BAAF003E2C76 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		840CF8072159FB98003E2C76 /* CSCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCViewModel.swift; sourceTree = "<group>"; };
 		840CF8092159FE5F003E2C76 /* CSCDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCDataModel.swift; sourceTree = "<group>"; };
@@ -447,6 +451,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		84050BC32176421E00EA752D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				84050BC42176425E00EA752D /* Search.storyboard */,
+				84050BC6217642C000EA752D /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		840CF8032158BA36003E2C76 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +650,7 @@
 				848B5F522130271F009D6314 /* ProfileScreen */,
 				845B8247212D29D800DF259F /* HomeScreen */,
 				845B8249212D30CC00DF259F /* SearchDonor */,
+				84050BC32176421E00EA752D /* Search */,
 				845B824A212D30CC00DF259F /* Donate */,
 				845B8248212D30CC00DF259F /* Desire */,
 				84AA83AD213541A9007695F9 /* CustomeCell */,
@@ -1153,6 +1167,7 @@
 				84FAEC88212EA1720099B0AE /* Muli-Semi-BoldItalic.ttf in Resources */,
 				84425B91216C72F2001B4D34 /* CarouselTableViewCell.xib in Resources */,
 				84FAEC81212EA1640099B0AE /* Muli-Bold.ttf in Resources */,
+				84050BC52176425E00EA752D /* Search.storyboard in Resources */,
 				84425B95216C7339001B4D34 /* CarouselView.xib in Resources */,
 				845D3A3A2151172100C48FC5 /* Donate.json in Resources */,
 				84D2EDC021746BD5009D5469 /* NoInternetView.xib in Resources */,
@@ -1315,6 +1330,7 @@
 				84CABD56213D295B0058E1B0 /* MoreVideosTableViewCell.swift in Sources */,
 				84FF60AA213FBBF6005475D3 /* MorePhotosHeaderCollectionViewCell.swift in Sources */,
 				848B5F4621300D32009D6314 /* MoreArticalsViewController.swift in Sources */,
+				84050BC7217642C000EA752D /* SearchViewController.swift in Sources */,
 				84AB781F213E5D5D0021E311 /* MorePhotosViewModel.swift in Sources */,
 				84831025217466A800C4AEED /* Daynamic.swift in Sources */,
 				8469B6832148FF1700D3CDEF /* EditProfileViewController.swift in Sources */,

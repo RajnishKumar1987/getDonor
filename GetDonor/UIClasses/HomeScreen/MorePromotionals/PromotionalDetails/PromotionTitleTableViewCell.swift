@@ -2,7 +2,7 @@
 //  PromotionTitleTableViewCell.swift
 //  GetDonor
 //
-//  Created by admin on 11/10/18.
+//  Created by Rajnish kumar on 11/10/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  HomeListingViewModel.swift
 //  GetDonor
 //
-//  Created by admin on 22/08/18.
+//  Created by Rajnish kumar on 22/08/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -26,9 +26,7 @@ class HomeListingViewModel {
     
     func loadHomeScreen(with result: @escaping(Result<String>)->Void) {
         
-        let requestParam = ["version": Bundle.main.versionNumber]
-        
-        apiLoader.loadAPIRequest(forFuncion: .getHomeData, requestData: requestParam) { [weak self](apiResponse, error) in
+        apiLoader.loadAPIRequest(forFuncion: .getHomeData, requestData: nil) { [weak self](apiResponse, error) in
             
             
             guard let weakSelf = self else {

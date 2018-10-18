@@ -2,7 +2,7 @@
 //  DesireViewModel.swift
 //  GetDonor
 //
-//  Created by admin on 24/08/18.
+//  Created by Rajnish kumar on 24/08/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -62,9 +62,7 @@ class DesireViewModel {
     
     func loadDesire(with result: @escaping(Result<String>)->Void) {
         
-        let requestParam = ["version":Bundle.main.versionNumber]
-        
-        apiLoader?.loadAPIRequest(forFuncion: .getDesire, requestData: requestParam, completionHandler: { [weak self](response, error) in
+        apiLoader?.loadAPIRequest(forFuncion: .getDesire, requestData: nil, completionHandler: { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))

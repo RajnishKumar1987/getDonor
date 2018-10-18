@@ -2,7 +2,7 @@
 //  DonateQ&ATableViewCell.swift
 //  GetDonor
 //
-//  Created by admin on 18/09/18.
+//  Created by Rajnish kumar on 18/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

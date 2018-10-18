@@ -2,7 +2,7 @@
 //  Tabbar+Extra.swift
 //  GetDonor
 //
-//  Created by admin on 04/09/18.
+//  Created by Rajnish kumar on 04/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -207,13 +207,13 @@ extension UIViewController{
         var navigationbarHeight :CGFloat  = viewController.navigationController?.navigationBar.frame.size.height ?? 0
         
         if viewController.tabBarController != nil {
-            tabbarHeight = viewController.tabBarController?.tabBar.frame.size.height ?? 0.0
+            tabbarHeight = getTabBarHeight()
         }
         
         if !navigationBarPresent {
             navigationbarHeight = 0
-        }else {
-            navigationbarHeight = navigationbarHeight - 20
+        }else{
+            navigationbarHeight = navigationbarHeight + 20
         }
         
         /* Used for excluding tab bar height and navigation item height. */
@@ -221,34 +221,34 @@ extension UIViewController{
         
         var screenRect = UIScreen.main.bounds
         if let baseView = viewController as? BaseViewController {
-            if let tableview = baseView.tableview{
+            if let tableview = baseView.view{
                 screenRect = tableview.bounds
-                
+
             }
-            
+
         }
         
         let noInternetoverlay = Bundle.main.loadNibNamed("NoInternetView", owner: nil, options: nil)![0] as? NoInternetView
         
         
-        noInternetoverlay?.frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height - upAndDownSpace)
+        noInternetoverlay?.frame = CGRect(x: 0, y: navigationbarHeight, width: screenRect.size.width, height: screenRect.size.height - upAndDownSpace)
         noInternetoverlay?.targetVc = viewController
         noInternetoverlay?.alpha = 0
         
         if let baseViewController = viewController as? BaseViewController{
             noInternetoverlay?.backgroundColor = baseViewController.view.backgroundColor
             
-//            if let tableview = baseViewController.tableview{
-//                tableview.addSubview(noInternetoverlay!)
-//                baseViewController.isNoInternetPresented = true
-//            }else if let collectionView = baseViewController.collectionview{
-//                collectionView.addSubview(noInternetoverlay!)
-//                baseViewController.isNoInternetPresented = true
-//            }else{
-//                viewController.view.addSubview(noInternetoverlay!)
-//            }
+            //            if let tableview = baseViewController.tableview{
+            //                tableview.addSubview(noInternetoverlay!)
+            //                baseViewController.isNoInternetPresented = true
+            //            }else if let collectionView = baseViewController.collectionview{
+            //                collectionView.addSubview(noInternetoverlay!)
+            //                baseViewController.isNoInternetPresented = true
+            //            }else{
+            //                viewController.view.addSubview(noInternetoverlay!)
+            //            }
             viewController.view.addSubview(noInternetoverlay!)
-
+            
         }else{
             viewController.view.addSubview(noInternetoverlay!)
         }
@@ -266,18 +266,21 @@ extension UIViewController{
         
         var keyWindow:UIView?
         
-        if let baseViewController = viewController as? BaseViewController{
-            if let tableview = baseViewController.tableview{
-                keyWindow = tableview
-            }else if let collectionView = baseViewController.collectionview{
-                keyWindow = collectionView
-            }else{
-                keyWindow = viewController.view
-            }
-            baseViewController.isNoInternetPresented = false
-        }else{
-            keyWindow = viewController.view
-        }
+        //        if let baseViewController = viewController as? BaseViewController{
+        //            if let tableview = baseViewController.tableview{
+        //                keyWindow = tableview
+        //            }else if let collectionView = baseViewController.collectionview{
+        //                keyWindow = collectionView
+        //            }else{
+        //                keyWindow = viewController.view
+        //            }
+        //            baseViewController.isNoInternetPresented = false
+        //        }else{
+        //            keyWindow = viewController.view
+        //        }
+        
+        keyWindow = viewController.view
+        
         
         if let _ = keyWindow,(keyWindow?.subviews.count)! > 1{
             
@@ -300,7 +303,7 @@ extension UIViewController{
         }
         
     }
-
+    
     
     
 }
@@ -404,5 +407,25 @@ extension UIView{
         return UIApplication.shared.delegate as! AppDelegate
     }
 }
+
+public extension UISearchBar {
+    
+    public func setNewcolor(color: UIColor) {
+        let clrChange = subviews.flatMap { $0.subviews }
+        guard let sc = (clrChange.filter { $0 is UITextField }).first as? UITextField else { return }
+        sc.textColor = color
+    }
+}
+extension UITableView{
+    func addBgViewWith(message: String?) {
+        let bgView = UILabel(frame: self.frame)
+        bgView.textAlignment = .center
+        bgView.numberOfLines = 20
+        bgView.font = UIFont.fontWithTextStyle(textStyle: .title1)
+        bgView.text = message
+        self.backgroundView = bgView
+    }
+}
+
 
 

@@ -2,7 +2,7 @@
 //  BaseViewController.swift
 //  GetDonor
 //
-//  Created by admin on 24/08/18.
+//  Created by Rajnish kumar on 24/08/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -17,10 +17,13 @@ class BaseViewController: UIViewController {
     var isEnableRefreshControler:Bool = true
     var isNoInternetPresented: Bool = false
     @IBOutlet weak var listingContainerButtomConstaraints: NSLayoutConstraint!
-
+    var controller: UISearchController!
+    
+    
     lazy var refreshControl: UIRefreshControl? = {
         let rControl = UIRefreshControl()
         rControl.tintColor = UIColor.colorFor(component: .navigationBar)
+        rControl.backgroundColor = UIColor.groupTableViewBackground
         rControl.addTarget(self, action:
             #selector(refreshPage),
                            for: UIControlEvents.valueChanged)
@@ -41,7 +44,7 @@ class BaseViewController: UIViewController {
         view.addSubview(indicatorView)
         return view
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if isEnableRefreshControler {
@@ -51,16 +54,43 @@ class BaseViewController: UIViewController {
             tableview.registerCell(CarouselTableViewCell.self)
         }
         addProfileButton()
+        
+    }
+    
+    func shouldShowSearchBar(value: Bool, viewController: UIViewController) {
+        
+        if value {
+            controller = UISearchController(searchResultsController: nil)
+            controller.obscuresBackgroundDuringPresentation = false
+            controller.searchBar.placeholder = "Search"
+            controller.searchBar.delegate = self
+            definesPresentationContext = true
+            
+            if let tblView = tableview{
+                tblView.tableHeaderView = controller.searchBar
+            }
+            if let collection = collectionview{
+                collection.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+               let someView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height:66))
+                someView.backgroundColor = UIColor.white
+                someView.addSubview(controller.searchBar)
+                collectionview.addSubview(someView)
+            }
+        }
+        else{
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.appDelegate().retry.bind { [weak self](vc) in
             if vc == self{
+                self?.showLoader(onViewController: self!)
                 self?.refresingPage()
             }
         }
-
+        
     }
     
     func hideProfileButton()  {
@@ -71,7 +101,7 @@ class BaseViewController: UIViewController {
         
     }
     func addProfileButton() {
-
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile"), style: .plain, target: self, action: #selector(openProfileScreen))
     }
     
@@ -80,7 +110,7 @@ class BaseViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
         self.navigationController?.pushViewController(profileVC, animated: true)
-        }
+    }
     @objc private func refreshPage(){
         
         self.refresingPage()
@@ -89,9 +119,9 @@ class BaseViewController: UIViewController {
     func refresingPage() {
         
     }
-
+    
     func isLoadingNextPageResult(_ isLoading: Bool) {
-
+        
         if isLoading {
             listingContainerButtomConstaraints.constant = kLoaderViewHeight
             self.view.addSubview(paginationLoaderView!)
@@ -147,8 +177,28 @@ class BaseViewController: UIViewController {
         }
         self.refreshControl?.removeFromSuperview()
     }
-
-
+    
+    func searchBarCancelButtonClicked() {
+    }
+    func searchBarSearchButtonClicked(text: String) {
+    }
     
 
 }
+
+extension BaseViewController: UISearchBarDelegate{
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text{
+            self.searchBarSearchButtonClicked(text: text)
+        }
+
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("Cancel")
+        self.searchBarCancelButtonClicked()
+
+    }
+}
+
+

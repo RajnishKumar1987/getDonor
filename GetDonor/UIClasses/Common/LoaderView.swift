@@ -2,7 +2,7 @@
 //  LoaderView.swift
 //  GetDonor
 //
-//  Created by admin on 04/10/18.
+//  Created by Rajnish kumar on 04/10/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

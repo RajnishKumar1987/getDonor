@@ -2,7 +2,7 @@
 //  MoreEventDataModel.swift
 //  GetDonor
 //
-//  Created by admin on 10/09/18.
+//  Created by Rajnish kumar on 10/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

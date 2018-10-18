@@ -2,7 +2,7 @@
 //  EventsCollectionViewCell.swift
 //  GetDonor
 //
-//  Created by admin on 24/08/18.
+//  Created by Rajnish kumar on 24/08/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

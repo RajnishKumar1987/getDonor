@@ -2,7 +2,7 @@
 //  LoginViewModel.swift
 //  GetDonor
 //
-//  Created by admin on 06/09/18.
+//  Created by Rajnish kumar on 06/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -19,7 +19,7 @@ class LoginViewModel {
     
     func login(with userName:String, and password:String, with result:@escaping(Result<String>)->Void) {
         
-        let requestParam = ["version":Bundle.main.versionNumber,"username":userName.toBase64(),"password":password.toBase64() , "token":"TOKEN"]
+        let requestParam = ["username":userName.toBase64(),"password":password.toBase64() , "token":"TOKEN"]
         
         apiLoader.loadAPIRequest(forFuncion: .login, requestData: requestParam) { (response, error) in
             

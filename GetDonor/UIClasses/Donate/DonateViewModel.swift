@@ -2,7 +2,7 @@
 //  DonateViewModel.swift
 //  GetDonor
 //
-//  Created by admin on 18/09/18.
+//  Created by Rajnish kumar on 18/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -94,9 +94,7 @@ class DonateViewModel {
     
     func loadDonationDetails(with result:@escaping(Result<String>)->Void) {
         
-        let requestParam = ["version":Bundle.main.versionNumber]
-        
-        apiLoader?.loadAPIRequest(forFuncion: .getPaymentInfo, requestData: requestParam) { [weak self](response, error) in
+        apiLoader?.loadAPIRequest(forFuncion: .getPaymentInfo, requestData: nil) { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))

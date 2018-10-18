@@ -2,7 +2,7 @@
 //  LoginSignUpTableViewController.swift
 //  GetDonor
 //
-//  Created by admin on 05/09/18.
+//  Created by Rajnish kumar on 05/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -50,6 +50,13 @@ class LoginSignUpViewController: UITableViewController {
         btnForgotPassword.titleLabel?.font = UIFont.fontWithTextStyle(textStyle: .title2)
         btnForgotPassword.tintColor = UIColor.black
         
+        let range = NSRange(location:3,length:1) // specific location. This means "range" handle 1 character at location 2
+        let attributedString = NSMutableAttributedString(string: "GetDonor")
+
+        attributedString.addAttribute(.foregroundColor, value: UIColor.colorFor(component: .navigationBar), range: range)
+        lblGetDonor.attributedText = attributedString
+
+
 
     }
     

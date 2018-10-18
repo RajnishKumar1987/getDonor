@@ -2,7 +2,7 @@
 //  DonationDetailsViewController.swift
 //  GetDonor
 //
-//  Created by admin on 05/10/18.
+//  Created by Rajnish kumar on 05/10/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -60,7 +60,7 @@ class DonationDetailsViewController: BaseViewController {
                 self?.tableview.reloadData()
                 self?.updateEndowmentDetails()
             case .failure(let msg):
-                print(msg)
+                self?.tableview.addBgViewWith(message: msg)
             }
             
         }

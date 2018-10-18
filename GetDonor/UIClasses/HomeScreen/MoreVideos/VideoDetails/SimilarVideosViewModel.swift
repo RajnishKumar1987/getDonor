@@ -2,7 +2,7 @@
 //  SimilarVideosViewModel.swift
 //  GetDonor
 //
-//  Created by admin on 06/09/18.
+//  Created by Rajnish kumar on 06/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -39,7 +39,7 @@ class SimilarVideosViewModel {
         
         let page = isUserRefreshingList ? 1 : (model.currentPage ?? 0) + 1
 
-        let requestParam = ["version":Bundle.main.versionNumber,
+        let requestParam = [
                             "type":"\(ContentType.video.rawValue)",
                             "id":contentId,
                             "page":"\(page)"

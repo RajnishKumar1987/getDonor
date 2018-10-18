@@ -2,8 +2,8 @@
 //  File.swift
 //  SampleApp
 //
-//  Created by admin on 14/08/18.
-//  Copyright © 2018 admin. All rights reserved.
+//  Created by Rajnish kumar on 14/08/18.
+//  Copyright © 2018 Rajnish kumar. All rights reserved.
 //
 
 import Foundation
@@ -25,12 +25,17 @@ class URLEncoder: URLEncodeble {
             throw URLEncodeingError.URLStringNotURLConvertable
         }
         
-        guard let param = parameters else { return urlComponents.url! }
+        guard let param = parameters else {
+            if urlComponents.queryItems == nil {
+                urlComponents.queryItems = Array<URLQueryItem>()
+            }
+            urlComponents.queryItems?.append(URLQueryItem(name: "version", value: Bundle.main.versionNumber))
+            return urlComponents.url! }
         
-        let items = param.map{
+        var items = param.map{
             URLQueryItem(name: String(describing: $0), value: String(describing: $1))
         }
-        
+        items.append(URLQueryItem(name: "version", value: Bundle.main.versionNumber))
         if urlComponents.queryItems == nil {
             urlComponents.queryItems = Array<URLQueryItem>()
         }

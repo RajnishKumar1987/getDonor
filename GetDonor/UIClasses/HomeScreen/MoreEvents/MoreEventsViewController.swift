@@ -2,7 +2,7 @@
 //  MoreEventsViewController.swift
 //  GetDonor
 //
-//  Created by admin on 24/08/18.
+//  Created by Rajnish kumar on 24/08/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ class MoreEventsViewController: BaseViewController {
         self.title = "Events"
         doInitialConfig()
         enableRefresh()
+        shouldShowSearchBar(value: true, viewController: self)
     }
     
     func doInitialConfig() {
@@ -25,35 +26,73 @@ class MoreEventsViewController: BaseViewController {
         showLoader(onViewController: self)
         loadMoreEvents()
     }
+    
     override func refresingPage() {
         viewModel.isUserRefreshingList = true
-        refreshControl?.beginRefreshing()
         loadMoreEvents()
     }
     
     func loadMoreEvents() {
         
-        viewModel.loadMoreEvents { [weak self](result) in
-            self?.removeLoader(fromViewController: self!)
-            self?.refreshControl?.endRefreshing()
-            self?.isLoadingNextPageResult(false)
-            self?.viewModel.isUserRefreshingList = false
-
-            switch (result){
-            case .Success:
-                print("Success")
-                self?.tableview.reloadData()
-            case .failure(let msg):
-                print(msg)
+        if checkInternetStatus(viewController: self, navigationBarPresent: true) {
+            viewModel.loadMoreEvents { [weak self](result) in
+                self?.removeLoader(fromViewController: self!)
+                self?.refreshControl?.endRefreshing()
+                self?.isLoadingNextPageResult(false)
+                self?.viewModel.isUserRefreshingList = false
+                
+                switch (result){
+                case .Success:
+                    print("Success")
+                    self?.tableview.reloadData()
+                case .failure(let msg):
+                    print(msg)
+                }
+                
             }
+        }
+    }
+    func searchEventFor(keyword: String) {
+        if checkInternetStatus(viewController: self, navigationBarPresent: true) {
+            viewModel.serachEventFor(keyword: keyword) { [weak self] (result) in
+                self?.removeLoader(fromViewController: self!)
+                self?.refreshControl?.endRefreshing()
+                self?.viewModel.isLoadingNextPageResults = false
+                self?.isLoadingNextPageResult(false)
+                self?.viewModel.isUserRefreshingList = false
+                switch (result){
+                case .Success:
+                    self?.tableview.reloadData()
+                    print("Success")
+                case .failure(let messgae):
+                    print(messgae)
+                }
+            }
+        }
+    }
+    
+    override func searchBarCancelButtonClicked() {
+        print("Cancel")
+        if viewModel.isSearching {
+            viewModel.isSearching = false
+            viewModel.isUserRefreshingList = true
+            showLoader(onViewController: self)
+            self.tableview.setContentOffset( CGPoint(x: 0, y: -70) , animated: false)
+            loadMoreEvents()
             
         }
-        
     }
+    override func searchBarSearchButtonClicked(text: String) {
+        showLoader(onViewController: self)
+        viewModel.isUserRefreshingList = true
+        viewModel.isSearching = true
+        searchEventFor(keyword: text)
+    }
+    
     deinit {
         viewModel.apiLoader.cancelTask()
     }
-
+    
 }
 
 extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
@@ -67,14 +106,17 @@ extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-       
+        
         print("cell: \(indexPath.row)")
         if indexPath.row == viewModel.model.eventList.count - 1 {
             if viewModel.canLoadNextPage(){
                 isLoadingNextPageResult(true)
                 viewModel.isLoadingNextPageResults = true
-                loadMoreEvents()
-
+                if viewModel.isSearching{
+                    searchEventFor(keyword: self.controller.searchBar.text!)
+                }else{
+                    loadMoreEvents()
+                }
             }
         }
     }
@@ -90,6 +132,7 @@ extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
         
     }
 }
+
 
 
 

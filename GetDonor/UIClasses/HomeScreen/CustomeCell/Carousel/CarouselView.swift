@@ -2,7 +2,7 @@
 //  TopBannerView.swift
 //  GetDonor
 //
-//  Created by admin on 09/10/18.
+//  Created by Rajnish kumar on 09/10/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

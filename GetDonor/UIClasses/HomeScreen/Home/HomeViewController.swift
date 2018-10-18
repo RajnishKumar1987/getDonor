@@ -2,58 +2,64 @@
 //  ViewController.swift
 //  GetDonor
 //
-//  Created by admin on 22/08/18.
+//  Created by Rajnish kumar on 22/08/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
 import UIKit
 
 class HomeViewController: BaseViewController {
-
-    @IBOutlet weak var tableView: UITableView!
+    
     var viewModel = HomeListingViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print(documentsPath)
-         doInitialConfig()
+        doInitialConfig()
+        enableRefresh()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        if !AppConfig.getUserLoginStatus() {
+//            presentLoginSignUpScreen()
+//        }
+//    }
     
     override func refresingPage() {
         self.loadHomeScreen()
     }
-        
+    
     func doInitialConfig() {
         self.title = "Home"
-        tableView.registerCell(CarouselTableViewCell.self)
+        tableview.registerCell(CarouselTableViewCell.self)
         if !AppConfig.getUserLoginStatus() {
             presentLoginSignUpScreen()
         }else{
+           showLoader(onViewController: self)
             loadHomeScreen()
         }
     }
     func presentLoginSignUpScreen() {
         
-        performSegue(withIdentifier: "openLoginSignUp", sender: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            self.performSegue(withIdentifier: "openLoginSignUp", sender: nil)
+        })
+
     }
     
     func loadHomeScreen() {
         
         if self.checkInternetStatus(viewController: self, navigationBarPresent: true){
-        showLoader(onViewController: self)
-        viewModel.loadHomeScreen { [weak self](result) in
-            self?.removeLoader(fromViewController: self!)
-            switch result {
-            case .Success:
-                self?.tableView.reloadData()
-            case .failure(let message):
-                print(message)
+            viewModel.loadHomeScreen { [weak self](result) in
+                self?.removeLoader(fromViewController: self!)
+                self?.refreshControl?.endRefreshing()
+                switch result {
+                case .Success:
+                    self?.tableview.reloadData()
+                case .failure(let message):
+                    print(message)
+                }
             }
-        }
         }
     }
     
@@ -94,7 +100,7 @@ class HomeViewController: BaseViewController {
         }
         
     }
-
+    
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {
         if let segue = segue as? UIStoryboardSegueWithCompletionHandler {
             segue.completion = {
@@ -106,7 +112,7 @@ class HomeViewController: BaseViewController {
                     self.performSegue(withIdentifier: "openEditProfile", sender: nil)
                     self.loadHomeScreen()
                 }
-
+                
             }
         }
         
@@ -119,13 +125,13 @@ class HomeViewController: BaseViewController {
         
         
     }
-
-
-
+    
+    
+    
 }
 
 extension HomeViewController: HomeScreenCellDelegate{
-   
+    
     func didCellSelected(at indexPath: IndexPath, with cellType: HomeScreenCellType) {
         
         switch cellType {
@@ -145,7 +151,7 @@ extension HomeViewController: HomeScreenCellDelegate{
         }
     }
     
-   
+    
     func didMoreButtonPressed(at cellType: HomeScreenCellType) {
         
         switch cellType {
@@ -159,8 +165,8 @@ extension HomeViewController: HomeScreenCellDelegate{
             loadViewControllerWith(viewControllerIdentifier: "MoreEventsViewController", andStoryboardName: "Events")
         case .promotional:
             loadViewControllerWith(viewControllerIdentifier: "MorePromotionalViewController", andStoryboardName: "Promotional")
-
-
+            
+            
         }
     }
     
@@ -190,13 +196,13 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
         
         switch cellType {
         case .video:
-//            let cell: HomeVideoTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-//            cell.configurecell(model: viewModel.homeApiResponse?.contents?.video)
-           // let c_model = CarouselDataModel(with: viewModel.homeApiResponse?.contents?.video)
-           // print(c_model)
+            //            let cell: HomeVideoTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+            //            cell.configurecell(model: viewModel.homeApiResponse?.contents?.video)
+            // let c_model = CarouselDataModel(with: viewModel.homeApiResponse?.contents?.video)
+            // print(c_model)
             let cell: CarouselTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
             cell.configureCell(with: viewModel.homeApiResponse?.contents?.video, and: .carousel(title: "Video", cellType: .video))
-
+            
             cell.delegate = self
             return cell
         case .artical:
@@ -230,6 +236,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
         switch cellType {
         case .video, .promotional:
             return kCarouselHeight
+        case .artical:
+            return 125
         default:
             return 180
         }

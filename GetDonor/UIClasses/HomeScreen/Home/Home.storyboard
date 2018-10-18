@@ -152,14 +152,14 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wv1-jS-i70">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="102"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="181.5" height="102"/>
                                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" secondItem="wv1-jS-i70" secondAttribute="height" multiplier="11:9" id="Tiw-s8-STD"/>
+                                                                            <constraint firstAttribute="width" secondItem="wv1-jS-i70" secondAttribute="height" multiplier="16:9" id="Tiw-s8-STD"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU3-oT-uMh">
-                                                                        <rect key="frame" x="137" y="-6" width="222" height="42"/>
+                                                                        <rect key="frame" x="193.5" y="-6" width="165.5" height="42"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="42" id="bag-La-C6M"/>
                                                                         </constraints>
@@ -168,7 +168,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khK-C1-PGx">
-                                                                        <rect key="frame" x="137" y="37" width="222" height="65"/>
+                                                                        <rect key="frame" x="193.5" y="37" width="165.5" height="65"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -291,7 +291,7 @@
                                         <rect key="frame" x="0.0" y="608" width="375" height="192"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jws-VA-0xA" id="bKe-on-Bc8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="191.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzH-yL-oOu">
@@ -323,7 +323,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventsCollectionViewCell" id="aWj-NH-rk1" customClass="EventsCollectionViewCell" customModule="GetDonor" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="2.5" width="157" height="132"/>
+                                                            <rect key="frame" x="0.0" y="2" width="157" height="132"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="157" height="132"/>
@@ -376,7 +376,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="HmQ-tT-G0O"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="1MJ-qh-4uk" id="oVF-Wx-bpN"/>
+                        <outlet property="tableview" destination="1MJ-qh-4uk" id="MZO-vh-fW7"/>
                         <segue destination="oF7-Xn-Upa" kind="show" identifier="openVideoDetails" id="i5H-oA-kpY"/>
                         <segue destination="Ebc-sX-7XJ" kind="show" identifier="openArticalsDetails" id="yhm-Gm-c2J"/>
                         <segue destination="bkL-Ga-mZz" kind="presentation" identifier="openLoginSignUp" animates="NO" id="Pn5-hq-JRJ"/>

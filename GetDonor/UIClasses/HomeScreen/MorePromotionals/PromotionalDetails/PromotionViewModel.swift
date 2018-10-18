@@ -2,7 +2,7 @@
 //  PromotionViewModel.swift
 //  GetDonor
 //
-//  Created by admin on 10/10/18.
+//  Created by Rajnish kumar on 10/10/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -24,8 +24,7 @@ class PromotionViewModel {
     
     func loadPromotionPage(for contentId: String, result:@escaping(Result<String>)-> Void)  {
         
-        let requestParam = ["version":Bundle.main.versionNumber]
-        apiLoader.loadAPIRequest(forFuncion: .getSpecialPageDetails(id: contentId), requestData: requestParam) { [weak self](response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .getSpecialPageDetails(id: contentId), requestData: nil) { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))
@@ -33,7 +32,9 @@ class PromotionViewModel {
             }
             
             if let response = response {
-                
+                if response.message != "successful"{
+                    result(.failure(response.message!))
+                }
                 weakSelf.model = response
                 weakSelf.cellType = weakSelf.getCellType(model: response)
                 result(.Success)

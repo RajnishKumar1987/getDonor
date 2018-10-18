@@ -2,7 +2,7 @@
 //  SimilarVideosTableViewCell.swift
 //  GetDonor
 //
-//  Created by admin on 06/09/18.
+//  Created by Rajnish kumar on 06/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 

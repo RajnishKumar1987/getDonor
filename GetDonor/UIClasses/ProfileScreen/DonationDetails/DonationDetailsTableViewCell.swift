@@ -2,7 +2,7 @@
 //  DonationDetailsTableViewCell.swift
 //  GetDonor
 //
-//  Created by admin on 05/10/18.
+//  Created by Rajnish kumar on 05/10/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -137,16 +137,24 @@ class DonationDetailsTableViewCell: UITableViewCell,CellReusable {
             let pdfNameFromUrl = "\(fileName).pdf"
             let actualPath = resourceDocPath.appendingPathComponent(pdfNameFromUrl)
             do {
-                try pdfData?.write(to: actualPath, options: .atomic)
-                print("pdf successfully saved!")
-                DispatchQueue.main.async {
-                    self.btnDownloadReceipt.loadingIndicator(show: false, isCenter: true)
-                    self.btnDownloadReceipt.setTitle("View Receipt", for: .normal)
-                    DownloadingQueue.sharedInstance.remove(id: fileName)
-                    self.delegate?.didDownloadFinished()
-                }
+                if let dataPDF = pdfData{
+                    try dataPDF.write(to: actualPath, options: .atomic)
+                    print("pdf successfully saved!")
+                    DispatchQueue.main.async {
+                        self.btnDownloadReceipt.loadingIndicator(show: false, isCenter: true)
+                        self.btnDownloadReceipt.setTitle("View Receipt", for: .normal)
+                        DownloadingQueue.sharedInstance.remove(id: fileName)
+                        self.delegate?.didDownloadFinished()
+                    }
 
-                
+                }
+                else{
+                    DispatchQueue.main.async {
+                    self.btnDownloadReceipt.setTitle("Download Receipt", for: .normal)
+                    self.btnDownloadReceipt.loadingIndicator(show: false, isCenter: true)
+
+                    }
+                }
             } catch {
                 print("Pdf could not be saved")
             }

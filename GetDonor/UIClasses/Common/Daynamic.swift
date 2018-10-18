@@ -2,7 +2,7 @@
 //  Daynamic.swift
 //  BaseVCDemo
 //
-//  Created by admin on 05/10/18.
+//  Created by Rajnish kumar on 05/10/18.
 //  Copyright © 2018 Zee. All rights reserved.
 //
 

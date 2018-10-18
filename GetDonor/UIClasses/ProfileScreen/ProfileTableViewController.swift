@@ -2,17 +2,19 @@
 //  ProfileTableViewController.swift
 //  GetDonor
 //
-//  Created by admin on 07/09/18.
+//  Created by Rajnish kumar on 07/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
 import UIKit
 import StoreKit
+import MessageUI
 
 class ProfileTableViewController: UITableViewController {
 
     var viewModel = MenuViewModel()
-    
+    var mc: MFMailComposeViewController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoader(onViewController: self)
@@ -67,12 +69,34 @@ class ProfileTableViewController: UITableViewController {
                     loadRateTheAppView()
             case "Share":
                 shareApp(model: model)
-            default:
+            case "Feedback":
+                openFeedback()
+            case "Edit":
                 performSegue(withIdentifier: model.name!, sender: nil)
+            case "Donation Details":
+                performSegue(withIdentifier: model.name!, sender: nil)
+            case "Logout":
+                self.performSegue(withIdentifier: model.name!, sender: nil)
+            default:
+                print("Unknown")
             }
         default:
             print("Unknown")
     }
+    }
+    
+    func openFeedback() {
+        let emailTitle = "Feedback"
+        //let messageBody = "Feature request or bug report?"
+        let toRecipents = ["feedback@getdonor.org"]
+        mc = MFMailComposeViewController()
+        mc.mailComposeDelegate = self
+        mc.setSubject(emailTitle)
+        //mc.setMessageBody(messageBody, isHTML: false)
+        mc.setToRecipients(toRecipents)
+        
+        self.present(mc, animated: true, completion: nil)
+
     }
     
     func openWebView(with stringUrl: String)  {
@@ -137,5 +161,11 @@ class ProfileTableViewController: UITableViewController {
         }
     }
     
+}
 
+extension ProfileTableViewController: MFMailComposeViewControllerDelegate{
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
+
+    }
 }

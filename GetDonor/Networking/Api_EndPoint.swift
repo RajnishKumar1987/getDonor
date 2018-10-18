@@ -2,7 +2,7 @@
 //  Api_EndPoint.swift
 //  GetDonor
 //
-//  Created by admin on 07/09/18.
+//  Created by Rajnish kumar on 07/09/18.
 //  Copyright © 2018 GetDonor. All rights reserved.
 //
 
@@ -51,6 +51,7 @@ enum Api_EndPoint {
     case getDonationDetails(action: DonationDetailsType, userId: String)
     case getSpecialPageDetails(id: String)
     case getPromotionalList
+    case searchContent(type: ContentType, page: String, searchKeyword: String)
     
     var urlString: String{
         switch self {
@@ -92,7 +93,8 @@ enum Api_EndPoint {
             return AppBaseURLs.baseUrl.appending("special_detail.php?id=\(id)")
         case .getPromotionalList:
             return AppBaseURLs.baseUrl.appending("special_list.php?")
-
+        case .searchContent(let type, let page, let searchKeyword):
+            return AppBaseURLs.baseUrl.appending("content_search.php?type=\(type.rawValue)&page=\(page)&q=\(searchKeyword)")
         }
     }
 
