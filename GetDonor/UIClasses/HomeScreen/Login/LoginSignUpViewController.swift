@@ -23,9 +23,9 @@ class LoginSignUpViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageView = UIImageView(frame: self.view.bounds)
-        imageView.image = UIImage(named: "bglogin")
-        tableView.backgroundView = imageView
+        //let imageView = UIImageView(frame: self.view.bounds)
+        //imageView.image = UIImage(named: "bglogin")
+        //tableView.backgroundView = imageView
         addTapGesture()
         lblWecome.font = UIFont.fontWithTextStyle(textStyle: .title1)
         lblGetDonor.font = UIFont.fontWithTextStyle(textStyle: .extraBold)

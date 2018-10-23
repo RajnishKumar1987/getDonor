@@ -41,7 +41,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyK-n0-1Cp">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyK-n0-1Cp">
                                                     <rect key="frame" x="316" y="212" width="59" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="59" id="qgB-bM-1HJ"/>
@@ -86,7 +86,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="km5-aX-jKr"/>
                     </view>
-                    <navigationItem key="navigationItem" id="r4V-UN-oaG"/>
+                    <navigationItem key="navigationItem" id="r4V-UN-oaG">
+                        <barButtonItem key="backBarButtonItem" title=" " id="NpK-JT-ZsN"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="listingContainerButtomConstaraints" destination="qAy-vn-W38" id="bng-yY-flX"/>
                         <outlet property="tableview" destination="sRC-77-oc8" id="AsZ-fd-Azc"/>

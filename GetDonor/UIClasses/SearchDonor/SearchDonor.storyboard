@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kon-JY-0Yx">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNg-Iw-Dql">
                                                 <rect key="frame" x="49" y="44" width="277" height="35"/>
@@ -59,17 +59,17 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBP-Qe-bha">
-                                                <rect key="frame" x="130" y="97" width="115" height="35"/>
+                                                <rect key="frame" x="57" y="97" width="261" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="GjT-pP-Jpm"/>
-                                                    <constraint firstAttribute="width" constant="115" id="owE-4Q-tFd"/>
+                                                    <constraint firstAttribute="width" constant="261" id="owE-4Q-tFd"/>
                                                 </constraints>
                                                 <state key="normal" title="SEARCH"/>
                                                 <connections>
                                                     <action selector="actionSearchButtonPressed:" destination="eZi-DW-VnX" eventType="touchUpInside" id="w0n-I3-1p0"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-Zc-iTl">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLw-Zc-iTl">
                                                 <rect key="frame" x="20" y="161" width="80" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="MP8-vt-Jd7"/>
@@ -90,10 +90,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgimg" translatesAutoresizingMaskIntoConstraints="NO" id="XlW-RC-AmV">
-                                                <rect key="frame" x="87" y="311" width="200" height="200"/>
+                                                <rect key="frame" x="62" y="311" width="250" height="250"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="D9b-4Y-WCo"/>
-                                                    <constraint firstAttribute="width" constant="200" id="gl5-bJ-Oo2"/>
+                                                    <constraint firstAttribute="height" constant="250" id="D9b-4Y-WCo"/>
+                                                    <constraint firstAttribute="width" constant="250" id="gl5-bJ-Oo2"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
@@ -108,8 +108,8 @@
                                             <constraint firstAttribute="trailing" secondItem="FNg-Iw-Dql" secondAttribute="trailing" constant="49" id="bDn-X1-Eiq"/>
                                             <constraint firstItem="JLw-Zc-iTl" firstAttribute="leading" secondItem="kon-JY-0Yx" secondAttribute="leading" constant="20" id="eq8-0C-GNg"/>
                                             <constraint firstItem="lxJ-b4-Zuu" firstAttribute="top" secondItem="JLw-Zc-iTl" secondAttribute="bottom" constant="12" id="gUk-E8-BMi"/>
-                                            <constraint firstItem="XlW-RC-AmV" firstAttribute="centerX" secondItem="kon-JY-0Yx" secondAttribute="centerX" id="hbc-Mx-shq"/>
-                                            <constraint firstAttribute="bottom" secondItem="XlW-RC-AmV" secondAttribute="bottom" constant="179" id="jlB-y6-Iix"/>
+                                            <constraint firstItem="XlW-RC-AmV" firstAttribute="centerX" secondItem="kon-JY-0Yx" secondAttribute="centerX" constant="-0.5" id="hbc-Mx-shq"/>
+                                            <constraint firstAttribute="bottom" secondItem="XlW-RC-AmV" secondAttribute="bottom" constant="42" id="jlB-y6-Iix"/>
                                             <constraint firstAttribute="trailing" secondItem="lxJ-b4-Zuu" secondAttribute="trailing" constant="19" id="sQU-zf-JIM"/>
                                             <constraint firstItem="lxJ-b4-Zuu" firstAttribute="leading" secondItem="kon-JY-0Yx" secondAttribute="leading" constant="19" id="u7t-eY-KVD"/>
                                         </constraints>
@@ -148,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0d-sL-Rmq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1580" y="151.47783251231527"/>
+            <point key="canvasLocation" x="1580" y="150.67466266866569"/>
         </scene>
         <!--Search Result View Controller-->
         <scene sceneID="qG6-Kr-paQ">
@@ -161,6 +161,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N4r-tU-ZNJ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="599"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchDonorTableViewCell" rowHeight="103" id="CJQ-F9-nEJ" customClass="SearchDonorTableViewCell" customModule="GetDonor" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="103"/>

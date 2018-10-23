@@ -142,6 +142,9 @@ class CarouselTableViewCell: UITableViewCell, CellReusable {
             }
             let model = model[i]
             banner.imageView.loadImage(from: model.image, shouldCache: true)
+            banner.lblTitle.text = model.title ?? ""
+            banner.lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
+
             if let contentType = ContentType(rawValue: model.type!){
                 if contentType != .video{
                     banner.playIcon.isHidden = true

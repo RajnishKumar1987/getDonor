@@ -65,7 +65,7 @@ class DonationDetailsTableViewCell: UITableViewCell,CellReusable {
     
     private func populateMySelfCell(model: Transaction) {
         btnContainerView.isHidden = false
-        lblReceiptNumber.text = model.username ?? ""
+        lblReceiptNumber.text = model.txnid ?? ""
         lblPaymentMode.text = "Payment Mode:"
         lblPaymentModeValue.text = model.mode ?? ""
         lblDate.text = model.addedon?.components(separatedBy: " ").first ?? ""
@@ -105,7 +105,7 @@ class DonationDetailsTableViewCell: UITableViewCell,CellReusable {
 
     private func populateAllDonationCell(model: Transaction) {
         btnContainerView.isHidden = true
-        lblReceiptNumber.text = model.txnid ?? ""
+        lblReceiptNumber.text = model.username ?? ""
         lblPaymentMode.text = "Payment Mode:"
         lblPaymentModeValue.text = model.mode ?? ""
         lblDate.text = model.addedon?.components(separatedBy: " ").first ?? ""

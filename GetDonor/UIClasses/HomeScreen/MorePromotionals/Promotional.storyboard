@@ -58,7 +58,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="hSv-7S-U3Z"/>
                     </view>
-                    <navigationItem key="navigationItem" id="6Pe-Ca-1fH"/>
+                    <navigationItem key="navigationItem" id="6Pe-Ca-1fH">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Zk9-Le-c2W"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableview" destination="Xvy-a1-gmh" id="y1d-9x-G0i"/>
                     </connections>

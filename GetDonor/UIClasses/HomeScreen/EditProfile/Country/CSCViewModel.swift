@@ -61,7 +61,8 @@ class CSCViewModel {
         case .city:
             return selectedState == name ? false : true
         case .state:
-            return selectedCountry == name ? false : true
+            return (stateName.someKey(forValue: name) != nil) ? false : true
+            //return selectedCountry == name ? false : true
         case .country:
             dataToPopulate = countryName
             return countryName.count>0 ? false : true

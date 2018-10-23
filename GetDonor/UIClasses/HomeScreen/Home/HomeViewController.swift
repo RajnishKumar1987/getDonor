@@ -85,12 +85,12 @@ class HomeViewController: BaseViewController {
             var indexPath = sender as? IndexPath
             indexPath?.section = 0
             articalDetailVC?.selectedIndex = IndexPath(item: 0, section: 0)
-            let model = viewModel.homeApiResponse?.contents?.event[(indexPath?.item)!]
+            let model = viewModel.homeApiResponse?.contents?.event![(indexPath?.item)!]
             articalDetailVC?.viewModel = PhotoViewerViewModel(with: (model?.data)!)
         case "openPromotionDetails":
             let promotionDetailsVC = segue.destination as? PromotionDetailsViewController
             var indexPath = sender as? IndexPath
-            let promotionBannerModel = viewModel.homeApiResponse?.contents?.topBanner[(indexPath?.row)!]
+            let promotionBannerModel = viewModel.homeApiResponse?.contents?.topBanner![(indexPath?.row)!]
             promotionDetailsVC?.contentId = promotionBannerModel?.id
             
             print("")
@@ -122,8 +122,17 @@ class HomeViewController: BaseViewController {
         let storyboard = UIStoryboard(name: "EditProfile", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController")
         self.navigationController?.pushViewController(vc, animated: true)
-        
-        
+    }
+    func openUrl(urlString: String) {
+        guard let url = URL(string: urlString) else {
+            return //be safe
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+
     }
     
     
@@ -136,10 +145,10 @@ extension HomeViewController: HomeScreenCellDelegate{
         
         switch cellType {
         case .video:
-            let model = viewModel.homeApiResponse?.contents?.video[indexPath.item]
+            let model = viewModel.homeApiResponse?.contents?.video![indexPath.item]
             self.performSegue(withIdentifier: "openVideoDetails", sender: model)
         case .artical:
-            let model = viewModel.homeApiResponse?.contents?.article[indexPath.item]
+            let model = viewModel.homeApiResponse?.contents?.article![indexPath.item]
             self.performSegue(withIdentifier: "openArticalsDetails", sender: model)
         case .photo:
             self.performSegue(withIdentifier: "openPhotoViewer", sender: indexPath)
@@ -147,7 +156,11 @@ extension HomeViewController: HomeScreenCellDelegate{
             self.performSegue(withIdentifier: "showEventsPhoto", sender: indexPath)
         case .promotional:
             self.performSegue(withIdentifier: "openPromotionDetails", sender: indexPath)
-            print("")
+        case .social:
+            let model = viewModel.homeApiResponse?.contents?.social![indexPath.item]
+            if let url = model?.link{
+                openUrl(urlString: url)
+            }
         }
     }
     
@@ -165,8 +178,8 @@ extension HomeViewController: HomeScreenCellDelegate{
             loadViewControllerWith(viewControllerIdentifier: "MoreEventsViewController", andStoryboardName: "Events")
         case .promotional:
             loadViewControllerWith(viewControllerIdentifier: "MorePromotionalViewController", andStoryboardName: "Promotional")
-            
-            
+        case .social:
+            print("")
         }
     }
     
@@ -201,7 +214,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
             // let c_model = CarouselDataModel(with: viewModel.homeApiResponse?.contents?.video)
             // print(c_model)
             let cell: CarouselTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.configureCell(with: viewModel.homeApiResponse?.contents?.video, and: .carousel(title: "Video", cellType: .video))
+            cell.configureCell(with: viewModel.homeApiResponse?.contents?.video, and: .carousel(title: "Videos", cellType: .video))
             
             cell.delegate = self
             return cell
@@ -222,7 +235,12 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         case .promotional:
             let cell: CarouselTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.configureCell(with: viewModel.homeApiResponse?.contents?.topBanner, and: .carousel(title: "", cellType: .promotional))
+            cell.configureCell(with: viewModel.homeApiResponse?.contents?.topBanner, and: .carousel(title: "Promos", cellType: .promotional))
+            cell.delegate = self
+            return cell
+        case .social:
+            let cell: HomeSocialTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+            cell.configureCell(with: viewModel.homeApiResponse?.contents?.social)
             cell.delegate = self
             return cell
         }
@@ -237,6 +255,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
         case .video, .promotional:
             return kCarouselHeight
         case .artical:
+            return 125
+        case .social:
             return 125
         default:
             return 180

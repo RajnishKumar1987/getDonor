@@ -24,10 +24,13 @@ class SearchDonorViewController: BaseViewController {
         btnSearch.makeCornerRadiusWithValue(15.0, borderColor: nil)
         btnSearch.backgroundColor = UIColor.colorFor(component: .button)
         btnSearch.tintColor = UIColor.white
-        lblNote.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        lblNote.font = UIFont.fontWithTextStyle(textStyle: .subHead)
         lblDesc.font = UIFont.fontWithTextStyle(textStyle: .title3)
         txtBloodGroup.font = UIFont.fontWithTextStyle(textStyle: .title1)
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        txtBloodGroup.text = ""
     }
     
     func searchDonor() {

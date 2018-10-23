@@ -23,6 +23,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="116" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EA8-1m-wZU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ArticalsTableViewCell" rowHeight="116" id="mtG-cB-Cf1" customClass="ArticalsTableViewCell" customModule="GetDonor" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="116"/>
@@ -76,6 +77,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fG2-Sh-Ljt"/>
                     </view>
+                    <navigationItem key="navigationItem" id="wDF-pl-t2h">
+                        <barButtonItem key="backBarButtonItem" title=" " id="blZ-Qa-Asd"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="listingContainerButtomConstaraints" destination="JJo-cz-3iL" id="SRd-jn-oHJ"/>
                         <outlet property="tableview" destination="EA8-1m-wZU" id="Joh-or-Li4"/>
@@ -83,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8D-bv-WOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="96.799999999999997" y="169.56521739130437"/>
+            <point key="canvasLocation" x="1036" y="169.56521739130437"/>
         </scene>
         <!--Artical Details View Controller-->
         <scene sceneID="eNI-bn-FTy">
@@ -104,7 +108,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArticalDetailsCollectionViewCell" id="0z8-CB-4Jh" customClass="ArticalDetailsCollectionViewCell" customModule="GetDonor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="9" width="374" height="649"/>
+                                        <rect key="frame" x="0.0" y="-23" width="374" height="649"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="649"/>
@@ -193,7 +197,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9B-fp-34l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="773.60000000000002" y="163.26836581709148"/>
+            <point key="canvasLocation" x="1712.8" y="163.26836581709148"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YEq-pS-NGs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BMX-b6-VKV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hZ2-v5-aKG">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CfE-qk-HjI" kind="relationship" relationship="rootViewController" id="SHA-YI-IDy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RNq-to-jvI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="96.799999999999997" y="169.56521739130437"/>
         </scene>
     </scenes>
 </document>

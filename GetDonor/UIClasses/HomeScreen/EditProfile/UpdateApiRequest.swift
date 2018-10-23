@@ -12,8 +12,8 @@ import UIKit
 class UpdateProfileApiRequest: APIRequest {
     
     func makeRequest(forFuncion function: Api_EndPoint, parameters: [String:Any]) throws -> URLRequest {
-        let url = try? URLEncoder().urlWith(urlString: function.urlString, parameters: nil)
-        var urlRequest = URLRequest(url: url!)
+        let url = try URLEncoder().urlWith(urlString: function.urlString, parameters: nil)
+        var urlRequest = URLRequest(url: url)
         var image = UIImage()
         if let img = parameters["image"] as? UIImage {
             image = img
@@ -21,8 +21,8 @@ class UpdateProfileApiRequest: APIRequest {
         var inputParam = parameters
         inputParam["image"] = ""
         urlRequest.httpMethod = "POST"
-        let str = AppBaseURLs.apiSecretKey + AppConfig.getUserId() + "SET"
-        urlRequest.addValue(str.utf8.md5.description, forHTTPHeaderField: "Authorization")
+        //let str = AppBaseURLs.apiSecretKey + AppConfig.getUserId() + "SET"
+        urlRequest.addValue(url.getMD5WithSceretKey(), forHTTPHeaderField: "Authorization")
         let boundary = generateBoundaryString()
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         

@@ -17,13 +17,15 @@ class SignUpViewModel {
     }
     
     
-    func login(with userDetails:[String:String], andcompletionHandler result:@escaping(Result<String>)->Void) {
+    func signUp(with userDetails:[String:String], andcompletionHandler result:@escaping(Result<String>)->Void) {
         
         apiLoader.loadAPIRequest(forFuncion: .registration, requestData: userDetails) { (response, error) in
             
             if let response = response {
                 
                 if response.message == "successful"{
+                    AppConfig.setUserId(id: response.userDetails?.userId ?? "")
+                    AppConfig.setUserLoggedIn(status: true)
                     result(.Success)
                     
                 }else

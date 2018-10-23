@@ -22,6 +22,7 @@ class VideoDetailsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Videos"
         playerView.delegate = self
         showLoader(onViewController: self)
         doInitialConfig()

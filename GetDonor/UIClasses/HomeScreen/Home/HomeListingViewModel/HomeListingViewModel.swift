@@ -9,7 +9,7 @@
 import Foundation
 
 enum HomeScreenCellType: String {
-    case video = "1", artical = "0", photo = "3", event = "2", promotional = "5"
+    case video = "1", artical = "0", photo = "3", event = "2", promotional = "5", social 
 }
 
 class HomeListingViewModel {
@@ -35,12 +35,9 @@ class HomeListingViewModel {
             }
             
             if let response = apiResponse{
-                
-                
                 weakSelf.homeApiResponse = response
                 weakSelf.cellTypes = weakSelf.getCellType(model: response)
                 result(.Success)
-                
             }
             else
             {
@@ -71,8 +68,9 @@ class HomeListingViewModel {
         if let videos = model.contents?.video, videos.count > 0 {
             cellTypes.append(.video)
         }
-
-        
+        if let social = model.contents?.social, social.count > 0{
+            cellTypes.append(.social)
+        }
         return cellTypes
         
     }

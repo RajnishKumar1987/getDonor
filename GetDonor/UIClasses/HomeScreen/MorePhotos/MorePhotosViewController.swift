@@ -15,7 +15,7 @@ class MorePhotosViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Phots"
+        self.title = "Photos"
         doInitialConfig()
         enableRefresh()
         shouldShowSearchBar(value: true, viewController: self)
@@ -166,7 +166,7 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
         
         switch indexPath.section {
         case 0:
-            return CGSize(width: collectionView.frame.size.width, height: 35)
+            return CGSize(width: collectionView.frame.size.width, height: 0)
             
         default:
             

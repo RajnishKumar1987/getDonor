@@ -21,7 +21,7 @@ struct DesireModel: Codable {
 }
 
 struct Response: Codable {
-    var corousal: [String]? = []
+    var corousal: [ContentDataModel]? = []
     var textBody: [BodyText]? = []
     
     enum CodingKeys: String, CodingKey {
@@ -30,6 +30,7 @@ struct Response: Codable {
     }
     
 }
+
 
 struct BodyText: Codable {
     

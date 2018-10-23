@@ -20,6 +20,8 @@ class PhotoViewerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Photos"
+
         guard viewModel.model.images.count > 0 else {
             return
         }

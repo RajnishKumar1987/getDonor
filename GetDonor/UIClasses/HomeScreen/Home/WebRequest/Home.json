@@ -1,0 +1,324 @@
+{
+    "error": 0,
+    "message": "successful",
+    "node": {
+        "special_page": [
+                         {
+                         "id": "1",
+                         "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+                         "image": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+                         "insertdate": "2018-08-19 10:38:47",
+                         "updatedate": null,
+                         "status": "1",
+                         "priority": "11",
+                         "type": "5",
+                         "s_url": "http://www.google.com/special_page-1"
+                         },
+                         {
+                         "id": "2",
+                         "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+                         "image": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+                         "insertdate": "2018-08-19 10:38:47",
+                         "updatedate": null,
+                         "status": "1",
+                         "priority": "12",
+                         "type": "5",
+                         "s_url": "http://www.google.com/special_page-2"
+                         },
+                         {
+                         "id": "3",
+                         "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+                         "image": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+                         "insertdate": "2018-08-19 10:38:47",
+                         "updatedate": null,
+                         "status": "1",
+                         "priority": "13",
+                         "type": "5",
+                         "s_url": "http://www.google.com/special_page-3"
+                         },
+                         {
+                         "id": "4",
+                         "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+                         "image": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+                         "insertdate": "2018-08-19 10:38:47",
+                         "updatedate": null,
+                         "status": "1",
+                         "priority": "14",
+                         "type": "5",
+                         "s_url": "http://www.google.com/special_page-4"
+                         },
+                         {
+                         "id": "5",
+                         "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+                         "image": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+                         "insertdate": "2018-08-19 10:38:47",
+                         "updatedate": null,
+                         "status": "1",
+                         "priority": "15",
+                         "type": "5",
+                         "s_url": "http://www.google.com/special_page-5"
+                         },
+                         {
+                         "id": "6",
+                         "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+                         "image": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+                         "insertdate": "2018-08-19 10:38:47",
+                         "updatedate": null,
+                         "status": "1",
+                         "priority": "16",
+                         "type": "5",
+                         "s_url": "http://www.google.com/special_page-6"
+                         },
+                         {
+                         "id": "7",
+                         "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+                         "image": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+                         "insertdate": "2018-08-19 10:38:47",
+                         "updatedate": null,
+                         "status": "1",
+                         "priority": "17",
+                         "type": "5",
+                         "s_url": "http://www.google.com/special_page-7"
+                         },
+                         {
+                         "id": "8",
+                         "title": "Muslim Man Breaks Ramzan Fast By Donating Blood To Infant",
+                         "image": "https://www.getdonor.org/media/content/2018/06/artical5.jpg",
+                         "insertdate": "2018-08-19 10:38:47",
+                         "updatedate": null,
+                         "status": "1",
+                         "priority": "18",
+                         "type": "5",
+                         "s_url": "http://www.google.com/special_page-8"
+                         }
+                         ],
+        "article": [
+                    {
+                    "id": "118",
+                    "title": "Kerala is in the midst of an unprecedented flood havoc",
+                    "image": "https://www.getdonor.org/media/content/2018/08/211051181534591925-PTI8_9_2018_000283BL_1533885130__rend_16_9.jpg",
+                    "description": "Kerala is in the midst of an unprecedented flood havoc. The calamity has caused immeasurable misery and devastation. Many lives were lost. Hundreds of homes were totally destroyed and many more were damaged. For the first time in history, 27 dams in the State had to be opened. Never before had the State witnessed a calamity of this scale. In the fight against the flood, we have braved the odds.Now it is our duty to help the affected rebuild their lives. The path to recovery can be long &amp; arduous, but you can make a difference by joining the rebuilding efforts. Contribute generously to the Chief Minister&#039;s Distress Relief Fund.",
+                    "data": null,
+                    "type": "0",
+                    "insertdate": "2018-08-21 10:51:18",
+                    "updatedate": null,
+                    "status": "1",
+                    "priority": "0",
+                    "s_url": "http://www.google.com/article-118"
+                    }
+                    ],
+        "photo": [
+                  {
+                  "id": "115",
+                  "title": "Bhushan jadhav",
+                  "image": "https://www.getdonor.org/media/content/2018/07/30065616bhushanjadhav.jpg",
+                  "description": null,
+                  "data": null,
+                  "type": "3",
+                  "insertdate": "2018-07-30 06:56:16",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "1",
+                  "s_url": "http://www.google.com/photo-115"
+                  },
+                  {
+                  "id": "114",
+                  "title": "Yogesh Vidhate",
+                  "image": "https://www.getdonor.org/media/content/2018/07/26011140IMG_20180222_181645%20Cropped.jpg",
+                  "description": null,
+                  "data": null,
+                  "type": "3",
+                  "insertdate": "2018-07-26 13:11:40",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "2",
+                  "s_url": "http://www.google.com/photo-114"
+                  }
+                  ],
+        "event": [
+                  {
+                  "id": "123",
+                  "title": "Mahindra And Mahindra",
+                  "image": "https://www.getdonor.org/media/content/2018/08/2202003312_2.jpg",
+                  "description": null,
+                  "data": [
+                           {
+                           "id": 1,
+                           "title": "Employees",
+                           "image": "https://www.getdonor.org/media/content/2018/08/2202003312_2.jpg"
+                           },
+                           {
+                           "id": 2,
+                           "title": "emp",
+                           "image": "https://www.getdonor.org/media/content/2018/08/2202003312-_1.jpg"
+                           },
+                           {
+                           "id": 3,
+                           "title": "test",
+                           "image": "https://www.getdonor.org/media/content/2018/08/2202003312_4.jpg"
+                           },
+                           {
+                           "id": 4,
+                           "title": "test3",
+                           "image": "https://www.getdonor.org/media/content/2018/08/2202003312_5.jpg"
+                           }
+                           ],
+                  "type": "2",
+                  "insertdate": "2018-08-22 14:00:33",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "0",
+                  "s_url": "http://www.google.com/event-123"
+                  },
+                  {
+                  "id": "124",
+                  "title": "Blood Donation Camp",
+                  "image": "https://www.getdonor.org/media/content/2018/08/2202072716.jpg",
+                  "description": null,
+                  "data": [
+                           {
+                           "id": 1,
+                           "title": "alll",
+                           "image": "https://www.getdonor.org/media/content/2018/08/2202072716.jpg"
+                           },
+                           {
+                           "id": 2,
+                           "title": "test",
+                           "image": "https://www.getdonor.org/media/content/2018/08/2202072714.jpg"
+                           },
+                           {
+                           "id": 3,
+                           "title": "check",
+                           "image": "https://www.getdonor.org/media/content/2018/08/2202072714.jpg"
+                           }
+                           ],
+                  "type": "2",
+                  "insertdate": "2018-08-22 14:07:27",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "0",
+                  "s_url": "http://www.google.com/event-124"
+                  }
+                  ],
+        "video": [
+                  {
+                  "id": "116",
+                  "title": "#AllForKerala :- donation.cmdrf.kerala.gov.in",
+                  "image": "https://www.getdonor.org/media/content/2018/08/19103847unnamed%20(1)%20(1).jpg",
+                  "description": "#AllForKerala :- donation.cmdrf.kerala.gov.in",
+                  "data": [
+                           {
+                           "video_title": "#AllForKerala :- donation.cmdrf.kerala.gov.in",
+                           "vu": "https://www.youtube.com/embed/WMBtqPgCsvM",
+                           "cap": "#AllForKerala :- donation.cmdrf.kerala.gov.in"
+                           }
+                           ],
+                  "type": "1",
+                  "insertdate": "2018-08-19 10:38:47",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "0",
+                  "s_url": "http://www.google.com/video-116"
+                  },
+                  {
+                  "id": "108",
+                  "title": "Appeal for blood donation in different languages",
+                  "image": "https://www.getdonor.org/media/content/2018/07/01122559language1_cms.jpg",
+                  "description": "Appeal for blood donation in different languages",
+                  "data": [
+                           {
+                           "video_title": "Appeal for blood donation in different languages",
+                           "vu": "https://www.youtube.com/embed/aXtGp5OiOkU",
+                           "cap": "Appeal for blood donation in different languages"
+                           }
+                           ],
+                  "type": "1",
+                  "insertdate": "2018-07-01 12:25:59",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "1",
+                  "s_url": "http://www.google.com/video-108"
+                  },
+                  {
+                  "id": "107",
+                  "title": "App Release In Ocean",
+                  "image": "https://www.getdonor.org/media/content/2018/07/01122431promotion_cms.jpg",
+                  "description": "App Release In Ocean",
+                  "data": [
+                           {
+                           "video_title": "App Release In Ocean",
+                           "vu": "https://www.youtube.com/embed/DDxtJ1-HQ60",
+                           "cap": "App Release In Ocean"
+                           }
+                           ],
+                  "type": "1",
+                  "insertdate": "2018-07-01 12:24:31",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "2",
+                  "s_url": "http://www.google.com/video-107"
+                  },
+                  {
+                  "id": "111",
+                  "title": "Red Revolution - Sachin Nikam",
+                  "image": "https://www.getdonor.org/media/content/2018/07/06102508sachin.jpg",
+                  "description": "Red Revolution - Sachin Nikam",
+                  "data": [
+                           {
+                           "video_title": "Red Revolution - Sachin Nikam",
+                           "vu": "https://www.youtube.com/embed/D3utXxHZ2-s",
+                           "cap": "Red Revolution - Sachin Nikam"
+                           }
+                           ],
+                  "type": "1",
+                  "insertdate": "2018-07-06 10:25:08",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "3",
+                  "s_url": "http://www.google.com/video-111"
+                  },
+                  {
+                  "id": "110",
+                  "title": "Red Revolution - Vijay Chavan",
+                  "image": "https://www.getdonor.org/media/content/2018/07/06102352vijay.jpg",
+                  "description": "Red Revolution - Vijay Chavan",
+                  "data": [
+                           {
+                           "video_title": "Red Revolution - Vijay Chavan",
+                           "vu": "https://www.youtube.com/embed/GGCVZmj4KWs",
+                           "cap": "Red Revolution - Vijay Chavan"
+                           }
+                           ],
+                  "type": "1",
+                  "insertdate": "2018-07-06 10:23:52",
+                  "updatedate": null,
+                  "status": "1",
+                  "priority": "4",
+                  "s_url": "http://www.google.com/video-110"
+                  }
+                  ],
+        "follow_us_on": [
+                         {
+                         "image": "http://getdonor.org/common/images/con_fb.jpg",
+                         "link": "https://www.facebook.com/getdonor.org",
+                         "title":"Facebook"
+                         },
+                         {
+                         "image": "http://getdonor.org/common/images/insta.png",
+                         "link": "https://www.instagram.com/getadonor/",
+                         "title": "Instagram"
+                         },
+                         {
+                         "image": "http://getdonor.org/common/images/youtube.png",
+                         "link": "https://www.youtube.com/channel/UC0gY_SuBrfy7bPUapVHEngA",
+                         "title": "Youtube"
+                         },
+                         {
+                         "image": "http://getdonor.org/common/images/con_tweet.jpg",
+                         "link": "https://twitter.com/DonorGet",
+                         "title": "twitter"
+                         }
+                         
+                         ]
+    }
+}

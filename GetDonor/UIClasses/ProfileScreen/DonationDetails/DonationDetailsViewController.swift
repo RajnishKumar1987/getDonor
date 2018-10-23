@@ -67,6 +67,14 @@ class DonationDetailsViewController: BaseViewController {
     }
     
     func updateEndowmentDetails() {
+        
+        if viewModel.myDonation.message == "unsuccessful"{
+            tableview.addBgViewWith(message: "Record not found!")
+        }
+        else{
+            tableview.addBgViewWith(message: "")
+        }
+
         switch selectedDonationDetailsType {
         case .allDonations:
             if let usedEnd = viewModel.allDonations.usedEndowment{
@@ -99,7 +107,7 @@ class DonationDetailsViewController: BaseViewController {
             }
         case 1:
             selectedDonationDetailsType = .myDonation
-            if viewModel.myDonation.transactions.count > 0{
+            if viewModel.myDonation.transactions.count > 0 || viewModel.myDonation.message == "unsuccessful"{
                 tableview.reloadData()
                 updateEndowmentDetails()
             }
@@ -154,6 +162,7 @@ extension DonationDetailsViewController: DonationDetailsTableViewCellDelegate{
         self.performSegue(withIdentifier: "openWebView", sender: receiptUrl)
     }
 }
+
 
 
 

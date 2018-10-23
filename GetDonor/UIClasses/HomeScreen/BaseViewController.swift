@@ -52,6 +52,8 @@ class BaseViewController: UIViewController {
         }
         if let _ = tableview {
             tableview.registerCell(CarouselTableViewCell.self)
+            tableview.separatorInset.left = 15
+            tableview.separatorInset.right = 15
         }
         addProfileButton()
         
@@ -101,9 +103,9 @@ class BaseViewController: UIViewController {
         
     }
     func addProfileButton() {
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile"), style: .plain, target: self, action: #selector(openProfileScreen))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile"), style: .plain, target: self, action: #selector(openProfileScreen))
     }
+    
     
     @objc func openProfileScreen() {
         

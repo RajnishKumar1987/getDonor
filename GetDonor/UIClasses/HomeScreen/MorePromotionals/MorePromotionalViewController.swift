@@ -14,6 +14,7 @@ class MorePromotionalViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Promos"
         tableview.estimatedRowHeight = 240
         tableview.rowHeight = UITableViewAutomaticDimension
         showLoader(onViewController: self)

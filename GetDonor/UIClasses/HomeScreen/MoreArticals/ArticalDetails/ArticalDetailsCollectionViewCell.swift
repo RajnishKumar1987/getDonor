@@ -57,9 +57,16 @@ extension ArticalDetailsCollectionViewCell: UITableViewDataSource, UITableViewDe
             return cell
         default:
             let cell: ArticalDeatilsTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.lblTitle.text = model?.description
-            cell.lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
-            cell.lblTitle.textColor = UIColor.darkGray
+            
+            if let attributedString = model?.description?.htmlToAttributedString{
+                cell.lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
+                let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
+                attributedString.addAttribute(.font, value: UIFont.fontWithTextStyle(textStyle: .headline), range: range)
+                attributedString.addAttribute(.font, value: UIFont.fontWithTextStyle(textStyle: .title2), range: NSRange(location: 1, length: attributedString.string.count - 1))
+                cell.lblTitle.attributedText = attributedString
+                cell.lblTitle.textColor = UIColor.darkGray
+                cell.lblTitle.textAlignment = .justified
+            }
             return cell
             
         }

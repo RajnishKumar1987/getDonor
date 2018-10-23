@@ -20,11 +20,12 @@ struct HomeListingModel: Codable {
 
 struct Content: Codable {
     
-    var article: [ContentDataModel] = []
-    var event: [ContentDataModel] = []
-    var video: [ContentDataModel] = []
-    var photo: [ContentDataModel] = []
-    var topBanner: [ContentDataModel] = []
+    var article: [ContentDataModel]? = []
+    var event: [ContentDataModel]? = []
+    var video: [ContentDataModel]? = []
+    var photo: [ContentDataModel]? = []
+    var topBanner: [ContentDataModel]? = []
+    var social: [Social]? 
     
     enum CodingKeys: String, CodingKey {
         case article
@@ -32,6 +33,7 @@ struct Content: Codable {
         case video
         case photo
         case topBanner = "special_page"
+        case social = "follow_us_on"
     }
 
 }
@@ -66,6 +68,12 @@ struct ExtraData:Codable {
         case playbackUrl = "vu"
         case imageUrl = "image"
     }
+}
+
+struct Social: Codable {
+    var image: String?
+    var link: String?
+    var title: String?
 }
 
 

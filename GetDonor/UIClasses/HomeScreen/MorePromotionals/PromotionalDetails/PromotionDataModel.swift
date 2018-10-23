@@ -32,17 +32,16 @@ struct PromotionDetails: Codable {
 }
 
 struct PromotionData: Codable {
-    var image: [String] = []
+    var image: [ContentList] = []
     var text: String?
     var insertdate: String?
     var updatedate: String?
     var priority: String?
     var status: String?
-    var video: [VideoList] = []
-    
+    var video: [ContentList] = []    
 }
 
-struct VideoList: Codable {
+struct ContentList: Codable {
     var image: String?
     var videoid: String?
     var id: String?

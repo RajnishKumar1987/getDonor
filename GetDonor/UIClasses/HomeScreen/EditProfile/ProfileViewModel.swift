@@ -27,6 +27,9 @@ class ProfileViewModel {
             if let response = response {
                 if response.message == "successful"{
                     self?.model = response
+                    if let imageURL = response.user?.image{
+                        AppConfig.setUserProfileImageUrl(urlString: imageURL)
+                    }
                     result(.Success)
                 }else
                 {
@@ -59,7 +62,9 @@ class ProfileViewModel {
                     if let bloodGroup = response.user?.b_group{
                         AppConfig.setUserBloodGroup(bgroupId: bloodGroup)
                     }
-                    
+                    if let imageURL = response.user?.image{
+                        AppConfig.setUserProfileImageUrl(urlString: imageURL)
+                    }
                     result(.Success)
                 }else
                 {

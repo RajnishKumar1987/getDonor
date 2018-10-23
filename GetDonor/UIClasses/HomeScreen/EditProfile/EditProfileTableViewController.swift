@@ -13,7 +13,7 @@ protocol EditProfileViewControllerDelegate: class{
 }
 
 class EditProfileTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var lblFirstName: UILabel!
     @IBOutlet weak var txtFirstName: UITextField!
     @IBOutlet weak var lblLastName: UILabel!
@@ -32,7 +32,7 @@ class EditProfileTableViewController: UITableViewController {
     @IBOutlet weak var txtDOB: UITextField!
     @IBOutlet weak var lblState: UILabel!
     @IBOutlet weak var txtState: UITextField!
-
+    
     @IBOutlet weak var btnUpdate: UIButton!
     
     var profileImage: UIImage!
@@ -45,7 +45,7 @@ class EditProfileTableViewController: UITableViewController {
     var datePickerView: UIDatePicker!
     var selectedTxtField = UITextField()
     let toolBar = UIToolbar()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,6 @@ class EditProfileTableViewController: UITableViewController {
         //tableView.alpha = 0
         initilizeToolBar()
         loadUserDetails()
-        loadDatePicker()
         addTapGesture()
         
     }
@@ -74,43 +73,43 @@ class EditProfileTableViewController: UITableViewController {
     }
     
     func setUpUI()  {
-        lblFirstName.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        lblFirstName.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtFirstName.font = UIFont.fontWithTextStyle(textStyle: .title1)
         
-        lblLastName.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        lblLastName.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtLastName.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
-        lblMobile.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        
+        lblMobile.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtMobile.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
-        lblEmail.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        
+        lblEmail.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtEmail.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
-        lblBloodGroup.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        
+        lblBloodGroup.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtBloodGroup.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
-        lblCountry.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        
+        lblCountry.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtCountry.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
-        lblCity.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        
+        lblCity.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtCity.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
-        lblDOB.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        
+        lblDOB.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtDOB.font = UIFont.fontWithTextStyle(textStyle: .title1)
         
-        txtState.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        lblState.font = UIFont.fontWithTextStyle(textStyle: .title2_bold)
         txtState.font = UIFont.fontWithTextStyle(textStyle: .title1)
-
+        
         btnUpdate.titleLabel?.font = UIFont.fontWithTextStyle(textStyle: .headline)
         btnUpdate.makeCornerRadiusWithValue(15.0, borderColor: nil)
         btnUpdate.backgroundColor = UIColor.colorFor(component: .button)
         btnUpdate.tintColor = UIColor.white
-
+        
     }
     
     func loadPickerView() {
-
         
+        removeLoader(form: self.pickerView)
         let values = Array(cscViewModel.dataToPopulate.values).sorted(by: <)
         
         if (selectedTxtField.text?.count)! > 0 {
@@ -119,11 +118,11 @@ class EditProfileTableViewController: UITableViewController {
                 self.pickerView.delegate?.pickerView!(self.pickerView, didSelectRow: index, inComponent: 0)
                 self.pickerView.selectRow(index, inComponent: 0, animated: false)
             }
-            else{
-                 selectedTxtField.text = values[0]
-                 self.pickerView.selectRow(0, inComponent: 0, animated: true)
-
-            }
+            
+        }else{
+            selectedTxtField.text = values[0]
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            
         }
         
     }
@@ -139,7 +138,7 @@ class EditProfileTableViewController: UITableViewController {
         
         toolBar.setItems([ spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
-
+        
     }
     
     func loadUserDetails() {
@@ -165,9 +164,19 @@ class EditProfileTableViewController: UITableViewController {
         datePickerView  = UIDatePicker()
         datePickerView.datePickerMode = .date
         datePickerView.maximumDate = Date(timeIntervalSinceNow: 0)
-
+        
         datePickerView.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         txtDOB.inputView = datePickerView
+        
+        if let dateString = txtDOB.text {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat =  "yyyy-MM-dd"
+
+            if let date = dateFormatter.date(from: dateString){
+                datePickerView.date = date
+            }
+            
+        }
         
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
@@ -191,13 +200,13 @@ class EditProfileTableViewController: UITableViewController {
         if selectedTxtField == txtState {
             cscViewModel.selectedState = txtState.text!
         }
-
+        
     }
     
     @objc func dateChanged(_ sender: UIDatePicker) {
         txtDOB.text = sender.date.getDateString(format: "yyyy-MM-dd")
     }
-
+    
     func populateData() {
         txtFirstName.text = viewModel.model.user?.firstname
         txtLastName.text = viewModel.model.user?.lastname
@@ -214,35 +223,37 @@ class EditProfileTableViewController: UITableViewController {
         if let vc = self.parent as? EditProfileViewController{
             vc.imgProfile.loadImage(from: viewModel.model.user?.image, shouldCache: false)
         }
+        loadDatePicker()
+
     }
     
     @IBAction func actionUpdate(_ sender: UIButton) {
         
-    if doValidation() {
-        
-        self.btnUpdate.loadingIndicator(show: true)
-        let userDetails : [String:Any] = ["phone": txtMobile.text!,
-                               "firstname":txtFirstName.text!,
-                               "lastname":txtLastName.text!,
-                               "city":txtCity.text!,
-                               "country":txtCountry.text!,
-                               "state":txtState.text!,
-                               "b_group":"6",
-                               "dob":txtDOB.text!,
-                              "image": profileImage
-                               ]
+        if doValidation() {
+            self.btnUpdate.loadingIndicator(show: true)
+            let userDetails : [String:Any] = ["phone": txtMobile.text!,
+                                              "firstname":txtFirstName.text!,
+                                              "lastname":txtLastName.text!,
+                                              "city":txtCity.text!,
+                                              "country":txtCountry.text!,
+                                              "state":txtState.text!,
+                                              "b_group":bloodGroups[txtBloodGroup.text!] ?? "",
+                                              "dob":txtDOB.text!,
+                                              "image": profileImage
+            ]
             
             viewModel.updateUserProfile(for: AppConfig.getUserId(), action: .set, userDetails: userDetails) { [weak self](result) in
                 self?.btnUpdate.loadingIndicator(show: false)
                 switch result{
                 case .Success:
                     print("Success")
+                    self?.populateData()
                     self?.navigationController?.popViewController(animated: true)
                 case .failure(let msg):
                     print(msg)
                 }
             }
-       }
+        }
     }
     
     func doValidation() -> Bool {
@@ -267,7 +278,7 @@ class EditProfileTableViewController: UITableViewController {
             showMessage(with: "DOB can't be empty.")
             return false
         }
-
+        
         return true
     }
     
@@ -287,18 +298,20 @@ extension EditProfileTableViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
+        cscViewModel.dataToPopulate = [:]
         selectedTxtField = textField
         self.pickerView  = UIPickerView()
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
-
         textField.inputView = pickerView
         textField.inputAccessoryView = toolBar
+        self.addLoaderView(to: self.pickerView)
         
         if textField == txtCountry {
-            if cscViewModel.shouldMakeCallToFetchCSCListing(for: .country, and: "") {
+            if cscViewModel.shouldMakeCallToFetchCSCListing(for: .country, and: self.txtCountry.text!) {
                 getCountryList(cscType: .country, id: "")
             }else{
+                loadPickerView()
                 pickerView.reloadAllComponents()
             }
         }
@@ -307,15 +320,16 @@ extension EditProfileTableViewController: UITextFieldDelegate{
             if (txtCountry.text?.isEmpty)!{
                 return
             }
-            if cscViewModel.shouldMakeCallToFetchCSCListing(for: .state, and: txtCountry.text!) {
+            if cscViewModel.shouldMakeCallToFetchCSCListing(for: .state, and: txtState.text!) {
                 
                 if let countryId = cscViewModel.countryName.someKey(forValue: txtCountry.text!){
                     getCountryList(cscType: .state, id: countryId)
                 }
             }else{
+                loadPickerView()
                 pickerView.reloadAllComponents()
             }
-
+            
         }
         
         if textField == txtCity {
@@ -326,8 +340,9 @@ extension EditProfileTableViewController: UITextFieldDelegate{
                 if let stateId = cscViewModel.stateName.someKey(forValue: txtState.text!){
                     getCountryList(cscType: .city, id: stateId)
                 }
-
+                
             }else{
+                loadPickerView()
                 pickerView.reloadAllComponents()
             }
             
@@ -351,7 +366,31 @@ extension EditProfileTableViewController: UIPickerViewDataSource, UIPickerViewDe
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
         let values = Array(self.cscViewModel.dataToPopulate.values).sorted(by: <)
-        selectedTxtField.text = values[row]
+        
+        if values.count > 0 && values.count >= row {
+            selectedTxtField.text = values[row]
+        }
+    }
+    
+}
+
+extension EditProfileTableViewController {
+    
+    func addLoaderView(to someView: UIView) {
+        let bgView = UIView(frame: CGRect(x: 0, y: (self.pickerView.bounds.height - 50) / 2, width: UIScreen.main.bounds.width, height: 50))
+        let activityIndi = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndi.frame = bgView.bounds
+        bgView.addSubview(activityIndi)
+        activityIndi.startAnimating()
+        bgView.backgroundColor = .clear
+        bgView.tag = 1001
+        someView.addSubview(bgView)
+    }
+    
+    func removeLoader(form someView: UIView) {
+        if let viewWithTag = someView.viewWithTag(1001) {
+            viewWithTag.removeFromSuperview()
+        }
     }
     
 }

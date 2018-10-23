@@ -15,7 +15,7 @@ class PromotionDetailsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.title = "Promotion Details"
+        self.title = "Promo Details"
         tableview.estimatedRowHeight = 50
         tableview.rowHeight = UITableViewAutomaticDimension
         loadPromotion()
@@ -60,9 +60,15 @@ extension PromotionDetailsViewController: UITableViewDataSource, UITableViewDele
             return cell
         case .description:
             let cell: PromotionTitleTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.lblTitle.text = viewModel.model.response?.extraData?.text
-            cell.lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
-            cell.lblTitle.textAlignment = .justified
+            if let attributedString = viewModel.model.response?.extraData?.text?.htmlToAttributedString{
+                cell.lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
+                let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
+                attributedString.addAttribute(.font, value: UIFont.fontWithTextStyle(textStyle: .headline), range: range)
+                attributedString.addAttribute(.font, value: UIFont.fontWithTextStyle(textStyle: .title2), range: NSRange(location: 1, length: attributedString.string.count - 1))
+                cell.lblTitle.attributedText = attributedString
+                cell.lblTitle.textColor = UIColor.darkGray
+                cell.lblTitle.textAlignment = .justified
+            }
             return cell
         case .vidoes:
             let cell: CarouselTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)

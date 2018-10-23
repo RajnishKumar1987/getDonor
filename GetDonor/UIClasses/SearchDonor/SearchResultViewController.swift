@@ -17,7 +17,7 @@ class SearchResultViewController: BaseViewController {
         super.viewDidLoad()
         tableview.estimatedRowHeight = 120
         tableview.rowHeight = UITableViewAutomaticDimension
-        self.title = "Near by Doners"
+        self.title = "Near by Donors"
         showLoader(onViewController: self)
         searchDonor()
         disableRefresh()

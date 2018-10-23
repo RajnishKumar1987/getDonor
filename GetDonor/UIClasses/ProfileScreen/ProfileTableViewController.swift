@@ -90,6 +90,7 @@ class ProfileTableViewController: UITableViewController {
         //let messageBody = "Feature request or bug report?"
         let toRecipents = ["feedback@getdonor.org"]
         mc = MFMailComposeViewController()
+        guard (mc) != nil else { return }
         mc.mailComposeDelegate = self
         mc.setSubject(emailTitle)
         //mc.setMessageBody(messageBody, isHTML: false)

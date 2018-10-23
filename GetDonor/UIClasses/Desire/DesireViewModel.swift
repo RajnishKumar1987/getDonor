@@ -36,9 +36,9 @@ struct HeadeAndDescriptionCellViewModel: DesireCellViewModel {
 }
 struct CorousalCellViewModel: DesireCellViewModel {
     
-    var imagePathArray: [String]?
+    var imagePathArray: [ContentDataModel]?
     
-    init(with desireItem: [String]?) {
+    init(with desireItem: [ContentDataModel]?) {
         
         if let data = desireItem   {
             
@@ -99,9 +99,10 @@ class DesireViewModel {
         var contentModels = [ContentDataModel]()
         
         if let carousel = model?.response.corousal {
-            contentModels = carousel.compactMap({ (imageUrl) -> ContentDataModel in
-                ContentDataModel(id: "", image: imageUrl, title: "", insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue)
+            contentModels = carousel.compactMap({ (model) -> ContentDataModel in
+                ContentDataModel(id: model.id, image: model.image, title: model.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue)
             })
+            
         }
         return contentModels
     }

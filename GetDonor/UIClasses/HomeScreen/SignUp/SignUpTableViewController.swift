@@ -28,7 +28,7 @@ class SignUpTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        txtMobile.text = "8369150994"
+ //        txtMobile.text = "8369112345"
 //        txtEmail.text = "rajkumar@gmail.com"
 //        txtFirstName.text = "raj"
 //        txtLastName.text = "kumar"
@@ -112,18 +112,18 @@ class SignUpTableViewController: UITableViewController {
                          "phone": txtMobile.text!,
                          "firstname":txtFirstName.text!,
                          "lastname": txtLastName.text!,
-                         "version":"1.0.0",
                          "b_group": b_group
                          ]
             
 
-            viewModel.login(with: param) {[weak self] (result) in
+            viewModel.signUp(with: param) {[weak self] (result) in
                 
                 self?.btnSignUp.loadingIndicator(show: false)
 
                 switch (result){
                 case .Success:
                     print("Success")
+                    self?.performSegue(withIdentifier: "unwindSegueToHome", sender: nil)
                 case .failure(let msg):
                     self?.showError(with: msg)
                 }
@@ -197,7 +197,7 @@ class SignUpTableViewController: UITableViewController {
                     
                     DispatchQueue.main.async {
                         self?.txtMobile.text = phoneNumber.phoneNumber
-
+                        self?.txtEmail.becomeFirstResponder()
                     }
                 }
             }
@@ -228,19 +228,7 @@ class SignUpTableViewController: UITableViewController {
 
 
     func doValidation() -> Bool {
-        
-        if txtEmail.text?.isEmpty ?? true {
-            showMessage(with: "Email can't be empty.")
-            return false
-        }
-        if !(txtEmail.text?.isValidEmail())! {
-            showMessage(with: "Please enter a valid email.")
-            return false
-        }
-        if txtPassword.text?.isEmpty ?? true {
-            showMessage(with: "Password can't be empty.")
-            return false
-        }
+       
         if txtFirstName.text?.isEmpty ?? true {
             showMessage(with: "First name can't be empty.")
             return false
@@ -249,14 +237,31 @@ class SignUpTableViewController: UITableViewController {
             showMessage(with: "Last name can't be empty.")
             return false
         }
-        if txtPassword.text != txtConfirmPassword.text {
-            showMessage(with: "Your password and confirmation password do not match")
+        if txtMobile.text?.isEmpty ?? true {
+            showMessage(with: "Mobile number can't be empty.")
+            return false
+        }
+        if txtEmail.text?.isEmpty ?? true {
+            showMessage(with: "Email can't be empty.")
+            return false
+        }
+        if !(txtEmail.text?.isValidEmail())! {
+            showMessage(with: "Please enter a valid email.")
             return false
         }
         if txtBloodGroup.text?.isEmpty ?? true {
             showMessage(with: "Please select blood group.")
             return false
         }
+        if txtPassword.text?.isEmpty ?? true {
+            showMessage(with: "Password can't be empty.")
+            return false
+        }
+        if txtPassword.text != txtConfirmPassword.text {
+            showMessage(with: "Your password and confirmation password do not match")
+            return false
+        }
+       
         return true
     }
     
@@ -304,6 +309,31 @@ extension SignUpTableViewController: UITextFieldDelegate{
         if textField == txtBloodGroup {
             loadPickerView()
         }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == txtFirstName {
+            txtLastName.becomeFirstResponder()
+        }
+        if textField == txtLastName {
+            actionMobileButtonPressed(UIButton())
+        }
+        if textField == txtMobile {
+            txtEmail.becomeFirstResponder()
+        }
+        if textField == txtEmail {
+            txtBloodGroup.becomeFirstResponder()
+        }
+        if textField == txtBloodGroup {
+            txtPassword.becomeFirstResponder()
+        }
+        if textField == txtPassword {
+            txtConfirmPassword.becomeFirstResponder()
+        }
+        if textField == txtConfirmPassword {
+            actionSignUpButtonPressed(UIButton())
+        }
+        return true
     }
 }
 

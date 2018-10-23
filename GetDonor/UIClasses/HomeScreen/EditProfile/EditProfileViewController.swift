@@ -17,7 +17,7 @@ class EditProfileViewController: BaseViewController {
     weak var delegate: EditProfileTableViewController?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+       // super.viewDidLoad()
         hideProfileButton()
         self.title = "Edit Profile"
         doIniticalConfug()

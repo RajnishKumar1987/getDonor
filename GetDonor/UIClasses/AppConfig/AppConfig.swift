@@ -53,6 +53,15 @@ struct AppConfig {
         return UserDefaults.standard.string(forKey: "userBloodGroup") ?? ""
 
     }
+    
+    static func setUserProfileImageUrl(urlString: String) {
+        UserDefaults.standard.set(urlString, forKey: "userProfileImageUrl")
+        UserDefaults.standard.synchronize()
+    }
+    static func getUserProfileImageUrl() -> String? {
+        return UserDefaults.standard.string(forKey: "userProfileImageUrl") ?? nil
+    }
+
 
     
 }

@@ -17,7 +17,7 @@ class ArticalCollectionViewCell: UICollectionViewCell, CellReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         imageView.image = #imageLiteral(resourceName: "default")
-        lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
+        lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title1)
         lblDescription.font = UIFont.fontWithTextStyle(textStyle: .body)
     }
     override func prepareForReuse() {

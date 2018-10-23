@@ -14,12 +14,17 @@ class CarouselView: UIView {
     var itemIndex: Int = 0
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var playIcon: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
     
     override init(frame: CGRect) {
         
         super.init(frame: frame)
         
         setupView()
+    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,7 +35,6 @@ class CarouselView: UIView {
     }
     
     func setupView() {
-        
         let nibView = Bundle.main.loadNibNamed("CarouselView", owner: self, options: nil)?.first as! UIView
         nibView.frame = self.bounds
         nibView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

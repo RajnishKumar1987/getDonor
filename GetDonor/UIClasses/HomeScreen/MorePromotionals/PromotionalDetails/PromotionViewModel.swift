@@ -54,10 +54,11 @@ class PromotionViewModel {
         switch cellType {
         case .image:
             if let images = model.response?.extraData?.image{
-                    dataModel =  images.compactMap { (imageUrl) -> ContentDataModel? in
-                    ContentDataModel(id: "", image: imageUrl, title: model.response?.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: String(ContentType.photo.rawValue))
+                dataModel =  images.compactMap({ (imageList) -> ContentDataModel? in
+                    ContentDataModel(id: imageList.id, image: imageList.image, title: imageList.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: String(ContentType.photo.rawValue))
+                })
                 }
-            }
+            
         case .vidoes:
             if let videos = model.response?.extraData?.video{
                 dataModel =  videos.compactMap({ (video) -> ContentDataModel? in
