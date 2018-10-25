@@ -87,7 +87,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fGh-hP-Mmu"/>
                     </view>
-                    <navigationItem key="navigationItem" id="G1X-TF-7Cl"/>
+                    <navigationItem key="navigationItem" id="G1X-TF-7Cl">
+                        <barButtonItem key="backBarButtonItem" title=" " id="qvg-aZ-g5n"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="listingContainerButtomConstaraints" destination="SEg-mq-9cr" id="CJS-Bj-7Qo"/>
                         <outlet property="tableview" destination="BDC-WK-ot9" id="WD2-fe-Bhc"/>

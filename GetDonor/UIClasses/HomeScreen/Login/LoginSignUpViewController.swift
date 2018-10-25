@@ -83,7 +83,13 @@ class LoginSignUpViewController: UITableViewController {
                 switch (result){
                 case .Success:
                     print("Success")
-                    self?.performSegue(withIdentifier: "unwindSegueToHome", sender: nil)
+                    if (self?.loginViewModel.model.userDetails?.shouldShowUpdateFrofile)!{
+                        self?.performSegue(withIdentifier: "unwindSegueToHome", sender: nil)
+                    }
+                    else{
+                        NotificationCenter.default.post(name: .loginSuccessful, object: nil)
+                        self?.dismiss(animated: true, completion: nil)
+                    }
                 case .failure(let msg):
                     self?.showMessage(with: msg)
                 }

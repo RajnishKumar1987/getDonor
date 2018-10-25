@@ -26,6 +26,8 @@ class SignUpViewModel {
                 if response.message == "successful"{
                     AppConfig.setUserId(id: response.userDetails?.userId ?? "")
                     AppConfig.setUserLoggedIn(status: true)
+                    LocationManager.sharedInstance.startLocaitonService()
+                    appDelegate.registerForPushNotifications()
                     result(.Success)
                     
                 }else

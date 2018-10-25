@@ -68,8 +68,8 @@ class DonationDetailsViewController: BaseViewController {
     
     func updateEndowmentDetails() {
         
-        if viewModel.myDonation.message == "unsuccessful"{
-            tableview.addBgViewWith(message: "Record not found!")
+        if viewModel.myDonation.error == 1{
+            tableview.addBgViewWith(message: viewModel.myDonation.message)
         }
         else{
             tableview.addBgViewWith(message: "")
@@ -107,7 +107,7 @@ class DonationDetailsViewController: BaseViewController {
             }
         case 1:
             selectedDonationDetailsType = .myDonation
-            if viewModel.myDonation.transactions.count > 0 || viewModel.myDonation.message == "unsuccessful"{
+            if viewModel.myDonation.transactions.count > 0 || viewModel.myDonation.error == 1{
                 tableview.reloadData()
                 updateEndowmentDetails()
             }

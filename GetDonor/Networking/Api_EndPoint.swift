@@ -37,7 +37,7 @@ enum Api_EndPoint {
     case getImage(urlString: String)
     case getListing
     case getSimilar
-    case login
+    case login(userName: String, password: String)
     case registration
     case getProfile
     case getPaymentInfo
@@ -65,8 +65,8 @@ enum Api_EndPoint {
             return imageUrl
         case .getSimilar:
             return AppBaseURLs.baseUrl.appending("similar.php")
-        case .login:
-            return AppBaseURLs.baseUrl.appending("login.php")
+        case .login(let userName, let password):
+            return AppBaseURLs.baseUrl.appending("login.php?username=\(userName)&password=\(password)")
         case .registration:
             return AppBaseURLs.baseUrl.appending("registration.php")
         case .getProfile:

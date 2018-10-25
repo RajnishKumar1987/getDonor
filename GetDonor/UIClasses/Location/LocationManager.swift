@@ -35,6 +35,10 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
 
     }
     
+    func stopLocationUpdate() {
+        locationManager.stopUpdatingLocation()
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }

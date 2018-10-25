@@ -73,6 +73,13 @@
                                     <outlet property="delegate" destination="k68-V1-Ejl" id="5Ht-pb-Tq2"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9X-IK-XRe">
+                                <rect key="frame" x="13" y="76" width="350" height="144"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -91,6 +98,7 @@
                         <outlet property="collectionView" destination="hj0-BE-BN1" id="6w9-Lv-6Ch"/>
                         <outlet property="collectionViewBottomConstraints" destination="Q2q-TU-Xgh" id="5aC-6j-LLz"/>
                         <outlet property="imageView" destination="3QH-Ie-YfN" id="Ply-Wr-KuK"/>
+                        <outlet property="lblTitle" destination="O9X-IK-XRe" id="0Rz-on-U5j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRu-KS-Gd3" userLabel="First Responder" sceneMemberID="firstResponder"/>

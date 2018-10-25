@@ -440,6 +440,11 @@ extension String {
         return htmlToAttributedString?.string ?? ""
     }
 }
+extension Notification.Name {
+    static let loginSuccessful = Notification.Name(
+        rawValue: "loginSuccessful")
+}
+
 
 
 

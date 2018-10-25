@@ -126,7 +126,10 @@ extension MoreEventsViewController: UITableViewDataSource, UITableViewDelegate{
         let vc = storyboard.instantiateViewController(withIdentifier: "PhotoViewerViewController") as! PhotoViewerViewController
         vc.selectedIndex = IndexPath(item: 0, section: 0)
         if let extraData = model.data {
-            vc.viewModel = PhotoViewerViewModel(with: extraData)
+            //vc.viewModel = PhotoViewerViewModel(with: extraData)
+            vc.imageArray = extraData.compactMap({ (data) -> ContentDataModel in
+                ContentDataModel(id: data.id, image: data.imageUrl, title: data.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue)
+            })
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

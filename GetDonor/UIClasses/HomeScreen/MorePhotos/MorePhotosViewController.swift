@@ -101,7 +101,7 @@ class MorePhotosViewController: BaseViewController {
         if let cell = sender as? MorePhotosCollectionViewCell, var indexPath = collectionview.indexPath(for: cell) {
             
             let photoViewerVc = segue.destination as? PhotoViewerViewController
-            photoViewerVc?.viewModel = PhotoViewerViewModel(with: viewModel.model.photoList)
+            photoViewerVc?.imageArray = viewModel.model.photoList
             indexPath.section = 0
             photoViewerVc?.selectedIndex = indexPath
             //            let photoDetailsVC = segue.destination as? PhotoDetailsViewController
@@ -166,16 +166,16 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
         
         switch indexPath.section {
         case 0:
-            return CGSize(width: collectionView.frame.size.width, height: 0)
+            return CGSize(width: collectionView.frame.size.width, height: 42)
             
         default:
             
             if indexPath.item % 5 == 0{
-                return CGSize(width: (collectionView.frame.size.width - 16), height: ((collectionView.frame.size.width) / 1.5))
+                return CGSize(width: (collectionView.frame.size.width - 16), height: ((collectionView.frame.size.width - 16) * 9/16) + 21)
                 
             }
             else{
-                return CGSize(width: (collectionView.frame.size.width - 24) / 2, height: ((collectionView.frame.size.width - 26) / 2) - 20)
+                return CGSize(width: (collectionView.frame.size.width - 24) / 2, height: ((collectionView.frame.size.width - 24) / 2 * 9/16) + 21)
                 
             }
             

@@ -10,6 +10,7 @@ import Foundation
 
 struct DonationDetailsDataModel: Codable {
     var message: String?
+    var error: Int8?
     var transactions: [Transaction] = []
     var usedEndowment: String?
     var totalEndowmant: String?
@@ -20,6 +21,7 @@ struct DonationDetailsDataModel: Codable {
         case transactions = "node"
         case totalEndowmant = "total_endowment"
         case usedEndowment = "total_endowment_used"
+        case error
     }
 }
 

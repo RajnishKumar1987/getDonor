@@ -58,10 +58,10 @@ class ProfileTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = viewModel.model.menu[indexPath.row]
-        
+    
         switch model.type {
         case "webview":
-            openWebView(with: model.url!)
+            openWebView(with: model)
         case "inapp":
            
             switch model.name{
@@ -100,10 +100,11 @@ class ProfileTableViewController: UITableViewController {
 
     }
     
-    func openWebView(with stringUrl: String)  {
+    func openWebView(with model: Menu)  {
         let storyBoard = UIStoryboard(name: "WebView", bundle: nil)
         let webViewController = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-        webViewController.urlString = stringUrl
+        webViewController.urlString = model.url
+        webViewController.title = model.name
         self.navigationController?.pushViewController(webViewController, animated: true)
 
     }
@@ -153,6 +154,7 @@ class ProfileTableViewController: UITableViewController {
         case "Logout":
             print("")
             AppConfig.setUserLoggedIn(status: false)
+            LocationManager.sharedInstance.stopLocationUpdate()
             self.navigationController?.popViewController(animated: true)
         case "Donation Details":
             print("")

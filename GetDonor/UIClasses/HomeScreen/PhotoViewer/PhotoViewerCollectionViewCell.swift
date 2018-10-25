@@ -38,7 +38,9 @@ class PhotoViewerCollectionViewCell: UICollectionViewCell,CellReusable {
         imageLoader = nil
     }
     
-    func configureCell(imageUrl: String) {
+    func configureCell(model: ContentDataModel) {
+        
+        guard let imageUrl = model.image else { return }
         
         imageLoader = APIRequestLoader(apiRequest: ImageRequest())
         imageLoader.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil) { [weak self](image, error) in

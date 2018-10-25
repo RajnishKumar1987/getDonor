@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileViewController: BaseViewController {
-
+    @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var containerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +17,10 @@ class ProfileViewController: BaseViewController {
         self.title = "Profile"
         doIniticalConfug()
         
+        imgProfile.makeCornerRadiusWithValue(imgProfile.frame.width/2)
+        imgProfile.layer.borderWidth = 3
+        imgProfile.layer.borderColor = UIColor.white.cgColor
+        imgProfile.loadImage(from: AppConfig.getUserProfileImageUrl(), shouldCache: false)
         if checkInternetStatus(viewController: self, navigationBarPresent: true) {
         }
     }

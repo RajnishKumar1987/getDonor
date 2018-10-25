@@ -70,7 +70,7 @@ class MorePhotosViewModel {
         
         let page = isUserRefreshingList ? 1 : (model.currentPage ?? 0) + 1
         
-        apiLoader.loadAPIRequest(forFuncion: .searchContent(type: .event, page: "\(page)", searchKeyword: keyword), requestData: nil) { [weak self](response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .searchContent(type: .photo, page: "\(page)", searchKeyword: keyword), requestData: nil) { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))

@@ -106,7 +106,7 @@ extension PromotionDetailsViewController : HomeScreenCellDelegate{
             case .photo:
                 let storyboard = UIStoryboard.init(name: "PhotoViewer", bundle: nil)
                 let photoViewerVc = storyboard.instantiateViewController(withIdentifier: "PhotoViewerViewController") as! PhotoViewerViewController
-                photoViewerVc.viewModel = PhotoViewerViewModel(with: viewModel.getModelFor(cellType: .image))
+                photoViewerVc.imageArray = viewModel.getModelFor(cellType: .image)
                 photoViewerVc.selectedIndex = index
                 self.navigationController?.pushViewController(photoViewerVc, animated: true)
             default:

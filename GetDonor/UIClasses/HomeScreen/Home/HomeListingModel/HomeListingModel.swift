@@ -61,12 +61,14 @@ struct ExtraData:Codable {
     var title: String?
     var playbackUrl: String?
     var imageUrl:String?
+    var id: String?
     
         enum CodingKeys: String, CodingKey {
         case caption = "cap"
-        case title = "video_title"
+        case title = "title"
         case playbackUrl = "vu"
         case imageUrl = "image"
+        case id 
     }
 }
 

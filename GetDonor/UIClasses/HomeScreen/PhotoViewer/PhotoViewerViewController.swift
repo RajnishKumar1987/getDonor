@@ -10,10 +10,11 @@ import UIKit
 
 class PhotoViewerViewController: UIViewController {
 
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var collectionViewBottomConstraints: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
-    var viewModel: PhotoViewerViewModel!
+    var imageArray: [ContentDataModel]!
     var imageLoader: APIRequestLoader<ImageRequest>!
     var selectedIndex: IndexPath?
     
@@ -21,8 +22,8 @@ class PhotoViewerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Photos"
-
-        guard viewModel.model.images.count > 0 else {
+        lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title1)
+        guard imageArray.count > 0 else {
             return
         }
         imageLoader = APIRequestLoader(apiRequest: ImageRequest())
@@ -35,18 +36,24 @@ class PhotoViewerViewController: UIViewController {
         
         if let indexPath = selectedIndex {
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-            loadImageView(from: viewModel.model.images[indexPath.item])
+            let model = self.imageArray[indexPath.item]
+            loadImageView(model: model)
+            lblTitle.text = model.title
 
         }
         else{
-            if viewModel.model.images.count > 0{
-                loadImageView(from: viewModel.model.images[0])
+            if imageArray.count > 0{
+                loadImageView(model: self.imageArray[0])
+                lblTitle.text = self.imageArray.first?.title
             }
 
         }
         
     }
-    func loadImageView(from imageUrl: String)  {
+    func loadImageView(model: ContentDataModel)  {
+        
+        guard let imageUrl = model.image else { return  }
+        
         imageLoader.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil) {[weak self] (image, error) in
             if let image = image{
                 self?.imageView.image = image
@@ -74,11 +81,11 @@ class PhotoViewerViewController: UIViewController {
 
 extension PhotoViewerViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.model.images.count
+        return imageArray.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PhotoViewerCollectionViewCell = collectionView.dequeueCell(atIndexPath: indexPath)
-        cell.configureCell(imageUrl: viewModel.model.images[indexPath.row])
+        cell.configureCell(model: imageArray[indexPath.item])
         if indexPath == selectedIndex {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
@@ -88,7 +95,9 @@ extension PhotoViewerViewController: UICollectionViewDataSource, UICollectionVie
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        loadImageView(from: viewModel.model.images[indexPath.item])
+        let model = self.imageArray[indexPath.item]
+        loadImageView(model: model)
+        lblTitle.text = model.title ?? ""
     }
     
 }

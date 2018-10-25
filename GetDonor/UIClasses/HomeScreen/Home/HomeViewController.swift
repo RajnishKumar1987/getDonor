@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class HomeViewController: BaseViewController {
     
     var viewModel = HomeListingViewModel()
@@ -18,6 +17,7 @@ class HomeViewController: BaseViewController {
         print(documentsPath)
         doInitialConfig()
         enableRefresh()
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.doInitialConfig), name: .loginSuccessful, object: nil)
     }
 //    override func viewWillAppear(_ animated: Bool) {
 //        if !AppConfig.getUserLoginStatus() {
@@ -29,7 +29,7 @@ class HomeViewController: BaseViewController {
         self.loadHomeScreen()
     }
     
-    func doInitialConfig() {
+    @objc func doInitialConfig() {
         self.title = "Home"
         tableview.registerCell(CarouselTableViewCell.self)
         if !AppConfig.getUserLoginStatus() {
@@ -75,7 +75,7 @@ class HomeViewController: BaseViewController {
         case "openPhotoViewer":
             let articalDetailVC = segue.destination as? PhotoViewerViewController
             articalDetailVC?.selectedIndex = sender as? IndexPath
-            articalDetailVC?.viewModel = PhotoViewerViewModel(with: (viewModel.homeApiResponse?.contents?.photo)!)
+            articalDetailVC?.imageArray = viewModel.homeApiResponse?.contents?.photo
         case "openEditProfile":
             let videoDetailsVC = segue.destination as? EditProfileViewController
             videoDetailsVC?.userId = AppConfig.getUserId()
@@ -86,7 +86,9 @@ class HomeViewController: BaseViewController {
             indexPath?.section = 0
             articalDetailVC?.selectedIndex = IndexPath(item: 0, section: 0)
             let model = viewModel.homeApiResponse?.contents?.event![(indexPath?.item)!]
-            articalDetailVC?.viewModel = PhotoViewerViewModel(with: (model?.data)!)
+            articalDetailVC?.imageArray = model?.data?.compactMap({ (data) -> ContentDataModel in
+                ContentDataModel(id: data.id, image: data.imageUrl, title: data.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue)
+            })
         case "openPromotionDetails":
             let promotionDetailsVC = segue.destination as? PromotionDetailsViewController
             var indexPath = sender as? IndexPath
@@ -104,7 +106,6 @@ class HomeViewController: BaseViewController {
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {
         if let segue = segue as? UIStoryboardSegueWithCompletionHandler {
             segue.completion = {
-                
                 if segue.identifier == "Logout" {
                     self.presentLoginSignUpScreen()
                 }

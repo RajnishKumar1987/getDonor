@@ -105,7 +105,7 @@ extension DesireViewController : HomeScreenCellDelegate{
             case .photo:
                 let storyboard = UIStoryboard.init(name: "PhotoViewer", bundle: nil)
                 let photoViewerVc = storyboard.instantiateViewController(withIdentifier: "PhotoViewerViewController") as! PhotoViewerViewController
-                photoViewerVc.viewModel = PhotoViewerViewModel(with: viewModel.getCarsouelCellModel())
+                photoViewerVc.imageArray = viewModel.getCarsouelCellModel()
                 photoViewerVc.selectedIndex = index
                 self.navigationController?.pushViewController(photoViewerVc, animated: true)
             default:

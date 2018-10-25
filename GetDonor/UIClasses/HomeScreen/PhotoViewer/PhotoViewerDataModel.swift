@@ -25,3 +25,8 @@ struct PhotoViewerDataModel {
     }
     
 }
+
+struct ImageViwerDataModel {
+    var imageUrl: String
+    var title: String
+}

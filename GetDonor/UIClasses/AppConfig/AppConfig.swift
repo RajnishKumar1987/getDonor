@@ -17,6 +17,8 @@ let kCarouselHeight: CGFloat = ((UIScreen.main.bounds.size.width) * 9/16) + 36
 
 let kAppId = "id1421647128"//id1421647128
 
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
 
 enum DevelopmentEnvironment {
     case stagging

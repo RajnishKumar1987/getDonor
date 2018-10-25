@@ -62,7 +62,7 @@ class PromotionViewModel {
         case .vidoes:
             if let videos = model.response?.extraData?.video{
                 dataModel =  videos.compactMap({ (video) -> ContentDataModel? in
-                    ContentDataModel(id: video.id, image: video.image, title: video.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: [ExtraData(caption: video.title, title: video.title, playbackUrl: video.videoid, imageUrl: video.image)], type: String(ContentType.video.rawValue))
+                    ContentDataModel(id: video.id, image: video.image, title: video.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: [ExtraData(caption: video.title, title: video.title, playbackUrl: video.videoid, imageUrl: video.image, id:video.id)], type: String(ContentType.video.rawValue))
                 })
                 }
         default:
