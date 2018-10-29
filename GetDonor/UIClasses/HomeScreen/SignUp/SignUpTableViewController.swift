@@ -258,9 +258,15 @@ class SignUpTableViewController: UITableViewController {
             return false
         }
         if txtPassword.text != txtConfirmPassword.text {
-            showMessage(with: "Your password and confirmation password do not match")
+            showMessage(with: "Your password and confirmation password do not match.")
             return false
         }
+        if (txtPassword.text?.count)! < 6 {
+            showMessage(with: "Password must be of minimum 6 characters length.")
+            return false
+
+        }
+
        
         return true
     }

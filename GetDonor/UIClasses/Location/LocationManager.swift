@@ -53,7 +53,7 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
     func updateUserLocation() {
         
         let apiLoader = APIRequestLoader(apiRequest: CommonApiRequest())
-        let param: [String: String] = ["id": AppConfig.getUserId(), "lat":latitude, "lon":longitude]
+        let param: [String: String] = ["id": GetDonorUserDefault.sharedInstance.getUserId(), "lat":latitude, "lon":longitude]
         
         apiLoader.loadAPIRequest(forFuncion: .updateLocation, requestData: param) { (response, error) in
         }

@@ -116,7 +116,7 @@
                                             <outlet property="pageControl" destination="mqb-92-Nzw" id="q7s-cX-EEL"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeArticalTableViewCell" rowHeight="157" id="wNC-52-bH4" customClass="HomeArticalTableViewCell" customModule="GetDonor" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeArticleTableViewCell" rowHeight="157" id="wNC-52-bH4" customClass="HomeArticleTableViewCell" customModule="GetDonor" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="269" width="375" height="157"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wNC-52-bH4" id="oEX-XA-aVx">
@@ -130,7 +130,7 @@
                                                         <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="actionMoreArticalsButtonPressed:" destination="wNC-52-bH4" eventType="touchUpInside" id="8AS-3S-hgr"/>
+                                                        <action selector="actionMoreArticlesButtonPressed:" destination="wNC-52-bH4" eventType="touchUpInside" id="8AS-3S-hgr"/>
                                                     </connections>
                                                 </button>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GbE-fW-V1s">
@@ -144,7 +144,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArticalCollectionViewCell" id="99Z-bh-p4z" customClass="ArticalCollectionViewCell" customModule="GetDonor" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArticleCollectionViewCell" id="99Z-bh-p4z" customClass="ArticleCollectionViewCell" customModule="GetDonor" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.5" width="359" height="102"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -195,7 +195,7 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Articals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Th-Ue-MFc">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Articles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Th-Ue-MFc">
                                                     <rect key="frame" x="8" y="11" width="82" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -291,7 +291,7 @@
                                         <rect key="frame" x="0.0" y="608" width="375" height="192"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jws-VA-0xA" id="bKe-on-Bc8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="191.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzH-yL-oOu">
@@ -312,7 +312,7 @@
                                                     </connections>
                                                 </button>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sI1-v4-GVj">
-                                                    <rect key="frame" x="8" y="44" width="359" height="136"/>
+                                                    <rect key="frame" x="8" y="44" width="359" height="135"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KRZ-Pm-Snl">
@@ -323,7 +323,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventsCollectionViewCell" id="aWj-NH-rk1" customClass="EventsCollectionViewCell" customModule="GetDonor" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="2" width="157" height="132"/>
+                                                            <rect key="frame" x="0.0" y="1.5" width="157" height="132"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="157" height="132"/>
@@ -366,18 +366,18 @@
                                         <rect key="frame" x="0.0" y="800" width="375" height="143"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r1s-hh-0Mt" id="7ZK-rC-id6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="143"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="142.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Follow Us On" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bD4-rr-1ga">
-                                                    <rect key="frame" x="114" y="42" width="148" height="25"/>
+                                                    <rect key="frame" x="114" y="41" width="148" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wx4-FX-9Fs">
-                                                    <rect key="frame" x="48" y="75" width="279" height="43"/>
+                                                    <rect key="frame" x="48" y="74" width="279" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="K36-zY-7Cf">
@@ -432,7 +432,7 @@
                     <connections>
                         <outlet property="tableview" destination="1MJ-qh-4uk" id="MZO-vh-fW7"/>
                         <segue destination="oF7-Xn-Upa" kind="show" identifier="openVideoDetails" id="i5H-oA-kpY"/>
-                        <segue destination="Ebc-sX-7XJ" kind="show" identifier="openArticalsDetails" id="yhm-Gm-c2J"/>
+                        <segue destination="Ebc-sX-7XJ" kind="show" identifier="openArticlesDetails" id="yhm-Gm-c2J"/>
                         <segue destination="bkL-Ga-mZz" kind="presentation" identifier="openLoginSignUp" animates="NO" id="Pn5-hq-JRJ"/>
                         <segue destination="EvQ-Xp-qwg" kind="show" identifier="openPhotoViewer" id="YwJ-Ro-cKH"/>
                         <segue destination="U8n-pJ-7Ri" kind="show" identifier="showEventsPhoto" id="15H-0F-8Pe"/>
@@ -452,10 +452,10 @@
             </objects>
             <point key="canvasLocation" x="-940" y="1074.9625187406298"/>
         </scene>
-        <!--ArticalDetailsViewController-->
+        <!--ArticleDetailsViewController-->
         <scene sceneID="fRL-FV-Drc">
             <objects>
-                <viewControllerPlaceholder storyboardName="Articals" referencedIdentifier="ArticalDetailsViewController" id="Ebc-sX-7XJ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Articles" referencedIdentifier="ArticleDetailsViewController" id="Ebc-sX-7XJ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kuZ-2a-3l4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-875.20000000000005" y="1205.3973013493255"/>

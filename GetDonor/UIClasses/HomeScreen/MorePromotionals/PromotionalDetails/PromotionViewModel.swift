@@ -50,19 +50,18 @@ class PromotionViewModel {
     func getModelFor(cellType: PromotionDetailsCellType) ->  [ContentDataModel]{
         
         var dataModel = [ContentDataModel]()
-        
         switch cellType {
         case .image:
             if let images = model.response?.extraData?.image{
                 dataModel =  images.compactMap({ (imageList) -> ContentDataModel? in
-                    ContentDataModel(id: imageList.id, image: imageList.image, title: imageList.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: String(ContentType.photo.rawValue))
+                    ContentDataModel(id: imageList.id, image: imageList.image, title: imageList.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: String(ContentType.photo.rawValue), s_url:"")
                 })
                 }
             
         case .vidoes:
             if let videos = model.response?.extraData?.video{
                 dataModel =  videos.compactMap({ (video) -> ContentDataModel? in
-                    ContentDataModel(id: video.id, image: video.image, title: video.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: [ExtraData(caption: video.title, title: video.title, playbackUrl: video.videoid, imageUrl: video.image, id:video.id)], type: String(ContentType.video.rawValue))
+                    ContentDataModel(id: video.id, image: video.image, title: video.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: [ExtraData(title: video.title, youtubeId: video.videoid, imageUrl: video.image, id:video.id)], type: String(ContentType.video.rawValue), s_url: "")
                 })
                 }
         default:

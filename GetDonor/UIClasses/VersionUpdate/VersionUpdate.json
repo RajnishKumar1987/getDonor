@@ -1,0 +1,10 @@
+
+
+
+{
+    "show_pop_up": true,
+    "force_update": true,
+    "message": "Hey! Looks like you’re using an older version of GetDonor. \r\n\t\t\tWe’ve added some new features and made some critical enhancements in the latest release. Upgrade now for a better experience!",
+    "updateBehaviour": "DAYS",
+    "updateFrequency": 1
+}

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoViewerViewController: UIViewController {
+class PhotoViewerViewController: BaseViewController {
 
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var collectionViewBottomConstraints: NSLayoutConstraint!
@@ -17,11 +17,13 @@ class PhotoViewerViewController: UIViewController {
     var imageArray: [ContentDataModel]!
     var imageLoader: APIRequestLoader<ImageRequest>!
     var selectedIndex: IndexPath?
+    var selectedImage: ContentDataModel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Photos"
+        configureNavigationBarButton(buttonType: .share)
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title1)
         guard imageArray.count > 0 else {
             return
@@ -37,6 +39,7 @@ class PhotoViewerViewController: UIViewController {
         if let indexPath = selectedIndex {
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
             let model = self.imageArray[indexPath.item]
+            selectedImage = model
             loadImageView(model: model)
             lblTitle.text = model.title
 
@@ -45,11 +48,19 @@ class PhotoViewerViewController: UIViewController {
             if imageArray.count > 0{
                 loadImageView(model: self.imageArray[0])
                 lblTitle.text = self.imageArray.first?.title
+                selectedImage = self.imageArray[0]
             }
 
         }
         
     }
+    
+    override func shareButtonPressed() {
+        let model = ShareDataModel(title: selectedImage.title, image: selectedImage.image, shareURL: selectedImage.s_url)
+        showShareActivity(model: model)
+
+    }
+    
     func loadImageView(model: ContentDataModel)  {
         
         guard let imageUrl = model.image else { return  }
@@ -96,8 +107,10 @@ extension PhotoViewerViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         let model = self.imageArray[indexPath.item]
+        selectedImage = model
         loadImageView(model: model)
         lblTitle.text = model.title ?? ""
+        selectedIndex = indexPath
     }
     
 }

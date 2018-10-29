@@ -100,7 +100,7 @@ class DesireViewModel {
         
         if let carousel = model?.response.corousal {
             contentModels = carousel.compactMap({ (model) -> ContentDataModel in
-                ContentDataModel(id: model.id, image: model.image, title: model.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue)
+                ContentDataModel(id: model.id, image: model.image, title: model.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue, s_url: "")
             })
             
         }

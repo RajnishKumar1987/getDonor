@@ -21,8 +21,14 @@ class PromotionDetailsViewController: BaseViewController {
         loadPromotion()
         showLoader(onViewController: self)
         disableRefresh()
+        configureNavigationBarButton(buttonType: .share)
     }
     
+    override func presentActivityViewController() {
+        let model = ShareDataModel(title: viewModel.model.response?.title, image: viewModel.model.response?.image, shareURL: viewModel.model.response?.s_url)
+        showShareActivity(model: model)
+    }
+
     func loadPromotion() {
         if checkInternetStatus(viewController: self, navigationBarPresent: true) {
             viewModel.loadPromotionPage(for: contentId) { [weak self](result) in

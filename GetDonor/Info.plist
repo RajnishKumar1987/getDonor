@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>7</string>
 	<key>FacebookAppID</key>
 	<string>1471589852942749</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -39,11 +39,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app will use camera</string>
+	<string>You can use camera to capture profile pic.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location is required to search doner near you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This will use your current location</string>
+	<string>Location is required to search doner near you.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You can select photo</string>
+	<string>You can select profile pic form photo library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Muli-ExtraLightItalic.ttf</string>

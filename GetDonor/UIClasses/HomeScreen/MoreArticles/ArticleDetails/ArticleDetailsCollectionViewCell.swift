@@ -1,5 +1,5 @@
 //
-//  ArticalDetailsCollectionViewCell.swift
+//  ArticleDetailsCollectionViewCell.swift
 //  GetDonor
 //
 //  Created by Rajnish kumar on 03/09/18.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-enum ArticalCellType {
+enum ArticleCellType {
     case title, description, image
 }
 
-class ArticalDetailsCollectionViewCell: UICollectionViewCell, CellReusable {
+class ArticleDetailsCollectionViewCell: UICollectionViewCell, CellReusable {
     @IBOutlet weak var tableView: UITableView!
-    var model: ContentDataModel?
-    let cellTypes : [ArticalCellType] = [.title, .image, .description]
-    
+    //var model: ContentDataModel?
+    let cellTypes : [ArticleCellType] = [.title, .image, .description]
+    var viewModel = ArticleDetailsViewModel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,15 +27,28 @@ class ArticalDetailsCollectionViewCell: UICollectionViewCell, CellReusable {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
+    override func prepareForReuse() {
+        viewModel = ArticleDetailsViewModel()
+    }
+    
     func configureCell(with model: ContentDataModel?) {
         
-        self.model = model
-        tableView.reloadData()
+
+        showLoaderOnView(someView: self)
+        viewModel.loadArticleDetails(contentId: (model?.id)!) { [weak self](result) in
+            self?.removeLoader(fromView: self)
+            switch result{
+            case .Success:
+                self?.tableView.reloadData()
+            case .failure(let msg):
+                print(msg)
+            }
+        }
     }
     
 }
 
-extension ArticalDetailsCollectionViewCell: UITableViewDataSource, UITableViewDelegate{
+extension ArticleDetailsCollectionViewCell: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellTypes.count
@@ -46,19 +59,19 @@ extension ArticalDetailsCollectionViewCell: UITableViewDataSource, UITableViewDe
         
         switch cellType {
         case .image:
-            let cell: ArticalImageTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.configureCellWith(image: model?.image)
+            let cell: ArticleImageTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+            cell.configureCellWith(image: viewModel.model.node?.image)
             return cell
         case .title:
-            let cell: ArticalDeatilsTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
-            cell.lblTitle.text = model?.title
+            let cell: ArticleDeatilsTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+            cell.lblTitle.text = viewModel.model.node?.title
             cell.lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title1)
             cell.lblTitle.textAlignment = .natural
             return cell
         default:
-            let cell: ArticalDeatilsTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+            let cell: ArticleDeatilsTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
             
-            if let attributedString = model?.description?.htmlToAttributedString{
+            if let attributedString = viewModel.model.node?.description?.htmlToAttributedString{
                 cell.lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
                 let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
                 attributedString.addAttribute(.font, value: UIFont.fontWithTextStyle(textStyle: .headline), range: range)
@@ -82,6 +95,8 @@ extension ArticalDetailsCollectionViewCell: UITableViewDataSource, UITableViewDe
         default:
             return UITableViewAutomaticDimension
         }
-        
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     }
 }

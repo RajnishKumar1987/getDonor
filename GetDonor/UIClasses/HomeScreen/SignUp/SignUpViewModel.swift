@@ -24,8 +24,8 @@ class SignUpViewModel {
             if let response = response {
                 
                 if response.message == "successful"{
-                    AppConfig.setUserId(id: response.userDetails?.userId ?? "")
-                    AppConfig.setUserLoggedIn(status: true)
+                    GetDonorUserDefault.sharedInstance.setUserId(id: response.userDetails?.userId ?? "")
+                    GetDonorUserDefault.sharedInstance.setUserLoggedIn(status: true)
                     LocationManager.sharedInstance.startLocaitonService()
                     appDelegate.registerForPushNotifications()
                     result(.Success)

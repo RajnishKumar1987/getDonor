@@ -1,5 +1,5 @@
 //
-//  ArticalsApiRequest.swift
+//  ArticlesApiRequest.swift
 //  GetDonor
 //
 //  Created by Rajnish kumar on 03/09/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ArticalsApiRequest: APIRequest {
+class ArticlesApiRequest: APIRequest {
     
 
     func makeRequest(forFuncion function: Api_EndPoint, parameters: [String:String]?) throws -> URLRequest {
@@ -18,7 +18,7 @@ class ArticalsApiRequest: APIRequest {
         return urlRequest
     }
     
-    func parseResponse(data: Data) throws -> ArticalsDataModel {
-        return try JSONDecoder().decode(ArticalsDataModel.self, from: data)
+    func parseResponse(data: Data) throws -> ArticlesDataModel {
+        return try JSONDecoder().decode(ArticlesDataModel.self, from: data)
     }
 }

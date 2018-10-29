@@ -9,7 +9,7 @@
 import Foundation
 
 enum HomeScreenCellType: String {
-    case video = "1", artical = "0", photo = "3", event = "2", promotional = "5", social 
+    case video = "1", article = "0", photo = "3", event = "2", promotional = "5", social 
 }
 
 class HomeListingViewModel {
@@ -56,8 +56,8 @@ class HomeListingViewModel {
         if let topBanner = model.contents?.topBanner, topBanner.count > 0 {
             cellTypes.append(.promotional)
         }
-        if let artical = model.contents?.article, artical.count > 0 {
-            cellTypes.append(.artical)
+        if let article = model.contents?.article, article.count > 0 {
+            cellTypes.append(.article)
         }
         if let photo = model.contents?.photo, photo.count > 0 {
             cellTypes.append(.photo)

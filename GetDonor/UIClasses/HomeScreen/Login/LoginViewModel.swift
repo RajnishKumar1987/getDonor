@@ -25,8 +25,9 @@ class LoginViewModel {
             if let response = response {
                 
                 if response.message == "successful"{
-                    AppConfig.setUserId(id: response.userDetails?.userId ?? "")
-                    AppConfig.setUserLoggedIn(status: true)
+                    GetDonorUserDefault.sharedInstance.setUserId(id: response.userDetails?.userId ?? "")
+                    GetDonorUserDefault.sharedInstance.setUserProfileImageUrl(urlString: response.userDetails?.profilePic ?? "")
+                    GetDonorUserDefault.sharedInstance.setUserLoggedIn(status: true)
                     appDelegate.registerForPushNotifications()
                     LocationManager.sharedInstance.startLocaitonService()
                     self.model = response

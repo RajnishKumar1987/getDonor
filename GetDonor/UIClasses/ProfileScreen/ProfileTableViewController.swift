@@ -150,10 +150,10 @@ class ProfileTableViewController: UITableViewController {
         switch segue.identifier {
         case "Edit":
             let vc = segue.destination as! EditProfileViewController
-            vc.userId = AppConfig.getUserId()
+            vc.userId = GetDonorUserDefault.sharedInstance.getUserId()
         case "Logout":
             print("")
-            AppConfig.setUserLoggedIn(status: false)
+            GetDonorUserDefault.sharedInstance.setUserLoggedIn(status: false)
             LocationManager.sharedInstance.stopLocationUpdate()
             self.navigationController?.popViewController(animated: true)
         case "Donation Details":

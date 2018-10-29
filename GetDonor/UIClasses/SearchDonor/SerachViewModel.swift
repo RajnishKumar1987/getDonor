@@ -33,7 +33,7 @@ class SearchViewModel {
         
         let page = model.currentPage! + 1
 
-        apiLoader.loadAPIRequest(forFuncion: .searchDonor(id: AppConfig.getUserId(), bloodGroup: bloodGroup, lat: LocationManager.sharedInstance.latitude, lon: LocationManager.sharedInstance.longitude, page: "\(page)"), requestData: nil) { [weak self](response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .searchDonor(id: GetDonorUserDefault.sharedInstance.getUserId(), bloodGroup: bloodGroup, lat: LocationManager.sharedInstance.latitude, lon: LocationManager.sharedInstance.longitude, page: "\(page)"), requestData: nil) { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))

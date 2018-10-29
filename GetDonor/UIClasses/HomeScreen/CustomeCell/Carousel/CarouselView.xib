@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopBannerView" customModule="GetDonor">
             <connections>
                 <outlet property="imageView" destination="Da9-7A-Nf0" id="PdC-Vq-Ls1"/>
+                <outlet property="ingrediantView" destination="wov-RB-UkO" id="vtE-b2-wrh"/>
                 <outlet property="lblTitle" destination="QQM-80-Qan" id="HG0-IK-3jo"/>
                 <outlet property="playIcon" destination="zra-iC-mN3" id="18e-hN-jJs"/>
             </connections>
@@ -27,7 +28,7 @@
                 </imageView>
                 <button opaque="NO" alpha="0.34999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="as9-Hp-h8G">
                     <rect key="frame" x="8" y="8" width="359" height="183"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="bnw-G8-5Nr"/>
                     </connections>

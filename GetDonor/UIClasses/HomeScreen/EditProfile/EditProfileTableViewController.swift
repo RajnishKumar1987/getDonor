@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AccountKit
 
 protocol EditProfileViewControllerDelegate: class{
     func didProfileImageSelected(image: UIImage)
@@ -45,7 +46,8 @@ class EditProfileTableViewController: UITableViewController {
     var datePickerView: UIDatePicker!
     var selectedTxtField = UITextField()
     let toolBar = UIToolbar()
-    
+    var _accountKit: AKFAccountKit!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,7 +148,7 @@ class EditProfileTableViewController: UITableViewController {
         guard let userId = self.userId else {
             return
         }
-        viewModel.getProfile(for: userId, action: .get, userDetails: nil) { [weak self](result) in
+        viewModel.getProfile(for: userId, action: .get) { [weak self](result) in
             self?.tableView.isScrollEnabled = true
             self?.removeLoader(fromViewController: self!)
             switch (result){
@@ -227,6 +229,88 @@ class EditProfileTableViewController: UITableViewController {
 
     }
     
+    @IBAction func actionMobileButtonPressed(_ sender: UIButton) {
+        
+       
+        if _accountKit == nil {
+            _accountKit = AKFAccountKit(responseType: .accessToken)
+        }
+        
+        _accountKit.logOut()
+        
+        if _accountKit?.currentAccessToken != nil {
+            print("Already Logged in.")
+        }
+        else {
+            loginWithPhone()
+        }
+        
+    }
+    
+    func loginWithPhone(){
+        let inputState = UUID().uuidString
+        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: inputState))!
+        vc.enableSendToFacebook = true
+        self.prepareLoginViewController(loginViewController: vc)
+        self.present(vc as UIViewController, animated: true, completion: nil)
+    }
+    
+    func prepareLoginViewController(loginViewController: AKFViewController) {
+        loginViewController.delegate = self
+        //UI Theming - Optional
+        loginViewController.uiManager = AKFSkinManager(skinType: .classic, primaryColor: UIColor.blue)
+    }
+    
+    func getUserInfo() {
+        
+        if _accountKit == nil {
+            
+            _accountKit = AKFAccountKit(responseType: AKFResponseType.accessToken)
+            _accountKit.requestAccount { [weak self](account, error) in
+                
+                if let accountID = account?.accountID{
+                    print("AccountID:\(accountID)")
+                }
+                
+                if let email = account?.emailAddress{
+                    print("Email:\(email)")
+                }
+                
+                if let phoneNumber = account?.phoneNumber{
+                    print("PhoneNumber:\(phoneNumber.phoneNumber)")
+                    
+                    DispatchQueue.main.async {
+                        self?.txtMobile.text = phoneNumber.phoneNumber
+                        self?.txtEmail.becomeFirstResponder()
+                    }
+                }
+            }
+            
+        }else
+        {
+            _accountKit.requestAccount { [weak self](account, error) in
+                
+                if let accountID = account?.accountID{
+                    print("AccountID:\(accountID)")
+                }
+                
+                if let email = account?.emailAddress{
+                    print("Email:\(email)")
+                }
+                
+                if let phoneNumber = account?.phoneNumber{
+                    print("PhoneNumber:\(phoneNumber.phoneNumber)")
+                    DispatchQueue.main.async {
+                        self?.txtMobile.text = phoneNumber.phoneNumber
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    
     @IBAction func actionUpdate(_ sender: UIButton) {
         
         if doValidation() {
@@ -242,12 +326,13 @@ class EditProfileTableViewController: UITableViewController {
                                               "image": profileImage
             ]
             
-            viewModel.updateUserProfile(for: AppConfig.getUserId(), action: .set, userDetails: userDetails) { [weak self](result) in
+            viewModel.updateUserProfile(for: GetDonorUserDefault.sharedInstance.getUserId(), action: .set, userDetails: userDetails) { [weak self](result) in
                 self?.btnUpdate.loadingIndicator(show: false)
                 switch result{
                 case .Success:
                     print("Success")
-                    self?.populateData()
+                    NotificationCenter.default.post(name: .profileUpdated, object: nil)
+                    //self?.populateData()
                     self?.navigationController?.popViewController(animated: true)
                 case .failure(let msg):
                     print(msg)
@@ -394,6 +479,21 @@ extension EditProfileTableViewController {
     }
     
 }
+
+extension EditProfileTableViewController: AKFViewControllerDelegate{
+    
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        print(state)
+        getUserInfo()
+    }
+    
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
+        print(state)
+        
+    }
+    
+}
+
 
 
 

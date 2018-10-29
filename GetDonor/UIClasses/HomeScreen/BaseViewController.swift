@@ -11,6 +11,12 @@ import UIKit
 let kLoaderViewTag = 1011
 let kLoaderViewHeight: CGFloat = 50
 
+enum navigationBarButtonType {
+    case profile
+    case share
+    case none
+}
+
 class BaseViewController: UIViewController {
     @IBOutlet weak var tableview:UITableView!
     @IBOutlet weak var collectionview:UICollectionView!
@@ -28,6 +34,15 @@ class BaseViewController: UIViewController {
             #selector(refreshPage),
                            for: UIControlEvents.valueChanged)
         return rControl
+    }()
+    
+    lazy var profileBarButton: UIBarButtonItem? = {
+        return UIBarButtonItem(image: UIImage(named: "profile"), style: .plain, target: self, action: #selector(openProfileScreen))
+    }()
+    
+    lazy var shareBarButton: UIBarButtonItem? = {
+        let btnShare = UIBarButtonItem(barButtonSystemItem:.action, target: self, action: #selector(shareButtonPressed))
+        return btnShare
     }()
     
     lazy var paginationLoaderView: UIView? = {
@@ -95,6 +110,18 @@ class BaseViewController: UIViewController {
         
     }
     
+    func configureNavigationBarButton(buttonType: navigationBarButtonType) {
+        
+        switch buttonType {
+        case .profile:
+            self.navigationItem.rightBarButtonItem = profileBarButton
+        case .share:
+            self.navigationItem.rightBarButtonItem = shareBarButton
+        case .none:
+            hideProfileButton()
+        }
+    }
+    
     func hideProfileButton()  {
         if let button = self.navigationItem.rightBarButtonItem {
             button.isEnabled = false
@@ -113,13 +140,18 @@ class BaseViewController: UIViewController {
         let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
+    @objc func shareButtonPressed() {
+        self.presentActivityViewController()
+    }
+
     @objc private func refreshPage(){
-        
         self.refresingPage()
     }
     
+    func presentActivityViewController() {
+    }
+    
     func refresingPage() {
-        
     }
     
     func isLoadingNextPageResult(_ isLoading: Bool) {

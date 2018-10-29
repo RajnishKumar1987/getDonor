@@ -10,6 +10,7 @@ import UIKit
 class HomeViewController: BaseViewController {
     
     var viewModel = HomeListingViewModel()
+    var versionCheck: VersionUpdateManager??
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +18,9 @@ class HomeViewController: BaseViewController {
         print(documentsPath)
         doInitialConfig()
         enableRefresh()
+        NotificationCenter.default.addObserver(self, selector: #selector(checkVersionUpdate), name: .UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.doInitialConfig), name: .loginSuccessful, object: nil)
-    }
+        }
 //    override func viewWillAppear(_ animated: Bool) {
 //        if !AppConfig.getUserLoginStatus() {
 //            presentLoginSignUpScreen()
@@ -32,11 +34,14 @@ class HomeViewController: BaseViewController {
     @objc func doInitialConfig() {
         self.title = "Home"
         tableview.registerCell(CarouselTableViewCell.self)
-        if !AppConfig.getUserLoginStatus() {
+        print("login status = \(GetDonorUserDefault.sharedInstance.getUserLoginStatus())")
+        if !GetDonorUserDefault.sharedInstance.getUserLoginStatus() {
             presentLoginSignUpScreen()
         }else{
            showLoader(onViewController: self)
             loadHomeScreen()
+            self.versionCheck = VersionUpdateManager(onViewController: self)
+            versionCheck??.checkVersionUpdate()
         }
     }
     func presentLoginSignUpScreen() {
@@ -45,6 +50,19 @@ class HomeViewController: BaseViewController {
             self.performSegue(withIdentifier: "openLoginSignUp", sender: nil)
         })
 
+    }
+    
+    @objc func checkVersionUpdate() {
+        
+        if let version = versionCheck{
+            if let shouldForceUpdate = version?.model.shouldForceUpdate {
+                        if shouldForceUpdate{
+                            version?.checkVersionUpdate()
+                        }
+                    }
+        }
+        
+        
     }
     
     func loadHomeScreen() {
@@ -69,25 +87,25 @@ class HomeViewController: BaseViewController {
         case "openVideoDetails":
             let videoDetailsVC = segue.destination as? VideoDetailsViewController
             videoDetailsVC?.model = sender as! ContentDataModel
-        case "openArticalsDetails":
-            let articalDetailVC = segue.destination as? ArticalDetailsViewController
-            articalDetailVC?.articals = [sender as? ContentDataModel] as? [ContentDataModel]
+        case "openArticlesDetails":
+            let articleDetailVC = segue.destination as? ArticleDetailsViewController
+            articleDetailVC?.articles = [sender as? ContentDataModel] as? [ContentDataModel]
         case "openPhotoViewer":
-            let articalDetailVC = segue.destination as? PhotoViewerViewController
-            articalDetailVC?.selectedIndex = sender as? IndexPath
-            articalDetailVC?.imageArray = viewModel.homeApiResponse?.contents?.photo
+            let articleDetailVC = segue.destination as? PhotoViewerViewController
+            articleDetailVC?.selectedIndex = sender as? IndexPath
+            articleDetailVC?.imageArray = viewModel.homeApiResponse?.contents?.photo
         case "openEditProfile":
             let videoDetailsVC = segue.destination as? EditProfileViewController
-            videoDetailsVC?.userId = AppConfig.getUserId()
+            videoDetailsVC?.userId = GetDonorUserDefault.sharedInstance.getUserId()
             print("openEditProfile")
         case "showEventsPhoto":
-            let articalDetailVC = segue.destination as? PhotoViewerViewController
+            let articleDetailVC = segue.destination as? PhotoViewerViewController
             var indexPath = sender as? IndexPath
             indexPath?.section = 0
-            articalDetailVC?.selectedIndex = IndexPath(item: 0, section: 0)
+            articleDetailVC?.selectedIndex = IndexPath(item: 0, section: 0)
             let model = viewModel.homeApiResponse?.contents?.event![(indexPath?.item)!]
-            articalDetailVC?.imageArray = model?.data?.compactMap({ (data) -> ContentDataModel in
-                ContentDataModel(id: data.id, image: data.imageUrl, title: data.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue)
+            articleDetailVC?.imageArray = model?.data?.compactMap({ (data) -> ContentDataModel in
+                ContentDataModel(id: data.id, image: data.imageUrl, title: data.title, insertdate: "", priority: "", status: "", updatedate: "", description: "", data: nil, type: ContentType.photo.rawValue, s_url:model?.s_url)
             })
         case "openPromotionDetails":
             let promotionDetailsVC = segue.destination as? PromotionDetailsViewController
@@ -148,9 +166,9 @@ extension HomeViewController: HomeScreenCellDelegate{
         case .video:
             let model = viewModel.homeApiResponse?.contents?.video![indexPath.item]
             self.performSegue(withIdentifier: "openVideoDetails", sender: model)
-        case .artical:
+        case .article:
             let model = viewModel.homeApiResponse?.contents?.article![indexPath.item]
-            self.performSegue(withIdentifier: "openArticalsDetails", sender: model)
+            self.performSegue(withIdentifier: "openArticlesDetails", sender: model)
         case .photo:
             self.performSegue(withIdentifier: "openPhotoViewer", sender: indexPath)
         case .event:
@@ -171,8 +189,8 @@ extension HomeViewController: HomeScreenCellDelegate{
         switch cellType {
         case .video:
             loadViewControllerWith(viewControllerIdentifier: "MoreVideosViewController", andStoryboardName: "Videos")
-        case .artical:
-            loadViewControllerWith(viewControllerIdentifier: "MoreArticalsViewController", andStoryboardName: "Articals")
+        case .article:
+            loadViewControllerWith(viewControllerIdentifier: "MoreArticlesViewController", andStoryboardName: "Articles")
         case .photo:
             loadViewControllerWith(viewControllerIdentifier: "MorePhotosViewController", andStoryboardName: "Photos")
         case .event:
@@ -219,8 +237,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
             
             cell.delegate = self
             return cell
-        case .artical:
-            let cell: HomeArticalTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+        case .article:
+            let cell: HomeArticleTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
             cell.configureCell(with: viewModel.homeApiResponse?.contents?.article)
             cell.delegate = self
             return cell
@@ -255,7 +273,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
         switch cellType {
         case .video, .promotional:
             return kCarouselHeight
-        case .artical:
+        case .article:
             return 125
         case .social:
             return 125

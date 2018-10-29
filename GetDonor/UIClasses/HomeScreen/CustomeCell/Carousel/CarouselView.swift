@@ -15,6 +15,7 @@ class CarouselView: UIView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var playIcon: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var ingrediantView: UIView!
     
     override init(frame: CGRect) {
         

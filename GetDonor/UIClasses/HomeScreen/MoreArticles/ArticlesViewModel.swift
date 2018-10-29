@@ -1,5 +1,5 @@
 //
-//  ArticalsViewMOdel.swift
+//  ArticlesViewMOdel.swift
 //  GetDonor
 //
 //  Created by Rajnish kumar on 03/09/18.
@@ -8,21 +8,21 @@
 
 import Foundation
 
-class ArticalsViewModel {
+class ArticlesViewModel {
     
-    let apiLoader: APIRequestLoader<ArticalsApiRequest>!
-    var model = ArticalsDataModel()
+    let apiLoader: APIRequestLoader<ArticlesApiRequest>!
+    var model = ArticlesDataModel()
     var isLoadingNextPageResults: Bool = false
     var isUserRefreshingList: Bool = false
     var isSearching = false
 
-    init(loader: APIRequestLoader<ArticalsApiRequest> = APIRequestLoader(apiRequest: ArticalsApiRequest())) {
+    init(loader: APIRequestLoader<ArticlesApiRequest> = APIRequestLoader(apiRequest: ArticlesApiRequest())) {
         self.apiLoader = loader
     }
     
     func getModelForCell(at indexPath: IndexPath) -> ContentDataModel {
         
-        return model.articalList[indexPath.row]
+        return model.articleList[indexPath.row]
     }
     func canLoadNextPage() -> Bool {
         
@@ -35,12 +35,12 @@ class ArticalsViewModel {
         return true
     }
     
-    func loadArticals(with result:@escaping(Result<String>)->Void) {
+    func loadArticles(with result:@escaping(Result<String>)->Void) {
         
         let page = isUserRefreshingList ? 1 : (model.currentPage ?? 0) + 1
 
         let requestParam = [
-                            "type":"\(ContentType.artical.rawValue)",
+                            "type":"\(ContentType.article.rawValue)",
                             "page": "\(page)"]
         
         apiLoader.loadAPIRequest(forFuncion: .getListing, requestData: requestParam) { [weak self](response, error) in
@@ -64,11 +64,11 @@ class ArticalsViewModel {
         
     }
     
-    func serachArticalFor(keyword: String, with result:@escaping(Result<String>)-> Void) {
+    func serachArticleFor(keyword: String, with result:@escaping(Result<String>)-> Void) {
         
         let page = isUserRefreshingList ? 1 : (model.currentPage ?? 0) + 1
         
-        apiLoader.loadAPIRequest(forFuncion: .searchContent(type: .artical, page: "\(page)", searchKeyword: keyword), requestData: nil) { [weak self](response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .searchContent(type: .article, page: "\(page)", searchKeyword: keyword), requestData: nil) { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))

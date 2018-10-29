@@ -71,7 +71,7 @@ class APIRequestLoader<T: APIRequest> {
             
             let urlRequest = try self.apiRequest.makeRequest(forFuncion: funcion, parameters: requestData)
             
-            NetworkLogger.log(request: urlRequest)
+            //NetworkLogger.log(request: urlRequest)
             
             if let response = getCachedData(from: urlRequest) {
                 completionHandler(response, nil)

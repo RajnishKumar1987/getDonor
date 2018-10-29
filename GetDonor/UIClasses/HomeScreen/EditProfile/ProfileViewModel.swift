@@ -28,7 +28,7 @@ class ProfileViewModel {
                 if response.message == "successful"{
                     self?.model = response
                     if let imageURL = response.user?.image{
-                        AppConfig.setUserProfileImageUrl(urlString: imageURL)
+                        GetDonorUserDefault.sharedInstance.setUserProfileImageUrl(urlString: imageURL)
                     }
                     result(.Success)
                 }else
@@ -42,28 +42,20 @@ class ProfileViewModel {
         }
     }
     
-    func getProfile(for userId:String, action: UserProfileActionType, userDetails:[String:String]? = [:], andcompletionHandler result:@escaping(Result<String>)->Void) {
+    func getProfile(for userId:String, action: UserProfileActionType, andcompletionHandler result:@escaping(Result<String>)->Void) {
         
-        var requestParam : [String:String] = [:]
-        requestParam["id"] = userId
-        requestParam["action"] = action.rawValue
-
-        if let inputParam = userDetails {
-            
-             requestParam = requestParam.merging(inputParam) { (current, _) in current }
-        }
         
-        apiLoader.loadAPIRequest(forFuncion: .getProfile, requestData: requestParam) {[weak self] (response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .userProfile(userId: userId, action: action), requestData: nil) {[weak self] (response, error) in
             
             if let response = response {
                 if response.message == "successful"{
                     self?.model = response
                     
                     if let bloodGroup = response.user?.b_group{
-                        AppConfig.setUserBloodGroup(bgroupId: bloodGroup)
+                        GetDonorUserDefault.sharedInstance.setUserBloodGroup(bgroupId: bloodGroup)
                     }
                     if let imageURL = response.user?.image{
-                        AppConfig.setUserProfileImageUrl(urlString: imageURL)
+                        GetDonorUserDefault.sharedInstance.setUserProfileImageUrl(urlString: imageURL)
                     }
                     result(.Success)
                 }else

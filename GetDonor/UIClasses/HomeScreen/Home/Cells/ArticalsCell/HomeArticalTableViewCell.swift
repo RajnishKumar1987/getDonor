@@ -1,5 +1,5 @@
 //
-//  HomeArticalTableViewCell.swift
+//  HomeArticleTableViewCell.swift
 //  GetDonor
 //
 //  Created by Rajnish kumar on 23/08/18.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class HomeArticalTableViewCell: UITableViewCell, CellReusable {
+class HomeArticleTableViewCell: UITableViewCell, CellReusable {
     @IBOutlet weak var lblCellName: UILabel!
     @IBOutlet weak var btnMore: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     weak var delegate: HomeScreenCellDelegate?
-    var articalsModelArray: [ContentDataModel]? = []
+    var articlesModelArray: [ContentDataModel]? = []
     
     
     override func awakeFromNib() {
@@ -27,7 +27,7 @@ class HomeArticalTableViewCell: UITableViewCell, CellReusable {
     
     func configureCell(with model: [ContentDataModel]?) {
         
-        self.articalsModelArray = model
+        self.articlesModelArray = model
         self.collectionView.reloadData()
     }
 
@@ -37,23 +37,23 @@ class HomeArticalTableViewCell: UITableViewCell, CellReusable {
         // Configure the view for the selected state
     }
 
-    @IBAction func actionMoreArticalsButtonPressed(_ sender: Any) {
+    @IBAction func actionMoreArticlesButtonPressed(_ sender: Any) {
         if (self.delegate != nil){
-            self.delegate?.didMoreButtonPressed(at: .artical)
+            self.delegate?.didMoreButtonPressed(at: .article)
         }
     }
 }
 
-extension HomeArticalTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension HomeArticleTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (articalsModelArray?.count)!
+        return (articlesModelArray?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell: ArticalCollectionViewCell = collectionView.dequeueCell(atIndexPath: indexPath)
-        cell.configurecell(model: articalsModelArray![indexPath.item])
+        let cell: ArticleCollectionViewCell = collectionView.dequeueCell(atIndexPath: indexPath)
+        cell.configurecell(model: articlesModelArray![indexPath.item])
         return cell
         
     }
@@ -65,7 +65,7 @@ extension HomeArticalTableViewCell: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let delegate = self.delegate else { return }
-        delegate.didCellSelected(at: indexPath, with: .artical)
+        delegate.didCellSelected(at: indexPath, with: .article)
     }
     
 }

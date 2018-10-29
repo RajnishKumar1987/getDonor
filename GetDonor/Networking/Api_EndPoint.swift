@@ -23,7 +23,7 @@ enum DonationDetailsType: String {
 }
 
 enum ContentType: String{
-    case artical = "0"
+    case article = "0"
     case video = "1"
     case event = "2"
     case photo = "3"
@@ -39,7 +39,7 @@ enum Api_EndPoint {
     case getSimilar
     case login(userName: String, password: String)
     case registration
-    case getProfile
+    case userProfile(userId: String, action: UserProfileActionType)
     case getPaymentInfo
     case updateProfile(id: String, action: UserProfileActionType)
     case menu
@@ -52,6 +52,8 @@ enum Api_EndPoint {
     case getSpecialPageDetails(id: String)
     case getPromotionalList
     case searchContent(type: ContentType, page: String, searchKeyword: String)
+    case getDetails(id: String, type: ContentType)
+    case versionUpdate(os: String)
     
     var urlString: String{
         switch self {
@@ -69,8 +71,8 @@ enum Api_EndPoint {
             return AppBaseURLs.baseUrl.appending("login.php?username=\(userName)&password=\(password)")
         case .registration:
             return AppBaseURLs.baseUrl.appending("registration.php")
-        case .getProfile:
-            return AppBaseURLs.baseUrl.appending("update_profile.php")
+        case .userProfile(let userId, let action):
+            return AppBaseURLs.baseUrl.appending("update_profile.php?id=\(userId)&action=\(action.rawValue)")
         case .getPaymentInfo:
             return AppBaseURLs.baseUrl.appending("pay_info.php")
         case .updateProfile(let id, let action):
@@ -95,6 +97,10 @@ enum Api_EndPoint {
             return AppBaseURLs.baseUrl.appending("special_list.php?")
         case .searchContent(let type, let page, let searchKeyword):
             return AppBaseURLs.baseUrl.appending("content_search.php?type=\(type.rawValue)&page=\(page)&q=\(searchKeyword)")
+        case .getDetails(let id, let type):
+            return AppBaseURLs.baseUrl.appending("detail.php?id=\(id)&type=\(type)")
+        case .versionUpdate(let os):
+            return AppBaseURLs.baseUrl.appending("versionupdate.php?os=\(os)")
         }
     }
 

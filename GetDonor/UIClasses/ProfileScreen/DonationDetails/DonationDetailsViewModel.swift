@@ -38,7 +38,7 @@ class DonationDetailsViewModel {
     
     func loadDonationDetails(for type: DonationDetailsType, result: @escaping(Result<String>)->Void) {
         
-        apiLoader.loadAPIRequest(forFuncion: .getDonationDetails(action: type, userId: AppConfig.getUserId()), requestData: nil) { [weak self](response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .getDonationDetails(action: type, userId: GetDonorUserDefault.sharedInstance.getUserId()), requestData: nil) { [weak self](response, error) in
             
             guard let weakSelf = self else {
                 result(.failure(error.debugDescription))

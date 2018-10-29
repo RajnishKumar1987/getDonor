@@ -1,5 +1,5 @@
 //
-//  ArticalDeatilsTableViewCell.swift
+//  ArticleDeatilsTableViewCell.swift
 //  GetDonor
 //
 //  Created by Rajnish kumar on 04/09/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArticalDeatilsTableViewCell: UITableViewCell,CellReusable {
+class ArticleDeatilsTableViewCell: UITableViewCell,CellReusable {
 
     @IBOutlet weak var lblTitle: UILabel!
     override func awakeFromNib() {

@@ -1,5 +1,5 @@
 //
-//  ArticalDetailsViewController.swift
+//  ArticleDetailsViewController.swift
 //  GetDonor
 //
 //  Created by Rajnish kumar on 03/09/18.
@@ -8,33 +8,43 @@
 
 import UIKit
 
-class ArticalDetailsViewController: UIViewController {
+class ArticleDetailsViewController: BaseViewController {
 
-    var articals: [ContentDataModel]?
+    var articles: [ContentDataModel]?
     var selectedIndex: IndexPath?
-
+    var selectedModel: ContentDataModel!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Artical Details"
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        self.title = "Article Details"
+        configureNavigationBarButton(buttonType: .share)
         
         collectionView.setNeedsLayout()
         collectionView.layoutIfNeeded()
         
         if let indexPath = selectedIndex {
             collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
-
+            
         }
+
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+    
+    override func presentActivityViewController() {
+        let model = ShareDataModel(title: selectedModel.title, image: selectedModel.image, shareURL: selectedModel.s_url)
+        showShareActivity(model: model)
     }
     
     func loadArticlsWith(model:[ContentDataModel],withSelected indexPath: IndexPath) {
-        self.articals = model
+        self.articles = model
         self.selectedIndex = indexPath
         //self.collectionView.reloadData()
     }
@@ -57,21 +67,26 @@ class ArticalDetailsViewController: UIViewController {
 
 }
 
-extension ArticalDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension ArticleDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (articals?.count)!
+        return (articles?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell : ArticalDetailsCollectionViewCell = collectionView.dequeueCell(atIndexPath: indexPath)
-        cell.configureCell(with: articals?[indexPath.item])
+        let cell : ArticleDetailsCollectionViewCell = collectionView.dequeueCell(atIndexPath: indexPath)
+        cell.configureCell(with: articles?[indexPath.item])
+        //cell.parentVC = self
         return cell
         
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: UIScreen.main.bounds.size.width, height: collectionView.frame.size.height - ( self.navigationController!.navigationBar.frame.size.height + self.tabBarController!.tabBar.frame.size.height) + 40)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        selectedModel = articles?[indexPath.item]
     }
 
     

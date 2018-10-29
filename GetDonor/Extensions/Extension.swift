@@ -158,22 +158,7 @@ extension UIViewController{
         }
     }
     
-    func showLoaderOnView(someView: UIView) {
-        if let keyWindow = view{
-            if keyWindow.subviews.count > 1{
-                
-                let loader = keyWindow.subviews[1]
-                
-                if (loader.isKind(of: LoaderView.self)){
-                    return
-                }
-            }
-            let overlay = Bundle.main.loadNibNamed("LoaderView", owner: nil, options: nil)![0] as! LoaderView
-            overlay.frame = someView.bounds
-            keyWindow.addSubview(overlay)
-            
-        }
-    }
+
     
     func showAlert(with title:String) {
         
@@ -304,7 +289,43 @@ extension UIViewController{
         
     }
     
+    func topViewController()-> UIViewController{
+        var topViewController:UIViewController = UIApplication.shared.keyWindow!.rootViewController!
+        
+        while ((topViewController.presentedViewController) != nil) {
+            topViewController = topViewController.presentedViewController!;
+        }
+        
+        return topViewController
+    }
     
+    func showShareActivity(model: ShareDataModel){
+        var content = [AnyObject]()
+        
+        let apiLoader = APIRequestLoader(apiRequest: ImageRequest())
+        if let imageUrl = model.image {
+            apiLoader.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil) { (image, error) in
+                if let image = image{
+                    content.append(image)
+                }
+            }
+        }
+        
+        
+        let title = model.title ?? ""
+        content.append(title as AnyObject)
+        if let urlString = model.shareURL {
+            if let shareUrl = URL(string: urlString){
+                content.append(shareUrl as AnyObject)
+            }
+        }
+
+        let activityVC = UIActivityViewController(activityItems: content, applicationActivities: nil)
+        //activityVC.modalPresentationStyle = .popover
+        //activityVC.popoverPresentationController?.sourceView = topViewController().view
+        topViewController().present(activityVC, animated: true, completion: nil)
+    }
+
     
 }
 
@@ -443,6 +464,52 @@ extension String {
 extension Notification.Name {
     static let loginSuccessful = Notification.Name(
         rawValue: "loginSuccessful")
+    static let profileUpdated = Notification.Name(
+        rawValue: "profileUpdated")
+
+}
+
+extension UIView{
+    func showLoaderOnView(someView: UIView?) {
+
+        if let keyWindow = someView{
+            if keyWindow.subviews.count > 1{
+                
+                let loader = keyWindow.subviews[1]
+                
+                if (loader.isKind(of: LoaderView.self)){
+                    return
+                }
+            }
+            let overlay = Bundle.main.loadNibNamed("LoaderView", owner: nil, options: nil)![0] as! LoaderView
+            overlay.frame = keyWindow.bounds
+            keyWindow.addSubview(overlay)
+            
+        }
+    }
+    
+    func removeLoader(fromView:UIView?){
+        let keyWindow = fromView
+        if let _ = keyWindow,(keyWindow?.subviews.count)! > 1{
+            keyWindow?.subviews.forEach({ (loader) in
+                if (loader.isKind(of: LoaderView.self)){
+                    let overlay = loader as! LoaderView
+                    overlay.removeFromSuperview()
+                }
+            })
+        }else{
+            print("")
+        }
+    }
+}
+
+extension UIView {
+    func round(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
 }
 
 

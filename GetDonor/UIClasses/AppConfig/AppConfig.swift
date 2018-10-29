@@ -15,7 +15,7 @@ let bloodGroups = ["O+":"1","O-":"2","A+":"3","A-":"4","B+":"5","B-":"6","AB+":"
 
 let kCarouselHeight: CGFloat = ((UIScreen.main.bounds.size.width) * 9/16) + 36
 
-let kAppId = "id1421647128"//id1421647128
+let kAppId =  "id1421647128"    //"id1421647128"//Hungama: id414009038
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -28,43 +28,6 @@ enum DevelopmentEnvironment {
 struct AppConfig {
     
     static let environment: DevelopmentEnvironment = .production
-    
-    static func setUserLoggedIn(status: Bool) {
-        UserDefaults.standard.set(status, forKey: "userLoginStatus")
-        UserDefaults.standard.synchronize()
-    }
-    
-    static func getUserLoginStatus() -> Bool {
-        return UserDefaults.standard.bool(forKey: "userLoginStatus")
-    }
-    
-    static func setUserId(id: String) {
-        UserDefaults.standard.set(id, forKey: "userId")
-        UserDefaults.standard.synchronize()
-    }
-    static func getUserId() -> String {
-        return UserDefaults.standard.string(forKey: "userId") ?? ""
-    }
-    
-    static func setUserBloodGroup(bgroupId: String){
-        UserDefaults.standard.set(bgroupId, forKey: "userBloodGroup")
-        UserDefaults.standard.synchronize()
-    }
-    
-    static func getUserBloodGroup()-> String{
-        return UserDefaults.standard.string(forKey: "userBloodGroup") ?? ""
-
-    }
-    
-    static func setUserProfileImageUrl(urlString: String) {
-        UserDefaults.standard.set(urlString, forKey: "userProfileImageUrl")
-        UserDefaults.standard.synchronize()
-    }
-    static func getUserProfileImageUrl() -> String? {
-        return UserDefaults.standard.string(forKey: "userProfileImageUrl") ?? nil
-    }
-
-
     
 }
 

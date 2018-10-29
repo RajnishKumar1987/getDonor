@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if AppConfig.getUserLoginStatus() {
+        if GetDonorUserDefault.sharedInstance.getUserLoginStatus() {
             LocationManager.sharedInstance.startLocaitonService()
             registerForPushNotifications()
 
@@ -53,10 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        print("applicationWillEnterForeground")
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        print("applicationDidBecomeActive")
+
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
@@ -86,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let token = token else { return }
         
         let apiLoader = APIRequestLoader(apiRequest: CommonApiRequest())
-        apiLoader.loadAPIRequest(forFuncion: .updateDeviceToken(id: AppConfig.getUserId(), token: token), requestData: nil) { (response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .updateDeviceToken(id: GetDonorUserDefault.sharedInstance.getUserId(), token: token), requestData: nil) { (response, error) in
             
         }
         

@@ -24,12 +24,13 @@ struct UserDetails: Codable {
     var userName: String?
     var userId: String?
     var shouldShowUpdateFrofile: Bool
-
+    var profilePic: String?
+    
     enum CodingKeys: String,CodingKey {
         case userName = "username"
         case userId = "user_id"
         case shouldShowUpdateFrofile = "update_profile"
-
+        case profilePic = "image"
     }
 
 }

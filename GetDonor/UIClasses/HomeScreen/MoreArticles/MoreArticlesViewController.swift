@@ -1,5 +1,5 @@
 //
-//  MoreArticalsViewController.swift
+//  MoreArticlesViewController.swift
 //  GetDonor
 //
 //  Created by Rajnish kumar on 24/08/18.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class MoreArticalsViewController: BaseViewController {
+class MoreArticlesViewController: BaseViewController {
     
-    var viewModel = ArticalsViewModel()
+    var viewModel = ArticlesViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Articals"
+        self.title = "Articles"
         tableview.alpha = 0
         doInitialConfig()
         enableRefresh()
@@ -23,20 +23,20 @@ class MoreArticalsViewController: BaseViewController {
     
     override func refresingPage() {
         viewModel.isUserRefreshingList = true
-        loadArticals()
+        loadArticles()
     }
     func doInitialConfig()  {
         
         tableview.estimatedRowHeight = 140
         tableview.rowHeight = UITableViewAutomaticDimension
         showLoader(onViewController: self)
-        loadArticals()
+        loadArticles()
     }
     
-    func loadArticals() {
+    func loadArticles() {
         
         if checkInternetStatus(viewController: self, navigationBarPresent: true) {
-            viewModel.loadArticals { [weak self](result) in
+            viewModel.loadArticles { [weak self](result) in
                 self?.removeLoader(fromViewController: self!)
                 self?.refreshControl?.endRefreshing()
                 self?.viewModel.isLoadingNextPageResults = false
@@ -54,9 +54,9 @@ class MoreArticalsViewController: BaseViewController {
         
     }
     
-    func searchArticalFor(keyword: String) {
+    func searchArticleFor(keyword: String) {
         if checkInternetStatus(viewController: self, navigationBarPresent: true) {
-            viewModel.serachArticalFor(keyword: keyword) { [weak self] (result) in
+            viewModel.serachArticleFor(keyword: keyword) { [weak self] (result) in
                 self?.removeLoader(fromViewController: self!)
                 self?.refreshControl?.endRefreshing()
                 self?.viewModel.isLoadingNextPageResults = false
@@ -80,7 +80,7 @@ class MoreArticalsViewController: BaseViewController {
             viewModel.isUserRefreshingList = true
             showLoader(onViewController: self)
             self.tableview.setContentOffset( CGPoint(x: 0, y: -70) , animated: false)
-            loadArticals()
+            loadArticles()
             
         }
     }
@@ -88,17 +88,17 @@ class MoreArticalsViewController: BaseViewController {
         showLoader(onViewController: self)
         viewModel.isUserRefreshingList = true
         viewModel.isSearching = true
-        searchArticalFor(keyword: text)
+        searchArticleFor(keyword: text)
     }
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let cell = sender as? ArticalsTableViewCell, let indexPath = tableview.indexPath(for: cell) {
+        if let cell = sender as? ArticlesTableViewCell, let indexPath = tableview.indexPath(for: cell) {
             
-            if let  articalDeatilsVC = segue.destination as? ArticalDetailsViewController{
+            if let  articleDeatilsVC = segue.destination as? ArticleDetailsViewController{
                 
-                articalDeatilsVC.loadArticlsWith(model: self.viewModel.model.articalList, withSelected: indexPath)
+                articleDeatilsVC.loadArticlsWith(model: self.viewModel.model.articleList, withSelected: indexPath)
             }
             
         }
@@ -110,28 +110,28 @@ class MoreArticalsViewController: BaseViewController {
     
 }
 
-extension MoreArticalsViewController: UITableViewDataSource, UITableViewDelegate{
+extension MoreArticlesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.model.articalList.count
+        return viewModel.model.articleList.count
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row == viewModel.model.articalList.count - 1 {
+        if indexPath.row == viewModel.model.articleList.count - 1 {
             if viewModel.canLoadNextPage(){
                 isLoadingNextPageResult(true)
                 viewModel.isLoadingNextPageResults = true
                 if viewModel.isSearching{
-                    searchArticalFor(keyword: self.controller.searchBar.text!)
+                    searchArticleFor(keyword: self.controller.searchBar.text!)
                 }else{
-                    loadArticals()
+                    loadArticles()
                 }
             }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let  cell: ArticalsTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
+        let  cell: ArticlesTableViewCell = tableView.dequeueCell(atIndexPath: indexPath)
         cell.configureCell(with: viewModel.getModelForCell(at: indexPath))
         return cell
         

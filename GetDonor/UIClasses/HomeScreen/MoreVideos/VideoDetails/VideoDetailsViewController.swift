@@ -25,9 +25,15 @@ class VideoDetailsViewController: BaseViewController {
         self.title = "Videos"
         playerView.delegate = self
         showLoader(onViewController: self)
+        configureNavigationBarButton(buttonType: .share)
         doInitialConfig()
     }
     
+    override func presentActivityViewController() {
+        let model = ShareDataModel(title: self.model.title, image: self.model.image, shareURL: self.model.s_url)
+        showShareActivity(model: model)
+    }
+
     func doInitialConfig() {
     
         tableview.estimatedRowHeight = 100
@@ -36,6 +42,7 @@ class VideoDetailsViewController: BaseViewController {
         playVideoAndLoadSimilar(with: model)
         
     }
+    
     
     func playVideoAndLoadSimilar(with model:ContentDataModel) {
      
@@ -48,9 +55,9 @@ class VideoDetailsViewController: BaseViewController {
 
         self.model = model
         lblTitle.text = model.title ?? ""
-        let videoId = model.data?.first?.playbackUrl?.components(separatedBy: "/").last
+        let youtubeId = model.data?.first?.youtubeId?.components(separatedBy: "/").last
         
-        if let playBackId = videoId {
+        if let playBackId = youtubeId {
             playerView.load(withVideoId: playBackId, playerVars: ["playsinline":"1"])
         }
         loadSimilarVideos(with: model.id!)

@@ -1,5 +1,5 @@
 //
-//  ArticalCollectionViewCell.swift
+//  ArticleCollectionViewCell.swift
 //  GetDonor
 //
 //  Created by Rajnish kumar on 23/08/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArticalCollectionViewCell: UICollectionViewCell, CellReusable {
+class ArticleCollectionViewCell: UICollectionViewCell, CellReusable {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDescription: UILabel!

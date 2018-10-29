@@ -50,23 +50,21 @@ struct ContentDataModel: Codable{
     var description: String?
     var data: [ExtraData]? = []
     var type: String?
-    
+    var s_url: String?
 }
 
 
 
 struct ExtraData:Codable {
     
-    var caption: String?
     var title: String?
-    var playbackUrl: String?
+    var youtubeId: String?
     var imageUrl:String?
     var id: String?
     
         enum CodingKeys: String, CodingKey {
-        case caption = "cap"
         case title = "title"
-        case playbackUrl = "vu"
+        case youtubeId = "youtube_id"
         case imageUrl = "image"
         case id 
     }

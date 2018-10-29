@@ -26,6 +26,7 @@ class EditProfileViewController: BaseViewController {
 
     func doIniticalConfug() {
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
         containerView.addShadow(offset: CGSize.init(width: 0, height: 1), color: UIColor.black, radius: 4.0, opacity: 0.35)
         imgProfile.makeCornerRadiusWithValue(imgProfile.frame.width/2)
         imgProfile.layer.borderWidth = 3
@@ -106,13 +107,15 @@ class EditProfileViewController: BaseViewController {
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imgProfile.image = pickedImage
+        
+        if let img = info[UIImagePickerControllerEditedImage] as? UIImage
+        {
+            imgProfile.image = img
+            
         }
-        if #available(iOS 11.0, *) {
-           // print(info[UIImagePickerControllerImageURL])
-        } else {
-            // Fallback on earlier versions
+        else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            imgProfile.image = img
         }
         picker.dismiss(animated: true, completion: nil)
         self.delegate?.didProfileImageSelected(image: self.imgProfile.image!)

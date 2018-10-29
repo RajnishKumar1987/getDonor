@@ -22,23 +22,28 @@ struct PromotionDetails: Codable {
     var id: String?
     var title: String?
     var image: String?
+    var insertdate: String?
+    var updatedate: String?
+    var priority: String?
+    var status: String?
+    var s_url: String?
     var extraData: PromotionData?
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case image
+        case image = "images"
         case extraData = "data"
+        case s_url
+        case insertdate
+        case updatedate
+        case priority
     }
 }
 
 struct PromotionData: Codable {
     var image: [ContentList] = []
     var text: String?
-    var insertdate: String?
-    var updatedate: String?
-    var priority: String?
-    var status: String?
-    var video: [ContentList] = []    
+    var video: [ContentList] = []
 }
 
 struct ContentList: Codable {
