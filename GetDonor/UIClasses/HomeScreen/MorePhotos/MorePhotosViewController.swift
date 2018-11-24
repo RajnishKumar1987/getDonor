@@ -135,7 +135,7 @@ extension MorePhotosViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.item == viewModel.model.photoList.count - 1 {
+        if indexPath.item == viewModel.model.photoList.count - 2 {
             if viewModel.canLoadNextPage(){
                 isLoadingNextPageResult(true)
                 viewModel.isLoadingNextPageResults = true

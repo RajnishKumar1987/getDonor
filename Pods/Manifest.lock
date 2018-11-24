@@ -1,24 +1,30 @@
 PODS:
   - AccountKit (4.35.0)
   - ReachabilitySwift (4.1.0)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
   - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - AccountKit
   - ReachabilitySwift
+  - SDWebImage (~> 4.0)
   - youtube-ios-player-helper (~> 0.1.4)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AccountKit
     - ReachabilitySwift
+    - SDWebImage
     - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   AccountKit: 870ccaf5d33facda9408783e28fbe68c5211e069
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 623338cfbf792b7ccdd05f0476b1c9c892ca2d84
+PODFILE CHECKSUM: 8b80825f944539e8df493f035f134d919130c505
 
 COCOAPODS: 1.5.3

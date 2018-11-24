@@ -12,17 +12,10 @@ class EventsCollectionViewCell: UICollectionViewCell,CellReusable {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     
-    var imageLoader: APIRequestLoader<ImageRequest>?
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        imageView.image = #imageLiteral(resourceName: "default")
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
-    }
-    override func prepareForReuse() {
-        imageView.image = #imageLiteral(resourceName: "default")
-        imageLoader = nil
     }
 
     func configureCell(with model: ContentDataModel?) {
@@ -32,16 +25,8 @@ class EventsCollectionViewCell: UICollectionViewCell,CellReusable {
         lblTitle.text = model.title ?? ""
         
         if let imageUrl = model.image  {
-            
-            imageLoader = APIRequestLoader(apiRequest: ImageRequest())
-            
-            imageLoader?.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil, completionHandler: { [weak self](image, error) in
-                
-                if let image = image{
-                    self?.imageView.image = image
-                }
-                
-            })
+            imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+
         }
         
         

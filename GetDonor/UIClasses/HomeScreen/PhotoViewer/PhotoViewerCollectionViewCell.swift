@@ -11,10 +11,8 @@ import UIKit
 class PhotoViewerCollectionViewCell: UICollectionViewCell,CellReusable {
     @IBOutlet weak var imageView: UIImageView!
     
-    var imageLoader: APIRequestLoader<ImageRequest>!
-    
     override func awakeFromNib() {
-        imageView.image = #imageLiteral(resourceName: "default")
+    
 
     }
     override var isSelected: Bool{
@@ -33,21 +31,14 @@ class PhotoViewerCollectionViewCell: UICollectionViewCell,CellReusable {
             }
         }
     }
-    override func prepareForReuse() {
-        imageView.image = #imageLiteral(resourceName: "default")
-        imageLoader = nil
-    }
+  
     
     func configureCell(model: ContentDataModel) {
         
         guard let imageUrl = model.image else { return }
         
-        imageLoader = APIRequestLoader(apiRequest: ImageRequest())
-        imageLoader.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil) { [weak self](image, error) in
-            if let image = image{
-                self?.imageView.image = image
-            }
-        }
+        imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+
         
     }
 }

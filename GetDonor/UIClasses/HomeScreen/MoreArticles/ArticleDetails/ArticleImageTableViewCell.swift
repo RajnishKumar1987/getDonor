@@ -11,31 +11,16 @@ import UIKit
 class ArticleImageTableViewCell: UITableViewCell, CellReusable {
     @IBOutlet weak var imgView: UIImageView!
     
-    var imageLoader: APIRequestLoader<ImageRequest>?
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        imgView.image = #imageLiteral(resourceName: "default")
     }
-    override func prepareForReuse() {
-        imgView.image = #imageLiteral(resourceName: "default")
-        imageLoader = nil
-    }
+
 
     func configureCellWith(image imageUrl: String?) {
         
         if let imageUrl = imageUrl {
-            
-            imageLoader = APIRequestLoader(apiRequest: ImageRequest())
-            imageLoader?.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil, completionHandler: { [weak self](image, error) in
-                
-                if let image = image{
-                    self?.imgView.image = image
-                }
-                
-            })
-            
+            imgView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+
         }
     }
 

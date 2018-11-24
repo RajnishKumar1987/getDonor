@@ -31,7 +31,6 @@
 		84425B95216C7339001B4D34 /* CarouselView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84425B94216C7339001B4D34 /* CarouselView.xib */; };
 		84425B98216CB89C001B4D34 /* Promotional.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84425B97216CB89C001B4D34 /* Promotional.storyboard */; };
 		84425B9A216CB8C6001B4D34 /* PromotionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425B99216CB8C6001B4D34 /* PromotionDetailsViewController.swift */; };
-		84425B9C216DBE62001B4D34 /* ImageApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425B9B216DBE62001B4D34 /* ImageApiRequest.swift */; };
 		84425B9E216DC557001B4D34 /* PromotionDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425B9D216DC557001B4D34 /* PromotionDataModel.swift */; };
 		84425BA0216DC567001B4D34 /* PromotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425B9F216DC567001B4D34 /* PromotionViewModel.swift */; };
 		84425BA2216DC579001B4D34 /* PromotionApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425BA1216DC579001B4D34 /* PromotionApiRequest.swift */; };
@@ -247,7 +246,6 @@
 		84425B94216C7339001B4D34 /* CarouselView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselView.xib; sourceTree = "<group>"; };
 		84425B97216CB89C001B4D34 /* Promotional.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Promotional.storyboard; sourceTree = "<group>"; };
 		84425B99216CB8C6001B4D34 /* PromotionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailsViewController.swift; sourceTree = "<group>"; };
-		84425B9B216DBE62001B4D34 /* ImageApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageApiRequest.swift; sourceTree = "<group>"; };
 		84425B9D216DC557001B4D34 /* PromotionDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDataModel.swift; sourceTree = "<group>"; };
 		84425B9F216DC567001B4D34 /* PromotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionViewModel.swift; sourceTree = "<group>"; };
 		84425BA1216DC579001B4D34 /* PromotionApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionApiRequest.swift; sourceTree = "<group>"; };
@@ -884,7 +882,6 @@
 				845B825B212D45C700DF259F /* HomeListingModel */,
 				845B825A212D45C700DF259F /* HomeListingViewModel */,
 				845B8257212D42D500DF259F /* WebRequest */,
-				84425B9B216DBE62001B4D34 /* ImageApiRequest.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1341,11 +1338,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GetDonor/Pods-GetDonor-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1460,7 +1459,6 @@
 				84FAEC6B212E8A980099B0AE /* MainTabBarController.swift in Sources */,
 				845B8219212D294C00DF259F /* HomeViewController.swift in Sources */,
 				84CABD65213D68E80058E1B0 /* ArticleDetailsCollectionViewCell.swift in Sources */,
-				84425B9C216DBE62001B4D34 /* ImageApiRequest.swift in Sources */,
 				84B08BBD2186D93B003B3F3E /* VersionUpdateApiRequest.swift in Sources */,
 				845205282154D09C0055297C /* MenuApiRequest.swift in Sources */,
 				84B08BC5218714D0003B3F3E /* GetDonorUserDefault.swift in Sources */,

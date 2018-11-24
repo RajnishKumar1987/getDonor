@@ -15,7 +15,6 @@ class PhotoViewerViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
     var imageArray: [ContentDataModel]!
-    var imageLoader: APIRequestLoader<ImageRequest>!
     var selectedIndex: IndexPath?
     var selectedImage: ContentDataModel!
     
@@ -28,7 +27,6 @@ class PhotoViewerViewController: BaseViewController {
         guard imageArray.count > 0 else {
             return
         }
-        imageLoader = APIRequestLoader(apiRequest: ImageRequest())
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,11 +63,8 @@ class PhotoViewerViewController: BaseViewController {
         
         guard let imageUrl = model.image else { return  }
         
-        imageLoader.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil) {[weak self] (image, error) in
-            if let image = image{
-                self?.imageView.image = image
-            }
-        }
+        imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+
     }
 
     override func didReceiveMemoryWarning() {

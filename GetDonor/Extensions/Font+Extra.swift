@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum TextStyle {
+enum GetDonerTextStyle {
     case headline
     case subHead
     case body
@@ -27,7 +27,7 @@ enum TextStyle {
 
 extension UIFont{
     
-   static func fontWithTextStyle(textStyle: TextStyle) -> UIFont {
+   static func fontWithTextStyle(textStyle: GetDonerTextStyle) -> UIFont {
         
         switch textStyle {
         case .title1:

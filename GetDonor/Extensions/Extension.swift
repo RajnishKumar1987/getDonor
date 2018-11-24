@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Reachability
+import SDWebImage
 
 extension String {
     
@@ -302,13 +303,14 @@ extension UIViewController{
     func showShareActivity(model: ShareDataModel){
         var content = [AnyObject]()
         
-        let apiLoader = APIRequestLoader(apiRequest: ImageRequest())
         if let imageUrl = model.image {
-            apiLoader.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil) { (image, error) in
-                if let image = image{
+            let url = URL(string: imageUrl)
+            
+            SDWebImageManager.shared().imageDownloader?.downloadImage(with: url, options: .continueInBackground, progress: nil, completed: {(image:UIImage?, data:Data?, error:Error?, finished:Bool) in
+                if let image = image {
                     content.append(image)
                 }
-            }
+            })
         }
         
         
@@ -412,14 +414,13 @@ extension UIImageView{
     func loadImage(from urlString: String?, shouldCache: Bool) {
         guard let url = urlString else { return }
         
-        let imageLoader = APIRequestLoader(apiRequest: ImageRequest(shouldCache: shouldCache))
-        imageLoader.loadAPIRequest(forFuncion: .getImage(urlString: url), requestData: nil) { (image, error) in
-            
-            if let image = image{
+        let imageUrl = URL(string: url)
+        
+        SDWebImageManager.shared().imageDownloader?.downloadImage(with: imageUrl, options: .continueInBackground, progress: nil, completed: {(image:UIImage?, data:Data?, error:Error?, finished:Bool) in
+            if let image = image {
                 self.image = image
             }
-        }
-        
+        })
     }
 }
 extension UIView{

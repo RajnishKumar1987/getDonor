@@ -13,12 +13,10 @@ class SearchDonorTableViewCell: UITableViewCell,CellReusable {
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblAddress: UILabel!
-    var imageLoader: APIRequestLoader<ImageRequest>!
     var phone: String!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        imgProfile.image = #imageLiteral(resourceName: "default")
         imgProfile.makeCornerRadiusWithValue(imgProfile.frame.width/2)
         imgProfile.layer.borderWidth = 1
         imgProfile.layer.borderColor = UIColor.red.cgColor
@@ -29,10 +27,7 @@ class SearchDonorTableViewCell: UITableViewCell,CellReusable {
         lblName.adjustsFontSizeToFitWidth = true
         lblAddress.adjustsFontSizeToFitWidth = true
     }
-    override func prepareForReuse() {
-        imgProfile.image = #imageLiteral(resourceName: "default")
-        imageLoader = nil
-    }
+
     func configureCell(with model: Doner) {
         
         self.phone = model.phone
@@ -50,13 +45,8 @@ class SearchDonorTableViewCell: UITableViewCell,CellReusable {
         
         if let imageUrl = model.image{
             
-            imageLoader = APIRequestLoader(apiRequest: ImageRequest())
-            imageLoader.loadAPIRequest(forFuncion: .getImage(urlString: imageUrl), requestData: nil) { [weak self](image, error) in
-                
-                if let image = image {
-                self?.imgProfile.image = image
-                }
-            }
+            imgProfile.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+
         }
     }
 
