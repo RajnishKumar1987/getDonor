@@ -82,7 +82,8 @@ enum Api_EndPoint {
         case .updateLocation:
             return AppBaseURLs.baseUrl.appending("update_location.php")
         case .getCSCList(let action, let id):
-            return AppBaseURLs.baseUrl.appending("csc.php?id=\(id)&t=\(action.rawValue)")
+            let allowedCharacterSet = (CharacterSet(charactersIn: " ").inverted)
+            return AppBaseURLs.baseUrl.appending("csc.php?n=\(id)&t=\(action.rawValue)").addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
         case .searchDonor(let id, let bloodGroup, let lat, let lon, let page):
             return AppBaseURLs.baseUrl.appending("user_search.php?id=\(id)&b_group=\(bloodGroup)&lat=\(lat)&lon=\(lon)&page=\(page)")
         case .updateDeviceToken(let id, let token):

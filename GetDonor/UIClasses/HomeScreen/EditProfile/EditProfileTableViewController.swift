@@ -33,6 +33,8 @@ class EditProfileTableViewController: UITableViewController {
     @IBOutlet weak var txtDOB: UITextField!
     @IBOutlet weak var lblState: UILabel!
     @IBOutlet weak var txtState: UITextField!
+    @IBOutlet weak var stateBgView: UIView!
+    @IBOutlet weak var cityBgView: UIView!
     
     @IBOutlet weak var btnUpdate: UIButton!
     
@@ -59,7 +61,26 @@ class EditProfileTableViewController: UITableViewController {
         initilizeToolBar()
         loadUserDetails()
         addTapGesture()
+        validateCSCTextFields()
+    }
+    
+    func validateCSCTextFields() {
         
+        if (txtState.text?.isEmpty)! {
+            txtCity.isEnabled = false
+            cityBgView.backgroundColor = .lightGray
+        }else{
+            txtCity.isEnabled = true
+            cityBgView.backgroundColor = .white
+        }
+        if (txtCountry.text?.isEmpty)! {
+            txtState.isEnabled = false
+            stateBgView.backgroundColor = .lightGray
+        }else{
+            txtState.isEnabled = true
+            stateBgView.backgroundColor = .white
+        }
+
     }
     
     func getCountryList(cscType: CSCListingType, id: String) {
@@ -112,7 +133,7 @@ class EditProfileTableViewController: UITableViewController {
     func loadPickerView() {
         
         removeLoader(form: self.pickerView)
-        let values = Array(cscViewModel.dataToPopulate.values).sorted(by: <)
+        let values = cscViewModel.dataToPopulate.sorted(by: <)
         
         if (selectedTxtField.text?.count)! > 0 {
             if let index = values.index(of: selectedTxtField.text!){
@@ -126,6 +147,8 @@ class EditProfileTableViewController: UITableViewController {
             self.pickerView.selectRow(0, inComponent: 0, animated: true)
             
         }
+        
+        validateCSCTextFields()
         
     }
     
@@ -226,6 +249,7 @@ class EditProfileTableViewController: UITableViewController {
             vc.imgProfile.loadImage(from: viewModel.model.user?.image, shouldCache: false)
         }
         loadDatePicker()
+        validateCSCTextFields()
 
     }
     
@@ -383,7 +407,7 @@ extension EditProfileTableViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        cscViewModel.dataToPopulate = [:]
+        cscViewModel.dataToPopulate = []
         selectedTxtField = textField
         self.pickerView  = UIPickerView()
         self.pickerView.dataSource = self
@@ -406,10 +430,7 @@ extension EditProfileTableViewController: UITextFieldDelegate{
                 return
             }
             if cscViewModel.shouldMakeCallToFetchCSCListing(for: .state, and: txtState.text!) {
-                
-                if let countryId = cscViewModel.countryName.someKey(forValue: txtCountry.text!){
-                    getCountryList(cscType: .state, id: countryId)
-                }
+                    getCountryList(cscType: .state, id: txtCountry.text!)
             }else{
                 loadPickerView()
                 pickerView.reloadAllComponents()
@@ -418,13 +439,14 @@ extension EditProfileTableViewController: UITextFieldDelegate{
         }
         
         if textField == txtCity {
+           print(txtCountry.text)
+            print(txtState.text)
+
             if (txtCountry.text?.isEmpty)! || (txtState.text?.isEmpty)!{
                 return
             }
             if cscViewModel.shouldMakeCallToFetchCSCListing(for: .city, and: txtState.text!) {
-                if let stateId = cscViewModel.stateName.someKey(forValue: txtState.text!){
-                    getCountryList(cscType: .city, id: stateId)
-                }
+                    getCountryList(cscType: .city, id: txtState.text!)
                 
             }else{
                 loadPickerView()
@@ -445,15 +467,26 @@ extension EditProfileTableViewController: UIPickerViewDataSource, UIPickerViewDe
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let values = Array(self.cscViewModel.dataToPopulate.values).sorted(by: <)
+        let values = self.cscViewModel.dataToPopulate.sorted(by: <)
         return values[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-        let values = Array(self.cscViewModel.dataToPopulate.values).sorted(by: <)
-        
+        let values = self.cscViewModel.dataToPopulate.sorted(by: <)
+
         if values.count > 0 && values.count >= row {
             selectedTxtField.text = values[row]
+            
+            if selectedTxtField == txtCountry{
+                txtState.isEnabled = true
+                stateBgView.backgroundColor = .white
+
+            }
+            if selectedTxtField == txtState{
+                txtCity.isEnabled = true
+                cityBgView.backgroundColor = .white
+
+            }
         }
     }
     

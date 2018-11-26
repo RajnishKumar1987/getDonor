@@ -11,13 +11,13 @@ import Foundation
 class CSCViewModel {
     
     var apiLoader: APIRequestLoader<CommonApiRequest>!
-    var countryName = [String: String]()
-    var stateName = [String: String]()
-    var cityName = [String: String]()
+    var countryName = [String]()
+    var stateName = [String]()
+    var cityName = [String]()
     var selectedState = ""
     var selectedCity = ""
     var selectedCountry = ""
-    var dataToPopulate = Dictionary<String,String>()
+    var dataToPopulate = Array<String>()
     
     
     
@@ -31,7 +31,7 @@ class CSCViewModel {
         
         apiLoader.loadAPIRequest(forFuncion: .getCSCList(listingType: cscType, id: id), requestData: nil) { [weak self](response, error) in
             
-            if let responseDict = response, let dict = responseDict["node"] as? Dictionary<String, String>{
+            if let responseDict = response, let dict = responseDict["node"] as? Array<String>{
                 
                 switch cscType{
                 case .country:
@@ -57,17 +57,17 @@ class CSCViewModel {
     
     func shouldMakeCallToFetchCSCListing(for cscType:CSCListingType, and name:String) -> Bool {
         return true
-        switch cscType {
-        case .city:
-            return selectedState == name ? false : true
-        case .state:
-            return (stateName.someKey(forValue: name) != nil) ? false : true
-            //return selectedCountry == name ? false : true
-        case .country:
-            dataToPopulate = countryName
-            return countryName.count>0 ? false : true
-
-        }
+//        switch cscType {
+//        case .city:
+//            return selectedState == name ? false : true
+//        case .state:
+//            return (stateName.someKey(forValue: name) != nil) ? false : true
+//            //return selectedCountry == name ? false : true
+//        case .country:
+//            dataToPopulate = countryName
+//            return countryName.count>0 ? false : true
+//
+//        }
     }
     
     
