@@ -11,6 +11,9 @@ target 'GetDonor' do
   pod 'AccountKit'
   pod 'ReachabilitySwift'
   pod 'SDWebImage', '~> 4.0'
+  pod 'Firebase/Core'
+  pod 'FirebaseMessaging', '~> 3.0'
+
   target 'GetDonorTests' do
     inherit! :search_paths
     # Pods for testing
