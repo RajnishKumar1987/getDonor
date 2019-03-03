@@ -53,7 +53,7 @@ enum Api_EndPoint {
     case getPromotionalList
     case searchContent(type: ContentType, page: String, searchKeyword: String)
     case getDetails(id: String, type: ContentType)
-    case versionUpdate(os: String)
+    case versionUpdate()
     
     var urlString: String{
         switch self {
@@ -100,8 +100,8 @@ enum Api_EndPoint {
             return AppBaseURLs.baseUrl.appending("content_search.php?type=\(type.rawValue)&page=\(page)&q=\(searchKeyword)")
         case .getDetails(let id, let type):
             return AppBaseURLs.baseUrl.appending("detail.php?id=\(id)&type=\(type)")
-        case .versionUpdate(let os):
-            return AppBaseURLs.baseUrl.appending("versionupdate.php?os=\(os)")
+        case .versionUpdate():
+            return AppBaseURLs.baseUrl.appending("versionupdate.php?")
         }
     }
 

@@ -9,6 +9,7 @@
 import UIKit
 import StoreKit
 import MessageUI
+import Firebase
 
 class ProfileTableViewController: UITableViewController {
 
@@ -103,7 +104,14 @@ class ProfileTableViewController: UITableViewController {
     func openWebView(with model: Menu)  {
         let storyBoard = UIStoryboard(name: "WebView", bundle: nil)
         let webViewController = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-        webViewController.urlString = model.url
+        
+        if model.name == "User Details" {
+            webViewController.urlString = String(format: "%@&uid=%@", model.url!, GetDonorUserDefault.sharedInstance.getUserId())
+        }
+        else{
+            webViewController.urlString = model.url
+
+        }
         webViewController.title = model.name
         self.navigationController?.pushViewController(webViewController, animated: true)
 
@@ -155,6 +163,7 @@ class ProfileTableViewController: UITableViewController {
             print("")
             GetDonorUserDefault.sharedInstance.setUserLoggedIn(status: false)
             LocationManager.sharedInstance.stopLocationUpdate()
+            
             self.navigationController?.popViewController(animated: true)
         case "Donation Details":
             print("")

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MorePromotionalTableViewCell: UITableViewCell,CellReusable {
 
@@ -18,10 +19,14 @@ class MorePromotionalTableViewCell: UITableViewCell,CellReusable {
         lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title1)
     }
     
-    func configureCell(with model: ContentDataModel) {
-        lblTitle.text = model.title
-        imgView.loadImage(from: model.image, shouldCache: true)
+    func configureCell(with model: ContentDataModel?) {
+        if let model = model {
+            lblTitle.text = model.title
+            guard let imageUrl = model.image else {return}
+            imgView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+        }
     }
+    
     
     
 

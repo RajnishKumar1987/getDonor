@@ -141,7 +141,11 @@ class CarouselTableViewCell: UITableViewCell, CellReusable {
                 banner.itemIndex = i
             }
             let model = model[i]
-            banner.imageView.loadImage(from: model.image, shouldCache: true)
+
+            if let imageUrl = model.image {
+                banner.imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+            }
+
             banner.lblTitle.text = model.title ?? ""
             banner.lblTitle.font = UIFont.fontWithTextStyle(textStyle: .title2)
             banner.imageView.makeCornerRadiusWithValue(10)

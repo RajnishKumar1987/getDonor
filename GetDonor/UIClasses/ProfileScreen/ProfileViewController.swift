@@ -35,7 +35,10 @@ class ProfileViewController: BaseViewController {
     }
     
     func loadProfilePic() {
-        imgProfile.loadImage(from: GetDonorUserDefault.sharedInstance.getUserProfileImageUrl(), shouldCache: false)
+        if let imageUrl = GetDonorUserDefault.sharedInstance.getUserProfileImageUrl() {
+            imgProfile.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+        }
+
     }
     
     override func refresingPage() {

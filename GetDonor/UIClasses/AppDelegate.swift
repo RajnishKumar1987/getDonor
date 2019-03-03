@@ -42,8 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func registerForPushNotifications() {
         
-        FirebaseApp.configure()
-
+        if(FirebaseApp.app() == nil){
+            FirebaseApp.configure()
+        }
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
         Messaging.messaging().shouldEstablishDirectChannel = true

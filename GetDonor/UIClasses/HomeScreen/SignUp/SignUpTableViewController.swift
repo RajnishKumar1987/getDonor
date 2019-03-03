@@ -28,8 +28,8 @@ class SignUpTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
- //        txtMobile.text = "8369112345"
-//        txtEmail.text = "rajkumar@gmail.com"
+         txtMobile.text = "8369165432"
+        txtEmail.text = "rajkumar123@gmail.com"
 //        txtFirstName.text = "raj"
 //        txtLastName.text = "kumar"
 //        txtPassword.text = "12345"

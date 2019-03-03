@@ -21,7 +21,7 @@ class VersionUpdateManager{
     }
     
     func checkVersionUpdate() {
-        apiLoader.loadAPIRequest(forFuncion: .versionUpdate(os: "ios"), requestData: nil) { [weak self](response, error) in
+        apiLoader.loadAPIRequest(forFuncion: .versionUpdate(), requestData: nil) { [weak self](response, error) in
             if let response = response{
                 self?.model = response
                 self?.showPopUp()

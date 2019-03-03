@@ -411,17 +411,17 @@ extension URL{
 }
 
 extension UIImageView{
-    func loadImage(from urlString: String?, shouldCache: Bool) {
-        guard let url = urlString else { return }
-        
-        let imageUrl = URL(string: url)
-        
-        SDWebImageManager.shared().imageDownloader?.downloadImage(with: imageUrl, options: .continueInBackground, progress: nil, completed: {(image:UIImage?, data:Data?, error:Error?, finished:Bool) in
-            if let image = image {
-                self.image = image
-            }
-        })
-    }
+//    func loadImage(from urlString: String?, shouldCache: Bool) {
+//        guard let url = urlString else { return }
+//        
+//        let imageUrl = URL(string: url)
+//        
+//        SDWebImageManager.shared().imageDownloader?.downloadImage(with: imageUrl, options: .continueInBackground, progress: nil, completed: {(image:UIImage?, data:Data?, error:Error?, finished:Bool) in
+//            if let image = image {
+//                self.image = image
+//            }
+//        })
+//    }
 }
 extension UIView{
     

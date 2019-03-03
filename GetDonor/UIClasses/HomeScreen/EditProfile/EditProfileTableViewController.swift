@@ -246,7 +246,11 @@ class EditProfileTableViewController: UITableViewController {
         }
         
         if let vc = self.parent as? EditProfileViewController{
-            vc.imgProfile.loadImage(from: viewModel.model.user?.image, shouldCache: false)
+            //vc.imgProfile.loadImage(from: viewModel.model.user?.image, shouldCache: false)
+            if let imageUrl = viewModel.model.user?.image {
+                vc.imgProfile.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+            }
+
         }
         loadDatePicker()
         validateCSCTextFields()

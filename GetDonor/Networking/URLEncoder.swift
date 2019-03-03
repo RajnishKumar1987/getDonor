@@ -30,12 +30,14 @@ class URLEncoder: URLEncodeble {
                 urlComponents.queryItems = Array<URLQueryItem>()
             }
             urlComponents.queryItems?.append(URLQueryItem(name: "version", value: Bundle.main.versionNumber))
+            urlComponents.queryItems?.append(URLQueryItem(name: "os", value: "iOS"))
             return urlComponents.url! }
         
         var items = param.map{
             URLQueryItem(name: String(describing: $0), value: String(describing: $1))
         }
         items.append(URLQueryItem(name: "version", value: Bundle.main.versionNumber))
+        urlComponents.queryItems?.append(URLQueryItem(name: "os", value: "iOS"))
         if urlComponents.queryItems == nil {
             urlComponents.queryItems = Array<URLQueryItem>()
         }

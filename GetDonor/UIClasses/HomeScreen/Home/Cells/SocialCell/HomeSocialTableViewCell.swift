@@ -48,7 +48,10 @@ extension HomeSocialTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeSocialCollectionViewCell = collectionView.dequeueCell(atIndexPath: indexPath)
         let social = model![indexPath.item]
-        cell.imageView.loadImage(from: social.image, shouldCache: true)
+        if let imageUrl = social.image {
+            cell.imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "default"))
+        }
+
         return cell
         
     }

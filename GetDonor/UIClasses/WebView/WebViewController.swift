@@ -67,4 +67,13 @@ extension WebViewController: UIWebViewDelegate{
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         removeLoader(fromViewController: self)
     }
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        let u = request.mainDocumentURL
+        if u?.absoluteString == "https://www.getdonor.org/mapi/menu.php" {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        return true
+    }
 }
