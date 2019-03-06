@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum TextStyle {
+enum GetDonerTextStyle {
     case headline
     case subHead
     case body
@@ -19,11 +19,15 @@ enum TextStyle {
     case caption1
     case caption2
     case extraBold
+    case regular
+    case title2_bold
+    case title1_bold
+    
 }
 
 extension UIFont{
     
-   static func fontWithTextStyle(textStyle: TextStyle) -> UIFont {
+    static func fontWithTextStyle(textStyle: GetDonerTextStyle) -> UIFont {
         
         switch textStyle {
         case .title1:
@@ -37,14 +41,20 @@ extension UIFont{
         case .headline:
             return UIFont(name: "Muli-Bold", size: 20.0)!
         case .subHead:
-            return UIFont(name: "Muli-Bold", size: 18.0)!
+            return UIFont(name: "Muli-Bold", size: 16.0)!
         case .caption1:
             return UIFont(name: "Muli", size: 12.0)!
         case .caption2:
             return UIFont(name: "Muli", size: 10.0)!
         case .extraBold:
             return UIFont(name: "Muli-Bold", size: 30.0)!
-
+        case .regular:
+            return UIFont(name: "Muli", size: 16.0)!
+        case .title2_bold:
+            return UIFont(name: "Muli-Bold", size: 14.0)!
+        case .title1_bold:
+            return UIFont(name: "Muli-Bold", size: 18.0)!
+            
         }
     }
 }
